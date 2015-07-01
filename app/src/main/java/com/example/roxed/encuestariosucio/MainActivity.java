@@ -92,7 +92,7 @@ public class MainActivity extends ActionBarActivity {
             String strDate = timeFormat.format(date);
 
 
-            Toast.makeText(getBaseContext(), "Hora seleccionada "+ strDate, Toast.LENGTH_SHORT).show();
+            Toast.makeText(getBaseContext(), "Hora seleccionada "+ strDate, Toast.LENGTH_SHORT).show(); //El TOAST esta mostrando la Hora del Sistema, Corregir
         }
     };
 
