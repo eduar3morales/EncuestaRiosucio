@@ -1,0 +1,126 @@
+<TableLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="fill_parent"
+    android:layout_width="fill_parent">
+
+    <TableRow>
+            <TextView
+                android:text="Información de la vivienda"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="20dp"/>
+
+
+    </TableRow>
+    <TableRow>
+        <TextView
+            android:text="Barrio"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:textStyle="bold" />
+        <TextView
+            android:text="Estrato"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:textStyle="bold" />
+        <TextView
+            android:text="Dirección"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:textStyle="bold" />
+
+    </TableRow>
+    <TableRow>
+        <EditText
+            android:id="@+id/txtBarrio"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:hint="Barrio..."
+            android:inputType="text"/>
+        <Spinner
+            android:id="@+id/spinnerEstrato"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <EditText
+            android:id="@+id/txtDireccion"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:hint="Dirección..." />
+    </TableRow>
+
+    <TableRow>
+        <TextView
+            android:text="ZAT"
+            android:textStyle="bold"/>
+        <TextView
+            android:text="Teléfono"
+            android:textStyle="bold"/>
+        <TextView
+            android:text="Celular"
+            android:textStyle="bold"/>
+    </TableRow>
+    <TableRow>
+        <Spinner
+            android:id="@+id/spinnerZATvivienda"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <EditText
+            android:id="@+id/txtTelefono"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Teléfono..."
+            android:inputType="number"
+            android:digits="0123456789"/>
+        <EditText
+            android:id="@+id/txtCelular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Celular"
+            android:inputType="number"
+            android:digits="0123456789"/>
+    </TableRow>
+    <TableRow>
+        <TextView
+            android:text="Tipo vivienda"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"/>
+        <TextView
+            android:text="Cantidad hogares en la vivienda"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"/>
+    </TableRow>
+    <TableRow>
+        <Spinner
+            android:id="@+id/spinnerTipoVivienda"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+
+        <EditText
+            android:id="@+id/txtCantidadHogaresVivienda"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Cantidad hogares en la vivienda..."
+            android:inputType="number"
+            android:digits="0123456789"/>
+    </TableRow>
+    <TableRow>
+        <Button
+            android:id="@+id/btnContinuarVivienda"
+            android:text="Continuar"
+            android:onClick="onClickContinuarVivienda"/>
+    </TableRow>
+
+
+
+
+<!--
+
+
+     -->
+
+<!-- </LinearLayout> -->
+</TableLayout>

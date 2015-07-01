@@ -1,0 +1,83 @@
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="com.example.roxed.encuestariosucio.InformacionHogarActivity">
+
+    <TableRow>
+        <TextView
+            android:text="Datos generales de la vivienda"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:textStyle="bold"/>
+    </TableRow>
+    <TableRow>
+        <TextView
+            android:text="Cantidad personas que conforman el hogar"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"/>
+        <TextView
+            android:text="Cantidad de personas que viaja en día típico"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"/>
+        <TextView
+            android:text="Cantidad de personas que viajan el día sábado"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"/>
+    </TableRow>
+    <TableRow>
+        <EditText
+            android:id="@+id/txtCantidadPersonasConformanHogar"
+            android:hint="Cantidad de personas que conforman el hogar..."
+            android:layout_width="80dp"
+            android:inputType="number"
+            android:digits="0123456789"/>
+        <EditText
+            android:id="@+id/txtCantidadPersonasViajanDiaTipico"
+            android:hint="Cantidad de personas que viaja en día típico..."
+            android:layout_width="80dp"
+            android:inputType="number"
+            android:digits="0123456789"/>
+        <EditText
+            android:id="@+id/txtCantidadPersonasViajanSabado"
+            android:hint="Cantidad de personas que viajan el día sábado"
+            android:layout_width="80dp"
+            android:inputType="number"
+            android:digits="0123456789"/>
+    </TableRow>
+    <TableRow>
+        <TextView
+            android:text="Cantidad de personas presentes del hogar elegido"
+            android:textStyle="bold"/>
+        <TextView
+            android:text="Tipo propiedad"
+            android:textStyle="bold"/>
+        <TextView
+            android:text="Rango ingresos mensuales"
+            android:textStyle="bold"/>
+    </TableRow>
+    <TableRow>
+        <EditText
+            android:id="@+id/txtCantidadPersonasPresentes"
+            android:hint="Ingrese la cantidad"
+            android:inputType="number"
+            android:digits="0123456789"/>
+        <Spinner
+            android:id="@+id/spinnerTipoPropiedad" />
+        <Spinner
+            android:id="@+id/spinnerRangoIngresosMensuales" />
+
+    </TableRow>
+
+
+
+
+    <!-- Una lista de ChekBox?¿O un Spinner? -->
+
+</TableLayout>

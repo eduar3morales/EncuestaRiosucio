@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">"Encuesta Riosucio "</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_informacion_encuesta">InformacionEncuestaActivity</string>
+    <string name="title_activity_informacion_vivienda">InformacionViviendaActivity</string>
+    <string name="title_activity_informacion_hogar">InformacionHogarActivity</string>
+    <string name="title_activity_informacion_medios_transporte">
+        InformacionMediosTransporteActivity
+    </string>
+    <string name="title_activity_informacion_persona">InformacionPersonaActivity</string>
+    <string name="title_activity_informacion_ocupacion_principal">
+        InformacionOcupacionPrincipalActivity
+    </string>
+    <string name="title_activity_informacion_discapacidad">InformacionDiscapacidadActivity</string>
+    <string name="title_activity_informacion_ocupacion_secundaria">
+        InformacionOcupacionSecundariaActivity
+    </string>
+    <string name="title_activity_informacion_viajes">InformacionViajesActivity</string>
+</resources>

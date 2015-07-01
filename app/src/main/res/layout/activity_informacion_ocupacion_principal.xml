@@ -1,0 +1,84 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="com.example.roxed.encuestariosucio.InformacionOcupacionPrincipalActivity">
+
+    <!-- Continuación de la información anterior (persona)-->
+    <!--Tener identificadores en los TextView para tenerlos o no visibles en las respuestas opcionales -->
+    <TextView
+        android:text="Ocupación Principal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"/>
+    <Spinner
+        android:id="@+id/spinnerOcupacionPrincipal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:text="Lugar en donde estudia"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"/>
+    <Spinner
+        android:id="@+id/spinnerLugarEstudioPrincipal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:text="Sector en el que trabaja"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"/>
+    <Spinner
+        android:id="@+id/spinnerSectorTrabajoPrincipal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:text="Labor que desempeña"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"/>
+    <Spinner
+        android:id="@+id/spinnerLaborDesempeñaPrincipal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:text="Lugar de trabajo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"/>
+    <Spinner
+        android:id="@+id/spinnerLugarTrabajoPrincipal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:text="Dirección de la actividad principal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"/>
+    <EditText
+        android:id="@+id/txtDireccionActividadPrincipal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Dirección actividad principal..."/>
+
+    <TextView
+        android:text="ZAT Actividad principal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"/>
+    <EditText
+        android:id="@+id/txtZatActividadPrincipal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="ZAT Actividad principal"/>
+
+
+</RelativeLayout>

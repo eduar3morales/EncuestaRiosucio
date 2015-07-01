@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.roxed.encuestariosucio" >
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="landscape">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".InformacionViviendaActivity"
+            android:label="@string/title_activity_informacion_vivienda"
+            android:screenOrientation="landscape">
+        </activity>
+        <activity
+            android:name=".InformacionHogarActivity"
+            android:label="@string/title_activity_informacion_hogar"
+            android:screenOrientation="landscape">
+        </activity>
+        <activity
+            android:name=".InformacionMediosTransporteActivity"
+            android:label="@string/title_activity_informacion_medios_transporte"
+            android:screenOrientation="landscape">
+        </activity>
+        <activity
+            android:name=".InformacionPersonaActivity"
+            android:label="@string/title_activity_informacion_persona"
+            android:screenOrientation="landscape">
+        </activity>
+        <activity
+            android:name=".InformacionOcupacionPrincipalActivity"
+            android:label="@string/title_activity_informacion_ocupacion_principal"
+            android:screenOrientation="landscape">
+        </activity>
+        <activity
+            android:name=".InformacionDiscapacidadActivity"
+            android:label="@string/title_activity_informacion_discapacidad"
+            android:screenOrientation="landscape">
+        </activity>
+        <activity
+            android:name=".InformacionOcupacionSecundariaActivity"
+            android:label="@string/title_activity_informacion_ocupacion_secundaria"
+            android:screenOrientation="landscape">
+        </activity>
+        <activity
+            android:name=".InformacionViajesActivity"
+            android:label="@string/title_activity_informacion_viajes"
+            android:screenOrientation="landscape">
+        </activity>
+    </application>
+
+</manifest>
