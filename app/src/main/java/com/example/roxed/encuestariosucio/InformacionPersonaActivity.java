@@ -1,17 +1,90 @@
 package com.example.roxed.encuestariosucio;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class InformacionPersonaActivity extends ActionBarActivity {
+
+    Spinner spinnerCodigoDeOrden;
+    Spinner spinnerEdad;
+    Spinner spinnerGenero;
+    Spinner spinnerNivelDeEstudios;
+    Spinner spinnerUsoCicloruta;
+
+    private List<String> listaCodigoDeOrden= new ArrayList<String>();
+    private List<String> listaEdad= new ArrayList<String>();
+    private List<String> listaGenero= new ArrayList<String>();
+    private List<String> listaNivelDeEstudios= new ArrayList<String>();
+    private List<String> listaUsoCicloruta = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_informacion_persona);
+
+        spinnerCodigoDeOrden= (Spinner) findViewById(R.id.spinnerCodigoDeOrden);
+        spinnerEdad= (Spinner) findViewById(R.id.spinnerEdad);
+        spinnerGenero= (Spinner) findViewById(R.id.spinnerGenero);
+        spinnerNivelDeEstudios= (Spinner) findViewById(R.id.spinnerNivelDeEstudios);
+        spinnerUsoCicloruta= (Spinner) findViewById(R.id.spinnerUsoCicloruta);
+
+
+        for (int i = 1; i < 30; i++)
+            listaCodigoDeOrden.add("" + i);
+
+        ArrayAdapter<String> adaptadorCodigoDeOrden = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, listaCodigoDeOrden);
+        adaptadorCodigoDeOrden.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerCodigoDeOrden.setAdapter(adaptadorCodigoDeOrden);
+
+        for (int i = 1; i < 120; i++)
+            listaEdad.add("" + i);
+
+        ArrayAdapter<String> adaptadorEdad = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, listaEdad);
+        adaptadorEdad.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerEdad.setAdapter(adaptadorEdad);
+
+        listaGenero.add("HOMBRE");
+        listaGenero.add("MUJER");
+
+        ArrayAdapter<String> adaptadorGenero = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, listaGenero);
+        adaptadorGenero.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerGenero.setAdapter(adaptadorGenero);
+
+        listaNivelDeEstudios.add("NINGUNO");
+        listaNivelDeEstudios.add("PRIMARIA");
+        listaNivelDeEstudios.add("BACHILLERATO");
+        listaNivelDeEstudios.add("EDU. NO. FORMAL");
+        listaNivelDeEstudios.add("TECNICO");
+        listaNivelDeEstudios.add("TECNOLOGICO");
+        listaNivelDeEstudios.add("UNIVERSITARIO");
+        listaNivelDeEstudios.add("POSGRADO");
+        ArrayAdapter<String> adaptadorNivelDeEstudios = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, listaNivelDeEstudios);
+        adaptadorNivelDeEstudios.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerNivelDeEstudios.setAdapter(adaptadorNivelDeEstudios);
+
+        listaUsoCicloruta.add("SI");
+        listaUsoCicloruta.add("NO");
+        ArrayAdapter<String> adaptadorUsoCicloruta = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, listaUsoCicloruta);
+        adaptadorUsoCicloruta.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerUsoCicloruta.setAdapter(adaptadorUsoCicloruta);
+
+
+
+    }
+
+    public void onClickContinuarOcupacionPrincipal(View view) {
+        Intent intent = new Intent(this,InformacionOcupacionPrincipalActivity. class);
+        startActivity(intent);
     }
 
     @Override

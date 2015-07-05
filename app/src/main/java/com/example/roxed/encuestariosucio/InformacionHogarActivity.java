@@ -1,9 +1,11 @@
 package com.example.roxed.encuestariosucio;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
@@ -47,6 +49,11 @@ public class InformacionHogarActivity extends ActionBarActivity {
 
     }
 
+    public void onClickContinuarHogar(View view)
+    {
+        Intent intent = new Intent(this, InformacionMediosTransporteActivity.class);
+        startActivity(intent);
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.

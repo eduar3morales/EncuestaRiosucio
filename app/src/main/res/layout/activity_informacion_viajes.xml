@@ -4,7 +4,8 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="com.example.roxed.encuestariosucio.InformacionViajesActivity">
+    tools:context="com.example.roxed.encuestariosucio.InformacionViajesActivity"
+    android:background="@drawable/fondo2">
 
     <TextView
         android:text="Viajes típicos realizados"
