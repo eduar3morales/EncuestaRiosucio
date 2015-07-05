@@ -3,19 +3,16 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
-    <string name="title_activity_informacion_encuesta">InformacionEncuestaActivity</string>
-    <string name="title_activity_informacion_vivienda">InformacionViviendaActivity</string>
-    <string name="title_activity_informacion_hogar">InformacionHogarActivity</string>
-    <string name="title_activity_informacion_medios_transporte">
-        InformacionMediosTransporteActivity
-    </string>
-    <string name="title_activity_informacion_persona">InformacionPersonaActivity</string>
-    <string name="title_activity_informacion_ocupacion_principal">
-        InformacionOcupacionPrincipalActivity
-    </string>
-    <string name="title_activity_informacion_discapacidad">InformacionDiscapacidadActivity</string>
-    <string name="title_activity_informacion_ocupacion_secundaria">
-        InformacionOcupacionSecundariaActivity
-    </string>
-    <string name="title_activity_informacion_viajes">InformacionViajesActivity</string>
+    <string name="title_activity_informacion_encuesta">Informacion de Encuesta</string>
+    <string name="title_activity_informacion_vivienda">Informacion de Vivienda</string>
+    <string name="title_activity_informacion_hogar">Informacion de Hogar</string>
+    <string name="title_activity_informacion_medios_transporte">Informacion de Medios de Transporte</string>
+    <string name="title_activity_informacion_persona">Informacion de Persona </string>
+    <string name="title_activity_informacion_ocupacion_principal">Informacion de Ocupacion Principal</string>
+    <string name="title_activity_informacion_discapacidad">Informacion de Discapacidad</string>
+    <string name="title_activity_informacion_ocupacion_secundaria">Informacion de Ocupacion Secundaria</string>
+    <string name="title_activity_informacion_viajes">Informacion de Viajes Frecuentes</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

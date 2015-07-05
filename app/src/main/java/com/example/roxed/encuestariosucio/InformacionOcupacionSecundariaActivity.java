@@ -1,19 +1,118 @@
 package com.example.roxed.encuestariosucio;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class InformacionOcupacionSecundariaActivity extends ActionBarActivity {
 
+    Spinner spinnerOcupacionSecundaria;
+    Spinner spinnerLugarEstudioSecundaria;
+    Spinner spinnerSectorTrabajoSecundaria;
+    Spinner spinnerLaborDesempeñaSecundaria;
+    Spinner spinnerLugarTrabajoSecundaria;
+    Spinner spinnerZatActividadSecundaria;
+
+
+    private List<String> listaOcupacionSecundaria= new ArrayList<String>();
+    private List<String> listaLugarEstudioSecundaria= new ArrayList<String>();
+    private List<String> listaSectorTrabajoSecundaria= new ArrayList<String>();
+    private List<String> listaLaborDesempeñaSecundaria= new ArrayList<String>();
+    private List<String> listaLugarTrabajoSecundaria = new ArrayList<String>();
+    private List<String> listaZatActividadSecundaria = new ArrayList<String>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_informacion_ocupacion_secundaria);
+
+        spinnerOcupacionSecundaria= (Spinner) findViewById(R.id.spinnerOcupacionSecundaria);
+        spinnerLugarEstudioSecundaria= (Spinner) findViewById(R.id.spinnerLugarEstudioSecundaria);
+        spinnerSectorTrabajoSecundaria= (Spinner) findViewById(R.id.spinnerSectorTrabajoSecundaria);
+        spinnerLaborDesempeñaSecundaria= (Spinner) findViewById(R.id.spinnerLaborDesempeñaSecundaria);
+        spinnerLugarTrabajoSecundaria=(Spinner) findViewById(R.id.spinnerLugarTrabajoSecundaria);
+        spinnerZatActividadSecundaria=(Spinner) findViewById(R.id.spinnerZATActividadSecundaria);
+
+        listaOcupacionSecundaria.add("ESTUDIAR");
+        listaOcupacionSecundaria.add("TRABAJAR");
+        listaOcupacionSecundaria.add("OFICIOS DEL HOGAR");
+        listaOcupacionSecundaria.add("JUBILADO");
+        listaOcupacionSecundaria.add("TENTISTA");
+        listaOcupacionSecundaria.add("BUSCAR TRABAJO");
+        listaOcupacionSecundaria.add("INCAPACIDAD PERMANENTE PARA TRABAJAR");
+        listaOcupacionSecundaria.add("OTRA ACTIVIDAD");
+
+        ArrayAdapter<String> adaptadorOcupacionSecundaria = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, listaOcupacionSecundaria);
+        adaptadorOcupacionSecundaria.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerOcupacionSecundaria.setAdapter(adaptadorOcupacionSecundaria);
+
+        listaLugarEstudioSecundaria.add("COLEGIO - ESCUELA");
+        listaLugarEstudioSecundaria.add("UNIVERSIDAD");
+        listaLugarEstudioSecundaria.add("INSTITUTO TECNICO O TECNOLOGICO");
+        listaLugarEstudioSecundaria.add("INSTITUTO DE EDUCACION NO FOMRAL");
+        listaLugarEstudioSecundaria.add("OTRO");
+
+        ArrayAdapter<String> adaptadorEstudioSecundaria = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, listaLugarEstudioSecundaria);
+        adaptadorEstudioSecundaria.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerLugarEstudioSecundaria.setAdapter(adaptadorEstudioSecundaria);
+
+        listaSectorTrabajoSecundaria.add("AGGRICULTURA");
+        listaSectorTrabajoSecundaria.add("MANTENIMIENTO Y REPARACION");
+        listaSectorTrabajoSecundaria.add("MINERIA");
+        listaSectorTrabajoSecundaria.add("MANUFACTURA");
+        listaSectorTrabajoSecundaria.add("CONSTRUCCION");
+        listaSectorTrabajoSecundaria.add("EDUCACION");
+        listaSectorTrabajoSecundaria.add("FINANCIERO");
+        listaSectorTrabajoSecundaria.add("SALUD");
+        listaSectorTrabajoSecundaria.add("TRANSPORTE");
+        listaSectorTrabajoSecundaria.add("HOTELES Y RESTAURANTES");
+        listaSectorTrabajoSecundaria.add("COMERCIO");
+        listaSectorTrabajoSecundaria.add("GOBIERNO");
+        listaSectorTrabajoSecundaria.add("OTROS SERVICIOS");
+        ArrayAdapter<String> adaptadorSectorTrabajoSecundaria = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, listaSectorTrabajoSecundaria);
+        adaptadorSectorTrabajoSecundaria.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerSectorTrabajoSecundaria.setAdapter(adaptadorSectorTrabajoSecundaria);
+
+        listaLaborDesempeñaSecundaria.add("OBRERO O EMPLEADO");
+        listaLaborDesempeñaSecundaria.add("EMPLEADO DOMESTICO");
+        listaLaborDesempeñaSecundaria.add("TRABAJADOR INDEPENDIENTE O CUENTA PROPIA");
+        listaLaborDesempeñaSecundaria.add("PATRON O EMPLEADOR");
+        listaLaborDesempeñaSecundaria.add("TRABAJADOR FAMILAIR SIN REMUNERACION");
+        listaLaborDesempeñaSecundaria.add("OTRO");
+        ArrayAdapter<String> adaptadorLaborDesempeñaSecundaria = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, listaLaborDesempeñaSecundaria);
+        adaptadorLaborDesempeñaSecundaria.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerLaborDesempeñaSecundaria.setAdapter(adaptadorLaborDesempeñaSecundaria);
+
+        listaLugarTrabajoSecundaria.add("CASA");
+        listaLugarTrabajoSecundaria.add("OFICINA O ESTACIONAMIENTO");
+        listaLugarTrabajoSecundaria.add("CASA Y OFICINA");
+        listaLugarTrabajoSecundaria.add("EN LA CALLE");
+        listaLugarTrabajoSecundaria.add("AGENTE VIAJERO");
+        listaLugarTrabajoSecundaria.add("OTRO");
+        ArrayAdapter<String> adaptadorLugarTrabajoSecundaria = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, listaLugarTrabajoSecundaria);
+        adaptadorLugarTrabajoSecundaria.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerLugarTrabajoSecundaria.setAdapter(adaptadorLugarTrabajoSecundaria);
+       for (int i = 0; i< 14; i++)
+            listaZatActividadSecundaria.add(""+(i+1));
+
+        ArrayAdapter<String> adaptadorZatActividadSecundaria = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, listaZatActividadSecundaria);
+        adaptadorZatActividadSecundaria.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerZatActividadSecundaria.setAdapter(adaptadorZatActividadSecundaria);
+
     }
 
+    public void onClickContinuarInformacionViajes(View view) {
+        Intent intent = new Intent(this,InformacionViajesActivity. class);
+        startActivity(intent);
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
