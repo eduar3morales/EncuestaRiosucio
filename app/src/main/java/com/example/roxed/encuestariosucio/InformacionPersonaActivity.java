@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.Spinner;
 
 import java.util.ArrayList;
@@ -20,6 +21,14 @@ public class InformacionPersonaActivity extends ActionBarActivity {
     Spinner spinnerGenero;
     Spinner spinnerNivelDeEstudios;
     Spinner spinnerUsoCicloruta;
+    EditText txtNombre;
+
+    String codigoOrden;
+    String nombre;
+    String edad;
+    String genero;
+    String ultimoNivelEstudio;
+    String usoRedCicloRuta;
 
     private List<String> listaCodigoDeOrden= new ArrayList<String>();
     private List<String> listaEdad= new ArrayList<String>();
@@ -37,6 +46,7 @@ public class InformacionPersonaActivity extends ActionBarActivity {
         spinnerGenero= (Spinner) findViewById(R.id.spinnerGenero);
         spinnerNivelDeEstudios= (Spinner) findViewById(R.id.spinnerNivelDeEstudios);
         spinnerUsoCicloruta= (Spinner) findViewById(R.id.spinnerUsoCicloruta);
+        txtNombre = (EditText) findViewById(R.id.txtNombre);
 
 
         for (int i = 1; i < 30; i++)
@@ -83,6 +93,13 @@ public class InformacionPersonaActivity extends ActionBarActivity {
     }
 
     public void onClickContinuarOcupacionPrincipal(View view) {
+        codigoOrden = spinnerCodigoDeOrden.getSelectedItem().toString();
+        nombre = txtNombre.getText().toString();
+        genero = spinnerGenero.getSelectedItem().toString();
+        edad = spinnerEdad.getSelectedItem().toString();
+        usoRedCicloRuta = spinnerUsoCicloruta.getSelectedItem().toString();
+        ultimoNivelEstudio = spinnerNivelDeEstudios.getSelectedItem().toString();
+
         Intent intent = new Intent(this,InformacionOcupacionPrincipalActivity. class);
         startActivity(intent);
     }

@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.Spinner;
 
 import java.util.ArrayList;
@@ -18,9 +19,20 @@ public class InformacionMediosTransporteActivity extends ActionBarActivity {
 
     Spinner spinnerTipoVehiculo;
     Spinner spinnerModeloVehiculo;
+    Spinner spinnerSitioEstacionamiento;
+    EditText txtKilometro;
+    EditText txtLugarMatricula;
+
     private List<String> listaTipoVehiculo = new ArrayList<String>();
     private List<String> listaModeloVehiculo = new ArrayList<String>();
+    private List<String> listaSitioEstacionamiento = new ArrayList<String>();
 
+
+    String tipoVehiculo;
+    String modeloVehiculo;
+    String kmUltimoA;
+    String lugarMatricula;
+    String sitioEstacionamiento;
 
 
     @Override
@@ -30,6 +42,9 @@ public class InformacionMediosTransporteActivity extends ActionBarActivity {
 
         spinnerTipoVehiculo = (Spinner) findViewById(R.id.spinnerTipoVehiculo);
         spinnerModeloVehiculo = (Spinner) findViewById(R.id.spinnerModeloVehiculo);
+        spinnerSitioEstacionamiento = (Spinner) findViewById(R.id.spinnerSitioEstacionamiento);
+        txtKilometro = (EditText) findViewById(R.id.txtKmUltimoAnio);
+        txtLugarMatricula = (EditText) findViewById(R.id.txtLugarMatricula);
 
 
         listaTipoVehiculo.add("AUTOMOVIL");
@@ -52,10 +67,22 @@ public class InformacionMediosTransporteActivity extends ActionBarActivity {
         adaptadorModeloVehiculo.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerModeloVehiculo.setAdapter(adaptadorModeloVehiculo);
 
+        listaSitioEstacionamiento.add("PROPIO");
+        listaSitioEstacionamiento.add("SOBRE LA VIA");
+        listaSitioEstacionamiento.add("PARQUEADERO PAGADO");
+        listaSitioEstacionamiento.add("PARQUEADERO GRATIS");
+
 
     }
 
     public void onClickContinuarMediosTransporte(View view) {
+        /*
+        tipoVehiculo = spinnerTipoVehiculo.getSelectedItem().toString();
+        modeloVehiculo = spinnerModeloVehiculo.getSelectedItem().toString();
+        kmUltimoA = txtKilometro.getText().toString();
+        lugarMatricula = txtLugarMatricula.getText().toString();
+        sitioEstacionamiento = spinnerSitioEstacionamiento.getSelectedItem().toString();*/
+
         Intent intent = new Intent(this,InformacionPersonaActivity. class);
         startActivity(intent);
     }

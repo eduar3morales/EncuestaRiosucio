@@ -74,7 +74,7 @@ public class MainActivity extends ActionBarActivity {
 
         numeroEncuesta = numeroEncuestaTxt.getText().toString();
         encuestador = encuestadorTxt.getText().toString();
-        coordinadorEncuesta = coordinadorSpinner.getSelectedItem().toString();
+        //coordinadorEncuesta = coordinadorSpinner.getSelectedItem().toString();
         fechaEncuesta = dia+"/"+(mes+1)+"/"+año;
         horaInicio = hora+":"+minuto;
 

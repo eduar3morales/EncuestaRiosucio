@@ -40,11 +40,13 @@
             android:id="@+id/spinnerCodigoDeOrden"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
-    <TextView
-        android:text="Edad"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textStyle="bold"/>
+        <EditText
+            android:id="@+id/txtNombre"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:hint="Nombre..."
+            android:inputType="text"/>
+
     </TableRow>
 
     <TableRow>
@@ -53,11 +55,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textStyle="bold"/>
-
-        <Spinner
-            android:id="@+id/spinnerEdad"
+        <TextView
+            android:text="Edad"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:textStyle="bold"/>
+
+
 
     </TableRow>
 
@@ -67,9 +71,12 @@
             android:id="@+id/spinnerGenero"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
-
-
+        <Spinner
+            android:id="@+id/spinnerEdad"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
     </TableRow>
+
     <TableRow>
     <TextView
         android:text="Uso red de cicloruta"

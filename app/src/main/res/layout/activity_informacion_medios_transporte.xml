@@ -79,11 +79,10 @@
            android:hint="Lugar"
            android:layout_width="80dp"
            android:inputType="text"/>
-       <EditText
-           android:id="@+id/txtSitioEstacionamiento"
-           android:hint="Sitio"
-           android:layout_width="80dp"
-           android:inputType="text"/>
+        <Spinner
+            android:id="@+id/spinnerSitioEstacionamiento"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
     </TableRow>
 
     <TableRow>

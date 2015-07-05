@@ -7,13 +7,13 @@ public class Persona {
     //--- VARIABLES ---
     String codigoOrden;
     String nombre;
-    int edad;
+    String edad;
     String genero;
     String ultimoNivelEstudio;
     String usoRedCicloRuta;
 
     //--- CONSTRUCTOR ---
-    public Persona(String mCodigoOrden, String mNombre, int mEdad, String mGenero, String mUltimoNivelEstudio, String mUsoCicloRuta)
+    public Persona(String mCodigoOrden, String mNombre, String mEdad, String mGenero, String mUltimoNivelEstudio, String mUsoCicloRuta)
     {
         codigoOrden = mCodigoOrden;
         nombre = mNombre;
@@ -33,7 +33,7 @@ public class Persona {
         return nombre;
     }
 
-    public int getEdad()
+    public String getEdad()
     {
         return edad;
     }

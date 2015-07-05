@@ -7,12 +7,12 @@ public class MediosTransporte {
     //--- VARIABLES ---
     String tipoVehiculo;
     String modeloVehiculo; //Ponerlo como NULL o como ""
-    int kmUltimoA; //Ponerlo como NULL o como ""
+    String kmUltimoA; //Ponerlo como NULL o como ""
     String lugarMatricula;
     String sitioEstacionamiento;
 
     //--- CONSTRUCTOR ---
-    public MediosTransporte(String mTipoVehiculo, String mModeloVehiculo, int mKmUltimoA, String mLugarMatricula, String mSitioEstacionamiento)
+    public MediosTransporte(String mTipoVehiculo, String mModeloVehiculo, String mKmUltimoA, String mLugarMatricula, String mSitioEstacionamiento)
     {
         tipoVehiculo = mTipoVehiculo;
         modeloVehiculo = mModeloVehiculo;
@@ -31,7 +31,7 @@ public class MediosTransporte {
         return modeloVehiculo;
     }
 
-    public int getKmUltimoA()
+    public String getKmUltimoA()
     {
         return kmUltimoA;
     }
