@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.Spinner;
 
 import java.util.ArrayList;
@@ -17,8 +18,19 @@ public class InformacionHogarActivity extends ActionBarActivity {
 
     Spinner spinnerTipoPropiedad;
     Spinner spinnerRangoIngresosMensuales;
+    EditText txtCantidadPersonasHogar;
+    EditText txtCantidadPersonasViajanDiaTipico;
+    EditText txtCantidadPersonasViajanSabado;
+    EditText txtCantidadPersonasPresentes;
     private List<String> listaTipoPropiedad = new ArrayList<String>();
     private List<String> listaRangoIngresosMensuales = new ArrayList<String>();
+
+    String cantidadPersonasConformanHogar;
+    String cantidadPersonasViajanDiaTipico;
+    String cantidadPersonasViajanDiaSabado;
+    String cantidadPersonasPresentes;
+    String tipoPropiedad;
+    String rangoIngresos;
 
 
     @Override
@@ -27,6 +39,10 @@ public class InformacionHogarActivity extends ActionBarActivity {
         setContentView(R.layout.activity_informacion_hogar);
         spinnerTipoPropiedad = (Spinner) findViewById(R.id.spinnerTipoPropiedad);
         spinnerRangoIngresosMensuales = (Spinner) findViewById(R.id.spinnerRangoIngresosMensuales);
+        txtCantidadPersonasHogar = (EditText) findViewById(R.id.txtCantidadPersonasConformanHogar);
+        txtCantidadPersonasViajanDiaTipico = (EditText) findViewById(R.id.txtCantidadPersonasViajanDiaTipico);
+        txtCantidadPersonasViajanSabado = (EditText) findViewById(R.id.txtCantidadPersonasViajanSabado);
+        txtCantidadPersonasPresentes = (EditText) findViewById(R.id.txtCantidadPersonasPresentes);
 
         listaTipoPropiedad.add("PROPIA");
         listaTipoPropiedad.add("ALQUILADA POR USTED");
@@ -51,6 +67,13 @@ public class InformacionHogarActivity extends ActionBarActivity {
 
     public void onClickContinuarHogar(View view)
     {
+        cantidadPersonasConformanHogar = txtCantidadPersonasHogar.getText().toString();
+        cantidadPersonasViajanDiaTipico = txtCantidadPersonasViajanDiaTipico.getText().toString();
+        cantidadPersonasViajanDiaSabado = txtCantidadPersonasViajanSabado.getText().toString();
+        cantidadPersonasPresentes = txtCantidadPersonasPresentes.getText().toString();
+        tipoPropiedad = spinnerTipoPropiedad.getSelectedItem().toString();
+        rangoIngresos = spinnerRangoIngresosMensuales.getSelectedItem().toString();
+
         Intent intent = new Intent(this, InformacionMediosTransporteActivity.class);
         startActivity(intent);
     }

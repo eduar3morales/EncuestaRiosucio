@@ -6,16 +6,16 @@ package com.example.roxed.encuestariosucio;
 public class Vivienda {
     //--- VARIABLES ---
     String barrio;
-    int estrato;
+    String estrato;
     String direccion;
     String zat;
     String telefono;
     String celular;
     String tipoVivienda;
-    int cantidadHogaresVivienda;
+    String cantidadHogaresVivienda;
 
     //--- CONSTRUCTOR ---
-    public Vivienda(String mBarrio, int mEstrato, String mDireccion, String mZat, String mTelefono, String mCelular, String mTipoVivienda, int mCantidadHogares)
+    public Vivienda(String mBarrio, String mEstrato, String mDireccion, String mZat, String mTelefono, String mCelular, String mTipoVivienda, String mCantidadHogares)
     {
         barrio = mBarrio;
         estrato = mEstrato;
@@ -32,7 +32,7 @@ public class Vivienda {
         return barrio;
     }
 
-    public int getEstrato()
+    public String getEstrato()
     {
         return  estrato;
     }
@@ -62,7 +62,7 @@ public class Vivienda {
         return tipoVivienda;
     }
 
-    public int getCantidadHogaresVivienda()
+    public String getCantidadHogaresVivienda()
     {
         return cantidadHogaresVivienda;
     }

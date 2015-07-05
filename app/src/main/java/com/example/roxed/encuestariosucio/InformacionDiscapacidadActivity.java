@@ -33,7 +33,7 @@ public class InformacionDiscapacidadActivity extends ActionBarActivity {
 
         spinnerTipoDiscapacidad = (Spinner) findViewById(R.id.spinnerTipoDiscapacidad);
         spinnerDuracionDiscapacidad = (Spinner) findViewById(R.id.spinnerDuracionDiscapacidad);
-        chOpc1= (CheckedTextView) findViewById(R.id.chModosTransporte);
+        //chOpc1= (CheckedTextView) findViewById(R.id.chModosTransporte);
 
 
 

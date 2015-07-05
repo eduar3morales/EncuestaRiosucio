@@ -48,6 +48,8 @@ public class Encuesta {
     }
 
 
+
+
     //--- CREAR MÉTODO QUE HAGA LA INSERCIÓN EN LA BASE DE DATOS ---
 
 

@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.Spinner;
 
 import java.util.ArrayList;
@@ -18,9 +19,23 @@ public class InformacionViviendaActivity extends ActionBarActivity {
     Spinner spinnerZat;
     Spinner spinnerTipoVivienda;
     Spinner spinnerEstrato;
+    EditText txtBarrio;
+    EditText txtDireccion;
+    EditText txtTelefono;
+    EditText txtCelular;
+    EditText txtCantidadHogaresVivienda;
     private List<String> listaZatVivienda = new ArrayList<String>();
     private List<String> listaTipoVivienda = new ArrayList<String>();
     private List<String> listaEstrato = new ArrayList<String>();
+
+    String barrio;
+    String estrato;
+    String direccion;
+    String zat;
+    String telefono;
+    String celular;
+    String tipoVivienda;
+    String cantidadHogaresVivienda;
 
 
     @Override
@@ -32,6 +47,12 @@ public class InformacionViviendaActivity extends ActionBarActivity {
         spinnerZat = (Spinner) findViewById(R.id.spinnerZATvivienda);
         spinnerTipoVivienda = (Spinner) findViewById(R.id.spinnerTipoVivienda);
         spinnerEstrato = (Spinner) findViewById(R.id.spinnerEstrato);
+        txtBarrio = (EditText) findViewById(R.id.txtBarrio);
+        txtDireccion = (EditText) findViewById(R.id.txtDireccion);
+        txtTelefono = (EditText) findViewById(R.id.txtTelefono);
+        txtCelular = (EditText) findViewById(R.id.txtCelular);
+        txtCantidadHogaresVivienda = (EditText) findViewById(R.id.txtCantidadHogaresVivienda);
+
 
         for (int i = 0; i< 14; i++)
             listaZatVivienda.add(String.valueOf((i+1)));
@@ -60,6 +81,14 @@ public class InformacionViviendaActivity extends ActionBarActivity {
 
     public void onClickContinuarVivienda(View view)
     {
+        barrio = txtBarrio.getText().toString();
+        estrato = spinnerEstrato.getSelectedItem().toString();
+        direccion = txtDireccion.getText().toString();
+        zat = spinnerZat.getSelectedItem().toString();
+        telefono = txtTelefono.getText().toString();
+        celular = txtCelular.getText().toString();
+        tipoVivienda = spinnerTipoVivienda.getSelectedItem().toString();
+
         Intent intent = new Intent(this, InformacionHogarActivity.class);
         startActivity(intent);
     }

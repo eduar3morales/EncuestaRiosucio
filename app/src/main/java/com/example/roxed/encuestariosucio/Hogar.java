@@ -5,15 +5,15 @@ package com.example.roxed.encuestariosucio;
  */
 public class Hogar {
     //--- VARIABLES ---
-    int cantidadPersonasConformanHogar;
-    int cantidadPersonasViajanDiaTipico;
-    int cantidadPersonasViajanDiaSabado;
-    int cantidadPersonasPresentes;
+    String cantidadPersonasConformanHogar;
+    String cantidadPersonasViajanDiaTipico;
+    String cantidadPersonasViajanDiaSabado;
+    String cantidadPersonasPresentes;
     String tipoPropiedad;
     String rangoIngresos;
 
     //--- CONSTRUCTOR ---
-    public Hogar(int mCantidadPersonasConformanHogar, int mCantidadPersonasViajanDiaTipico, int mCantidadPersonasViajanDiaSabado, int mCantidadPersonasPresentes, String mTipoPropiedad, String mRangoIngresos)
+    public Hogar(String mCantidadPersonasConformanHogar, String mCantidadPersonasViajanDiaTipico, String mCantidadPersonasViajanDiaSabado, String mCantidadPersonasPresentes, String mTipoPropiedad, String mRangoIngresos)
     {
         cantidadPersonasConformanHogar = mCantidadPersonasConformanHogar;
         cantidadPersonasViajanDiaTipico = mCantidadPersonasViajanDiaTipico;
@@ -24,22 +24,22 @@ public class Hogar {
 
     }
 
-    public int getCantidadPersonasConformanHogar()
+    public String getCantidadPersonasConformanHogar()
     {
         return cantidadPersonasConformanHogar;
     }
 
-    public int getCantidadPersonasViajanDiaTipico()
+    public String getCantidadPersonasViajanDiaTipico()
     {
         return cantidadPersonasViajanDiaTipico;
     }
 
-    public int getCantidadPersonasViajanDiaSabado()
+    public String getCantidadPersonasViajanDiaSabado()
     {
         return cantidadPersonasViajanDiaSabado;
     }
 
-    public int getCantidadPersonasPresentes()
+    public String getCantidadPersonasPresentes()
     {
         return cantidadPersonasPresentes;
     }

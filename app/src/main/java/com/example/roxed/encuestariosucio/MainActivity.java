@@ -3,10 +3,13 @@ package com.example.roxed.encuestariosucio;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TimePicker;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -25,6 +28,16 @@ public class MainActivity extends ActionBarActivity {
     int año, mes, dia;
     static final int TIME_DIALOG_ID = 0; //ID que identifica la fuente del dialogo para el TimePicker
     static final int DATE_DIALOG_ID = 1;
+    EditText numeroEncuestaTxt;
+    EditText encuestadorTxt;
+    Spinner coordinadorSpinner;
+
+    String numeroEncuesta;
+    String coordinadorEncuesta;
+    String encuestador;
+    String horaInicio;
+    String fechaEncuesta;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,12 +45,18 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
         //timePickerHoraInicio = (TimePicker) findViewById(R.id.timePickerHoraInicio);
         //timePickerHoraInicio.setIs24HourView(true);
+        numeroEncuestaTxt = (EditText) findViewById(R.id.txtNumeroEncuesta);
+        encuestadorTxt = (EditText) findViewById(R.id.txtEncuestador);
+        coordinadorSpinner = (Spinner) findViewById(R.id.spinnerCoordinador);
 
         //Obtener fecha actual
         Calendar fechaActual = Calendar.getInstance();
         año = fechaActual.get(Calendar.YEAR);
         mes = fechaActual.get(Calendar.MONTH);
         dia = fechaActual.get(Calendar.DAY_OF_MONTH);
+
+
+
     }
 
     public void onClickHora(View view)
@@ -52,6 +71,15 @@ public class MainActivity extends ActionBarActivity {
 
     public void onClickContinuarEncuesta(View view)
     {
+
+        numeroEncuesta = numeroEncuestaTxt.getText().toString();
+        encuestador = encuestadorTxt.getText().toString();
+        coordinadorEncuesta = coordinadorSpinner.getSelectedItem().toString();
+        fechaEncuesta = dia+"/"+(mes+1)+"/"+año;
+        horaInicio = hora+":"+minuto;
+
+
+
         Intent intent = new Intent(this, InformacionViviendaActivity.class);
         startActivity(intent);
     }
@@ -77,6 +105,7 @@ public class MainActivity extends ActionBarActivity {
             mes = monthOfYear;
             dia = dayOfMonth;
             Toast.makeText(getBaseContext(), "Fecha seleccionada: " + dia + "/"+ (mes + 1) + "/" + año, Toast.LENGTH_SHORT ).show();
+
         }
     };
 
@@ -90,9 +119,9 @@ public class MainActivity extends ActionBarActivity {
             SimpleDateFormat timeFormat = new SimpleDateFormat("kk:mm:ss"); //Como poner este formato de 24 horas?????
             Date date = new Date();
             String strDate = timeFormat.format(date);
-
-
             Toast.makeText(getBaseContext(), "Hora seleccionada "+ strDate, Toast.LENGTH_SHORT).show();
+
+
         }
     };
 
