@@ -70,7 +70,6 @@ public class DBAdapter {
             db.execSQL("DROP TABLE IF EXISTS herramientaApoyo");
             db.execSQL("DROP TABLE IF EXISTS modoTransporteDificilAcceso");
             db.execSQL("DROP TABLE IF EXISTS ocupacion");
-
             onCreate(db);
         }
     }//--------------------- FIN DE LA CLASE DatabaseHelper SQLiteOpenHelper
