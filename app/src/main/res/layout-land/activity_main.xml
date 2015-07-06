@@ -10,14 +10,15 @@
     tools:context=".MainActivity"
     android:background="@drawable/fondo2">
 
-
     <TextView
+
 
         android:text="Encuesta Plan de Movilidad Riosucio"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-       />
+
+        />
 
 
     <LinearLayout
@@ -35,7 +36,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Número Encuesta"
-                android:textStyle="bold"/>
+                />
             <EditText
 
                 android:id="@+id/txtNumeroEncuesta"
@@ -83,7 +84,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Encuestador"
-                android:textStyle="bold"/>
+                />
             <EditText
 
                 android:id="@+id/txtEncuestador"
@@ -129,7 +130,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Continuar"
-        android:onClick="onClickContinuarEncuesta"/>
+        android:onClick="onClickContinuarEncuesta" />
 
 
 
