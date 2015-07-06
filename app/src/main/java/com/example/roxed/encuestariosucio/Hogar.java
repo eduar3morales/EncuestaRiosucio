@@ -53,4 +53,7 @@ public class Hogar {
     {
         return rangoIngresos;
     }
+
+
+
 }

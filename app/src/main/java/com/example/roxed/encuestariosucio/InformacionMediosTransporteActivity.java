@@ -40,6 +40,7 @@ public class InformacionMediosTransporteActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_informacion_medios_transporte);
 
+
         spinnerTipoVehiculo = (Spinner) findViewById(R.id.spinnerTipoVehiculo);
         spinnerModeloVehiculo = (Spinner) findViewById(R.id.spinnerModeloVehiculo);
         spinnerSitioEstacionamiento = (Spinner) findViewById(R.id.spinnerSitioEstacionamiento);

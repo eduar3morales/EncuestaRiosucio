@@ -6,7 +6,9 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.Spinner;
 
 import java.util.ArrayList;
@@ -22,6 +24,15 @@ public class InformacionOcupacionPrincipalActivity extends ActionBarActivity {
     Spinner spinnerLaborDesempeñaPrincipal;
     Spinner spinnerLugarTrabajoPrincipal;
     Spinner spinnerZatActividadPrincipal;
+    EditText txtDireccionActividadPrincipal;
+
+    String ocupacion;
+    String lugarEstudio;
+    String sectorTrabajo;
+    String laborDesempeño;
+    String lugarTrabajo;
+    String direccionActividadPrincipal;
+    String zatActividadPrincipal;
 
     private List<String> listaOcupacionPrincipal= new ArrayList<String>();
     private List<String> listaLugarEstudioPrincipal= new ArrayList<String>();
@@ -40,7 +51,7 @@ public class InformacionOcupacionPrincipalActivity extends ActionBarActivity {
         spinnerLaborDesempeñaPrincipal= (Spinner) findViewById(R.id.spinnerLaborDesempeñaPrincipal);
         spinnerLugarTrabajoPrincipal=(Spinner) findViewById(R.id.spinnerLugarTrabajoPrincipal);
         spinnerZatActividadPrincipal = (Spinner) findViewById(R.id.spinnerZATActividadPrincipal);
-
+        txtDireccionActividadPrincipal = (EditText) findViewById(R.id.txtDireccionActividadPrincipal);
 
 
         listaOcupacionPrincipal.add("ESTUDIAR");
@@ -113,11 +124,62 @@ public class InformacionOcupacionPrincipalActivity extends ActionBarActivity {
         spinnerZatActividadPrincipal.setAdapter(adaptadorZatActividadPrincipal);
 
 
+        spinnerOcupacionPrincipal.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                //adapterView.getItemAtPosition(i).toString();
+                if (spinnerOcupacionPrincipal.getSelectedItem().toString().equals("ESTUDIAR"))
+                {
+                    spinnerLugarEstudioPrincipal.setEnabled(true);
+                    spinnerSectorTrabajoPrincipal.setEnabled(false);
+                    spinnerLaborDesempeñaPrincipal.setEnabled(false);
+                    spinnerLugarTrabajoPrincipal.setEnabled(false);
+                    txtDireccionActividadPrincipal.setEnabled(true);
+                    spinnerZatActividadPrincipal.setEnabled(true);
+
+
+                }
+                else if (spinnerOcupacionPrincipal.getSelectedItem().toString().equals("TRABAJAR"))
+                {
+                    spinnerLugarEstudioPrincipal.setEnabled(false);
+                    spinnerSectorTrabajoPrincipal.setEnabled(true);
+                    spinnerLaborDesempeñaPrincipal.setEnabled(true);
+                    spinnerLugarTrabajoPrincipal.setEnabled(true);
+                    txtDireccionActividadPrincipal.setEnabled(true);
+                    spinnerZatActividadPrincipal.setEnabled(true);
+                }
+                else
+                {
+                    spinnerLugarEstudioPrincipal.setEnabled(false);
+                    spinnerSectorTrabajoPrincipal.setEnabled(false);
+                    spinnerLaborDesempeñaPrincipal.setEnabled(false);
+                    spinnerLugarTrabajoPrincipal.setEnabled(false);
+                    txtDireccionActividadPrincipal.setEnabled(false);
+                    spinnerZatActividadPrincipal.setEnabled(false);
+                }
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+
 
 
     }
 
     public void onClickContinuarInformacionDiscapacidad(View view) {
+        ocupacion = spinnerOcupacionPrincipal.getSelectedItem().toString(); // --- VERIFICAR QUE LAS VISTAS DESACTIVADAS NO GENEREN UN ERROR CON VALORES NULOS ---
+        lugarEstudio = spinnerLugarEstudioPrincipal.getSelectedItem().toString();
+        sectorTrabajo = spinnerSectorTrabajoPrincipal.getSelectedItem().toString();
+        laborDesempeño = spinnerLaborDesempeñaPrincipal.getSelectedItem().toString();
+        lugarTrabajo = spinnerLugarTrabajoPrincipal.getSelectedItem().toString();
+        direccionActividadPrincipal = txtDireccionActividadPrincipal.getText().toString();
+        zatActividadPrincipal = spinnerZatActividadPrincipal.getSelectedItem().toString();
+
         Intent intent = new Intent(this,InformacionDiscapacidadActivity. class);
         startActivity(intent);
     }

@@ -1,12 +1,15 @@
 package com.example.roxed.encuestariosucio;
 
 import android.content.Intent;
+import android.graphics.Path;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.Spinner;
 
 import java.util.ArrayList;
@@ -21,6 +24,15 @@ public class InformacionOcupacionSecundariaActivity extends ActionBarActivity {
     Spinner spinnerLaborDesempeñaSecundaria;
     Spinner spinnerLugarTrabajoSecundaria;
     Spinner spinnerZatActividadSecundaria;
+    EditText txtDireccionActividadSecundaria;
+
+    String ocupacion;
+    String lugarEstudio;
+    String sectorTrabajo;
+    String laborDesempeño;
+    String lugarTrabajo;
+    String direccionActividadSecundaria;
+    String zatActividadSecundaria;
 
 
     private List<String> listaOcupacionSecundaria= new ArrayList<String>();
@@ -40,6 +52,7 @@ public class InformacionOcupacionSecundariaActivity extends ActionBarActivity {
         spinnerLaborDesempeñaSecundaria= (Spinner) findViewById(R.id.spinnerLaborDesempeñaSecundaria);
         spinnerLugarTrabajoSecundaria=(Spinner) findViewById(R.id.spinnerLugarTrabajoSecundaria);
         spinnerZatActividadSecundaria=(Spinner) findViewById(R.id.spinnerZATActividadSecundaria);
+        txtDireccionActividadSecundaria = (EditText) findViewById (R.id.txtDireccionActividadSecundaria);
 
         listaOcupacionSecundaria.add("ESTUDIAR");
         listaOcupacionSecundaria.add("TRABAJAR");
@@ -107,9 +120,58 @@ public class InformacionOcupacionSecundariaActivity extends ActionBarActivity {
         adaptadorZatActividadSecundaria.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerZatActividadSecundaria.setAdapter(adaptadorZatActividadSecundaria);
 
+
+        spinnerOcupacionSecundaria.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if (spinnerOcupacionSecundaria.getSelectedItem().toString().equals("ESTUDIAR"))
+                {
+                    spinnerLugarEstudioSecundaria.setEnabled(true);
+                    spinnerSectorTrabajoSecundaria.setEnabled(false);
+                    spinnerLaborDesempeñaSecundaria.setEnabled(false);
+                    spinnerLugarTrabajoSecundaria.setEnabled(false);
+                    txtDireccionActividadSecundaria.setEnabled(true);
+                    spinnerZatActividadSecundaria.setEnabled(true);
+
+
+                }
+                else if (spinnerOcupacionSecundaria.getSelectedItem().toString().equals("TRABAJAR"))
+                {
+                    spinnerLugarEstudioSecundaria.setEnabled(false);
+                    spinnerSectorTrabajoSecundaria.setEnabled(true);
+                    spinnerLaborDesempeñaSecundaria.setEnabled(true);
+                    spinnerLugarTrabajoSecundaria.setEnabled(true);
+                    txtDireccionActividadSecundaria.setEnabled(true);
+                    spinnerZatActividadSecundaria.setEnabled(true);
+                }
+                else
+                {
+                    spinnerLugarEstudioSecundaria.setEnabled(false);
+                    spinnerSectorTrabajoSecundaria.setEnabled(false);
+                    spinnerLaborDesempeñaSecundaria.setEnabled(false);
+                    spinnerLugarTrabajoSecundaria.setEnabled(false);
+                    txtDireccionActividadSecundaria.setEnabled(false);
+                    spinnerZatActividadSecundaria.setEnabled(false);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
     }
 
     public void onClickContinuarInformacionViajes(View view) {
+        ocupacion = spinnerOcupacionSecundaria.getSelectedItem().toString();
+        lugarEstudio = spinnerLugarEstudioSecundaria.getSelectedItem().toString();
+        sectorTrabajo = spinnerSectorTrabajoSecundaria.getSelectedItem().toString();
+        laborDesempeño = spinnerLaborDesempeñaSecundaria.getSelectedItem().toString();
+        lugarTrabajo = spinnerLugarTrabajoSecundaria.getSelectedItem().toString();
+        direccionActividadSecundaria = txtDireccionActividadSecundaria.getText().toString();
+        zatActividadSecundaria = spinnerZatActividadSecundaria.getSelectedItem().toString();
+
         Intent intent = new Intent(this,InformacionViajesActivity. class);
         startActivity(intent);
     }
