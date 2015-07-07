@@ -1,6 +1,7 @@
 package com.example.roxed.encuestariosucio;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -75,6 +77,22 @@ public class InformacionViviendaActivity extends ActionBarActivity {
         ArrayAdapter<String> adaptadorEstrato = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, listaEstrato);
         adaptadorEstrato.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerEstrato.setAdapter(adaptadorEstrato);
+
+        DBAdapter db = new DBAdapter(this);
+        db.open();
+        Cursor c = db.getAllContacts();
+        if (c.moveToFirst())
+        {
+            do{
+                Toast.makeText(this,
+                        "id: " +c.getString(0)+ "\n"+
+                "Coordinador: " +c.getString(1)+ "\n"+
+                "Encuestador: "+c.getString(2)+ "\n"+
+                "Hora inicio: "+c.getString(3)+"\n"+
+                "Fecha: "+c.getString(4), Toast.LENGTH_LONG).show();
+            }while (c.moveToNext());
+        }
+        db.close();
 
 
     }

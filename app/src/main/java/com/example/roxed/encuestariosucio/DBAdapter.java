@@ -41,14 +41,38 @@ public class DBAdapter {
         {
             try{
                 //Todas las sentencias para crear las tablas
-                db.execSQL("CREATE TABLE encuesta (_idn_umero_encuesta primary key, coordinador text not null, encuestador text not null," +
+                db.execSQL("CREATE TABLE encuesta (_id_numero_encuesta primary key, coordinador text not null, encuestador text not null," +
                         "hora_inicio text not null, fecha text not null);");
 
                 db.execSQL("CREATE TABLE vivienda (_id_vivienda primary key autoincrement, barrio text not null, estrato text not null, direccion text not null," +
-                        "zat text not null, telefono text not null, celular text not null, tipo_vivienda text not null, cantidad_hogares_vivienda text not null);");
+                        " zat text not null, telefono text not null, celular text not null, tipo_vivienda text not null, cantidad_hogares_vivienda text not null);");
 
                 db.execSQL("CREATE TABLE hogar (id_hogar primary key autoincrement, cantidad_personas_hogar text not null, cantidad_personas_dia_tipico text not null," +
-                        "cantidad_personas_dia_sabado text not null, cantidad_personas_presentes text not null, tipo_propiedad text not null, ingresos_mensuales text);");
+                        " cantidad_personas_dia_sabado text not null, cantidad_personas_presentes text not null, tipo_propiedad text not null, ingresos_mensuales text);");
+
+                db.execSQL("CREATE TABLE medios_transporte (_id_vehiculo primary key autoincrement, tipo_vehiculo text not null, modelo_vehiculo text, km_ultimo text," +
+                        " lugar_matricula text not null, sitio_estacionamiento text not null);");
+
+                db.execSQL("CREATE TABLE persona (_id_persona primary key autoincrement, codigo_orden text not null, nombre text not null, edad text not null, genero text not null," +
+                        " ultimo_nivel_estudio text not null, uso_red_ciclovia text not null);");
+
+                db.execSQL("CREATE TABLE viaje (_id_viaje primary key autoincrement, viaje_numero text not null, lugar_origen text not null, zat_origen text not null, hora_salida text not null," +
+                        " lugar_destino text not null, zat_destino text not null, hora_llegada text not null, motivo_viaje text not null, modo_viaje text not null);");
+
+                db.execSQL("CREATE TABLE modoTransporteDificilAcceso (_id_modo_trasnporte primary key autoincrement, modo_transporte text not null);");
+
+                db.execSQL("CREATE TABLE herramientaApoyo (_id_herramienta_apoyo primary key autoincrement, herramienta_apoyo text not null);");
+
+                db.execSQL("CREATE TABLE frecuenciaViaje (_id_frecuencia primary key autoincrement, nombre_dia text not null);");
+
+                db.execSQL("CREATE TABLE discapacidad (_id_discapacidad primary key autoincrement, tipo_discapacidad text not null, discapacidad_duracion text not null);");
+
+                db.execSQL("CREATE TABLE ocupacion (_id_ocupacion primary key autoincrement, ocupacion text not null, lugar_estudio text, sector_trabajo text, labor_desempeño text, lugar_trabajo text, " +
+                        "direccion_Actividad text not null, zat_actividad text not null);");
+
+                db.execSQL("CREATE TABLE discapacidad_persona"); //Definir Foreigns Keys
+
+                db.execSQL("CREATE TABLE ocupacion_prin_sec"); //Definir Foreigns Keys
 
             } catch (SQLException e){
                 e.printStackTrace();
@@ -91,6 +115,22 @@ public class DBAdapter {
         DBHelper.close();
     }
 
-    // --- Insertar contactos ---
+    // --- Insertar valores en la base de datos ---
+    public long insertEncuesta(String id, String coordinador, String encuestador, String horaInicio, String fecha)
+    {
+        ContentValues initialValues = new ContentValues();
+        initialValues.put("_id_numero_encuesta", id);
+        initialValues.put("coordinador", coordinador);
+        initialValues.put("encuestador", encuestador);
+        initialValues.put("hora_inicio", horaInicio);
+        initialValues.put("fecha", fecha);
+        return db.insert("encuesta", null, initialValues);
+    }
+
+    public Cursor getAllContacts()
+    {
+        return db.query("encuesta", new String[] {"_id_numero_encuesta", "coordinador", "encuestador", "hora_inicio", "fecha"}, null,
+                 null, null, null, null);
+    }
 
 }

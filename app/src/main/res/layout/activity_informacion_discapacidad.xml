@@ -51,16 +51,7 @@
             android:textStyle="bold"/>
         <!-- Lista de Chekbox-->
 
-        <CheckedTextView
-            android:id="@+id/chModosTransporte1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="48dp"
-            android:checkMark="?android:attr/listChoiceIndicatorMultiple"
-            android:checked="true"
-            android:text="CheckedTextView" />
+
 
 
     </TableRow>
@@ -74,9 +65,145 @@
         <!-- Lista de Chekbox-->
 
     </TableRow>
+    <TableRow>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+
+            <CheckBox
+                android:id="@+id/checkBoxBic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Bicicleta" />
+
+
+            <CheckBox
+                android:id="@+id/checkBoxTax"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Taxi"
+                android:checked="true" />
+
+
+
+            <CheckBox
+                android:id="@+id/checkBoxBus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Bus" />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+
+
+
+            <CheckBox
+                android:id="@+id/checkBoxAut"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Automovil" />
+
+
+            <CheckBox
+                android:id="@+id/checkBoxMot"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Moto"
+                android:checked="true" />
+
+
+
+            <CheckBox
+                android:id="@+id/checkBoxOtro"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Otro" />
+        </LinearLayout>
+
+    </TableRow>
+
+    <TableRow>
+        <TextView
+            android:text="Herramientas de las que requiere uso"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"/>
+        <!-- Lista de Chekbox-->
+
+    </TableRow>
+
+    <TableRow>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+
+            <CheckBox
+                android:id="@+id/checkBoxSill"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Silla de Ruedas" />
+
+
+            <CheckBox
+                android:id="@+id/checkBoxMul"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Muletas"
+                android:checked="true" />
+
+
+
+            <CheckBox
+                android:id="@+id/checkBoxBas"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Baston" />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+
+
+
+            <CheckBox
+                android:id="@+id/checkBoxCam"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Caminador" />
+
+
+            <CheckBox
+                android:id="@+id/checkBoxOtros"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Otro"
+                android:checked="true" />
+
+
+
+            <CheckBox
+                android:id="@+id/checkBoxNin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ninguno" />
+        </LinearLayout>
+
+    </TableRow>
 
 
     <TableRow>
+
 
         <Button
             android:id="@+id/btnContinuarInformacionOcupacionSecundaria"

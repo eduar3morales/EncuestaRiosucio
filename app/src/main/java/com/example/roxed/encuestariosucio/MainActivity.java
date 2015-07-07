@@ -7,13 +7,17 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TimePicker;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Calendar;
+import java.util.List;
+
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
@@ -31,6 +35,8 @@ public class MainActivity extends ActionBarActivity {
     EditText numeroEncuestaTxt;
     EditText encuestadorTxt;
     Spinner coordinadorSpinner;
+    List<String> listaCoordinador = new ArrayList<String>();
+
 
     String numeroEncuesta;
     String coordinadorEncuesta;
@@ -48,6 +54,14 @@ public class MainActivity extends ActionBarActivity {
         numeroEncuestaTxt = (EditText) findViewById(R.id.txtNumeroEncuesta);
         encuestadorTxt = (EditText) findViewById(R.id.txtEncuestador);
         coordinadorSpinner = (Spinner) findViewById(R.id.spinnerCoordinador);
+
+        listaCoordinador.add("JORGE ALBERTO MONTOYA");
+        listaCoordinador.add("LUIS GABRIEL QUINA");
+        listaCoordinador.add("GUSTAVO CANO");
+        ArrayAdapter<String> adaptadorCoordinador = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, listaCoordinador);
+        adaptadorCoordinador.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        coordinadorSpinner.setAdapter(adaptadorCoordinador);
+
 
         //Obtener fecha actual
         Calendar fechaActual = Calendar.getInstance();
@@ -74,10 +88,16 @@ public class MainActivity extends ActionBarActivity {
 
         numeroEncuesta = numeroEncuestaTxt.getText().toString();
         encuestador = encuestadorTxt.getText().toString();
-        //coordinadorEncuesta = coordinadorSpinner.getSelectedItem().toString();
+        coordinadorEncuesta = coordinadorSpinner.getSelectedItem().toString();
         fechaEncuesta = dia+"/"+(mes+1)+"/"+año;
         horaInicio = hora+":"+minuto;
 
+
+        DBAdapter  db = new DBAdapter(this);
+        db.open();
+        long id = db.insertEncuesta(numeroEncuesta, coordinadorEncuesta, encuestador, horaInicio, fechaEncuesta);
+        id = db.insertEncuesta("3", "Daniel", "Jaimito", horaInicio, fechaEncuesta);
+        db.close();
 
 
         Intent intent = new Intent(this, InformacionViviendaActivity.class);

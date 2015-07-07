@@ -17,6 +17,19 @@ import java.util.List;
 
 public class InformacionDiscapacidadActivity extends ActionBarActivity {
 
+    private CheckBox checkBoxBicicleta;
+    private CheckBox checkBoxTaxi;
+    private CheckBox checkBoxBus;
+    private CheckBox checkBoxAutomovil;
+    private CheckBox checkBoxMoto;
+    private CheckBox checkBoxOtro;
+    private CheckBox checkBoxSillaRuedas;
+    private CheckBox checkBoxMuleta;
+    private CheckBox checkBoxBaston;
+    private CheckBox checkBoxCaminador;
+    private CheckBox checkBoxOtros;
+    private CheckBox checkBoxNinguno;
+
 
     Spinner spinnerTipoDiscapacidad;
     Spinner spinnerDuracionDiscapacidad;
@@ -32,6 +45,19 @@ public class InformacionDiscapacidadActivity extends ActionBarActivity {
 
         spinnerTipoDiscapacidad = (Spinner) findViewById(R.id.spinnerTipoDiscapacidad);
         spinnerDuracionDiscapacidad = (Spinner) findViewById(R.id.spinnerDuracionDiscapacidad);
+
+        checkBoxBicicleta = (CheckBox) findViewById(R.id.checkBoxBic);
+        checkBoxTaxi = (CheckBox) findViewById(R.id.checkBoxTax);
+        checkBoxBus = (CheckBox) findViewById(R.id.checkBoxBus);
+        checkBoxAutomovil = (CheckBox) findViewById(R.id.checkBoxAut);
+        checkBoxMoto = (CheckBox) findViewById(R.id.checkBoxMot);
+        checkBoxOtro = (CheckBox) findViewById(R.id.checkBoxOtro);
+        checkBoxSillaRuedas = (CheckBox) findViewById(R.id.checkBoxSill);
+        checkBoxMuleta = (CheckBox) findViewById(R.id.checkBoxMul);
+        checkBoxBaston = (CheckBox) findViewById(R.id.checkBoxBas);
+        checkBoxCaminador = (CheckBox) findViewById(R.id.checkBoxCam);
+        checkBoxOtros = (CheckBox) findViewById(R.id.checkBoxOtros);
+        checkBoxNinguno = (CheckBox) findViewById(R.id.checkBoxNin);
 
 
 
