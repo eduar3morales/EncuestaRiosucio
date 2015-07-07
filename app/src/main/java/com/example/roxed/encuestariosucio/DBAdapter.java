@@ -41,11 +41,14 @@ public class DBAdapter {
         {
             try{
                 //Todas las sentencias para crear las tablas
-                db.execSQL("CREATE TABLE encuesta (enc_numero_encuesta primary key, enc_coordinador text not null, enc_encuestador text not null," +
-                        "enc_hora_inicio text not null, enc_fecha text not null);");
+                db.execSQL("CREATE TABLE encuesta (_idn_umero_encuesta primary key, coordinador text not null, encuestador text not null," +
+                        "hora_inicio text not null, fecha text not null);");
 
-                db.execSQL("CREATE TABLE vivienda (viv_id_vivienda primary key autoincrement, viv_barrio text not null, viv_estrato text not null, viv_direccion text not null," +
-                        "viv_zat text not null, viv_telefono text not null, viv_celular text not null, viv_tipo_vivienda text not null, viv_cantidad_hogares_vivienda text not null);");
+                db.execSQL("CREATE TABLE vivienda (_id_vivienda primary key autoincrement, barrio text not null, estrato text not null, direccion text not null," +
+                        "zat text not null, telefono text not null, celular text not null, tipo_vivienda text not null, cantidad_hogares_vivienda text not null);");
+
+                db.execSQL("CREATE TABLE hogar (id_hogar primary key autoincrement, cantidad_personas_hogar text not null, cantidad_personas_dia_tipico text not null," +
+                        "cantidad_personas_dia_sabado text not null, cantidad_personas_presentes text not null, tipo_propiedad text not null, ingresos_mensuales text);");
 
             } catch (SQLException e){
                 e.printStackTrace();
