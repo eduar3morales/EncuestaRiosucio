@@ -20,7 +20,6 @@ public class InformacionDiscapacidadActivity extends ActionBarActivity {
 
     Spinner spinnerTipoDiscapacidad;
     Spinner spinnerDuracionDiscapacidad;
-    CheckedTextView chOpc1, chOpc2,chopc3,chopc4,chopc5,chopc6;
 
     private List<String> listaTipoDiscapacidad = new ArrayList<String>();
     private List<String> listaDuracionDiscapacidad = new ArrayList<String>();
@@ -33,7 +32,7 @@ public class InformacionDiscapacidadActivity extends ActionBarActivity {
 
         spinnerTipoDiscapacidad = (Spinner) findViewById(R.id.spinnerTipoDiscapacidad);
         spinnerDuracionDiscapacidad = (Spinner) findViewById(R.id.spinnerDuracionDiscapacidad);
-        //chOpc1= (CheckedTextView) findViewById(R.id.chModosTransporte);
+        
 
 
 
