@@ -72,6 +72,9 @@ public class InformacionMediosTransporteActivity extends ActionBarActivity {
         listaSitioEstacionamiento.add("SOBRE LA VIA");
         listaSitioEstacionamiento.add("PARQUEADERO PAGADO");
         listaSitioEstacionamiento.add("PARQUEADERO GRATIS");
+        ArrayAdapter<String> adaptadorSitioEstacionamiento = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, listaSitioEstacionamiento);
+        adaptadorSitioEstacionamiento.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerSitioEstacionamiento.setAdapter(adaptadorSitioEstacionamiento);
 
 
     }
