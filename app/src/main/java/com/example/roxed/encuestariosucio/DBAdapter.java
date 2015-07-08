@@ -103,7 +103,7 @@ public class DBAdapter {
         }
 
         //Permitir el uso de Foreign Keys
-        @Override
+        /*@Override
         public void onOpen(SQLiteDatabase db)
         {
             super.onOpen(db);
@@ -111,7 +111,7 @@ public class DBAdapter {
             {
                 db.execSQL("PRAGMA foreigns_keys =ON;");
             }
-        }
+        }*/
     }//--------------------- FIN DE LA CLASE DatabaseHelper SQLiteOpenHelper
 
 
