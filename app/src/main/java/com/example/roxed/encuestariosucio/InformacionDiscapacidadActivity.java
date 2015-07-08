@@ -59,8 +59,10 @@ public class InformacionDiscapacidadActivity extends ActionBarActivity {
         checkBoxOtros = (CheckBox) findViewById(R.id.checkBoxOtros);
         checkBoxNinguno = (CheckBox) findViewById(R.id.checkBoxNin);
 
-
-
+        checkBoxTaxi.setChecked(false);
+        checkBoxMuleta.setChecked(false);
+        checkBoxMoto.setChecked(false);
+        checkBoxOtros.setChecked(false);
 
 
         listaTipoDiscapacidad.add("NINGUNA");

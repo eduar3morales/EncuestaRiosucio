@@ -58,7 +58,7 @@ public class InformacionOcupacionPrincipalActivity extends ActionBarActivity {
         listaOcupacionPrincipal.add("TRABAJAR");
         listaOcupacionPrincipal.add("OFICIOS DEL HOGAR");
         listaOcupacionPrincipal.add("JUBILADO");
-        listaOcupacionPrincipal.add("TENTISTA");
+        listaOcupacionPrincipal.add("RENTISTA");
         listaOcupacionPrincipal.add("BUSCAR TRABAJO");
         listaOcupacionPrincipal.add("INCAPACIDAD PERMANENTE PARA TRABAJAR");
         listaOcupacionPrincipal.add("OTRA ACTIVIDAD");
@@ -78,7 +78,7 @@ public class InformacionOcupacionPrincipalActivity extends ActionBarActivity {
         adaptadorEstudioPrincipal.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerLugarEstudioPrincipal.setAdapter(adaptadorEstudioPrincipal);
 
-        listaSectorTrabajoPrincipal.add("AGGRICULTURA");
+        listaSectorTrabajoPrincipal.add("AGRICULTURA");
         listaSectorTrabajoPrincipal.add("MANTENIMIENTO Y REPARACION");
         listaSectorTrabajoPrincipal.add("MINERIA");
         listaSectorTrabajoPrincipal.add("MANUFACTURA");

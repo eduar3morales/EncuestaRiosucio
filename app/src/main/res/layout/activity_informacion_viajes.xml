@@ -1,4 +1,4 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
@@ -7,78 +7,243 @@
     tools:context="com.example.roxed.encuestariosucio.InformacionViajesActivity"
     android:background="@drawable/fondo2">
 
-    <TextView
-        android:text="Viajes típicos realizados"
+    <TableRow>
+        <TextView
+            android:text="Viajes típicos realizados"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textSize="20dp"/>
+
+
+        <!-- Tener boton para agregar nuevo viaje en lugar de poner viaje número, eso se hace automaticamente con cada viaje -->
+
+    </TableRow>
+
+    <TableRow>
+        <TextView
+            android:text="Motivo del viaje"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"/>
+
+        <Spinner
+            android:id="@+id/spinnerMotivoDeViaje"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#FFFFFFFF"/>
+        <!--Lista CheckBox -->
+        <LinearLayout>
+
+
+        </LinearLayout>
+
+    </TableRow>
+
+    <TableRow>
+
+        <TextView
+            android:text="Lugar origen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:text="ZAT origen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"/>
+
+
+        <Button
+
+            android:id="@+id/btnSeleccionarHoraSalida"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Seleccionar Hora de Salida"
+            android:onClick="onClickHoraSalida"/>
+        <!-- TimePicker-->
+    </TableRow>
+
+    <TableRow>
+        <EditText
+            android:id="@+id/txtLugarDeOrigen"
+            android:hint="Lugar..."
+            android:inputType="textPersonName"
+
+            />
+
+        <Spinner
+            android:id="@+id/spinnerZATOrigen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#FFFFFFFF"/>
+
+    </TableRow>
+
+
+    <TableRow>
+
+
+        <TextView
+            android:text="Lugar destino"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:text="ZAT destino"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"/>
+
+
+        <Button
+
+            android:id="@+id/btnSeleccionarHoraLlegada"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Seleccionar Hora de Llegada"
+            android:onClick="onClickHoraLlegada"/>
+
+    </TableRow>
+
+    <TableRow>
+
+        <EditText
+            android:id="@+id/txtLugarDeDestino"
+            android:hint="Lugar..."
+            android:inputType="textPersonName"
+            />
+
+        <Spinner
+            android:id="@+id/spinnerZATDestino"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#FFFFFFFF" />
+
+    </TableRow>
+
+    <TableRow>
+        <TextView
+            android:text="Modo de cada viaje o etapa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"/>
+
+        <Spinner
+            android:id="@+id/spinnerModoDeViaje"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#FFFFFFFF"/>
+        <!--Lista CheckBox -->
+
+        <LinearLayout>
+
+
+        </LinearLayout>
+
+    </TableRow>
+
+    <TableRow>
+
+        <TextView
+            android:text="Frecuencia del viaje"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"/>
+        <!-- Lista CheckBox-->
+    </TableRow>
+    <TableRow>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+
+            <CheckBox
+                android:id="@+id/checkBoxLunesAViernes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Lunes a Viernes " />
+
+
+            <CheckBox
+                android:id="@+id/checkBoxLunesASabado"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Lunes a Sabado"
+                android:checked="true" />
+
+
+
+            <CheckBox
+                android:id="@+id/checkBoxLunes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Lunes" />
+
+            <CheckBox
+                android:id="@+id/checkBoxMartes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="martes" />
+
+        </LinearLayout>
+
+    </TableRow>
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:textSize="20dp"/>
+        android:orientation="horizontal"
+        >
 
-    <!-- Tener boton para agregar nuevo viaje en lugar de poner viaje número, eso se hace automaticamente con cada viaje -->
+        <CheckBox
+            android:id="@+id/checkBoxMiercoles"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Miercoles " />
 
-    <TextView
-        android:text="Lugar origen"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textStyle="bold"/>
 
-    <TextView
-        android:text="ZAT origen"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textStyle="bold"/>
+        <CheckBox
+            android:id="@+id/checkBoxJueves"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Jueves"
+            android:checked="true" />
 
-    <TextView
-        android:text="Hora salida"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textStyle="bold"/>
-    <TimePicker
-        android:id="@+id/timePickerHoraSalidaViaje"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
 
-    <TextView
-        android:text="Lugar destino"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textStyle="bold"/>
 
-    <TextView
-        android:text="ZAT destino"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textStyle="bold"/>
+        <CheckBox
+            android:id="@+id/checkBoxViernes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Viernes" />
 
-    <TextView
-        android:text="Hora llegada"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textStyle="bold"/>
-    <TimePicker
-        android:id="@+id/timePickerHoraLlegadaViaje"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        <CheckBox
+            android:id="@+id/checkBoxSabado"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sabado" />
+        <CheckBox
+            android:id="@+id/checkBoxDomingo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Domingo" />
 
-    <TextView
-        android:text="Motivo del viaje"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textStyle="bold"/>
-    <!--Lista CheckBox -->
 
-    <TextView
-        android:text="Modo de cada viaje o etapa"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textStyle="bold"/>
-    <!--Lista CheckBox -->
+    </LinearLayout>
 
-    <TextView
-        android:text="Frecuencia del viaje"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textStyle="bold"/>
-    <!-- Lista CheckBox-->
 
-</RelativeLayout>
+    <TableRow>
+
+    </TableRow>
+
+
+
+
+
+
+
+</TableLayout>

@@ -45,7 +45,7 @@ public class DBAdapter {
                         "hora_inicio text not null, fecha text not null);");
 
                 db.execSQL("CREATE TABLE vivienda (_id_vivienda primary key autoincrement, barrio text not null, estrato text not null, direccion text not null," +
-                        " zat text not null, telefono text not null, celular text not null, tipo_vivienda text not null, cantidad_hogares_vivienda text not null);");
+                        " zat text not null, telefono text, celular text not null, tipo_vivienda text not null, cantidad_hogares_vivienda text not null);");
 
                 db.execSQL("CREATE TABLE hogar (id_hogar primary key autoincrement, cantidad_personas_hogar text not null, cantidad_personas_dia_tipico text not null," +
                         " cantidad_personas_dia_sabado text not null, cantidad_personas_presentes text not null, tipo_propiedad text not null, ingresos_mensuales text);");
@@ -99,6 +99,17 @@ public class DBAdapter {
             db.execSQL("DROP TABLE IF EXISTS ocupacion");
             onCreate(db);
         }
+
+        //Permitir el uso de Foreign Keys
+        @Override
+        public void onOpen(SQLiteDatabase db)
+        {
+            super.onOpen(db);
+            if(!db.isReadOnly())
+            {
+                db.execSQL("PRAGMA foreigns_keys =ON;");
+            }
+        }
     }//--------------------- FIN DE LA CLASE DatabaseHelper SQLiteOpenHelper
 
 
@@ -127,6 +138,45 @@ public class DBAdapter {
         return db.insert("encuesta", null, initialValues);
     }
 
+
+    public long insertVivienda(String barrio, String estrato, String direccion, String zat, String telefono, String celular, String tipoVivienda, String cantidadHogares)
+    {
+        ContentValues initialValues = new ContentValues();
+        initialValues.put("barrio", barrio);
+        initialValues.put("estrato", estrato);
+        initialValues.put("direccion", direccion);
+        initialValues.put("zat", zat);
+        initialValues.put("telefono", telefono);
+        initialValues.put("celular", celular);
+        initialValues.put("tipo_vivienda", tipoVivienda);
+        initialValues.put("cantidad_hogares_vivienda", cantidadHogares);
+        return db.insert("vivienda", null, initialValues);
+    }
+
+    public long insertHogar(String cantPersHogar, String cantPersViajanTipico, String cantPersViajanSabado, String cantPersPresentesHogar, String tipoPropiedad, String ingresosMensaules)
+    {
+        ContentValues initialValues = new ContentValues();
+        initialValues.put("cantidad_personas_hogar", cantPersHogar);
+        initialValues.put("cantidad_personas_dia_tipico", cantPersViajanTipico);
+        initialValues.put("cantidad_personas_dia_sabado", cantPersViajanSabado);
+        initialValues.put("cantidad_personas_presentes", cantPersPresentesHogar);
+        initialValues.put("tipo_propiedad", tipoPropiedad);
+        initialValues.put("ingresos_mensuales", ingresosMensaules);
+        return db.insert("hogar", null, initialValues);
+    }
+
+    public long insertMediosTransporte(String tipoVehiculo, String modeloVehiculo, String kmUltimo, String lugarMatricula, String sitioEstacionamiento)
+    {
+        ContentValues initialValues = new ContentValues();
+        initialValues.put("tipo_vehiculo", tipoVehiculo);
+        initialValues.put("modelo_vehiculo", modeloVehiculo);
+        initialValues.put("km_ultimo", kmUltimo);
+        initialValues.put("lugar_matricula", lugarMatricula);
+        initialValues.put("sitio_estacionamiento", sitioEstacionamiento);
+        return db.insert("medios_transporte", null, initialValues);
+    }
+
+   
     public Cursor getAllContacts()
     {
         return db.query("encuesta", new String[] {"_id_numero_encuesta", "coordinador", "encuestador", "hora_inicio", "fecha"}, null,
