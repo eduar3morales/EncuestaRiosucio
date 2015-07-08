@@ -1,6 +1,7 @@
 package com.example.roxed.encuestariosucio;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,6 +65,7 @@ public class InformacionHogarActivity extends ActionBarActivity {
         adaptadorRangoIngresosMensuales.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerRangoIngresosMensuales.setAdapter(adaptadorRangoIngresosMensuales);
 
+
     }
 
     public void onClickContinuarHogar(View view)
@@ -73,6 +76,11 @@ public class InformacionHogarActivity extends ActionBarActivity {
         cantidadPersonasPresentes = txtCantidadPersonasPresentes.getText().toString();
         tipoPropiedad = spinnerTipoPropiedad.getSelectedItem().toString();
         rangoIngresos = spinnerRangoIngresosMensuales.getSelectedItem().toString();
+
+        DBAdapter db = new DBAdapter(this);
+        long id = db.insertHogar(cantidadPersonasConformanHogar, cantidadPersonasViajanDiaTipico, cantidadPersonasViajanDiaSabado, cantidadPersonasPresentes, tipoPropiedad,
+                rangoIngresos);
+        db.close();
 
         Intent intent = new Intent(this, InformacionMediosTransporteActivity.class);
         startActivity(intent);

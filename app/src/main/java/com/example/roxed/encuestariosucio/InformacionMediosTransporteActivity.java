@@ -77,12 +77,17 @@ public class InformacionMediosTransporteActivity extends ActionBarActivity {
     }
 
     public void onClickContinuarMediosTransporte(View view) {
-        /*
+
         tipoVehiculo = spinnerTipoVehiculo.getSelectedItem().toString();
         modeloVehiculo = spinnerModeloVehiculo.getSelectedItem().toString();
         kmUltimoA = txtKilometro.getText().toString();
         lugarMatricula = txtLugarMatricula.getText().toString();
-        sitioEstacionamiento = spinnerSitioEstacionamiento.getSelectedItem().toString();*/
+        sitioEstacionamiento = spinnerSitioEstacionamiento.getSelectedItem().toString();
+
+        DBAdapter db = new DBAdapter(this);
+        db.open();
+        long id = db.insertMediosTransporte(tipoVehiculo, modeloVehiculo, kmUltimoA, lugarMatricula, sitioEstacionamiento);
+        db.close();
 
         Intent intent = new Intent(this,InformacionPersonaActivity. class);
         startActivity(intent);

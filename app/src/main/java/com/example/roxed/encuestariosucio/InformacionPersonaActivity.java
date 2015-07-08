@@ -100,6 +100,11 @@ public class InformacionPersonaActivity extends ActionBarActivity {
         usoRedCicloRuta = spinnerUsoCicloruta.getSelectedItem().toString();
         ultimoNivelEstudio = spinnerNivelDeEstudios.getSelectedItem().toString();
 
+        DBAdapter db = new DBAdapter(this);
+        db.open();
+        long id = db.insertPersona(codigoOrden, nombre, edad, genero, ultimoNivelEstudio, usoRedCicloRuta);
+        db.close();
+
         Intent intent = new Intent(this,InformacionOcupacionPrincipalActivity. class);
         startActivity(intent);
     }

@@ -78,7 +78,7 @@ public class InformacionViviendaActivity extends ActionBarActivity {
         adaptadorEstrato.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerEstrato.setAdapter(adaptadorEstrato);
 
-        DBAdapter db = new DBAdapter(this);
+        /*DBAdapter db = new DBAdapter(this);
         db.open();
         Cursor c = db.getAllContacts();
         if (c.moveToFirst())
@@ -92,7 +92,7 @@ public class InformacionViviendaActivity extends ActionBarActivity {
                 "Fecha: "+c.getString(4), Toast.LENGTH_LONG).show();
             }while (c.moveToNext());
         }
-        db.close();
+        db.close();*/
 
 
     }
@@ -106,6 +106,12 @@ public class InformacionViviendaActivity extends ActionBarActivity {
         telefono = txtTelefono.getText().toString();
         celular = txtCelular.getText().toString();
         tipoVivienda = spinnerTipoVivienda.getSelectedItem().toString();
+        cantidadHogaresVivienda = txtCantidadHogaresVivienda.getText().toString();
+
+        DBAdapter db = new DBAdapter(this);
+        db.open();
+        long id = db.insertVivienda(barrio, estrato, direccion, zat, telefono, celular, tipoVivienda, cantidadHogaresVivienda);
+        db.close();
 
         Intent intent = new Intent(this, InformacionHogarActivity.class);
         startActivity(intent);
