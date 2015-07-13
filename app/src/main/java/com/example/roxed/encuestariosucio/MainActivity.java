@@ -92,15 +92,13 @@ public class MainActivity extends ActionBarActivity {
         fechaEncuesta = dia+"/"+(mes+1)+"/"+año;
         horaInicio = hora+":"+minuto;
 
-
         DBAdapter  db = new DBAdapter(this);
         db.open();
         long id = db.insertEncuesta(numeroEncuesta, coordinadorEncuesta, encuestador, horaInicio, fechaEncuesta);
-        id = db.insertEncuesta("3", "Daniel", "Jaimito", horaInicio, fechaEncuesta);
         db.close();
 
-
         Intent intent = new Intent(this, InformacionViviendaActivity.class);
+        intent.putExtra("numeroEncuesta", numeroEncuesta);
         startActivity(intent);
     }
 

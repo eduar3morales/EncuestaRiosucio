@@ -25,10 +25,11 @@ public class InformacionViviendaActivity extends ActionBarActivity {
     EditText txtDireccion;
     EditText txtTelefono;
     EditText txtCelular;
-    EditText txtCantidadHogaresVivienda;
+    Spinner spinnerCantidadHogaresVivienda;
     private List<String> listaZatVivienda = new ArrayList<String>();
     private List<String> listaTipoVivienda = new ArrayList<String>();
     private List<String> listaEstrato = new ArrayList<String>();
+    private List<String> listaCantidadHogaresVivienda = new ArrayList<String>();
 
     String barrio;
     String estrato;
@@ -38,6 +39,9 @@ public class InformacionViviendaActivity extends ActionBarActivity {
     String celular;
     String tipoVivienda;
     String cantidadHogaresVivienda;
+
+    String numeroEncuesta;
+    String idVivienda;
 
 
     @Override
@@ -53,10 +57,10 @@ public class InformacionViviendaActivity extends ActionBarActivity {
         txtDireccion = (EditText) findViewById(R.id.txtDireccion);
         txtTelefono = (EditText) findViewById(R.id.txtTelefono);
         txtCelular = (EditText) findViewById(R.id.txtCelular);
-        txtCantidadHogaresVivienda = (EditText) findViewById(R.id.txtCantidadHogaresVivienda);
+        spinnerCantidadHogaresVivienda = (Spinner) findViewById(R.id.spinnerCantidadHogaresVivienda);
 
 
-        for (int i = 0; i< 14; i++)
+        for (int i = -1; i< 17; i++)
             listaZatVivienda.add(String.valueOf((i+1)));
 
         ArrayAdapter<String> adaptadorZat = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, listaZatVivienda);
@@ -78,9 +82,20 @@ public class InformacionViviendaActivity extends ActionBarActivity {
         adaptadorEstrato.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerEstrato.setAdapter(adaptadorEstrato);
 
+        for(int i=0;i<=40;i++)
+            listaCantidadHogaresVivienda.add(""+(i));
+
+        ArrayAdapter<String> adaptadorCantidadHogaresVivienda = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, listaCantidadHogaresVivienda);
+        adaptadorCantidadHogaresVivienda.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerCantidadHogaresVivienda.setAdapter(adaptadorCantidadHogaresVivienda);
+
+
+        numeroEncuesta = getIntent().getStringExtra("numeroEncuesta");
+        //Toast.makeText(this, "Numero encuesta: "+numeroEncuesta, Toast.LENGTH_SHORT).show();
+
         /*DBAdapter db = new DBAdapter(this);
         db.open();
-        Cursor c = db.getAllContacts();
+        Cursor c = db.getAllEncuestas();
         if (c.moveToFirst())
         {
             do{
@@ -106,14 +121,35 @@ public class InformacionViviendaActivity extends ActionBarActivity {
         telefono = txtTelefono.getText().toString();
         celular = txtCelular.getText().toString();
         tipoVivienda = spinnerTipoVivienda.getSelectedItem().toString();
-        cantidadHogaresVivienda = txtCantidadHogaresVivienda.getText().toString();
+        cantidadHogaresVivienda = spinnerCantidadHogaresVivienda.getSelectedItem().toString();
 
         DBAdapter db = new DBAdapter(this);
         db.open();
         long id = db.insertVivienda(barrio, estrato, direccion, zat, telefono, celular, tipoVivienda, cantidadHogaresVivienda);
+
+        Cursor c = db.getAllViviendas();
+        if (c.moveToFirst())
+        {
+            do{
+                idVivienda = c.getString(0);
+                /*Toast.makeText(this,
+                        "id: " +c.getString(0)+ "\n"+
+                                "Barrio: " +c.getString(1)+ "\n"+
+                                "Estrato: "+c.getString(2)+ "\n"+
+                                "Dirección: "+c.getString(3)+"\n"+
+                                "Zat: "+c.getString(4)+"\n"+
+                                "Telefono: "+c.getString(5)+"\n"+
+                                "Celular: "+c.getString(6)+"\n"+
+                                "Tipo Vivienda: "+"\n"+
+                                "Cantidad Hogares: ", Toast.LENGTH_LONG).show();*/
+            }while (c.moveToNext());
+        }
         db.close();
 
+
         Intent intent = new Intent(this, InformacionHogarActivity.class);
+        intent.putExtra("numeroEncuesta", numeroEncuesta);
+        intent.putExtra("idVivienda", idVivienda);
         startActivity(intent);
     }
 

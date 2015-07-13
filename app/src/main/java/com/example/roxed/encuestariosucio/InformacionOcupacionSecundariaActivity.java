@@ -11,6 +11,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +34,11 @@ public class InformacionOcupacionSecundariaActivity extends ActionBarActivity {
     String lugarTrabajo;
     String direccionActividadSecundaria;
     String zatActividadSecundaria;
+
+    String idPersona;
+    //String numeroViaje = "0";
+    int numeroViaje = 0;
+    static final String TIPO_OCUPACION = "OCUPACIÓN SECUNARIA";
 
 
     private List<String> listaOcupacionSecundaria= new ArrayList<String>();
@@ -58,7 +64,7 @@ public class InformacionOcupacionSecundariaActivity extends ActionBarActivity {
         listaOcupacionSecundaria.add("TRABAJAR");
         listaOcupacionSecundaria.add("OFICIOS DEL HOGAR");
         listaOcupacionSecundaria.add("JUBILADO");
-        listaOcupacionSecundaria.add("TENTISTA");
+        listaOcupacionSecundaria.add("RENTISTA");
         listaOcupacionSecundaria.add("BUSCAR TRABAJO");
         listaOcupacionSecundaria.add("INCAPACIDAD PERMANENTE PARA TRABAJAR");
         listaOcupacionSecundaria.add("OTRA ACTIVIDAD");
@@ -77,7 +83,7 @@ public class InformacionOcupacionSecundariaActivity extends ActionBarActivity {
         adaptadorEstudioSecundaria.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerLugarEstudioSecundaria.setAdapter(adaptadorEstudioSecundaria);
 
-        listaSectorTrabajoSecundaria.add("AGGRICULTURA");
+        listaSectorTrabajoSecundaria.add("AGRICULTURA");
         listaSectorTrabajoSecundaria.add("MANTENIMIENTO Y REPARACION");
         listaSectorTrabajoSecundaria.add("MINERIA");
         listaSectorTrabajoSecundaria.add("MANUFACTURA");
@@ -113,12 +119,15 @@ public class InformacionOcupacionSecundariaActivity extends ActionBarActivity {
         ArrayAdapter<String> adaptadorLugarTrabajoSecundaria = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, listaLugarTrabajoSecundaria);
         adaptadorLugarTrabajoSecundaria.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerLugarTrabajoSecundaria.setAdapter(adaptadorLugarTrabajoSecundaria);
-       for (int i = 0; i< 14; i++)
+        for (int i = -1; i< 17; i++)
             listaZatActividadSecundaria.add(""+(i+1));
 
         ArrayAdapter<String> adaptadorZatActividadSecundaria = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, listaZatActividadSecundaria);
         adaptadorZatActividadSecundaria.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerZatActividadSecundaria.setAdapter(adaptadorZatActividadSecundaria);
+
+        idPersona = getIntent().getStringExtra("idPersona");
+        //Toast.makeText(this, idPersona, Toast.LENGTH_SHORT).show();
 
 
         spinnerOcupacionSecundaria.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -172,9 +181,55 @@ public class InformacionOcupacionSecundariaActivity extends ActionBarActivity {
         direccionActividadSecundaria = txtDireccionActividadSecundaria.getText().toString();
         zatActividadSecundaria = spinnerZatActividadSecundaria.getSelectedItem().toString();
 
+        DBAdapter db = new DBAdapter(this);
+        db.open();
+        long id = db.insertOcupacion(ocupacion, lugarEstudio, sectorTrabajo, laborDesempeño, lugarTrabajo,direccionActividadSecundaria, zatActividadSecundaria, TIPO_OCUPACION, idPersona);
+        db.close();
+
         Intent intent = new Intent(this,InformacionViajesActivity. class);
+        intent.putExtra("idPersona", idPersona);
+        intent.putExtra("numeroViaje", numeroViaje);
         startActivity(intent);
     }
+
+    public void onClickContinuarAgregarPersona(View view){
+        ocupacion = spinnerOcupacionSecundaria.getSelectedItem().toString();
+        lugarEstudio = spinnerLugarEstudioSecundaria.getSelectedItem().toString();
+        sectorTrabajo = spinnerSectorTrabajoSecundaria.getSelectedItem().toString();
+        laborDesempeño = spinnerLaborDesempeñaSecundaria.getSelectedItem().toString();
+        lugarTrabajo = spinnerLugarTrabajoSecundaria.getSelectedItem().toString();
+        direccionActividadSecundaria = txtDireccionActividadSecundaria.getText().toString();
+        zatActividadSecundaria = spinnerZatActividadSecundaria.getSelectedItem().toString();
+
+        DBAdapter db = new DBAdapter(this);
+        db.open();
+        long id = db.insertOcupacion(ocupacion, lugarEstudio, sectorTrabajo, laborDesempeño, lugarTrabajo,direccionActividadSecundaria, zatActividadSecundaria, TIPO_OCUPACION, idPersona);
+        db.close();
+
+        Intent intent = new Intent(this,InformacionPersonaActivity. class);
+        startActivity(intent);
+
+    }
+
+    public void onClickFinalizar(View view){
+        ocupacion = spinnerOcupacionSecundaria.getSelectedItem().toString();
+        lugarEstudio = spinnerLugarEstudioSecundaria.getSelectedItem().toString();
+        sectorTrabajo = spinnerSectorTrabajoSecundaria.getSelectedItem().toString();
+        laborDesempeño = spinnerLaborDesempeñaSecundaria.getSelectedItem().toString();
+        lugarTrabajo = spinnerLugarTrabajoSecundaria.getSelectedItem().toString();
+        direccionActividadSecundaria = txtDireccionActividadSecundaria.getText().toString();
+        zatActividadSecundaria = spinnerZatActividadSecundaria.getSelectedItem().toString();
+
+        DBAdapter db = new DBAdapter(this);
+        db.open();
+        long id = db.insertOcupacion(ocupacion, lugarEstudio, sectorTrabajo, laborDesempeño, lugarTrabajo,direccionActividadSecundaria, zatActividadSecundaria, TIPO_OCUPACION, idPersona);
+        db.close();
+
+        Intent intent = new Intent(this,MainActivity. class);
+        startActivity(intent);
+
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.

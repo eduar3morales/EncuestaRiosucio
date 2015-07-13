@@ -1,92 +1,169 @@
 <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/margenes"
     tools:context="com.example.roxed.encuestariosucio.InformacionHogarActivity"
     android:background ="@drawable/fondo2">
 
+
     <TableRow>
         <TextView
-            android:text="Datos generales de la vivienda"
+            style="@style/Subtitulos"
+            android:text="Cantidad personas que conforman el hogar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20dp"
-            android:textStyle="bold"/>
-    </TableRow>
-    <TableRow>
+            android:textStyle="bold"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"/>
         <TextView
-            android:text="Cantidad personas que conforman el hogar"
-            android:layout_width="120dp"
+
+            android:text="   "
             android:layout_height="wrap_content"
-            android:textStyle="bold"/>
+            android:layout_width="1dp"/>
+
+        <Spinner
+            style="@style/fondoBlanco"
+            android:id="@+id/spinnerCantidadPersonasConformanHogar"
+            />
+
         <TextView
+
+            android:text="   "
+            android:layout_height="wrap_content"
+            android:layout_width="1dp"/>
+
+        />
+
+
+    </TableRow>
+
+
+    <TableRow>
+
+        <TextView
+            style="@style/Subtitulos"
             android:text="Cantidad de personas que viaja en día típico"
-            android:layout_width="120dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textStyle="bold"/>
+            android:textStyle="bold"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"/>
+
         <TextView
+
+            android:text="   "
+            android:layout_height="wrap_content"
+            android:layout_width="1dp"/>
+        <Spinner
+            style="@style/fondoBlanco"
+            android:id="@+id/spinnerCantidadPersonasViajanDiaTipico"
+            />
+
+    </TableRow>
+
+    <TableRow>
+        <TextView
+            style="@style/Subtitulos"
             android:text="Cantidad de personas que viajan el día sábado"
-            android:layout_width="120dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textStyle="bold"/>
-    </TableRow>
-    <TableRow>
-        <EditText
-            android:id="@+id/txtCantidadPersonasConformanHogar"
-            android:hint="Cantidad de personas que conforman el hogar..."
-            android:layout_width="80dp"
-            android:inputType="number"
-            android:digits="0123456789"/>
-        <EditText
-            android:id="@+id/txtCantidadPersonasViajanDiaTipico"
-            android:hint="Cantidad de personas que viaja en día típico..."
-            android:layout_width="80dp"
-            android:inputType="number"
-            android:digits="0123456789"/>
-        <EditText
-            android:id="@+id/txtCantidadPersonasViajanSabado"
-            android:hint="Cantidad de personas que viajan el día sábado"
-            android:layout_width="80dp"
-            android:inputType="number"
-            android:digits="0123456789"/>
-    </TableRow>
-    <TableRow>
+            android:textStyle="bold"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"/>
         <TextView
-            android:text="Cantidad de personas presentes del hogar elegido"
-            android:textStyle="bold"/>
+
+            android:text="   "
+            android:layout_height="wrap_content"
+            android:layout_width="1dp"/>
+
+        <Spinner
+            style="@style/fondoBlanco"
+            android:id="@+id/spinnerCantidadPersonasViajanSabado"
+            />
+
+    </TableRow>
+
+
+    <TableRow>
+
         <TextView
+            style="@style/Subtitulos"
             android:text="Tipo propiedad"
-            android:textStyle="bold"/>
+            android:textStyle="bold"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"/>
         <TextView
-            android:text="Rango ingresos mensuales"
-            android:textStyle="bold"/>
-    </TableRow>
-    <TableRow>
-        <EditText
-            android:id="@+id/txtCantidadPersonasPresentes"
-            android:hint="Ingrese la cantidad"
-            android:inputType="number"
-            android:digits="0123456789"/>
+
+            android:text=""
+            android:layout_height="wrap_content"
+            android:layout_width="1dp"/>
+
         <Spinner
+            style="@style/fondoBlanco"
             android:id="@+id/spinnerTipoPropiedad" />
+
+
+    </TableRow>
+
+    <TableRow>
+
+        <TextView
+            style="@style/Subtitulos"
+            android:text="Rango ingresos mensuales"
+            android:textStyle="bold"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"/>
+
+        <TextView
+
+            android:text="   "
+            android:layout_height="wrap_content"
+            android:layout_width="1dp"/>
         <Spinner
+            style="@style/fondoBlanco"
+            android:layout_width="220dp"
             android:id="@+id/spinnerRangoIngresosMensuales" />
 
     </TableRow>
-
     <TableRow>
 
-        <Button
-            android:id="@+id/btnContinuarHogar"
-            android:text="Continuar"
-            android:onClick="onClickContinuarHogar"/>
+        <TextView
+            style="@style/Subtitulos"
+            android:text="Cantidad de personas presentes del hogar elegido"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:paddingBottom="10dp"
+            android:paddingRight="5dp"
+            android:paddingTop="10dp"/>
+        <TextView
+
+            android:text="   "
+            android:layout_height="wrap_content"
+            android:layout_width="1dp"/>
+
+        <LinearLayout
+            android:layout_width="220dp">
+
+            <Spinner
+                style="@style/fondoBlanco"
+                android:id="@+id/spinnerCantidadPersonasPresentes"
+                android:layout_width="110dp"
+                android:layout_height="wrap_content"/>
+
+            <Button
+
+                style="@style/botones"
+                android:id="@+id/btnContinuarHogar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="    Continuar    "
+                android:onClick="onClickContinuarHogar" />
+
+        </LinearLayout>
 
     </TableRow>
 
 
 
-    <!-- Una lista de ChekBox?¿O un Spinner? -->
 
 </TableLayout>

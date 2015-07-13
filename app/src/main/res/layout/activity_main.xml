@@ -1,139 +1,146 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingLeft="16dp"
-        android:paddingRight="16dp"
-        android:paddingTop="16dp"
-        android:orientation="vertical"
-        android:paddingBottom="16dp"
-        tools:context=".MainActivity"
-        android:background="@drawable/fondo2">
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/margenes"
+    tools:context=".MainActivity"
+    android:background="@drawable/fondo2">
 
+    <TableRow>
+        <TextView
+            style="@style/Subtitulos"
+            android:text="Número Encuesta"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:layout_width="360dp"/>
         <TextView
 
-            style="@style/Titulos"
+            android:text="   "
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"/>
 
-            android:text="Encuesta Plan de Movilidad Riosucio"
+        <TextView
+            style="@style/Subtitulos"
+            android:text="Coodinador encuesta"
+            android:layout_height="wrap_content"
+            android:layout_width="fill_parent"
+            android:textStyle="bold"
+            android:layout_column="2" />
+
+    </TableRow>
+
+    <TableRow>
+
+
+        <EditText
+            style="@style/editText"
+            android:id="@+id/txtNumeroEncuesta"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:paddingTop="5dp"
+            android:hint="Número encuesta..."
+            android:inputType="number"
+            android:digits="0123456789"/>
+        <TextView
+
+            android:text="   "
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"/>
+
+        <Spinner
+            style="@style/fondoBlanco"
+            android:paddingLeft="1dp"
+            android:id="@+id/spinnerCoordinador"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="5dp"
+            android:layout_column="2" />
 
 
+    </TableRow>
+
+    <TableRow>
+        <TextView
+            style="@style/Subtitulos"
+            android:text="Encuestador"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:textStyle="bold"
             />
+        <TextView
 
+            android:text="   "
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"/>
+        <TextView
+            style="@style/Subtitulos"
+            android:text="Seleccionar Hora y Fecha :"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:textStyle="bold"
+            android:layout_column="2" />
 
-        <LinearLayout
+    </TableRow>
+
+    <TableRow>
+
+        <EditText
+            style="@style/editText"
+            android:id="@+id/txtEncuestador"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:paddingTop="5dp"
+            android:hint="Encuestador..."
+            android:inputType="textPersonName"/>
+        <TextView
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <TextView
-                    style="@style/Subtitulos"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Número Encuesta"
-                    />
-                <EditText
-
-                    android:id="@+id/txtNumeroEncuesta"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="5dp"
-                    android:hint="Número encuesta..."
-                    android:inputType="number"
-                    android:digits="0123456789"/>
-
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingLeft="90dp">
-
-                <TextView
-                    style="@style/Subtitulos"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Coodinador encuesta"
-                    android:textStyle="bold"/>
-                <Spinner
-                    android:id="@+id/spinnerCoordinador"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="5dp"/>
-
-            </LinearLayout>
-
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="wrap_content"
+            android:text="   "
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_width="wrap_content"/>
+        <LinearLayout
 
-            <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="horizontal"
+            android:paddingLeft="40dp"
+            android:layout_column="2"
+            android:background="#FFFFFF">
+
+            <Button
+                style="@style/botones2"
+                android:id="@+id/btnSeleccionarHora"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <TextView
-                    style="@style/Subtitulos"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Encuestador"
-                    />
-                <EditText
-
-                    android:id="@+id/txtEncuestador"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="5dp"
-                    android:hint="Encuestador..."
-                    android:inputType="textPersonName"/>
-
-            </LinearLayout>
-            <LinearLayout
+                android:text="Hora"
+                android:onClick="onClickHora"/>
+            <!-- TimePicker-->
+            <Button
+                style="@style/botones2"
+                android:id="@+id/btnSeleccionarFecha"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingLeft="90dp">
-
-                <Button
-
-                    android:id="@+id/btnSeleccionarHora"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Seleccionar Hora"
-                    android:onClick="onClickHora"/>
-                <!-- TimePicker-->
-                <Button
-
-                    android:id="@+id/btnSeleccionarFecha"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Seleccionar Fecha"
-                    android:onClick="onClickFecha"/>
-                <!--DatePicker-->
-
-            </LinearLayout>
-
-
+                android:text="Fecha"
+                android:onClick="onClickFecha"/>
+            <!--DatePicker-->
 
         </LinearLayout>
 
-        <Button
+    </TableRow>
 
-            android:id="@+id/btnContinuarEncuesta"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Continuar"
-            android:onClick="onClickContinuarEncuesta" />
+    <TableRow>
+        <LinearLayout>
+
+            <Button
+
+                style="@style/botones"
+                android:id="@+id/btnContinuarEncuesta"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Continuar"
+                android:onClick="onClickContinuarEncuesta" />
+
+        </LinearLayout>
+    </TableRow>
 
 
 
 
-    </LinearLayout>
+</TableLayout>

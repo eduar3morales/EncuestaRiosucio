@@ -1,75 +1,81 @@
 <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/margenes"
     tools:context="com.example.roxed.encuestariosucio.InformacionDiscapacidadActivity"
     android:background="@drawable/fondo2">
 
 
+
     <TableRow>
+        <LinearLayout>
+            <TextView
+
+                style="@style/Subtitulos2"
+                android:text="Tipo discapacidad"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:paddingRight="100dp"/>
+
+            <TextView
+                android:text="              "
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <Spinner
+                style="@style/fondoBlanco"
+                android:id="@+id/spinnerTipoDiscapacidad"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+    </TableRow>
+
+    <TableRow>
+        <LinearLayout>
+            <TextView
+
+                style="@style/Subtitulos2"
+                android:text="Duración de la discapacidad   "
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:text="             "
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <Spinner
+                style="@style/fondoBlanco"
+                android:id="@+id/spinnerDuracionDiscapacidad"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+    </TableRow>
+
+    <TableRow>
+
         <TextView
-            android:text="Información adicional sobre el hogar"
+
+            style="@style/Subtitulos2"
+            android:text="Modos de transporte de difícil acceso  "
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textStyle="bold"
-            android:textSize="20dp"/>
-    </TableRow>
-
-    <TableRow>
-        <TextView
-            android:text="Tipo discapacidad"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"/>
-        <Spinner
-            android:id="@+id/spinnerTipoDiscapacidad"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-    </TableRow>
-
-    <TableRow>
-
-        <TextView
-            android:text="Duración de la discapacidad"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"/>
-        <Spinner
-            android:id="@+id/spinnerDuracionDiscapacidad"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-    </TableRow>
-
-    <TableRow>
-
-        <TextView
-            android:text="Modos de transporte de difícil acceso"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"/>
+            android:layout_margin="3dp"/>
         <!-- Lista de Chekbox-->
 
     </TableRow>
 
-    <TableRow>
-        <TextView
-            android:text="Herramientas de las que requiere uso"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"/>
-        <!-- Lista de Chekbox-->
-
-    </TableRow>
     <TableRow>
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:background="#93BB94"
             >
 
             <CheckBox
+
                 android:id="@+id/checkBoxBic"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -77,35 +83,28 @@
 
 
             <CheckBox
+
                 android:id="@+id/checkBoxTax"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Taxi"
-                android:checked="true" />
+                />
 
 
 
             <CheckBox
+
                 android:id="@+id/checkBoxBus"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Bus" />
 
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            >
-
-
-
             <CheckBox
+
                 android:id="@+id/checkBoxAut"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Automovil" />
-
 
             <CheckBox
                 android:id="@+id/checkBoxMot"
@@ -115,21 +114,35 @@
                 android:checked="true" />
 
 
-
             <CheckBox
+
                 android:id="@+id/checkBoxOtro"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Otro" />
+                android:text="Otro"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="#93BB94"
+            >
+
+
         </LinearLayout>
 
     </TableRow>
 
     <TableRow>
         <TextView
-            android:text="Herramientas de las que requiere uso"
+            style="@style/Subtitulos2"
+            android:text="Herramientas de las que requiere uso  "
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="3dp"
             android:textStyle="bold"/>
         <!-- Lista de Chekbox-->
 
@@ -140,6 +153,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:background="#93BB94"
             >
 
             <CheckBox
@@ -153,24 +167,13 @@
                 android:id="@+id/checkBoxMul"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Muletas"
-                android:checked="true" />
-
-
+                android:text="Muletas" />
 
             <CheckBox
                 android:id="@+id/checkBoxBas"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Baston" />
-
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            >
-
 
 
             <CheckBox
@@ -187,28 +190,40 @@
                 android:text="Otro"
                 android:checked="true" />
 
-
-
             <CheckBox
                 android:id="@+id/checkBoxNin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Ninguno" />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="#93BB94">
+
+
+
         </LinearLayout>
 
     </TableRow>
 
 
     <TableRow>
+        <LinearLayout>
 
+            <Button
 
-        <Button
-            android:id="@+id/btnContinuarInformacionOcupacionSecundaria"
-            android:text="Continuar"
-            android:onClick="onClickContinuarInformacionOcupacionSecundaria"/>
+                style="@style/botones"
+                android:id="@+id/btnContinuarInformacionOcupacionSecundaria"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Continuar"
+                android:onClick="onClickContinuarInformacionOcupacionSecundaria" />
+
+        </LinearLayout>
     </TableRow>
-
-
 
 
 

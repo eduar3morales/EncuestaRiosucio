@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +34,9 @@ public class InformacionOcupacionPrincipalActivity extends ActionBarActivity {
     String lugarTrabajo;
     String direccionActividadPrincipal;
     String zatActividadPrincipal;
+
+    String idPersona;
+    static final String TIPO_OCUPACION = "OCUPACIÓN PRINCIPAL";
 
     private List<String> listaOcupacionPrincipal= new ArrayList<String>();
     private List<String> listaLugarEstudioPrincipal= new ArrayList<String>();
@@ -116,12 +120,16 @@ public class InformacionOcupacionPrincipalActivity extends ActionBarActivity {
         spinnerLugarTrabajoPrincipal.setAdapter(adaptadorLugarTrabajoPrincipal);
 
 
-        for (int i = 0; i< 14; i++)
+        for (int i = -1; i< 17; i++)
             listaZatActividadPrincipal.add(String.valueOf((i+1)));
 
         ArrayAdapter<String> adaptadorZatActividadPrincipal = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, listaZatActividadPrincipal);
         adaptadorZatActividadPrincipal.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerZatActividadPrincipal.setAdapter(adaptadorZatActividadPrincipal);
+
+
+        idPersona = getIntent().getStringExtra("idPersona");
+        //Toast.makeText(this, idPersona, Toast.LENGTH_SHORT).show();
 
 
         spinnerOcupacionPrincipal.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -180,7 +188,12 @@ public class InformacionOcupacionPrincipalActivity extends ActionBarActivity {
         direccionActividadPrincipal = txtDireccionActividadPrincipal.getText().toString();
         zatActividadPrincipal = spinnerZatActividadPrincipal.getSelectedItem().toString();
 
+        DBAdapter db = new DBAdapter(this);
+        db.open();
+        long id = db.insertOcupacion(ocupacion, lugarEstudio, sectorTrabajo, laborDesempeño, lugarTrabajo, direccionActividadPrincipal, zatActividadPrincipal, TIPO_OCUPACION, idPersona);
+        db.close();
         Intent intent = new Intent(this,InformacionDiscapacidadActivity. class);
+        intent.putExtra("idPersona", idPersona);
         startActivity(intent);
     }
     @Override

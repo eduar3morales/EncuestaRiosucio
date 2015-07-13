@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.CheckedTextView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +34,14 @@ public class InformacionDiscapacidadActivity extends ActionBarActivity {
 
     Spinner spinnerTipoDiscapacidad;
     Spinner spinnerDuracionDiscapacidad;
+
+    String tipoDiscapacidad;
+    String duracionDiscapacidad;
+    //String[] herramientaApoyo;
+    //String[] mediosTransporteDificilAcceso;
+    List<String> herramientaApoyo = new ArrayList<String>();
+    List <String> medioTransporteDificilAcceso = new ArrayList<String>();
+    String idPersona;
 
     private List<String> listaTipoDiscapacidad = new ArrayList<String>();
     private List<String> listaDuracionDiscapacidad = new ArrayList<String>();
@@ -87,12 +96,65 @@ public class InformacionDiscapacidadActivity extends ActionBarActivity {
         spinnerDuracionDiscapacidad.setAdapter(adaptadorDuracionDiscapacidad);
 
 
+        idPersona = getIntent().getStringExtra("idPersona");
+        //Toast.makeText(this, idPersona, Toast.LENGTH_SHORT).show();
+
+
 
     }
 
     public void onClickContinuarInformacionOcupacionSecundaria(View view)
     {
+        tipoDiscapacidad = spinnerTipoDiscapacidad.getSelectedItem().toString();
+        duracionDiscapacidad = spinnerDuracionDiscapacidad.getSelectedItem().toString();
+        if (checkBoxBicicleta.isChecked())
+            medioTransporteDificilAcceso.add("BICICLETA");
+
+        if (checkBoxTaxi.isChecked())
+            medioTransporteDificilAcceso.add("TAXI");
+
+        if (checkBoxBus.isChecked())
+            medioTransporteDificilAcceso.add("BUS");
+
+        if (checkBoxAutomovil.isChecked())
+            medioTransporteDificilAcceso.add("AUTOMOVIL");
+
+        if (checkBoxMoto.isChecked())
+            medioTransporteDificilAcceso.add("MOTO");
+
+        if (checkBoxOtro.isChecked())
+            medioTransporteDificilAcceso.add("OTROS");
+
+        if (checkBoxSillaRuedas.isChecked())
+            herramientaApoyo.add("SILLA DE RUEDAS");
+
+        if (checkBoxMuleta.isChecked())
+            herramientaApoyo.add("MULETA");
+
+        if (checkBoxBaston.isChecked())
+            herramientaApoyo.add("BASTON");
+
+        if (checkBoxCaminador.isChecked())
+            herramientaApoyo.add("CAMINADOR");
+
+        if (checkBoxOtros.isChecked())
+            herramientaApoyo.add("OTROS");
+
+
+        DBAdapter db = new DBAdapter(this);
+        db.open();
+        long id = db.insertDiscapacidad(tipoDiscapacidad, duracionDiscapacidad, idPersona);
+
+        for (int i=0; i<herramientaApoyo.size(); i++)
+            id = db.insertHerramientaApoyo(herramientaApoyo.get(i), idPersona);
+
+        for (int i=0; i<medioTransporteDificilAcceso.size(); i++)
+            id = db.insertModoTransporteDificilAcceso(medioTransporteDificilAcceso.get(i), idPersona);
+
+        db.close();
+
         Intent intent = new Intent(this, InformacionOcupacionSecundariaActivity.class);
+        intent.putExtra("idPersona", idPersona);
         startActivity(intent);
     }
     @Override

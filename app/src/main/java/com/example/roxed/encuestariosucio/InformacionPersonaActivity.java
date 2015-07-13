@@ -1,6 +1,7 @@
 package com.example.roxed.encuestariosucio;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +31,9 @@ public class InformacionPersonaActivity extends ActionBarActivity {
     String genero;
     String ultimoNivelEstudio;
     String usoRedCicloRuta;
+
+    String idHogar;
+    String idPersona;
 
     private List<String> listaCodigoDeOrden= new ArrayList<String>();
     private List<String> listaEdad= new ArrayList<String>();
@@ -56,7 +61,7 @@ public class InformacionPersonaActivity extends ActionBarActivity {
         adaptadorCodigoDeOrden.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerCodigoDeOrden.setAdapter(adaptadorCodigoDeOrden);
 
-        for (int i = 1; i < 120; i++)
+        for (int i = 0; i < 120; i++)
             listaEdad.add("" + i);
 
         ArrayAdapter<String> adaptadorEdad = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, listaEdad);
@@ -88,7 +93,8 @@ public class InformacionPersonaActivity extends ActionBarActivity {
         adaptadorUsoCicloruta.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerUsoCicloruta.setAdapter(adaptadorUsoCicloruta);
 
-
+        idHogar = getIntent().getStringExtra("idHogar");
+        //Toast.makeText(this, "Id hogar: "+idHogar, Toast.LENGTH_SHORT).show();
 
     }
 
@@ -102,10 +108,18 @@ public class InformacionPersonaActivity extends ActionBarActivity {
 
         DBAdapter db = new DBAdapter(this);
         db.open();
-        long id = db.insertPersona(codigoOrden, nombre, edad, genero, ultimoNivelEstudio, usoRedCicloRuta);
+        long id = db.insertPersona(codigoOrden, nombre, edad, genero, ultimoNivelEstudio, usoRedCicloRuta, idHogar);
+        Cursor c = db.getAllPersonas();
+        if(c.moveToFirst())
+        {
+            do{
+                idPersona = c.getString(0);
+            }while (c.moveToNext());
+        }
         db.close();
 
         Intent intent = new Intent(this,InformacionOcupacionPrincipalActivity. class);
+        intent.putExtra("idPersona", idPersona);
         startActivity(intent);
     }
 
@@ -130,4 +144,7 @@ public class InformacionPersonaActivity extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+
+    ///Cuando se vuelve a esta vista, aparece un null
 }
