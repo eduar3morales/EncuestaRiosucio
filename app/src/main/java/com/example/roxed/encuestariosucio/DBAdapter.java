@@ -69,8 +69,8 @@ public class DBAdapter {
 
                 db.execSQL("CREATE TABLE discapacidad (_id_discapacidad integer primary key autoincrement, tipo_discapacidad text not null, discapacidad_duracion text, persona_fk text not null);");
 
-                db.execSQL("CREATE TABLE ocupacion (_id_ocupacion integer primary key autoincrement, ocupacion text not null, lugar_estudio text, sector_trabajo text, labor_desempeño text, lugar_trabajo text, " +
-                        "direccion_Actividad text, zat_actividad text, tipo_ocupacion text not null, persona_fk text not null);");
+                db.execSQL("CREATE TABLE ocupacion (_id_ocupacion integer primary key autoincrement, ocupacion text not null, lugar_estudio text, sector_trabajo text, labor_desempeño text, " +
+                        "direccion_actividad text, zat_actividad text, tipo_ocupacion text not null, persona_fk text not null);");
 
                 // ---- Revisar bien esta tabla como crear los campos ----
                 //db.execSQL("CREATE TABLE restriccion");
@@ -240,14 +240,13 @@ public class DBAdapter {
         return db.insert("discapacidad", null, initialValues);
     }
 
-    public long insertOcupacion(String ocupacion, String lugarEstudio, String sectorTrabajo, String laborDesempeño, String lugarTrabajo, String direccionActividad, String zatActividad, String tipoOcupacion, String persona_fk)
+    public long insertOcupacion(String ocupacion, String lugarEstudio, String sectorTrabajo, String laborDesempeño, String direccionActividad, String zatActividad, String tipoOcupacion, String persona_fk)
     {
         ContentValues initialValues = new ContentValues();
         initialValues.put("ocupacion", ocupacion);
         initialValues.put("lugar_estudio", lugarEstudio);
         initialValues.put("sector_trabajo", sectorTrabajo);
         initialValues.put("labor_desempeño", laborDesempeño);
-        initialValues.put("lugar_trabajo", lugarTrabajo);
         initialValues.put("direccion_actividad", direccionActividad);
         initialValues.put("zat_actividad", zatActividad);
         initialValues.put("tipo_ocupacion", tipoOcupacion);
@@ -312,7 +311,7 @@ public class DBAdapter {
 
     public Cursor getAllOcupacion()
     {
-        return db.query("ocupacion", new String[]{"_id_ocupacion", "ocupacion", "lugar_estudio", "sector_trabajo", "labor_desempeño", "lugar_trabajo", "direccion_actividad",
+        return db.query("ocupacion", new String[]{"_id_ocupacion", "ocupacion", "lugar_estudio", "sector_trabajo", "labor_desempeño", "direccion_actividad",
                 "zat_actividad", "tipo_ocupacion", "persona_fk"}, null, null, null, null, null);
     }
 

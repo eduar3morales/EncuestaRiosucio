@@ -43,6 +43,8 @@ public class InformacionViviendaActivity extends ActionBarActivity {
     String numeroEncuesta;
     String idVivienda;
 
+    long id;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,7 +93,7 @@ public class InformacionViviendaActivity extends ActionBarActivity {
 
 
         numeroEncuesta = getIntent().getStringExtra("numeroEncuesta");
-        //Toast.makeText(this, "Numero encuesta: "+numeroEncuesta, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Numero encuesta: "+numeroEncuesta, Toast.LENGTH_SHORT).show();
 
         /*DBAdapter db = new DBAdapter(this);
         db.open();
@@ -125,8 +127,9 @@ public class InformacionViviendaActivity extends ActionBarActivity {
 
         DBAdapter db = new DBAdapter(this);
         db.open();
-        long id = db.insertVivienda(barrio, estrato, direccion, zat, telefono, celular, tipoVivienda, cantidadHogaresVivienda);
-
+        id = db.insertVivienda(barrio, estrato, direccion, zat, telefono, celular,tipoVivienda, cantidadHogaresVivienda);
+        db.close();
+        db.open();
         Cursor c = db.getAllViviendas();
         if (c.moveToFirst())
         {

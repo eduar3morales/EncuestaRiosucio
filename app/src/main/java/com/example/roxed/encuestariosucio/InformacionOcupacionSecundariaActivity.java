@@ -31,7 +31,7 @@ public class InformacionOcupacionSecundariaActivity extends ActionBarActivity {
     String lugarEstudio;
     String sectorTrabajo;
     String laborDesempeño;
-    String lugarTrabajo;
+
     String direccionActividadSecundaria;
     String zatActividadSecundaria;
 
@@ -177,13 +177,13 @@ public class InformacionOcupacionSecundariaActivity extends ActionBarActivity {
         lugarEstudio = spinnerLugarEstudioSecundaria.getSelectedItem().toString();
         sectorTrabajo = spinnerSectorTrabajoSecundaria.getSelectedItem().toString();
         laborDesempeño = spinnerLaborDesempeñaSecundaria.getSelectedItem().toString();
-        lugarTrabajo = spinnerLugarTrabajoSecundaria.getSelectedItem().toString();
+        //lugarTrabajo = spinnerLugarTrabajoSecundaria.getSelectedItem().toString();
         direccionActividadSecundaria = txtDireccionActividadSecundaria.getText().toString();
         zatActividadSecundaria = spinnerZatActividadSecundaria.getSelectedItem().toString();
 
         DBAdapter db = new DBAdapter(this);
         db.open();
-        long id = db.insertOcupacion(ocupacion, lugarEstudio, sectorTrabajo, laborDesempeño, lugarTrabajo,direccionActividadSecundaria, zatActividadSecundaria, TIPO_OCUPACION, idPersona);
+        long id = db.insertOcupacion(ocupacion, lugarEstudio, sectorTrabajo, laborDesempeño, direccionActividadSecundaria, zatActividadSecundaria, TIPO_OCUPACION, idPersona);
         db.close();
 
         Intent intent = new Intent(this,InformacionViajesActivity. class);
@@ -197,13 +197,13 @@ public class InformacionOcupacionSecundariaActivity extends ActionBarActivity {
         lugarEstudio = spinnerLugarEstudioSecundaria.getSelectedItem().toString();
         sectorTrabajo = spinnerSectorTrabajoSecundaria.getSelectedItem().toString();
         laborDesempeño = spinnerLaborDesempeñaSecundaria.getSelectedItem().toString();
-        lugarTrabajo = spinnerLugarTrabajoSecundaria.getSelectedItem().toString();
+        //lugarTrabajo = spinnerLugarTrabajoSecundaria.getSelectedItem().toString();
         direccionActividadSecundaria = txtDireccionActividadSecundaria.getText().toString();
         zatActividadSecundaria = spinnerZatActividadSecundaria.getSelectedItem().toString();
 
         DBAdapter db = new DBAdapter(this);
         db.open();
-        long id = db.insertOcupacion(ocupacion, lugarEstudio, sectorTrabajo, laborDesempeño, lugarTrabajo,direccionActividadSecundaria, zatActividadSecundaria, TIPO_OCUPACION, idPersona);
+        long id = db.insertOcupacion(ocupacion, lugarEstudio, sectorTrabajo, laborDesempeño, direccionActividadSecundaria, zatActividadSecundaria, TIPO_OCUPACION, idPersona);
         db.close();
 
         Intent intent = new Intent(this,InformacionPersonaActivity. class);
@@ -216,13 +216,13 @@ public class InformacionOcupacionSecundariaActivity extends ActionBarActivity {
         lugarEstudio = spinnerLugarEstudioSecundaria.getSelectedItem().toString();
         sectorTrabajo = spinnerSectorTrabajoSecundaria.getSelectedItem().toString();
         laborDesempeño = spinnerLaborDesempeñaSecundaria.getSelectedItem().toString();
-        lugarTrabajo = spinnerLugarTrabajoSecundaria.getSelectedItem().toString();
+        //lugarTrabajo = spinnerLugarTrabajoSecundaria.getSelectedItem().toString();
         direccionActividadSecundaria = txtDireccionActividadSecundaria.getText().toString();
         zatActividadSecundaria = spinnerZatActividadSecundaria.getSelectedItem().toString();
 
         DBAdapter db = new DBAdapter(this);
         db.open();
-        long id = db.insertOcupacion(ocupacion, lugarEstudio, sectorTrabajo, laborDesempeño, lugarTrabajo,direccionActividadSecundaria, zatActividadSecundaria, TIPO_OCUPACION, idPersona);
+        long id = db.insertOcupacion(ocupacion, lugarEstudio, sectorTrabajo, laborDesempeño, direccionActividadSecundaria, zatActividadSecundaria, TIPO_OCUPACION, idPersona);
         db.close();
 
         Intent intent = new Intent(this,MainActivity. class);

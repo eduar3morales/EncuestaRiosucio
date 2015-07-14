@@ -1,5 +1,10 @@
 package com.example.roxed.encuestariosucio;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.app.DialogFragment;
+import android.app.FragmentManager;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.support.v7.app.ActionBarActivity;
@@ -52,6 +57,22 @@ public class InformacionHogarActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_informacion_hogar);
+
+        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+        dialog.setMessage("De antemano muchas gracias por indicarnos de los siguientes rangos, en cual de éstos se podría ubicar los ingresos " +
+                "mensuales de este hogar (Tener en cuenta arrendamientos, pensiones, salarios, y otro tipo de ingresos que se generen normalmente. " +
+                "Toda esta información se usará para el estudio y es condidencial)")
+                .setTitle("Por favor leer este mensaje a las personas encuestadas")
+                .setCancelable(false)
+                .setPositiveButton("OK", new DialogInterface.OnClickListener(){
+                    @Override
+                public void onClick(DialogInterface dialog, int which){
+                        dialog.cancel();
+                    }
+                });
+        dialog.show();
+
+
         spinnerTipoPropiedad = (Spinner) findViewById(R.id.spinnerTipoPropiedad);
         spinnerRangoIngresosMensuales = (Spinner) findViewById(R.id.spinnerRangoIngresosMensuales);
         spinnerCantidadPersonasHogar = (Spinner) findViewById(R.id.spinnerCantidadPersonasConformanHogar);
@@ -109,7 +130,7 @@ public class InformacionHogarActivity extends ActionBarActivity {
 
         numeroEncuesta = getIntent().getStringExtra("numeroEncuesta");
         idVivienda = getIntent().getStringExtra("idVivienda");
-        //Toast.makeText(this, "Nro Encuesta: "+numeroEncuesta+"/"+"Id Vivienda: "+idVivienda, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Nro Encuesta: "+numeroEncuesta+"/"+"Id Vivienda: "+idVivienda, Toast.LENGTH_SHORT).show();
 
     }
 
@@ -150,6 +171,8 @@ public class InformacionHogarActivity extends ActionBarActivity {
         intent.putExtra("idHogar", idHogar);
         startActivity(intent);
     }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

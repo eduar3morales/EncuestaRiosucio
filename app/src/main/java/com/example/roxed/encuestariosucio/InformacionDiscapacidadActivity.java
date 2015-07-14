@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.CheckedTextView;
@@ -36,7 +37,7 @@ public class InformacionDiscapacidadActivity extends ActionBarActivity {
     Spinner spinnerDuracionDiscapacidad;
 
     String tipoDiscapacidad;
-    String duracionDiscapacidad;
+    String duracionDiscapacidad = "NO APLICA";
     //String[] herramientaApoyo;
     //String[] mediosTransporteDificilAcceso;
     List<String> herramientaApoyo = new ArrayList<String>();
@@ -94,6 +95,56 @@ public class InformacionDiscapacidadActivity extends ActionBarActivity {
         ArrayAdapter<String> adaptadorDuracionDiscapacidad = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, listaDuracionDiscapacidad);
         adaptadorDuracionDiscapacidad.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerDuracionDiscapacidad.setAdapter(adaptadorDuracionDiscapacidad);
+
+        spinnerTipoDiscapacidad.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if (adapterView.getItemAtPosition(i).toString().equals("NINGUNA"))
+                {
+                    spinnerDuracionDiscapacidad.setEnabled(false);
+                    checkBoxNinguno.setChecked(true);
+                    //Agregar el otro checkBox
+
+                    checkBoxBicicleta.setEnabled(false);
+                    checkBoxTaxi.setEnabled(false);
+                    checkBoxBus.setEnabled(false);
+                    checkBoxAutomovil.setEnabled(false);
+                    checkBoxMoto.setEnabled(false);
+                    checkBoxOtro.setEnabled(false);
+                    checkBoxSillaRuedas.setEnabled(false);
+                    checkBoxMuleta.setEnabled(false);
+                    checkBoxBaston.setEnabled(false);
+                    checkBoxCaminador.setEnabled(false);
+                    checkBoxOtros.setEnabled(false);
+                    Toast.makeText(getBaseContext(), "En este caso la duración de la discapacidad no aplica", Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    spinnerDuracionDiscapacidad.setEnabled(true);
+                    checkBoxNinguno.setChecked(false);
+                    //Agregar el otro checkbox
+
+                    checkBoxBicicleta.setEnabled(true);
+                    checkBoxTaxi.setEnabled(true);
+                    checkBoxBus.setEnabled(true);
+                    checkBoxAutomovil.setEnabled(true);
+                    checkBoxMoto.setEnabled(true);
+                    checkBoxOtro.setEnabled(true);
+                    checkBoxSillaRuedas.setEnabled(true);
+                    checkBoxMuleta.setEnabled(true);
+                    checkBoxBaston.setEnabled(true);
+                    checkBoxCaminador.setEnabled(true);
+                    checkBoxOtros.setEnabled(true);
+
+                }
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
 
 
         idPersona = getIntent().getStringExtra("idPersona");

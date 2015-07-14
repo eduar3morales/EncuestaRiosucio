@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TimePicker;
@@ -140,6 +141,37 @@ public class InformacionViajesActivity extends ActionBarActivity {
         idPersona = getIntent().getStringExtra("idPersona");
         numeroViaje = getIntent().getStringExtra("numeroViaje");
 
+        checkBoxLunesAViernes.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
+            @Override
+        public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked){
+                if (isChecked)
+                {
+                    checkBoxLunesASabado.setEnabled(false);
+                    //agregar lunes a Domingo
+                }
+                else{
+                    checkBoxLunesASabado.setEnabled(true);
+                }
+            }
+        });
+
+        checkBoxLunesASabado.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChekced) {
+                if (isChekced)
+                {
+                    checkBoxLunesAViernes.setEnabled(false);
+                    //Agregar lunes a domingo
+                }
+                else{
+                    checkBoxLunesAViernes.setEnabled(true);
+                }
+            }
+        });
+
+
+
+
 
         //Toast.makeText(this, "Id Persona: "+ idPersona+ " Numero Viaje: " +nroViaje, Toast.LENGTH_SHORT).show();
     }
@@ -246,6 +278,7 @@ public class InformacionViajesActivity extends ActionBarActivity {
             }while (c.moveToNext());
         }
         db.close();
+        db.open();
         for (int i=0; i< frecuenciaViaje.size(); i++)
             id = db.insertFrecuenciaViaje(frecuenciaViaje.get(i), idViaje);
 
@@ -294,6 +327,7 @@ public class InformacionViajesActivity extends ActionBarActivity {
             }while (c.moveToNext());
         }
         db.close();
+        db.open();
         for (int i=0; i< frecuenciaViaje.size(); i++)
             id = db.insertFrecuenciaViaje(frecuenciaViaje.get(i), idViaje);
 
