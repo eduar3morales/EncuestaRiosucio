@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.TimePicker;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -44,6 +45,9 @@ public class MainActivity extends ActionBarActivity {
     String horaInicio;
     String fechaEncuesta;
 
+    TextView txtHoraEncuesta;
+    TextView txtHFechaEncuesta;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +58,8 @@ public class MainActivity extends ActionBarActivity {
         numeroEncuestaTxt = (EditText) findViewById(R.id.txtNumeroEncuesta);
         encuestadorTxt = (EditText) findViewById(R.id.txtEncuestador);
         coordinadorSpinner = (Spinner) findViewById(R.id.spinnerCoordinador);
+        txtHoraEncuesta = (TextView) findViewById(R.id.txtHoraEncuesta);
+        txtHFechaEncuesta = (TextView) findViewById(R.id.txtFechaEncuesta);
 
         listaCoordinador.add("JORGE ALBERTO MONTOYA");
         listaCoordinador.add("LUIS GABRIEL QUINA");
@@ -85,21 +91,30 @@ public class MainActivity extends ActionBarActivity {
 
     public void onClickContinuarEncuesta(View view)
     {
+        if (numeroEncuestaTxt.getText().toString().equals("") || encuestadorTxt.getText().toString().equals("") || txtHoraEncuesta.getText().toString().equals("")
+                || txtHFechaEncuesta.getText().toString().equals(""))
+        {
+            Toast.makeText(getBaseContext(), "Por favor complete todos los campos", Toast.LENGTH_SHORT).show();
+        }
+        else
+        {
+            numeroEncuesta = numeroEncuestaTxt.getText().toString();
+            encuestador = encuestadorTxt.getText().toString();
+            coordinadorEncuesta = coordinadorSpinner.getSelectedItem().toString();
+            fechaEncuesta = dia+"/"+(mes+1)+"/"+año;
+            horaInicio = hora+":"+minuto;
 
-        numeroEncuesta = numeroEncuestaTxt.getText().toString();
-        encuestador = encuestadorTxt.getText().toString();
-        coordinadorEncuesta = coordinadorSpinner.getSelectedItem().toString();
-        fechaEncuesta = dia+"/"+(mes+1)+"/"+año;
-        horaInicio = hora+":"+minuto;
+            DBAdapter  db = new DBAdapter(this);
+            db.open();
+            long id = db.insertEncuesta(numeroEncuesta, coordinadorEncuesta, encuestador, horaInicio, fechaEncuesta);
+            db.close();
 
-        DBAdapter  db = new DBAdapter(this);
-        db.open();
-        long id = db.insertEncuesta(numeroEncuesta, coordinadorEncuesta, encuestador, horaInicio, fechaEncuesta);
-        db.close();
+            Intent intent = new Intent(this, InformacionViviendaActivity.class);
+            intent.putExtra("numeroEncuesta", numeroEncuesta);
+            startActivity(intent);
+            finish();
+        }
 
-        Intent intent = new Intent(this, InformacionViviendaActivity.class);
-        intent.putExtra("numeroEncuesta", numeroEncuesta);
-        startActivity(intent);
     }
 
     @Override
@@ -123,7 +138,7 @@ public class MainActivity extends ActionBarActivity {
             mes = monthOfYear;
             dia = dayOfMonth;
             Toast.makeText(getBaseContext(), "Fecha seleccionada: " + dia + "/"+ (mes + 1) + "/" + año, Toast.LENGTH_SHORT ).show();
-
+            txtHFechaEncuesta.setText("FECHA: " + año + " / " + (mes + 1) + " / " + dia);
         }
     };
 
@@ -139,9 +154,27 @@ public class MainActivity extends ActionBarActivity {
             String strDate = timeFormat.format(date);
             Toast.makeText(getBaseContext(), "Hora seleccionada "+ strDate, Toast.LENGTH_SHORT).show();
 
+            //HORA MOSTRATA EN PANTALLA
+            txtHoraEncuesta.setText(Horas(hora,minuto));
 
         }
     };
+
+
+    private String Horas(int hora, int minuto){
+
+        if(minuto<10){
+            return "HORA:  "+hora+" : 0"+minuto;
+        }
+
+        return "HORA  "+hora+" : "+minuto;
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        // Do Here what ever you want do on back press;
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -160,6 +193,11 @@ public class MainActivity extends ActionBarActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
+        }
+
+        if (id == R.id.actin_exit)
+        {
+            MainActivity.this.finish();
         }
 
         return super.onOptionsItemSelected(item);

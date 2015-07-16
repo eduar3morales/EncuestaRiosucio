@@ -138,6 +138,7 @@ public class InformacionMediosTransporteActivity extends ActionBarActivity {
         Intent intent = new Intent(this,InformacionPersonaActivity. class);
         intent.putExtra("idHogar", idHogar);
         startActivity(intent);
+        finish();
     }
 
     public void onClickContinuarAgregarMedioTransporte(View view){
@@ -155,6 +156,7 @@ public class InformacionMediosTransporteActivity extends ActionBarActivity {
         Intent intent = new Intent(this,InformacionMediosTransporteActivity. class);
         intent.putExtra("idHogar", idHogar);
         startActivity(intent);
+        finish();
     }
 
 
@@ -177,6 +179,12 @@ public class InformacionMediosTransporteActivity extends ActionBarActivity {
             return true;
         }
 
+
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        // Do Here what ever you want do on back press;
     }
 }

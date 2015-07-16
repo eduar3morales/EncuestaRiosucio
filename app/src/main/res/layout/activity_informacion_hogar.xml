@@ -2,9 +2,30 @@
     xmlns:tools="http://schemas.android.com/tools"
     style="@style/margenes"
     tools:context="com.example.roxed.encuestariosucio.InformacionHogarActivity"
-    android:background ="@drawable/fondo2">
+    android:background ="@drawable/fondo2"
+    >
+
+    <TableRow>
+
+        <TextView
+            style="@style/Subtitulos"
+            android:text="Rango ingresos mensuales"
+            android:textStyle="bold"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"/>
 
 
+        <TextView
+
+            android:text="   "
+            android:layout_height="wrap_content"
+            android:layout_width="1dp"/>
+        <Spinner
+            style="@style/fondoBlanco"
+            android:layout_width="320dp"
+            android:id="@+id/spinnerRangoIngresosMensuales" />
+
+    </TableRow>
     <TableRow>
         <TextView
             style="@style/Subtitulos"
@@ -104,26 +125,7 @@
 
     </TableRow>
 
-    <TableRow>
 
-        <TextView
-            style="@style/Subtitulos"
-            android:text="Rango ingresos mensuales"
-            android:textStyle="bold"
-            android:paddingBottom="10dp"
-            android:paddingTop="10dp"/>
-
-        <TextView
-
-            android:text="   "
-            android:layout_height="wrap_content"
-            android:layout_width="1dp"/>
-        <Spinner
-            style="@style/fondoBlanco"
-            android:layout_width="220dp"
-            android:id="@+id/spinnerRangoIngresosMensuales" />
-
-    </TableRow>
     <TableRow>
 
         <TextView
@@ -141,26 +143,25 @@
             android:layout_height="wrap_content"
             android:layout_width="1dp"/>
 
-        <LinearLayout
-            android:layout_width="220dp">
 
-            <Spinner
-                style="@style/fondoBlanco"
-                android:id="@+id/spinnerCantidadPersonasPresentes"
-                android:layout_width="110dp"
-                android:layout_height="wrap_content"/>
+        <Spinner
+            style="@style/fondoBlanco"
+            android:id="@+id/spinnerCantidadPersonasPresentes"
+            />
 
+
+    </TableRow>
+
+    <TableRow>
+        <LinearLayout>
             <Button
-
                 style="@style/botones"
                 android:id="@+id/btnContinuarHogar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="    Continuar    "
                 android:onClick="onClickContinuarHogar" />
-
         </LinearLayout>
-
     </TableRow>
 
 

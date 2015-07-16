@@ -7,7 +7,9 @@
     <!-- Continuación de la información anterior (persona)-->
     <!--Tener identificadores en los TextView para tenerlos o no visibles en las respuestas opcionales -->
 
-
+    <LinearLayout android:focusable="true"
+        android:focusableInTouchMode="true" android:layout_width="0px"
+        android:layout_height="0px" />
     <TableRow>
         <TextView
             style="@style/Subtitulos2"
@@ -76,28 +78,28 @@
             android:layout_height="wrap_content"/>
     </TableRow>
 
-    <TableRow>
+    <!--   <TableRow>
 
+         <TextView
+             style="@style/Subtitulos2"
+             android:text="Lugar de trabajo"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:paddingBottom="10dp"
+             android:paddingTop="10dp"
+             android:textStyle="bold"
+             />
+         <Spinner
+             style="@style/spinnerOP"
+             android:id="@+id/spinnerLugarTrabajoPrincipal"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"/>
+     </TableRow> -->
+
+    <TableRow>
         <TextView
             style="@style/Subtitulos2"
-            android:text="Lugar de trabajo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingBottom="10dp"
-            android:paddingTop="10dp"
-            android:textStyle="bold"
-            />
-        <Spinner
-            style="@style/spinnerOP"
-            android:id="@+id/spinnerLugarTrabajoPrincipal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-    </TableRow>
-
-    <TableRow>
-        <TextView
-            style="@style/Subtitulos2"
-            android:text="Dirección de la actividad principal"
+            android:text="Dirección de la actividad principal "
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingBottom="10dp"
@@ -116,7 +118,7 @@
     <TableRow>
         <TextView
             style="@style/Subtitulos2"
-            android:text="ZAT Actividad principal"
+            android:text="ZAT Actividad principal "
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingBottom="10dp"
@@ -125,35 +127,32 @@
             android:layout_margin="5dp"/>
 
 
+
+        <Spinner
+            style="@style/spinnerOP"
+            android:id="@+id/spinnerZATActividadPrincipal"
+            android:layout_width="wrap_content"/>
+
+
+
+
+    </TableRow>
+
+    <TableRow>
+
         <LinearLayout>
 
-            <Spinner
-                style="@style/spinnerOP"
-                android:id="@+id/spinnerZATActividadPrincipal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-            <TextView
-                android:text=""
-                android:paddingRight="220dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
             <Button
 
                 style="@style/botones"
                 android:id="@+id/btnContinuarInformacionDiscapacidad"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Continuar"
+                android:text="    Continuar    "
                 android:onClick="onClickContinuarInformacionDiscapacidad" />
 
         </LinearLayout>
-
-
     </TableRow>
-
-
-
-
 
 
 

@@ -1,5 +1,7 @@
 package com.example.roxed.encuestariosucio;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Path;
 import android.support.v7.app.ActionBarActivity;
@@ -23,7 +25,6 @@ public class InformacionOcupacionSecundariaActivity extends ActionBarActivity {
     Spinner spinnerLugarEstudioSecundaria;
     Spinner spinnerSectorTrabajoSecundaria;
     Spinner spinnerLaborDesempeñaSecundaria;
-    Spinner spinnerLugarTrabajoSecundaria;
     Spinner spinnerZatActividadSecundaria;
     EditText txtDireccionActividadSecundaria;
 
@@ -41,11 +42,13 @@ public class InformacionOcupacionSecundariaActivity extends ActionBarActivity {
     static final String TIPO_OCUPACION = "OCUPACIÓN SECUNARIA";
 
 
+
+
     private List<String> listaOcupacionSecundaria= new ArrayList<String>();
     private List<String> listaLugarEstudioSecundaria= new ArrayList<String>();
     private List<String> listaSectorTrabajoSecundaria= new ArrayList<String>();
     private List<String> listaLaborDesempeñaSecundaria= new ArrayList<String>();
-    private List<String> listaLugarTrabajoSecundaria = new ArrayList<String>();
+
     private List<String> listaZatActividadSecundaria = new ArrayList<String>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +59,7 @@ public class InformacionOcupacionSecundariaActivity extends ActionBarActivity {
         spinnerLugarEstudioSecundaria= (Spinner) findViewById(R.id.spinnerLugarEstudioSecundaria);
         spinnerSectorTrabajoSecundaria= (Spinner) findViewById(R.id.spinnerSectorTrabajoSecundaria);
         spinnerLaborDesempeñaSecundaria= (Spinner) findViewById(R.id.spinnerLaborDesempeñaSecundaria);
-        spinnerLugarTrabajoSecundaria=(Spinner) findViewById(R.id.spinnerLugarTrabajoSecundaria);
+        //spinnerLugarTrabajoSecundaria=(Spinner) findViewById(R.id.spinnerLugarTrabajoSecundaria);
         spinnerZatActividadSecundaria=(Spinner) findViewById(R.id.spinnerZATActividadSecundaria);
         txtDireccionActividadSecundaria = (EditText) findViewById (R.id.txtDireccionActividadSecundaria);
 
@@ -110,15 +113,6 @@ public class InformacionOcupacionSecundariaActivity extends ActionBarActivity {
         adaptadorLaborDesempeñaSecundaria.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerLaborDesempeñaSecundaria.setAdapter(adaptadorLaborDesempeñaSecundaria);
 
-        listaLugarTrabajoSecundaria.add("CASA");
-        listaLugarTrabajoSecundaria.add("OFICINA O ESTACIONAMIENTO");
-        listaLugarTrabajoSecundaria.add("CASA Y OFICINA");
-        listaLugarTrabajoSecundaria.add("EN LA CALLE");
-        listaLugarTrabajoSecundaria.add("AGENTE VIAJERO");
-        listaLugarTrabajoSecundaria.add("OTRO");
-        ArrayAdapter<String> adaptadorLugarTrabajoSecundaria = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, listaLugarTrabajoSecundaria);
-        adaptadorLugarTrabajoSecundaria.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerLugarTrabajoSecundaria.setAdapter(adaptadorLugarTrabajoSecundaria);
         for (int i = -1; i< 17; i++)
             listaZatActividadSecundaria.add(""+(i+1));
 
@@ -138,7 +132,6 @@ public class InformacionOcupacionSecundariaActivity extends ActionBarActivity {
                     spinnerLugarEstudioSecundaria.setEnabled(true);
                     spinnerSectorTrabajoSecundaria.setEnabled(false);
                     spinnerLaborDesempeñaSecundaria.setEnabled(false);
-                    spinnerLugarTrabajoSecundaria.setEnabled(false);
                     txtDireccionActividadSecundaria.setEnabled(true);
                     spinnerZatActividadSecundaria.setEnabled(true);
 
@@ -149,7 +142,6 @@ public class InformacionOcupacionSecundariaActivity extends ActionBarActivity {
                     spinnerLugarEstudioSecundaria.setEnabled(false);
                     spinnerSectorTrabajoSecundaria.setEnabled(true);
                     spinnerLaborDesempeñaSecundaria.setEnabled(true);
-                    spinnerLugarTrabajoSecundaria.setEnabled(true);
                     txtDireccionActividadSecundaria.setEnabled(true);
                     spinnerZatActividadSecundaria.setEnabled(true);
                 }
@@ -158,7 +150,6 @@ public class InformacionOcupacionSecundariaActivity extends ActionBarActivity {
                     spinnerLugarEstudioSecundaria.setEnabled(false);
                     spinnerSectorTrabajoSecundaria.setEnabled(false);
                     spinnerLaborDesempeñaSecundaria.setEnabled(false);
-                    spinnerLugarTrabajoSecundaria.setEnabled(false);
                     txtDireccionActividadSecundaria.setEnabled(false);
                     spinnerZatActividadSecundaria.setEnabled(false);
                 }
@@ -173,23 +164,52 @@ public class InformacionOcupacionSecundariaActivity extends ActionBarActivity {
     }
 
     public void onClickContinuarInformacionViajes(View view) {
-        ocupacion = spinnerOcupacionSecundaria.getSelectedItem().toString();
-        lugarEstudio = spinnerLugarEstudioSecundaria.getSelectedItem().toString();
-        sectorTrabajo = spinnerSectorTrabajoSecundaria.getSelectedItem().toString();
-        laborDesempeño = spinnerLaborDesempeñaSecundaria.getSelectedItem().toString();
-        //lugarTrabajo = spinnerLugarTrabajoSecundaria.getSelectedItem().toString();
-        direccionActividadSecundaria = txtDireccionActividadSecundaria.getText().toString();
-        zatActividadSecundaria = spinnerZatActividadSecundaria.getSelectedItem().toString();
+        if (txtDireccionActividadSecundaria.isEnabled()) {
+            if (txtDireccionActividadSecundaria.getText().toString().equals("")) {
+                Toast.makeText(getBaseContext(), "Por favor complete todos los campos", Toast.LENGTH_SHORT).show();
+            } else {
+                ocupacion = spinnerOcupacionSecundaria.getSelectedItem().toString();
+                lugarEstudio = spinnerLugarEstudioSecundaria.getSelectedItem().toString();
+                sectorTrabajo = spinnerSectorTrabajoSecundaria.getSelectedItem().toString();
+                laborDesempeño = spinnerLaborDesempeñaSecundaria.getSelectedItem().toString();
+                //lugarTrabajo = spinnerLugarTrabajoSecundaria.getSelectedItem().toString();
+                direccionActividadSecundaria = txtDireccionActividadSecundaria.getText().toString();
+                zatActividadSecundaria = spinnerZatActividadSecundaria.getSelectedItem().toString();
 
-        DBAdapter db = new DBAdapter(this);
-        db.open();
-        long id = db.insertOcupacion(ocupacion, lugarEstudio, sectorTrabajo, laborDesempeño, direccionActividadSecundaria, zatActividadSecundaria, TIPO_OCUPACION, idPersona);
-        db.close();
+                DBAdapter db = new DBAdapter(this);
+                db.open();
+                long id = db.insertOcupacion(ocupacion, lugarEstudio, sectorTrabajo, laborDesempeño, direccionActividadSecundaria, zatActividadSecundaria, TIPO_OCUPACION, idPersona);
+                db.close();
 
-        Intent intent = new Intent(this,InformacionViajesActivity. class);
-        intent.putExtra("idPersona", idPersona);
-        intent.putExtra("numeroViaje", numeroViaje);
-        startActivity(intent);
+                Intent intent = new Intent(this, InformacionViajesActivity.class);
+                intent.putExtra("idPersona", idPersona);
+                intent.putExtra("numeroViaje", numeroViaje);
+                startActivity(intent);
+                finish();
+            }
+        }
+        else
+        {
+            ocupacion = spinnerOcupacionSecundaria.getSelectedItem().toString();
+            lugarEstudio = spinnerLugarEstudioSecundaria.getSelectedItem().toString();
+            sectorTrabajo = spinnerSectorTrabajoSecundaria.getSelectedItem().toString();
+            laborDesempeño = spinnerLaborDesempeñaSecundaria.getSelectedItem().toString();
+            //lugarTrabajo = spinnerLugarTrabajoSecundaria.getSelectedItem().toString();
+            direccionActividadSecundaria = txtDireccionActividadSecundaria.getText().toString();
+            zatActividadSecundaria = spinnerZatActividadSecundaria.getSelectedItem().toString();
+
+            DBAdapter db = new DBAdapter(this);
+            db.open();
+            long id = db.insertOcupacion(ocupacion, lugarEstudio, sectorTrabajo, laborDesempeño, direccionActividadSecundaria, zatActividadSecundaria, TIPO_OCUPACION, idPersona);
+            db.close();
+
+            Intent intent = new Intent(this,InformacionViajesActivity. class);
+            intent.putExtra("idPersona", idPersona);
+            intent.putExtra("numeroViaje", numeroViaje);
+            startActivity(intent);
+            finish();
+        }
+
     }
 
     public void onClickContinuarAgregarPersona(View view){
@@ -208,6 +228,7 @@ public class InformacionOcupacionSecundariaActivity extends ActionBarActivity {
 
         Intent intent = new Intent(this,InformacionPersonaActivity. class);
         startActivity(intent);
+        finish();
 
     }
 
@@ -225,9 +246,34 @@ public class InformacionOcupacionSecundariaActivity extends ActionBarActivity {
         long id = db.insertOcupacion(ocupacion, lugarEstudio, sectorTrabajo, laborDesempeño, direccionActividadSecundaria, zatActividadSecundaria, TIPO_OCUPACION, idPersona);
         db.close();
 
-        Intent intent = new Intent(this,MainActivity. class);
-        startActivity(intent);
+        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+        dialog.setCancelable(true);
+        dialog.setMessage("¿Qué desea hacer?")
+                .setTitle("Gracias por hacer uso de la aplicación Encuesta Riosucio")
+                .setCancelable(true)
+                .setPositiveButton("Comenzar una nueva encuesta", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent intent = new Intent(getBaseContext(), MainActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
+                })
+                .setNegativeButton("Finalizar la aplicación", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        InformacionOcupacionSecundariaActivity.this.finish();
+                    }
+                });
+        dialog.show();
 
+
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        // Do Here what ever you want do on back press;
     }
 
     @Override

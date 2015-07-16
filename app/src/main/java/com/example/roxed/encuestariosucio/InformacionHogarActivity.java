@@ -61,7 +61,7 @@ public class InformacionHogarActivity extends ActionBarActivity {
         AlertDialog.Builder dialog = new AlertDialog.Builder(this);
         dialog.setMessage("De antemano muchas gracias por indicarnos de los siguientes rangos, en cual de éstos se podría ubicar los ingresos " +
                 "mensuales de este hogar (Tener en cuenta arrendamientos, pensiones, salarios, y otro tipo de ingresos que se generen normalmente. " +
-                "Toda esta información se usará para el estudio y es condidencial)")
+                "Toda esta información se usará para el estudio y es confidencial)")
                 .setTitle("Por favor leer este mensaje a las personas encuestadas")
                 .setCancelable(false)
                 .setPositiveButton("OK", new DialogInterface.OnClickListener(){
@@ -170,8 +170,15 @@ public class InformacionHogarActivity extends ActionBarActivity {
         Intent intent = new Intent(this, InformacionMediosTransporteActivity.class);
         intent.putExtra("idHogar", idHogar);
         startActivity(intent);
+
+        finish();
     }
 
+
+    @Override
+    public void onBackPressed() {
+        // Do Here what ever you want do on back press;
+    }
 
 
     @Override
@@ -192,6 +199,7 @@ public class InformacionHogarActivity extends ActionBarActivity {
         if (id == R.id.action_settings) {
             return true;
         }
+
 
         return super.onOptionsItemSelected(item);
     }

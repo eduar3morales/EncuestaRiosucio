@@ -43,10 +43,10 @@ public class DBAdapter {
             try{
                 //Todas las sentencias para crear las tablas
                 db.execSQL("CREATE TABLE encuesta (_id_numero_encuesta primary key, coordinador text not null, encuestador text not null," +
-                        "hora_inicio text not null, fecha text not null);");
+                        "horaInicio text not null, fecha text not null);");
 
                 db.execSQL("CREATE TABLE vivienda (_id_vivienda integer primary key autoincrement, barrio text not null, estrato text not null, direccion text not null, "
-                        +"zat text not null, telefono text, celular text, tipo_vivienda text not null, cantidad_hogares_vivienda text not null);");
+                        +"zat text not null, telefono text, celular text, tipoVivienda text not null, cantidadHogaresVivienda text not null);");
 
                 db.execSQL("CREATE TABLE hogar (_id_hogar integer primary key autoincrement, cantidadPersonasHogar text not null, cantidadPersonasDiaTipico text not null, " +
                         "cantidadPersonasDiaSabado text not null, cantidadPersonasPresentes text not null, tipoPropiedad text not null, ingresosMensuales text," +
@@ -55,22 +55,22 @@ public class DBAdapter {
                 db.execSQL("CREATE TABLE medioTransporte (_id_vehiculo integer primary key autoincrement, tipoVehiculo text not null, modeloVehiculo text, kmUltimo text, " +
                         "lugarMatricula text, sitioEstacionamiento text not null, hogarFk text not null);");
 
-                db.execSQL("CREATE TABLE persona (_id_persona integer primary key autoincrement, codigo_orden text not null, nombre text not null, edad text not null, genero text not null, " +
-                        "ultimo_nivel_estudio text not null, uso_red_cicloruta text not null, hogar_fk text not null);");
+                db.execSQL("CREATE TABLE persona (_id_persona integer primary key autoincrement, codigoOrden text not null, nombre text not null, edad text not null, genero text not null, " +
+                        "ultimoNivelEstudio text not null, usoRedCicloruta text not null, hogarFk text not null);");
 
-                db.execSQL("CREATE TABLE viaje (_id_viaje integer primary key autoincrement, viaje_numero text not null, lugar_origen text not null, zat_origen text not null, hora_salida text not null, " +
-                        "lugar_destino text not null, zat_destino text not null, hora_llegada text not null, motivo_viaje text not null, modo_viaje text not null, persona_fk text not null);");
+                db.execSQL("CREATE TABLE viaje (_id_viaje integer primary key autoincrement, viajeNumero text not null, lugarOrigen text not null, zatOrigen text not null, horaSalida text not null, " +
+                        "lugarDestino text not null, zatDestino text not null, horaLlegada text not null, motivoViaje text not null, modoViaje text not null, personaFk text not null);");
 
-                db.execSQL("CREATE TABLE modoTransporteDificilAcceso (_id_modo_trasnporte integer primary key autoincrement, modo_transporte text not null, persona_fk text not null);");
+                db.execSQL("CREATE TABLE modoTransporteDificilAcceso (_id_modo_trasnporte integer primary key autoincrement, modoTransporte text not null, personaFk text not null);");
 
-                db.execSQL("CREATE TABLE herramientaApoyo (_id_herramienta_apoyo integer primary key autoincrement, herramienta_apoyo text not null, persona_fk text not null);");
+                db.execSQL("CREATE TABLE herramientaApoyo (_id_herramienta_apoyo integer primary key autoincrement, herramientaApoyo text not null, personaFk text not null);");
 
-                db.execSQL("CREATE TABLE frecuenciaViaje (_id_frecuencia integer primary key autoincrement, nombre_dia text not null, viaje_fk text not null);");
+                db.execSQL("CREATE TABLE frecuenciaViaje (_id_frecuencia integer primary key autoincrement, nombreDia text not null, viajeFk text not null);");
 
-                db.execSQL("CREATE TABLE discapacidad (_id_discapacidad integer primary key autoincrement, tipo_discapacidad text not null, discapacidad_duracion text, persona_fk text not null);");
+                db.execSQL("CREATE TABLE discapacidad (_id_discapacidad integer primary key autoincrement, tipoDiscapacidad text not null, discapacidadDuracion text, personaFk text not null);");
 
-                db.execSQL("CREATE TABLE ocupacion (_id_ocupacion integer primary key autoincrement, ocupacion text not null, lugar_estudio text, sector_trabajo text, labor_desempeño text, " +
-                        "direccion_actividad text, zat_actividad text, tipo_ocupacion text not null, persona_fk text not null);");
+                db.execSQL("CREATE TABLE ocupacion (_id_ocupacion integer primary key autoincrement, ocupacion text not null, lugarEstudio text, sectorTrabajo text, laborDesempeño text, " +
+                        "direccionActividad text, zatActividad text, tipoOcupacion text not null, personaFk text not null);");
 
                 // ---- Revisar bien esta tabla como crear los campos ----
                 //db.execSQL("CREATE TABLE restriccion");
@@ -131,7 +131,7 @@ public class DBAdapter {
         initialValues.put("_id_numero_encuesta", id);
         initialValues.put("coordinador", coordinador);
         initialValues.put("encuestador", encuestador);
-        initialValues.put("hora_inicio", horaInicio);
+        initialValues.put("horaInicio", horaInicio);
         initialValues.put("fecha", fecha);
         return db.insert("encuesta", null, initialValues);
     }
@@ -146,8 +146,8 @@ public class DBAdapter {
         initialValues.put("zat", zat);
         initialValues.put("telefono", telefono);
         initialValues.put("celular", celular);
-        initialValues.put("tipo_vivienda", tipoVivienda);
-        initialValues.put("cantidad_hogares_vivienda", cantidadHogares);
+        initialValues.put("tipoVivienda", tipoVivienda);
+        initialValues.put("cantidadHogaresVivienda", cantidadHogares);
         return db.insert("vivienda", null, initialValues);
     }
 
@@ -180,29 +180,29 @@ public class DBAdapter {
     public long insertPersona(String codigoOrden, String nombre, String edad, String genero, String ultimoNivelEstudio, String usoRedCicloruta, String hogarFk)
     {
         ContentValues initialValues = new ContentValues();
-        initialValues.put("codigo_orden", codigoOrden);
+        initialValues.put("codigoOrden", codigoOrden);
         initialValues.put("nombre", nombre);
         initialValues.put("edad", edad);
         initialValues.put("genero", genero);
-        initialValues.put("ultimo_nivel_estudio", ultimoNivelEstudio);
-        initialValues.put("uso_red_cicloruta", usoRedCicloruta);
-        initialValues.put("hogar_fk", hogarFk);
+        initialValues.put("ultimoNivelEstudio", ultimoNivelEstudio);
+        initialValues.put("usoRedCicloruta", usoRedCicloruta);
+        initialValues.put("hogarFk", hogarFk);
         return db.insert("persona", null, initialValues);
     }
 
     public long insertViaje(String numeroViaje, String lugarOrigen, String zatOrigen, String horaSalida, String lugarDestino, String zatDestino, String horaLlegada, String motivoViaje, String modoViaje, String personaFk)
     {
         ContentValues initialValues = new ContentValues();
-        initialValues.put("viaje_numero", numeroViaje);
-        initialValues.put("lugar_origen", lugarOrigen);
-        initialValues.put("zat_origen", zatOrigen);
-        initialValues.put("hora_salida", horaSalida);
-        initialValues.put("lugar_destino", lugarDestino);
-        initialValues.put("zat_destino", zatDestino);
-        initialValues.put("hora_llegada", horaLlegada);
-        initialValues.put("motivo_viaje", motivoViaje);
-        initialValues.put("modo_viaje", modoViaje);
-        initialValues.put("persona_fk", personaFk);
+        initialValues.put("viajeNumero", numeroViaje);
+        initialValues.put("lugarOrigen", lugarOrigen);
+        initialValues.put("zatOrigen", zatOrigen);
+        initialValues.put("horaSalida", horaSalida);
+        initialValues.put("lugarDestino", lugarDestino);
+        initialValues.put("zatDestino", zatDestino);
+        initialValues.put("horaLlegada", horaLlegada);
+        initialValues.put("motivoViaje", motivoViaje);
+        initialValues.put("modoViaje", modoViaje);
+        initialValues.put("personaFk", personaFk);
         return db.insert("viaje", null, initialValues);
 
     }
@@ -210,33 +210,33 @@ public class DBAdapter {
     public long insertModoTransporteDificilAcceso(String modoTransporte, String personaFk)
     {
         ContentValues initialValues = new ContentValues();
-        initialValues.put("modo_transporte", modoTransporte);
-        initialValues.put("persona_fk", personaFk);
+        initialValues.put("modoTransporte", modoTransporte);
+        initialValues.put("personaFk", personaFk);
         return db.insert("modoTransporteDificilAcceso", null, initialValues);
     }
 
     public long insertHerramientaApoyo(String herramientaApoyo, String personaFk)
     {
         ContentValues initialValues = new ContentValues();
-        initialValues.put("herramienta_apoyo", herramientaApoyo);
-        initialValues.put("persona_fk", personaFk);
+        initialValues.put("herramientaApoyo", herramientaApoyo);
+        initialValues.put("personaFk", personaFk);
         return db.insert("herramientaApoyo", null, initialValues);
     }
 
     public long insertFrecuenciaViaje(String dia, String viajeFk)
     {
         ContentValues initialValues = new ContentValues();
-        initialValues.put("nombre_dia", dia);
-        initialValues.put("viaje_fk", viajeFk);
+        initialValues.put("nombreDia", dia);
+        initialValues.put("viajeFk", viajeFk);
         return db.insert("frecuenciaViaje", null, initialValues);
     }
 
     public long insertDiscapacidad(String tipoDiscapacidad, String duracionDiscapacidad, String personaFk)
     {
         ContentValues initialValues= new ContentValues();
-        initialValues.put("tipo_discapacidad", tipoDiscapacidad);
-        initialValues.put("duracion_discapacidad", duracionDiscapacidad);
-        initialValues.put("persona_fk", personaFk);
+        initialValues.put("tipoDiscapacidad", tipoDiscapacidad);
+        initialValues.put("discapacidadDuracion", duracionDiscapacidad);
+        initialValues.put("personaFk", personaFk);
         return db.insert("discapacidad", null, initialValues);
     }
 
@@ -244,13 +244,13 @@ public class DBAdapter {
     {
         ContentValues initialValues = new ContentValues();
         initialValues.put("ocupacion", ocupacion);
-        initialValues.put("lugar_estudio", lugarEstudio);
-        initialValues.put("sector_trabajo", sectorTrabajo);
-        initialValues.put("labor_desempeño", laborDesempeño);
-        initialValues.put("direccion_actividad", direccionActividad);
-        initialValues.put("zat_actividad", zatActividad);
-        initialValues.put("tipo_ocupacion", tipoOcupacion);
-        initialValues.put("persona_fk", persona_fk);
+        initialValues.put("lugarEstudio", lugarEstudio);
+        initialValues.put("sectorTrabajo", sectorTrabajo);
+        initialValues.put("laborDesempeño", laborDesempeño);
+        initialValues.put("direccionActividad", direccionActividad);
+        initialValues.put("zatActividad", zatActividad);
+        initialValues.put("tipoOcupacion", tipoOcupacion);
+        initialValues.put("personaFk", persona_fk);
         return db.insert("ocupacion", null, initialValues);
     }
 
@@ -258,14 +258,14 @@ public class DBAdapter {
     // --- Get ---
     public Cursor getAllEncuestas()
     {
-        return db.query("encuesta", new String[]{"_id_numero_encuesta", "coordinador", "encuestador", "hora_inicio", "fecha"}, null,
+        return db.query("encuesta", new String[]{"_id_numero_encuesta", "coordinador", "encuestador", "horaInicio", "fecha"}, null,
                 null, null, null, null);
     }
 
     public Cursor getAllViviendas()
     {
         return db.query("vivienda", new String[]{"_id_vivienda", "barrio", "estrato", "direccion", "zat", "telefono", "celular",
-                "tipo_vivienda", "cantidad_hogares_vivienda"}, null, null, null, null, null);
+                "tipoVivienda", "cantidadHogaresVivienda"}, null, null, null, null, null);
     }
 
     public Cursor getAllHogares()
@@ -280,39 +280,39 @@ public class DBAdapter {
 
     public Cursor getAllPersonas()
     {
-        return db.query("persona", new String[]{"_id_persona", "codigo_orden", "nombre", "edad", "genero", "ultimo_nivel_estudio", "uso_red_cicloruta", "hogar_fk"}, null, null, null, null, null);
+        return db.query("persona", new String[]{"_id_persona", "codigoOrden", "nombre", "edad", "genero", "ultimoNivelEstudio", "usoRedCicloruta", "hogarFk"}, null, null, null, null, null);
     }
 
     public Cursor getAllViajes()
     {
-        return db.query("viaje", new String[] {"_id_viaje", "viaje_numero", "lugar_origen", "zat_origen", "hora_salida", "lugar_destino", "zat_destino", "hora_llegada",
-                "motivo_viaje", "modo_viaje", "persona_fk"}, null, null, null, null, null);
+        return db.query("viaje", new String[] {"_id_viaje", "viajeNumero", "lugarOrigen", "zatOrigen", "horaSalida", "lugarDestino", "zatDestino", "horaLlegada",
+                "motivoViaje", "modoViaje", "personaFk"}, null, null, null, null, null);
     }
 
     public Cursor getAllModoTransporteDificilAcceso()
     {
-        return db.query("modoTransporteDificilAcceso", new String[] {"_id_modo_transporte", "modo_transporte", "persona_fk"}, null, null, null,null, null);
+        return db.query("modoTransporteDificilAcceso", new String[] {"_id_modo_transporte", "modoTransporte", "personaFk"}, null, null, null,null, null);
     }
 
     public Cursor getAllHerramientaApoyo()
     {
-        return db.query("herramientaApoyo", new String[] {"_id_herramienta_apoyo", "herramienta_apoyo", "persona_fk"}, null, null, null, null, null);
+        return db.query("herramientaApoyo", new String[] {"_id_herramienta_apoyo", "herramientaApoyo", "personaFk"}, null, null, null, null, null);
     }
 
     public Cursor getAllFrecuenciaViaje()
     {
-        return db.query("frecuenciaViaje", new String[] {"_id_frecuencia", "nombre_dia", "viaje_fk"}, null, null, null, null, null);
+        return db.query("frecuenciaViaje", new String[] {"_id_frecuencia", "nombreDia", "viajeFk"}, null, null, null, null, null);
     }
 
     public Cursor getAllDiscapacidad()
     {
-        return db.query("discapacidad", new String[] {"_id_discapacidad", "tipo_discapacidad", "discapacidad_duracion", "persona_fk"}, null, null, null, null, null);
+        return db.query("discapacidad", new String[] {"_id_discapacidad", "tipoDiscapacidad", "discapacidadDuracion", "personaFk"}, null, null, null, null, null);
     }
 
     public Cursor getAllOcupacion()
     {
-        return db.query("ocupacion", new String[]{"_id_ocupacion", "ocupacion", "lugar_estudio", "sector_trabajo", "labor_desempeño", "direccion_actividad",
-                "zat_actividad", "tipo_ocupacion", "persona_fk"}, null, null, null, null, null);
+        return db.query("ocupacion", new String[]{"_id_ocupacion", "ocupacion", "lugarEstudio", "sectorTrabajo", "laborDesempeño", "direccionActividad",
+                "zatActividad", "tipoOcupacion", "personaFk"}, null, null, null, null, null);
     }
 
 }

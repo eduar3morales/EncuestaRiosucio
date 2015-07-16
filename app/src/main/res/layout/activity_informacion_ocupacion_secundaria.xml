@@ -6,7 +6,9 @@
 
     <!-- Continuación de la información de persona-->
     <!-- Tener en consideración los mismos aspectos que la ocupación princial -->
-
+    <LinearLayout android:focusable="true"
+        android:focusableInTouchMode="true" android:layout_width="0px"
+        android:layout_height="0px" />
 
     <TableRow>
         <TextView
@@ -76,23 +78,7 @@
             android:layout_height="wrap_content"/>
     </TableRow>
 
-    <TableRow>
 
-        <TextView
-            style="@style/Subtitulos2"
-            android:text="Lugar de trabajo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingBottom="10dp"
-            android:paddingTop="10dp"
-            android:textStyle="bold"
-            />
-        <Spinner
-            style="@style/spinnerOP"
-            android:id="@+id/spinnerLugarTrabajoSecundaria"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-    </TableRow>
 
     <TableRow>
         <TextView
@@ -137,13 +123,24 @@
                 android:paddingRight="110dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+
+    </TableRow>
+
+
+    <TableRow>
+
+        <LinearLayout>
+
             <Button
 
                 style="@style/botones"
                 android:id="@+id/btnContinuarInformacionViajes"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=" Agregar Viaje "
+                android:text="   Agregar Viaje   "
                 android:onClick="onClickContinuarInformacionViajes" />
 
             <TextView
@@ -156,7 +153,7 @@
                 android:id="@+id/btnContinuarAgregarPersona"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=" Agregar Persona "
+                android:text="  Agregar Persona  "
                 android:onClick="onClickContinuarAgregarPersona" />
             <TextView
                 android:text=""
@@ -168,15 +165,10 @@
                 android:id="@+id/btnFinalizar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=" Finalizar "
+                android:text="     Finalizar      "
                 android:onClick="onClickFinalizar" />
 
         </LinearLayout>
-
-
-    </TableRow>
-
-    <TableRow>
 
     </TableRow>
 

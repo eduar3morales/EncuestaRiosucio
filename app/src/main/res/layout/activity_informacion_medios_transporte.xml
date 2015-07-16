@@ -4,6 +4,9 @@
     tools:context="com.example.roxed.encuestariosucio.InformacionMediosTransporteActivity"
     android:background="@drawable/fondo2">
 
+    <LinearLayout android:focusable="true"
+        android:focusableInTouchMode="true" android:layout_width="0px"
+        android:layout_height="0px" />
     <TableRow>
         <TextView
             style="@style/Subtitulos"
@@ -20,7 +23,7 @@
         <TextView
             style="@style/Subtitulos"
             android:text="Modelo del vehículo"
-            android:layout_width="260dp"
+            android:layout_width="460dp"
             android:layout_height="wrap_content"
             android:textStyle="bold"/>
 
@@ -121,7 +124,9 @@
     </TableRow>
     <TableRow>
 
-        <LinearLayout>
+        <LinearLayout
+            android:paddingTop="20dp"
+            >
             <Button
                 style="@style/botones"
                 android:id="@+id/btnContinuarAgregarMedioTransporte"
@@ -129,17 +134,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:onClick="onClickContinuarAgregarMedioTransporte"
-                android:layout_margin="3dp"/>
+                />
 
 
             <Button
                 style="@style/botones"
                 android:id="@+id/btnContinuarMediosTransporte"
-                android:text="  Continuar  "
+                android:text="    Continuar    "
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:onClick="onClickContinuarMediosTransporte"
-                android:layout_margin="3dp"/>
+                />
 
         </LinearLayout>
     </TableRow>

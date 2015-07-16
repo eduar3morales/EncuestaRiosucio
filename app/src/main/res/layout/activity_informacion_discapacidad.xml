@@ -5,20 +5,22 @@
     android:background="@drawable/fondo2">
 
 
-
+    <LinearLayout android:focusable="true"
+        android:focusableInTouchMode="true" android:layout_width="0px"
+        android:layout_height="0px" />
     <TableRow>
         <LinearLayout>
             <TextView
 
                 style="@style/Subtitulos2"
                 android:text="Tipo discapacidad"
-                android:layout_width="wrap_content"
+                android:layout_width="400dp"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
-                android:paddingRight="100dp"/>
+                />
 
             <TextView
-                android:text="              "
+                android:text="            "
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <Spinner
@@ -35,7 +37,7 @@
 
                 style="@style/Subtitulos2"
                 android:text="Duración de la discapacidad   "
-                android:layout_width="wrap_content"
+                android:layout_width="400dp"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"/>
 
@@ -61,13 +63,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textStyle="bold"
-            android:layout_margin="3dp"/>
+            />
         <!-- Lista de Chekbox-->
 
     </TableRow>
 
     <TableRow>
         <LinearLayout
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -75,7 +79,7 @@
             >
 
             <CheckBox
-
+                style="@style/Checks"
                 android:id="@+id/checkBoxBic"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -83,7 +87,7 @@
 
 
             <CheckBox
-
+                style="@style/Checks"
                 android:id="@+id/checkBoxTax"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -93,20 +97,21 @@
 
 
             <CheckBox
-
+                style="@style/Checks"
                 android:id="@+id/checkBoxBus"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Bus" />
 
             <CheckBox
-
+                style="@style/Checks"
                 android:id="@+id/checkBoxAut"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Automovil" />
 
             <CheckBox
+                style="@style/Checks"
                 android:id="@+id/checkBoxMot"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -115,11 +120,19 @@
 
 
             <CheckBox
-
+                style="@style/Checks"
                 android:id="@+id/checkBoxOtro"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Otro"
+                />
+
+            <CheckBox
+                style="@style/Checks"
+                android:id="@+id/checkNing"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ninguno"
                 />
 
         </LinearLayout>
@@ -142,7 +155,6 @@
             android:text="Herramientas de las que requiere uso  "
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="3dp"
             android:textStyle="bold"/>
         <!-- Lista de Chekbox-->
 
@@ -154,9 +166,12 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:background="#93BB94"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
             >
 
             <CheckBox
+                style="@style/Checks"
                 android:id="@+id/checkBoxSill"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -164,12 +179,14 @@
 
 
             <CheckBox
+                style="@style/Checks"
                 android:id="@+id/checkBoxMul"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Muletas" />
 
             <CheckBox
+                style="@style/Checks"
                 android:id="@+id/checkBoxBas"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -177,6 +194,7 @@
 
 
             <CheckBox
+                style="@style/Checks"
                 android:id="@+id/checkBoxCam"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -184,6 +202,7 @@
 
 
             <CheckBox
+                style="@style/Checks"
                 android:id="@+id/checkBoxOtros"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -191,6 +210,7 @@
                 android:checked="true" />
 
             <CheckBox
+                style="@style/Checks"
                 android:id="@+id/checkBoxNin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -211,7 +231,8 @@
 
 
     <TableRow>
-        <LinearLayout>
+        <LinearLayout
+            android:paddingTop="20dp">
 
             <Button
 
@@ -219,7 +240,7 @@
                 android:id="@+id/btnContinuarInformacionOcupacionSecundaria"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Continuar"
+                android:text="    Continuar    "
                 android:onClick="onClickContinuarInformacionOcupacionSecundaria" />
 
         </LinearLayout>

@@ -4,30 +4,11 @@
     tools:context="com.example.roxed.encuestariosucio.InformacionViajesActivity"
     android:background="@drawable/fondo2">
 
-    <LinearLayout>
-        <TextView
-            style="@style/Subtitulos2"
-            android:paddingBottom="10dp"
-            android:paddingTop="10dp"
-            android:text=" Motivo del viaje "
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"/>
-        <Spinner
-            style="@style/fondoBlanco"
-            android:id="@+id/spinnerMotivoDeViaje"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            />
-    </LinearLayout>
-
-    <LinearLayout>
 
 
-    </LinearLayout>
-
-
-
+    <LinearLayout android:focusable="true"
+        android:focusableInTouchMode="true" android:layout_width="0px"
+        android:layout_height="0px" />
     <TableRow>
         <LinearLayout
             android:layout_width="wrap_content"
@@ -85,6 +66,17 @@
                 android:layout_height="wrap_content"
                 android:text="   Hora de Salida   "
                 android:onClick="onClickHoraSalida"/>
+
+            <TextView
+                android:background="#FFFFFF"
+                android:id="@+id/txtHoraSalida"
+                android:paddingBottom="4dp"
+                android:paddingTop="4dp"
+                android:paddingLeft="5dp"
+                android:textSize="17dp"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"/>
 
         </LinearLayout>
     </TableRow>
@@ -144,18 +136,39 @@
                 android:layout_height="wrap_content"
                 android:text=" Hora de Llegada "
                 android:onClick="onClickHoraLlegada"/>
+            <TextView
+                android:background="#FFFFFF"
+                android:id="@+id/txtHoraLlegada"
+                android:paddingBottom="4dp"
+                android:paddingTop="4dp"
+                android:paddingLeft="5dp"
+                android:textSize="17dp"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"/>
+
         </LinearLayout>
 
     </TableRow>
 
     <TableRow>
-        <LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
             <TextView
                 style="@style/Subtitulos2"
-                android:text="Frecuencia del viaje  "
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
+                android:text=" Motivo del viaje           "
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"/>
+            <Spinner
+                style="@style/fondoBlanco"
+                android:id="@+id/spinnerMotivoDeViaje"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
 
             <TextView
                 android:text=" "
@@ -164,20 +177,44 @@
                 />
 
 
-            <TextView
-                style="@style/Subtitulos2"
-                android:text=" Modo de cada viaje o etapa "
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textStyle="bold"/>
-            <Spinner
-                style="@style/fondoBlanco"
-                android:id="@+id/spinnerModoDeViaje"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
         </LinearLayout>
+
     </TableRow>
 
+    <LinearLayout
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            style="@style/Subtitulos2"
+            android:text=" Modo de cada viaje o etapa "
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"/>
+        <Spinner
+            style="@style/fondoBlanco"
+            android:id="@+id/spinnerModoDeViaje"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+    <TableRow>
+
+
+    </TableRow>
+
+    <TableRow>
+
+        <TextView
+            style="@style/Subtitulos2"
+            android:text="Frecuencia del viaje  "
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"/>
+
+    </TableRow>
 
     <TableRow>
         <LinearLayout
@@ -187,6 +224,7 @@
             >
 
             <CheckBox
+                style="@style/Checks"
                 android:id="@+id/checkBoxLunesAViernes"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -194,6 +232,7 @@
 
 
             <CheckBox
+                style="@style/Checks"
                 android:id="@+id/checkBoxLunesASabado"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -201,18 +240,13 @@
                 android:checked="true" />
 
 
-
             <CheckBox
-                android:id="@+id/checkBoxLunes"
+                style="@style/Checks"
+                android:id="@+id/checkBoxLunesADomingo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Lunes" />
+                android:text="Lunes a Domingo" />
 
-            <CheckBox
-                android:id="@+id/checkBoxMartes"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="martes" />
 
         </LinearLayout>
 
@@ -229,6 +263,20 @@
             >
 
             <CheckBox
+                style="@style/Checks"
+                android:id="@+id/checkBoxLunes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Lunes" />
+
+            <CheckBox
+                style="@style/Checks"
+                android:id="@+id/checkBoxMartes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Martes" />
+            <CheckBox
+                style="@style/Checks"
                 android:id="@+id/checkBoxMiercoles"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -236,7 +284,7 @@
 
 
             <CheckBox
-
+                style="@style/Checks"
                 android:id="@+id/checkBoxJueves"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -246,17 +294,20 @@
 
 
             <CheckBox
+                style="@style/Checks"
                 android:id="@+id/checkBoxViernes"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Viernes" />
 
             <CheckBox
+                style="@style/Checks"
                 android:id="@+id/checkBoxSabado"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Sabado" />
             <CheckBox
+                style="@style/Checks"
                 android:id="@+id/checkBoxDomingo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -270,7 +321,8 @@
     </TableRow>
 
     <TableRow>
-        <LinearLayout>
+        <LinearLayout
+            android:paddingTop="20dp">
 
 
             <Button
@@ -279,7 +331,7 @@
                 android:id="@+id/btnContinuarInformacionViajes"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=" Agregar Viaje "
+                android:text="    Agregar Viaje    "
                 android:onClick="onClickContinuarInformacionViajes" />
 
             <TextView
@@ -292,7 +344,7 @@
                 android:id="@+id/btnContinuarAgregarPersona"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=" Agregar Persona "
+                android:text="    Agregar Persona    "
                 android:onClick="onClickContinuarAgregarPersona" />
             <TextView
                 android:text=""
@@ -304,7 +356,7 @@
                 android:id="@+id/btnFinalizar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=" Finalizar "
+                android:text="    Finalizar    "
                 android:onClick="onClickFinalizar" />
         </LinearLayout>
     </TableRow>

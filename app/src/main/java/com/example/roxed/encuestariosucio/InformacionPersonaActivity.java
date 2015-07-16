@@ -99,28 +99,44 @@ public class InformacionPersonaActivity extends ActionBarActivity {
     }
 
     public void onClickContinuarOcupacionPrincipal(View view) {
-        codigoOrden = spinnerCodigoDeOrden.getSelectedItem().toString();
-        nombre = txtNombre.getText().toString();
-        genero = spinnerGenero.getSelectedItem().toString();
-        edad = spinnerEdad.getSelectedItem().toString();
-        usoRedCicloRuta = spinnerUsoCicloruta.getSelectedItem().toString();
-        ultimoNivelEstudio = spinnerNivelDeEstudios.getSelectedItem().toString();
 
-        DBAdapter db = new DBAdapter(this);
-        db.open();
-        long id = db.insertPersona(codigoOrden, nombre, edad, genero, ultimoNivelEstudio, usoRedCicloRuta, idHogar);
-        Cursor c = db.getAllPersonas();
-        if(c.moveToFirst())
+        if (txtNombre.getText().toString().equals(""))
         {
-            do{
-                idPersona = c.getString(0);
-            }while (c.moveToNext());
+            Toast.makeText(getBaseContext(), "Por favor complete todos los campos", Toast.LENGTH_SHORT).show();
         }
-        db.close();
+        else
+        {
+            codigoOrden = spinnerCodigoDeOrden.getSelectedItem().toString();
+            nombre = txtNombre.getText().toString();
+            genero = spinnerGenero.getSelectedItem().toString();
+            edad = spinnerEdad.getSelectedItem().toString();
+            usoRedCicloRuta = spinnerUsoCicloruta.getSelectedItem().toString();
+            ultimoNivelEstudio = spinnerNivelDeEstudios.getSelectedItem().toString();
 
-        Intent intent = new Intent(this,InformacionOcupacionPrincipalActivity. class);
-        intent.putExtra("idPersona", idPersona);
-        startActivity(intent);
+            DBAdapter db = new DBAdapter(this);
+            db.open();
+            long id = db.insertPersona(codigoOrden, nombre, edad, genero, ultimoNivelEstudio, usoRedCicloRuta, idHogar);
+            Cursor c = db.getAllPersonas();
+            if(c.moveToFirst())
+            {
+                do{
+                    idPersona = c.getString(0);
+                }while (c.moveToNext());
+            }
+            db.close();
+
+            Intent intent = new Intent(this,InformacionOcupacionPrincipalActivity. class);
+            intent.putExtra("idPersona", idPersona);
+            startActivity(intent);
+
+            finish();
+        }
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        // Do Here what ever you want do on back press;
     }
 
     @Override

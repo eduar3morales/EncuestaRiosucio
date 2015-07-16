@@ -116,25 +116,32 @@ public class InformacionViviendaActivity extends ActionBarActivity {
 
     public void onClickContinuarVivienda(View view)
     {
-        barrio = txtBarrio.getText().toString();
-        estrato = spinnerEstrato.getSelectedItem().toString();
-        direccion = txtDireccion.getText().toString();
-        zat = spinnerZat.getSelectedItem().toString();
-        telefono = txtTelefono.getText().toString();
-        celular = txtCelular.getText().toString();
-        tipoVivienda = spinnerTipoVivienda.getSelectedItem().toString();
-        cantidadHogaresVivienda = spinnerCantidadHogaresVivienda.getSelectedItem().toString();
-
-        DBAdapter db = new DBAdapter(this);
-        db.open();
-        id = db.insertVivienda(barrio, estrato, direccion, zat, telefono, celular,tipoVivienda, cantidadHogaresVivienda);
-        db.close();
-        db.open();
-        Cursor c = db.getAllViviendas();
-        if (c.moveToFirst())
+        if ((txtCelular.getText().toString().equals("") && txtTelefono.getText().toString().equals("")) || txtBarrio.getText().toString().equals("")
+                || txtDireccion.getText().toString().equals(""))
         {
-            do{
-                idVivienda = c.getString(0);
+            Toast.makeText(getBaseContext(), "Por favor complete todos los campos", Toast.LENGTH_SHORT).show();
+        }
+        else
+        {
+            barrio = txtBarrio.getText().toString();
+            estrato = spinnerEstrato.getSelectedItem().toString();
+            direccion = txtDireccion.getText().toString();
+            zat = spinnerZat.getSelectedItem().toString();
+            telefono = txtTelefono.getText().toString();
+            celular = txtCelular.getText().toString();
+            tipoVivienda = spinnerTipoVivienda.getSelectedItem().toString();
+            cantidadHogaresVivienda = spinnerCantidadHogaresVivienda.getSelectedItem().toString();
+
+            DBAdapter db = new DBAdapter(this);
+            db.open();
+            id = db.insertVivienda(barrio, estrato, direccion, zat, telefono, celular,tipoVivienda, cantidadHogaresVivienda);
+            db.close();
+            db.open();
+            Cursor c = db.getAllViviendas();
+            if (c.moveToFirst())
+            {
+                do{
+                    idVivienda = c.getString(0);
                 /*Toast.makeText(this,
                         "id: " +c.getString(0)+ "\n"+
                                 "Barrio: " +c.getString(1)+ "\n"+
@@ -145,15 +152,24 @@ public class InformacionViviendaActivity extends ActionBarActivity {
                                 "Celular: "+c.getString(6)+"\n"+
                                 "Tipo Vivienda: "+"\n"+
                                 "Cantidad Hogares: ", Toast.LENGTH_LONG).show();*/
-            }while (c.moveToNext());
+                }while (c.moveToNext());
+            }
+            db.close();
+
+
+            Intent intent = new Intent(this, InformacionHogarActivity.class);
+            intent.putExtra("numeroEncuesta", numeroEncuesta);
+            intent.putExtra("idVivienda", idVivienda);
+            startActivity(intent);
+
+            finish();
         }
-        db.close();
 
+    }
 
-        Intent intent = new Intent(this, InformacionHogarActivity.class);
-        intent.putExtra("numeroEncuesta", numeroEncuesta);
-        intent.putExtra("idVivienda", idVivienda);
-        startActivity(intent);
+    @Override
+    public void onBackPressed() {
+        // Do Here what ever you want do on back press;
     }
 
     @Override
@@ -174,6 +190,7 @@ public class InformacionViviendaActivity extends ActionBarActivity {
         if (id == R.id.action_settings) {
             return true;
         }
+
 
         return super.onOptionsItemSelected(item);
     }

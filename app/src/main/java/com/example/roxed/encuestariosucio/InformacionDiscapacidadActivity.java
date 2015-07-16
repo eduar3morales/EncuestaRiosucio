@@ -25,6 +25,7 @@ public class InformacionDiscapacidadActivity extends ActionBarActivity {
     private CheckBox checkBoxAutomovil;
     private CheckBox checkBoxMoto;
     private CheckBox checkBoxOtro;
+    private CheckBox checkBoxNingunos;
     private CheckBox checkBoxSillaRuedas;
     private CheckBox checkBoxMuleta;
     private CheckBox checkBoxBaston;
@@ -62,6 +63,7 @@ public class InformacionDiscapacidadActivity extends ActionBarActivity {
         checkBoxAutomovil = (CheckBox) findViewById(R.id.checkBoxAut);
         checkBoxMoto = (CheckBox) findViewById(R.id.checkBoxMot);
         checkBoxOtro = (CheckBox) findViewById(R.id.checkBoxOtro);
+        checkBoxNingunos = (CheckBox) findViewById(R.id.checkNing);
         checkBoxSillaRuedas = (CheckBox) findViewById(R.id.checkBoxSill);
         checkBoxMuleta = (CheckBox) findViewById(R.id.checkBoxMul);
         checkBoxBaston = (CheckBox) findViewById(R.id.checkBoxBas);
@@ -103,8 +105,10 @@ public class InformacionDiscapacidadActivity extends ActionBarActivity {
                 {
                     spinnerDuracionDiscapacidad.setEnabled(false);
                     checkBoxNinguno.setChecked(true);
-                    //Agregar el otro checkBox
+                    checkBoxNingunos.setChecked(true);
 
+                    checkBoxNinguno.setEnabled(false);
+                    checkBoxNingunos.setEnabled(false);
                     checkBoxBicicleta.setEnabled(false);
                     checkBoxTaxi.setEnabled(false);
                     checkBoxBus.setEnabled(false);
@@ -122,8 +126,10 @@ public class InformacionDiscapacidadActivity extends ActionBarActivity {
                 {
                     spinnerDuracionDiscapacidad.setEnabled(true);
                     checkBoxNinguno.setChecked(false);
-                    //Agregar el otro checkbox
+                    checkBoxNingunos.setChecked(false);
 
+                    checkBoxNinguno.setEnabled(true);
+                    checkBoxNingunos.setEnabled(true);
                     checkBoxBicicleta.setEnabled(true);
                     checkBoxTaxi.setEnabled(true);
                     checkBoxBus.setEnabled(true);
@@ -205,9 +211,17 @@ public class InformacionDiscapacidadActivity extends ActionBarActivity {
         db.close();
 
         Intent intent = new Intent(this, InformacionOcupacionSecundariaActivity.class);
-        intent.putExtra("idPersona", idPersona);
+        //intent.putExtra("idPersona", idPersona);
         startActivity(intent);
+
+        finish();
     }
+
+    @Override
+    public void onBackPressed() {
+        // Do Here what ever you want do on back press;
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.

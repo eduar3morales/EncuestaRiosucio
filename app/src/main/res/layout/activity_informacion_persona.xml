@@ -4,6 +4,10 @@
     tools:context="com.example.roxed.encuestariosucio.InformacionPersonaActivity"
     android:background="@drawable/fondo2">
 
+    <LinearLayout android:focusable="true"
+        android:focusableInTouchMode="true" android:layout_width="0px"
+        android:layout_height="0px" />
+
     <TableRow>
         <TextView
             style="@style/Subtitulos"
@@ -44,7 +48,7 @@
             style="@style/editText"
             android:id="@+id/txtNombre"
             android:layout_height="wrap_content"
-            android:layout_width="260dp"
+            android:layout_width="460dp"
             android:hint="Nombre..."
             android:inputType="text"/>
 
@@ -97,7 +101,7 @@
 
         <TextView
             style="@style/Subtitulos"
-            android:text="Último nivel de estudios aprobado"
+            android:text="Último nivel de estudios aprobado "
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textStyle="bold"/>
@@ -109,7 +113,7 @@
 
         <TextView
             style="@style/Subtitulos"
-            android:text="Uso red de cicloruta"
+            android:text="¿Si existiera una red de ciclorutas la usaría? "
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textStyle="bold"/>
@@ -145,7 +149,7 @@
             <Button
                 style="@style/botones"
                 android:id="@+id/btnContinuarOcupacionPrincipal"
-                android:text="Continuar"
+                android:text="    Continuar    "
                 android:onClick="onClickContinuarOcupacionPrincipal"
                 android:layout_width="wrap_content"/>
         </LinearLayout>

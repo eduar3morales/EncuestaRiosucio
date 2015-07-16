@@ -3,6 +3,9 @@
     style="@style/margenes"
     android:background="@drawable/fondo2">
 
+    <LinearLayout android:focusable="true"
+        android:focusableInTouchMode="true" android:layout_width="0px"
+        android:layout_height="0px" />
 
     <TableRow>
         <TextView
@@ -10,7 +13,7 @@
             android:text="Barrio"
             android:layout_width="260dp"
             android:layout_height="wrap_content"
-            android:textStyle="bold" />
+            android:textStyle="bold"/>
         <TextView
             android:text=" "
             android:layout_height="1dp"
@@ -18,7 +21,7 @@
         <TextView
             style="@style/Subtitulos"
             android:text="Dirección"
-            android:layout_width="260dp"
+            android:layout_width="360dp"
             android:layout_height="wrap_content"
             android:textStyle="bold" />
         <TextView
@@ -169,7 +172,7 @@
                 android:id="@+id/btnContinuarVivienda"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Continuar"
+                android:text="    Continuar    "
                 android:onClick="onClickContinuarVivienda" />
 
         </LinearLayout>
