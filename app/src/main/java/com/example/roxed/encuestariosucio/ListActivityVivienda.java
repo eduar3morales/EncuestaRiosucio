@@ -26,8 +26,8 @@ public class ListActivityVivienda extends ListActivity {
         if (c.moveToFirst())
         {
             do{
-                viviendas.add(c.getString(0)+"  "+c.getString(1)+"  "+c.getString(2)+"  "+c.getString(3)+"  "+c.getString(4)+"  "+
-                c.getString(5)+"  "+c.getString(6)+"  "+c.getString(7)+"  "+c.getString(8));
+                viviendas.add("Id Vivienda: "+c.getString(0)+" Barrio: "+c.getString(1)+" Estrato: "+c.getString(2)+" Dirección: "+c.getString(3)+" Zat: "+c.getString(4)+" Teléfono: "+
+                c.getString(5)+" Celular: "+c.getString(6)+" Tipo vivienda: "+c.getString(7)+" Cantidad hogares en vivienda: "+c.getString(8));
             }while (c.moveToNext());
         }
         db.close();

@@ -639,11 +639,12 @@ public class InformacionViajesActivity extends ActionBarActivity {
             }
             db.close();
 
+            /*
             if (! (zatVivienda.equals(zatDestino))) {
                 db.open();
                 id = db.insertRestriccion("VIAJES", "LA ZAT del Viaje final no corresponde a la ZAT de residencia", idViaje, numeroEncuesta);
                 db.close();
-            }
+            }*/
 
 
             db.open();

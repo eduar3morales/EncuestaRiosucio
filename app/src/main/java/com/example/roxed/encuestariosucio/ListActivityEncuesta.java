@@ -31,7 +31,7 @@ public class ListActivityEncuesta extends ListActivity {
         if (c.moveToFirst())
         {
             do{
-                encuestas.add(c.getString(0)+" "+c.getString(1)+" "+c.getString(2)+" "+c.getString(3)+" "+ c.getString(4));
+                encuestas.add("Número Encuesta: "+c.getString(0)+" Coordinador: "+c.getString(1)+" Encuestador: "+c.getString(2)+" "+c.getString(3)+" Fecha: "+ c.getString(4));
 
             }while(c.moveToNext());
         }

@@ -41,7 +41,7 @@ public class InformacionOcupacionPrincipalActivity extends ActionBarActivity {
     String numeroEncuesta;
     String idHogar;
     String cdOrden;
-    static final String TIPO_OCUPACION = "OcPpal";
+    static final String TIPO_OCUPACION = "Principal";
 
     private List<String> listaOcupacionPrincipal= new ArrayList<String>();
     private List<String> listaLugarEstudioPrincipal= new ArrayList<String>();

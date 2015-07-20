@@ -26,8 +26,8 @@ public class ListActivityPersona extends ListActivity {
         if (c.moveToFirst())
         {
             do {
-                personas.add(c.getString(0)+" "+c.getString(1)+" "+c.getString(2)+" "+c.getString(3)+" "+c.getString(4)+" "+
-                        c.getString(5)+" "+c.getString(6)+" "+c.getString(7));
+                personas.add("Id persona: "+c.getString(0)+" Código orden: "+c.getString(1)+" Nombre: "+c.getString(2)+" Edad: "+c.getString(3)+" Genero: "+c.getString(4)+" Último nivel estudio: "+
+                        c.getString(5)+" Uso red cicloruta: "+c.getString(6)+" Id hogar: "+c.getString(7));
             }while(c.moveToNext());
         }
         db.close();

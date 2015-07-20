@@ -27,8 +27,8 @@ public class ListActivityHogar extends ListActivity{
         if (c.moveToFirst())
         {
             do{
-                hogares.add(c.getString(0)+" "+c.getString(1)+" "+c.getString(2)+" "+c.getString(3)+" "+c.getString(4)+" "+
-                        c.getString(5)+" "+c.getString(6)+" "+c.getString(7)+" "+c.getString(8));
+                hogares.add("Id hogar: "+c.getString(0)+" Personas por hogar: "+c.getString(1)+" Personas en día típico: "+c.getString(2)+" Personas viajan día sabado: "+c.getString(3)+" Personas presentes: "+c.getString(4)+" Tipo propiedad: "+
+                        c.getString(5)+" Ingresos mensuales "+c.getString(6)+" Número encuesta: "+c.getString(7)+" Id vivienda "+c.getString(8));
             }while(c.moveToNext());
         }
         db.close();

@@ -27,7 +27,8 @@ public class ListActivityDiscapacidad extends ListActivity {
         if (c.moveToFirst())
         {
             do{
-                discapacidades.add(c.getString(0)+" "+c.getString(1)+" "+c.getString(3));
+                discapacidades.add("Id:"+c.getString(0)+" Tipo discapacidad:"+c.getString(1)+" Duración:"+c.getString(2)+
+                        " Id persona"+c.getString(3));
             }while (c.moveToNext());
         }
         db.close();

@@ -54,6 +54,7 @@ public class InformacionHogarActivity extends ActionBarActivity {
     String idHogar;
     String zatVivienda;
 
+    int cantidadClick = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -136,7 +137,7 @@ public class InformacionHogarActivity extends ActionBarActivity {
                 spinnerCantidadPersonasViajanSabado.setAdapter(adaptadorCantidadPersonasViajanSabado);
 
                 ;
-                for (int j = 0; j <= x; j++)
+                for (int j = 1; j <= x; j++)
                     listaCantidadPersonasPresentes.add("" + (j));
 
                 ArrayAdapter<String> adaptadorCantidadPersonasPresentes = new ArrayAdapter<String>(getBaseContext(), android.R.layout.simple_spinner_item, listaCantidadPersonasPresentes);
@@ -169,18 +170,33 @@ public class InformacionHogarActivity extends ActionBarActivity {
         tipoPropiedad = spinnerTipoPropiedad.getSelectedItem().toString();
         rangoIngresos = spinnerRangoIngresosMensuales.getSelectedItem().toString();
 
-        DBAdapter db = new DBAdapter(this);
-        db.open();
-        long id = db.insertHogar(cantidadPersonasConformanHogar, cantidadPersonasViajanDiaTipico, cantidadPersonasViajanDiaSabado, cantidadPersonasPresentes,
-                tipoPropiedad, rangoIngresos, numeroEncuesta, idVivienda);
-        db.close();
-
-        db.open();
-        Cursor c = db.getAllHogares();
-        if (c.moveToFirst())
+        if (cantidadClick < 1)
         {
-            do{
-                idHogar = c.getString(0);
+            AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+            dialog.setMessage("Recuerde revisar todos los datos y estar seguro antes de continuar con la encuesta. ¿Qué desea hacer?")
+                    .setCancelable(true)
+                    .setTitle("Recordatorio")
+                    .setPositiveButton("Revisar datos", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
+                        }
+                    })
+                    .setNegativeButton("Continuar con la siguiente pregunta", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            DBAdapter db = new DBAdapter(getBaseContext());
+                            db.open();
+                            long id = db.insertHogar(cantidadPersonasConformanHogar, cantidadPersonasViajanDiaTipico, cantidadPersonasViajanDiaSabado, cantidadPersonasPresentes,
+                                    tipoPropiedad, rangoIngresos, numeroEncuesta, idVivienda);
+                            db.close();
+
+                            db.open();
+                            Cursor c = db.getAllHogares();
+                            if (c.moveToFirst())
+                            {
+                                do{
+                                    idHogar = c.getString(0);
                 /*Toast.makeText(this,
                         "Id: " +c.getString(0)+ "\n"+
                                 "Personas: " +c.getString(1)+ "\n"+
@@ -191,16 +207,58 @@ public class InformacionHogarActivity extends ActionBarActivity {
                                 "Ingresos: "+c.getString(6)+"\n"+
                                 "Encuesta: "+c.getString(7)+"\n"+
                                 "Vivienda: "+c.getString(8), Toast.LENGTH_LONG).show();*/
-            }while (c.moveToNext());
-        }
-        db.close();
+                                }while (c.moveToNext());
+                            }
+                            db.close();
 
-        Intent intent = new Intent(this, InformacionMediosTransporteActivity.class);
-        intent.putExtra("idHogar", idHogar);
-        intent.putExtra("zatVivienda", zatVivienda);
-        intent.putExtra("nroEncuesta", numeroEncuesta);
-        startActivity(intent);
-        finish();
+                            Intent intent = new Intent(getBaseContext(), InformacionMediosTransporteActivity.class);
+                            intent.putExtra("idHogar", idHogar);
+                            intent.putExtra("zatVivienda", zatVivienda);
+                            intent.putExtra("nroEncuesta", numeroEncuesta);
+                            startActivity(intent);
+                            finish();
+                        }
+                    });
+            dialog.show();
+        }
+        else
+        {
+            DBAdapter db = new DBAdapter(getBaseContext());
+            db.open();
+            long id = db.insertHogar(cantidadPersonasConformanHogar, cantidadPersonasViajanDiaTipico, cantidadPersonasViajanDiaSabado, cantidadPersonasPresentes,
+                    tipoPropiedad, rangoIngresos, numeroEncuesta, idVivienda);
+            db.close();
+
+            db.open();
+            Cursor c = db.getAllHogares();
+            if (c.moveToFirst())
+            {
+                do{
+                    idHogar = c.getString(0);
+                /*Toast.makeText(this,
+                        "Id: " +c.getString(0)+ "\n"+
+                                "Personas: " +c.getString(1)+ "\n"+
+                                "Tipico: "+c.getString(2)+ "\n"+
+                                "Sabado: "+c.getString(3)+"\n"+
+                                "Presentes: "+c.getString(4)+"\n"+
+                                "Tipo: "+c.getString(5)+"\n"+
+                                "Ingresos: "+c.getString(6)+"\n"+
+                                "Encuesta: "+c.getString(7)+"\n"+
+                                "Vivienda: "+c.getString(8), Toast.LENGTH_LONG).show();*/
+                }while (c.moveToNext());
+            }
+            db.close();
+
+            Intent intent = new Intent(getBaseContext(), InformacionMediosTransporteActivity.class);
+            intent.putExtra("idHogar", idHogar);
+            intent.putExtra("zatVivienda", zatVivienda);
+            intent.putExtra("nroEncuesta", numeroEncuesta);
+            startActivity(intent);
+            finish();
+        }
+
+        cantidadClick ++;
+
     }
 
 

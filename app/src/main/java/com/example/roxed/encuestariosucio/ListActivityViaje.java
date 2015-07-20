@@ -26,8 +26,8 @@ public class ListActivityViaje extends ListActivity {
         if (c.moveToFirst())
         {
             do{
-                viajes.add(c.getString(0)+" "+c.getString(1)+" "+c.getString(2)+" "+c.getString(3)+" "+c.getString(4)+" "+c.getString(5)+" "+
-                        c.getString(6)+" "+c.getString(7)+" "+c.getString(8)+" "+c.getString(9)+" "+c.getString(10));
+                viajes.add("Id Viaje"+c.getString(0)+" No viaje:"+c.getString(1)+" Lugar origen:"+c.getString(2)+" Zat origen:"+c.getString(3)+" Hora salida:"+c.getString(4)+" Lugar destino:"+c.getString(5)+" Zat destino:"+
+                        c.getString(6)+" Hora llegada"+c.getString(7)+" Motivo viaje:"+c.getString(8)+" Modo viaje:"+c.getString(9)+" Id persona:"+c.getString(10));
             }while (c.moveToNext());
         }
         db.close();

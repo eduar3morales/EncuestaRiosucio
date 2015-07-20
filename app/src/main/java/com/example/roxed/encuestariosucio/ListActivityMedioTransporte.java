@@ -25,8 +25,8 @@ public class ListActivityMedioTransporte extends ListActivity {
         if (c.moveToFirst())
         {
             do{
-                mediosTransporte.add(c.getString(0)+" "+c.getString(1)+" "+c.getString(2)+" "+c.getString(3)+" "+c.getString(4)+" "+
-                        c.getString(5)+" "+c.getString(6));
+                mediosTransporte.add("Id vehículo: "+c.getString(0)+" Tipo vehículo: "+c.getString(1)+" Modelo: "+c.getString(2)+" Km último año: "+c.getString(3)+" Lugar de matricula: "+c.getString(4)+" Sitio estacionamiento: "+
+                        c.getString(5)+" Id hogar "+c.getString(6));
             }while(c.moveToNext());
         }
         db.close();

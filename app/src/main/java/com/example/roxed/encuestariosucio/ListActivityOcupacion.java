@@ -6,7 +6,10 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,8 +30,8 @@ public class ListActivityOcupacion extends ListActivity {
         if (c.moveToFirst())
         {
             do{
-                ocupaciones.add(c.getString(0)+"/"+c.getString(1)+"/"+c.getString(2)+"/"+c.getString(3)+"/"+c.getString(4)+"/"+
-                        c.getString(5)+"/"+c.getString(6)+"/"+c.getString(7));
+                ocupaciones.add("Id:"+c.getString(0)+" Ocupación:"+c.getString(1)+" Lugar estudio:"+c.getString(2)+" Sector trabajo:"+c.getString(3)+" Labor desempeño:"+c.getString(4)+" Dirección actividad:"+
+                        c.getString(5)+" Zat actividad:"+c.getString(6)+" Tipo ocupación:"+c.getString(7)+" Id persona:"+c.getString(8));
             }while (c.moveToNext());
         }
         db.close();
@@ -40,6 +43,11 @@ public class ListActivityOcupacion extends ListActivity {
         }
 
         setListAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, ocupacion));
+    }
+
+    public void onListItemClick(ListView parent, View v, int position, long id)
+    {
+        Toast.makeText(this, "Ha seleccionado:"+ocupaciones.get(position), Toast.LENGTH_LONG).show();
     }
 
     @Override

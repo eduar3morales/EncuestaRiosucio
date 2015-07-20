@@ -44,7 +44,7 @@ public class InformacionOcupacionSecundariaActivity extends ActionBarActivity {
     String numeroEncuesta;
     String idHogar;
     String cdOrden;
-    static final String TIPO_OCUPACION = "OcSecd";
+    static final String TIPO_OCUPACION = "Secundaria";
 
 
 
