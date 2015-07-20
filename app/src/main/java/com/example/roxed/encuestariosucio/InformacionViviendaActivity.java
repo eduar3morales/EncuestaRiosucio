@@ -40,7 +40,7 @@ public class InformacionViviendaActivity extends ActionBarActivity {
     String tipoVivienda;
     String cantidadHogaresVivienda;
 
-    String numeroEncuesta;
+    String numeroEncuesta; //Valor pasado a través del Intent
     String idVivienda;
 
     long id;
@@ -84,7 +84,7 @@ public class InformacionViviendaActivity extends ActionBarActivity {
         adaptadorEstrato.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerEstrato.setAdapter(adaptadorEstrato);
 
-        for(int i=0;i<=40;i++)
+        for(int i=1;i<=40;i++)
             listaCantidadHogaresVivienda.add(""+(i));
 
         ArrayAdapter<String> adaptadorCantidadHogaresVivienda = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, listaCantidadHogaresVivienda);
@@ -136,6 +136,7 @@ public class InformacionViviendaActivity extends ActionBarActivity {
             db.open();
             id = db.insertVivienda(barrio, estrato, direccion, zat, telefono, celular,tipoVivienda, cantidadHogaresVivienda);
             db.close();
+
             db.open();
             Cursor c = db.getAllViviendas();
             if (c.moveToFirst())
@@ -160,6 +161,7 @@ public class InformacionViviendaActivity extends ActionBarActivity {
             Intent intent = new Intent(this, InformacionHogarActivity.class);
             intent.putExtra("numeroEncuesta", numeroEncuesta);
             intent.putExtra("idVivienda", idVivienda);
+            intent.putExtra("zatVivienda", zat);
             startActivity(intent);
 
             finish();

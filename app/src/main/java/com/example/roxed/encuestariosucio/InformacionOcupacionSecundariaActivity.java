@@ -3,6 +3,7 @@ package com.example.roxed.encuestariosucio;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Path;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -36,10 +37,14 @@ public class InformacionOcupacionSecundariaActivity extends ActionBarActivity {
     String direccionActividadSecundaria;
     String zatActividadSecundaria;
 
-    String idPersona;
+    String idPersona; //Valor proveniente del Intent
+    String zatVivienda;
     //String numeroViaje = "0";
-    int numeroViaje = 0;
-    static final String TIPO_OCUPACION = "OCUPACIÓN SECUNARIA";
+    //int numeroViaje = 0;
+    String numeroEncuesta;
+    String idHogar;
+    String cdOrden;
+    static final String TIPO_OCUPACION = "OcSecd";
 
 
 
@@ -63,6 +68,7 @@ public class InformacionOcupacionSecundariaActivity extends ActionBarActivity {
         spinnerZatActividadSecundaria=(Spinner) findViewById(R.id.spinnerZATActividadSecundaria);
         txtDireccionActividadSecundaria = (EditText) findViewById (R.id.txtDireccionActividadSecundaria);
 
+        listaOcupacionSecundaria.add("NINGUNA");
         listaOcupacionSecundaria.add("ESTUDIAR");
         listaOcupacionSecundaria.add("TRABAJAR");
         listaOcupacionSecundaria.add("OFICIOS DEL HOGAR");
@@ -145,6 +151,14 @@ public class InformacionOcupacionSecundariaActivity extends ActionBarActivity {
                     txtDireccionActividadSecundaria.setEnabled(true);
                     spinnerZatActividadSecundaria.setEnabled(true);
                 }
+                else if (spinnerOcupacionSecundaria.getSelectedItem().toString().equals("NINGUNA"))
+                {
+                    spinnerLugarEstudioSecundaria.setEnabled(false);
+                    spinnerSectorTrabajoSecundaria.setEnabled(false);
+                    spinnerLaborDesempeñaSecundaria.setEnabled(false);
+                    txtDireccionActividadSecundaria.setEnabled(false);
+                    spinnerZatActividadSecundaria.setEnabled(false);
+                }
                 else
                 {
                     spinnerLugarEstudioSecundaria.setEnabled(false);
@@ -161,6 +175,17 @@ public class InformacionOcupacionSecundariaActivity extends ActionBarActivity {
             }
         });
 
+        idPersona = getIntent().getStringExtra("idPersona");
+        Toast.makeText(this, "Id persona: "+ idPersona, Toast.LENGTH_SHORT).show();
+
+        zatVivienda = getIntent().getStringExtra("zatVivienda");
+
+        numeroEncuesta = getIntent().getStringExtra("nroEncuesta");
+
+        idHogar = getIntent().getStringExtra("idHogar");
+
+        cdOrden = getIntent().getStringExtra("codigoOrden");
+        Toast.makeText(this, "Codigo ordne: "+cdOrden, Toast.LENGTH_SHORT).show();
     }
 
     public void onClickContinuarInformacionViajes(View view) {
@@ -168,6 +193,83 @@ public class InformacionOcupacionSecundariaActivity extends ActionBarActivity {
             if (txtDireccionActividadSecundaria.getText().toString().equals("")) {
                 Toast.makeText(getBaseContext(), "Por favor complete todos los campos", Toast.LENGTH_SHORT).show();
             } else {
+                ocupacion = spinnerOcupacionSecundaria.getSelectedItem().toString();
+                lugarEstudio = spinnerLugarEstudioSecundaria.getSelectedItem().toString();
+                sectorTrabajo = spinnerSectorTrabajoSecundaria.getSelectedItem().toString();
+                laborDesempeño = spinnerLaborDesempeñaSecundaria.getSelectedItem().toString();
+                direccionActividadSecundaria = txtDireccionActividadSecundaria.getText().toString();
+                zatActividadSecundaria = spinnerZatActividadSecundaria.getSelectedItem().toString();
+
+                if (ocupacion.equals("ESTUDIAR"))
+                {
+                    sectorTrabajo = "NA";
+                    laborDesempeño = "NA";
+                }
+                else if (ocupacion.equals("TRABAJAR"))
+                {
+                    lugarEstudio = "NA";
+
+                }
+                else
+                {
+                    lugarEstudio = "NA";
+                    sectorTrabajo = "NA";
+                    laborDesempeño = "NA";
+                    direccionActividadSecundaria = "NA";
+                    zatActividadSecundaria = "NA";
+                }
+
+                DBAdapter db = new DBAdapter(this);
+                db.open();
+                long id = db.insertOcupacion(ocupacion, lugarEstudio, sectorTrabajo, laborDesempeño, direccionActividadSecundaria, zatActividadSecundaria, TIPO_OCUPACION, idPersona);
+                db.close();
+
+                Intent intent = new Intent(this, InformacionViajesActivity.class);
+                intent.putExtra("idPersona", idPersona);
+                intent.putExtra("zatVivienda", zatVivienda);
+                intent.putExtra("nroEncuesta", numeroEncuesta);
+                intent.putExtra("idHogar", idHogar);
+                intent.putExtra("codigoOrden", cdOrden);
+                //intent.putExtra("numeroViaje", numeroViaje);
+                startActivity(intent);
+                finish();
+            }
+        }
+        else
+        {
+            ocupacion = spinnerOcupacionSecundaria.getSelectedItem().toString();
+            lugarEstudio = spinnerLugarEstudioSecundaria.getSelectedItem().toString();
+            sectorTrabajo = spinnerSectorTrabajoSecundaria.getSelectedItem().toString();
+            laborDesempeño = spinnerLaborDesempeñaSecundaria.getSelectedItem().toString();
+            direccionActividadSecundaria = txtDireccionActividadSecundaria.getText().toString();
+            zatActividadSecundaria = spinnerZatActividadSecundaria.getSelectedItem().toString();
+
+            DBAdapter db = new DBAdapter(this);
+            db.open();
+            long id = db.insertOcupacion(ocupacion, lugarEstudio, sectorTrabajo, laborDesempeño, direccionActividadSecundaria, zatActividadSecundaria, TIPO_OCUPACION, idPersona);
+            db.close();
+
+            Intent intent = new Intent(this,InformacionViajesActivity. class);
+            intent.putExtra("idPersona", idPersona);
+            intent.putExtra("zatVivienda", zatVivienda);
+            intent.putExtra("nroEncuesta", numeroEncuesta);
+            intent.putExtra("idHogar", idHogar);
+            intent.putExtra("codigoOrden", cdOrden);
+            //intent.putExtra("numeroViaje", numeroViaje);
+            startActivity(intent);
+            finish();
+        }
+
+    }
+
+    public void onClickContinuarAgregarPersona(View view){
+
+
+        if (txtDireccionActividadSecundaria.isEnabled()) {
+            if (txtDireccionActividadSecundaria.getText().toString().equals("")) {
+                Toast.makeText(getBaseContext(), "Por favor complete todos los campos", Toast.LENGTH_SHORT).show();
+            } else
+            {
                 ocupacion = spinnerOcupacionSecundaria.getSelectedItem().toString();
                 lugarEstudio = spinnerLugarEstudioSecundaria.getSelectedItem().toString();
                 sectorTrabajo = spinnerSectorTrabajoSecundaria.getSelectedItem().toString();
@@ -181,11 +283,38 @@ public class InformacionOcupacionSecundariaActivity extends ActionBarActivity {
                 long id = db.insertOcupacion(ocupacion, lugarEstudio, sectorTrabajo, laborDesempeño, direccionActividadSecundaria, zatActividadSecundaria, TIPO_OCUPACION, idPersona);
                 db.close();
 
-                Intent intent = new Intent(this, InformacionViajesActivity.class);
-                intent.putExtra("idPersona", idPersona);
-                intent.putExtra("numeroViaje", numeroViaje);
-                startActivity(intent);
-                finish();
+                AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+                dialog.setCancelable(true);
+                dialog.setMessage("¿Qué desea hacer?")
+                        .setTitle("Asegurese de que esta persona no realiza ningún viaje")
+                        .setCancelable(true)
+                        .setPositiveButton("Agregar viaje", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Intent intent = new Intent(getBaseContext(), InformacionViajesActivity.class);
+                                intent.putExtra("zatVivienda", zatVivienda);
+                                intent.putExtra("nroEncuesta", numeroEncuesta);
+                                intent.putExtra("idHogar", idHogar);
+                                intent.putExtra("codigoOrden", cdOrden);
+                                startActivity(intent);
+                                finish();
+                            }
+                        })
+                        .setNegativeButton("Agregar persona", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                Intent intent = new Intent(getBaseContext(), InformacionPersonaActivity.class);
+                                intent.putExtra("zatVivienda", zatVivienda);
+                                intent.putExtra("nroEncuesta", numeroEncuesta);
+                                intent.putExtra("idHogar", idHogar);
+                                intent.putExtra("codigoOrden", cdOrden);
+                                startActivity(intent);
+                                finish();
+                            }
+                        });
+                dialog.show();
+
+
             }
         }
         else
@@ -203,69 +332,122 @@ public class InformacionOcupacionSecundariaActivity extends ActionBarActivity {
             long id = db.insertOcupacion(ocupacion, lugarEstudio, sectorTrabajo, laborDesempeño, direccionActividadSecundaria, zatActividadSecundaria, TIPO_OCUPACION, idPersona);
             db.close();
 
-            Intent intent = new Intent(this,InformacionViajesActivity. class);
-            intent.putExtra("idPersona", idPersona);
-            intent.putExtra("numeroViaje", numeroViaje);
-            startActivity(intent);
-            finish();
+            AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+            dialog.setCancelable(true);
+            dialog.setMessage("¿Qué desea hacer?")
+                    .setTitle("Asegurese de que esta persona no realiza ningún viaje")
+                    .setCancelable(true)
+                    .setPositiveButton("Agregar viaje", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Intent intent = new Intent(getBaseContext(), InformacionViajesActivity.class);
+                            intent.putExtra("zatVivienda", zatVivienda);
+                            intent.putExtra("nroEncuesta", numeroEncuesta);
+                            intent.putExtra("idHogar", idHogar);
+                            intent.putExtra("codigoOrden", cdOrden);
+                            startActivity(intent);
+                            finish();
+                        }
+                    })
+                    .setNegativeButton("Agregar persona", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            Intent intent = new Intent(getBaseContext(), InformacionPersonaActivity.class);
+                            intent.putExtra("zatVivienda", zatVivienda);
+                            intent.putExtra("nroEncuesta", numeroEncuesta);
+                            intent.putExtra("idHogar", idHogar);
+                            intent.putExtra("codigoOrden", cdOrden);
+                            startActivity(intent);
+                            finish();
+                        }
+                    });
+            dialog.show();
+
         }
 
-    }
-
-    public void onClickContinuarAgregarPersona(View view){
-        ocupacion = spinnerOcupacionSecundaria.getSelectedItem().toString();
-        lugarEstudio = spinnerLugarEstudioSecundaria.getSelectedItem().toString();
-        sectorTrabajo = spinnerSectorTrabajoSecundaria.getSelectedItem().toString();
-        laborDesempeño = spinnerLaborDesempeñaSecundaria.getSelectedItem().toString();
-        //lugarTrabajo = spinnerLugarTrabajoSecundaria.getSelectedItem().toString();
-        direccionActividadSecundaria = txtDireccionActividadSecundaria.getText().toString();
-        zatActividadSecundaria = spinnerZatActividadSecundaria.getSelectedItem().toString();
-
-        DBAdapter db = new DBAdapter(this);
-        db.open();
-        long id = db.insertOcupacion(ocupacion, lugarEstudio, sectorTrabajo, laborDesempeño, direccionActividadSecundaria, zatActividadSecundaria, TIPO_OCUPACION, idPersona);
-        db.close();
-
-        Intent intent = new Intent(this,InformacionPersonaActivity. class);
-        startActivity(intent);
-        finish();
 
     }
 
     public void onClickFinalizar(View view){
-        ocupacion = spinnerOcupacionSecundaria.getSelectedItem().toString();
-        lugarEstudio = spinnerLugarEstudioSecundaria.getSelectedItem().toString();
-        sectorTrabajo = spinnerSectorTrabajoSecundaria.getSelectedItem().toString();
-        laborDesempeño = spinnerLaborDesempeñaSecundaria.getSelectedItem().toString();
-        //lugarTrabajo = spinnerLugarTrabajoSecundaria.getSelectedItem().toString();
-        direccionActividadSecundaria = txtDireccionActividadSecundaria.getText().toString();
-        zatActividadSecundaria = spinnerZatActividadSecundaria.getSelectedItem().toString();
+        if (txtDireccionActividadSecundaria.isEnabled()) {
+            if (txtDireccionActividadSecundaria.getText().toString().equals("")) {
+                Toast.makeText(getBaseContext(), "Por favor complete todos los campos", Toast.LENGTH_SHORT).show();
+            } else
+            {
+                ocupacion = spinnerOcupacionSecundaria.getSelectedItem().toString();
+                lugarEstudio = spinnerLugarEstudioSecundaria.getSelectedItem().toString();
+                sectorTrabajo = spinnerSectorTrabajoSecundaria.getSelectedItem().toString();
+                laborDesempeño = spinnerLaborDesempeñaSecundaria.getSelectedItem().toString();
+                direccionActividadSecundaria = txtDireccionActividadSecundaria.getText().toString();
+                zatActividadSecundaria = spinnerZatActividadSecundaria.getSelectedItem().toString();
 
-        DBAdapter db = new DBAdapter(this);
-        db.open();
-        long id = db.insertOcupacion(ocupacion, lugarEstudio, sectorTrabajo, laborDesempeño, direccionActividadSecundaria, zatActividadSecundaria, TIPO_OCUPACION, idPersona);
-        db.close();
+                DBAdapter db = new DBAdapter(this);
+                db.open();
+                long id = db.insertOcupacion(ocupacion, lugarEstudio, sectorTrabajo, laborDesempeño, direccionActividadSecundaria, zatActividadSecundaria, TIPO_OCUPACION, idPersona);
+                db.close();
 
-        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
-        dialog.setCancelable(true);
-        dialog.setMessage("¿Qué desea hacer?")
-                .setTitle("Gracias por hacer uso de la aplicación Encuesta Riosucio")
-                .setCancelable(true)
-                .setPositiveButton("Comenzar una nueva encuesta", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Intent intent = new Intent(getBaseContext(), MainActivity.class);
-                        startActivity(intent);
-                        finish();
-                    }
-                })
-                .setNegativeButton("Finalizar la aplicación", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        InformacionOcupacionSecundariaActivity.this.finish();
-                    }
-                });
-        dialog.show();
+
+                AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+                dialog.setCancelable(true);
+                dialog.setMessage("Asegurese de que esta persona no realiza ningún viaje no ser asi cierre este dialogo tocando cualquier parte de la " +
+                        "pantalla para poder agregar un viaje. ¿Qué desea hacer?")
+                        .setTitle("Gracias por hacer uso de la aplicación Encuesta Riosucio.")
+                        .setCancelable(true)
+                        .setPositiveButton("Comenzar una nueva encuesta", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Intent intent = new Intent(getBaseContext(), MainActivity.class);
+                                startActivity(intent);
+                                finish();
+                            }
+                        })
+                        .setNegativeButton("Finalizar la aplicación", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                InformacionOcupacionSecundariaActivity.this.finish();
+                            }
+                        });
+                dialog.show();
+
+
+            }
+        }
+        else {
+            ocupacion = spinnerOcupacionSecundaria.getSelectedItem().toString();
+            lugarEstudio = spinnerLugarEstudioSecundaria.getSelectedItem().toString();
+            sectorTrabajo = spinnerSectorTrabajoSecundaria.getSelectedItem().toString();
+            laborDesempeño = spinnerLaborDesempeñaSecundaria.getSelectedItem().toString();
+            //lugarTrabajo = spinnerLugarTrabajoSecundaria.getSelectedItem().toString();
+            direccionActividadSecundaria = txtDireccionActividadSecundaria.getText().toString();
+            zatActividadSecundaria = spinnerZatActividadSecundaria.getSelectedItem().toString();
+
+            DBAdapter db = new DBAdapter(this);
+            db.open();
+            long id = db.insertOcupacion(ocupacion, lugarEstudio, sectorTrabajo, laborDesempeño, direccionActividadSecundaria, zatActividadSecundaria, TIPO_OCUPACION, idPersona);
+            db.close();
+
+            AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+            dialog.setCancelable(true);
+            dialog.setMessage("¿Qué desea hacer?")
+                    .setTitle("Gracias por hacer uso de la aplicación Encuesta Riosucio")
+                    .setCancelable(true)
+                    .setPositiveButton("Comenzar una nueva encuesta", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Intent intent = new Intent(getBaseContext(), MainActivity.class);
+                            startActivity(intent);
+                            finish();
+                        }
+                    })
+                    .setNegativeButton("Finalizar la aplicación", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            InformacionOcupacionSecundariaActivity.this.finish();
+                        }
+                    });
+            dialog.show();
+        }
+
 
 
 
@@ -292,7 +474,24 @@ public class InformacionOcupacionSecundariaActivity extends ActionBarActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            return true;
+            //return true;
+            //return true;
+            DBAdapter db = new DBAdapter(getBaseContext());
+            db.open();
+            Cursor mCursor = db.getAllRestriccion();
+            db.getAllRestriccion();
+            if(mCursor.moveToFirst())
+            {
+                do{
+                    Toast.makeText(this,
+                            "id: " +mCursor.getString(0)+ "\n"+
+                                    "Tabla: " +mCursor.getString(1)+ "\n"+
+                                    "Descripción: "+mCursor.getString(2)+ "\n"+
+                                    "Referencia persona: "+mCursor.getString(3)+"\n"+
+                                    "Número encuesta: "+mCursor.getString(4), Toast.LENGTH_LONG).show();
+                }while (mCursor.moveToNext());
+            }
+            db.close();
         }
 
         return super.onOptionsItemSelected(item);

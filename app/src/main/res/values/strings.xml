@@ -16,4 +16,24 @@
 
 <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_list_activity_encuesta">ListActivityEncuesta</string>
+    <string name="title_activity_list_activity_hogar">ListActivityHogar</string>
+    <string name="title_activity_list_activity_vivienda">ListActivityVivienda</string>
+    <string name="title_activity_list_activity_medio_transporte">ListActivityMedioTransporte
+    </string>
+    <string name="title_activity_list_activity_persona">ListActivityPersona</string>
+    <string name="title_activity_list_activity_ocupacion_principal">ListActivityOcupacionPrincipal
+    </string>
+    <string name="title_activity_list_activity_discapacidad">ListActivityDiscapacidad</string>
+    <string name="title_activity_list_activity_ocupacion_secundaria">
+        ListActivityOcupacionSecundaria
+    </string>
+    <string name="title_activity_list_activity_viaje">ListActivityViaje</string>
+    <string name="title_activity_list_activity_herramienta_apoyo">ListActivityHerramientaApoyo
+    </string>
+    <string name="title_activity_list_activity_medios_transporte_dificil_acceso">
+        ListActivityMediosTransporteDificilAcceso
+    </string>
+    <string name="title_activity_list_activity_frecuencia_viaje">ListActivityFrecuenciaViaje
+    </string>
 </resources>

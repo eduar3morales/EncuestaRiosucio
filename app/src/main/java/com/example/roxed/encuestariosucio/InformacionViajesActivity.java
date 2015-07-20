@@ -70,11 +70,16 @@ public class InformacionViajesActivity extends ActionBarActivity {
     boolean somethingChecked = false;
     List<String> frecuenciaViaje = new ArrayList<String>();
 
-    String idPersona;
+    String idPersona; //Valor proveniente del Intent
     String numeroViaje;
     int nroViaje;
     String idViaje;
     int nViaje;
+    String zatVivienda;
+    String zatViviendaBd;
+    String numeroEncuesta;
+    String idHogar;
+    String cdOrden;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -149,7 +154,7 @@ public class InformacionViajesActivity extends ActionBarActivity {
         spinnerModoDeViaje.setAdapter(adaptadorModoViaje);
 
         idPersona = getIntent().getStringExtra("idPersona");
-        numeroViaje = getIntent().getStringExtra("numeroViaje");
+        numeroViaje = "1";//getIntent().getStringExtra("numeroViaje");
 
         checkBoxLunesAViernes.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
             @Override
@@ -201,8 +206,19 @@ public class InformacionViajesActivity extends ActionBarActivity {
 
 
 
-
+        idPersona = getIntent().getStringExtra("idPersona");
+        Toast.makeText(this, "Id persona: "+ idPersona, Toast.LENGTH_SHORT).show();
         //Toast.makeText(this, "Id Persona: "+ idPersona+ " Numero Viaje: " +nroViaje, Toast.LENGTH_SHORT).show();
+
+        zatVivienda = getIntent().getStringExtra("zatVivienda");
+
+        numeroEncuesta = getIntent().getStringExtra("nroEncuesta");
+
+        idHogar = getIntent().getStringExtra("idHogar");
+
+        cdOrden = getIntent().getStringExtra("codigoOrden");
+        Toast.makeText(this, "Codigo orden: "+cdOrden, Toast.LENGTH_SHORT).show();
+
     }
 
     public void onClickHoraLlegada(View view)
@@ -218,35 +234,64 @@ public class InformacionViajesActivity extends ActionBarActivity {
 
     public void onClickContinuarInformacionViajes(View view) {
         if (checkBoxLunesAViernes.isChecked())
+        {
             frecuenciaViaje.add("LUNES A VIERNES");
             somethingChecked = true;
+        }
+
         if (checkBoxLunesASabado.isChecked())
+        {
             frecuenciaViaje.add("LUNES A SABADO");
             somethingChecked = true;
+        }
+
         if (checkBoxLunesADomingo.isChecked())
+        {
             frecuenciaViaje.add("LUNES A DOMINGO");
             somethingChecked = true;
+        }
+
         if (checkBoxLunes.isChecked())
+        {
             frecuenciaViaje.add("LUNES");
             somethingChecked = true;
+        }
+
         if (checkBoxMartes.isChecked())
+        {
             frecuenciaViaje.add("MARTES");
             somethingChecked = true;
+        }
+
         if (checkBoxMiercoles.isChecked())
+        {
             frecuenciaViaje.add("MIERCOLES");
             somethingChecked = true;
+        }
+
         if (checkBoxJueves.isChecked())
+        {
             frecuenciaViaje.add("JUEVES");
             somethingChecked = true;
+        }
+
         if (checkBoxViernes.isChecked())
+        {
             frecuenciaViaje.add("VIERNES");
             somethingChecked = true;
+        }
+
         if (checkBoxSabado.isChecked())
+        {
             frecuenciaViaje.add("SABADO");
             somethingChecked = true;
+        }
+
         if (checkBoxDomingo.isChecked())
+        {
             frecuenciaViaje.add("DOMINGO");
             somethingChecked = true;
+        }
 
         if (txtLugarOrigen.getText().toString().equals("") || txtLugarDestino.getText().toString().equals("") || txtHoraSalida.getText().toString().equals("")
                 || txtHoraLlegada.getText().toString().equals("") || (somethingChecked == false))
@@ -265,10 +310,33 @@ public class InformacionViajesActivity extends ActionBarActivity {
             modoViaje = spinnerModoDeViaje.getSelectedItem().toString();
             zatDestino = spinnerZatDestino.getSelectedItem().toString();
 
-
+            boolean is = false;
             DBAdapter db = new DBAdapter(this);
             db.open();
+            Cursor cur  = db.getViaje(1); //Acá se debería de pasar si el númerod e viaje es 1
+            if (cur.moveToFirst())
+            {
+                is = true;
+            }
+            db.close();
+            /*if (is == true)
+            {
+                if (!zatVivienda.equals(zatOrigen))
+                {
+                    db.open();
+                    long id = db.insertRestriccion("VIAJES", "ZAT de origen del primer viaje no es Zat de residencia", cur.getString(0), numeroEncuesta );
+                    db.close();
+                }
+            }*/
+
+
+
+
+            db.open();
             long id = db.insertViaje(numeroViaje, lugarOrigen, zatOrigen, horaSalida, lugarDestino, zatDestino, horaLlegada, motivoViaje, modoViaje, idPersona);
+            db.close();
+
+            db.open();
             Cursor c = db.getAllViajes();
             if(c.moveToFirst())
             {
@@ -277,14 +345,18 @@ public class InformacionViajesActivity extends ActionBarActivity {
                 }while (c.moveToNext());
             }
             db.close();
+
             db.open();
             for (int i=0; i< frecuenciaViaje.size(); i++)
-                id = db.insertFrecuenciaViaje(frecuenciaViaje.get(i), idViaje);   //Genera un error
+                id = db.insertFrecuenciaViaje(frecuenciaViaje.get(i), idViaje);
 
             db.close();
 
             Intent intent = new Intent(this,InformacionViajesActivity. class);
-            intent.putExtra("nroViaje", numeroViaje);
+            //intent.putExtra("nroViaje", numeroViaje);
+            intent.putExtra("idPersona", idPersona);
+            intent.putExtra("idHogar", idHogar);
+            intent.putExtra("codigoOrden", cdOrden);
             startActivity(intent);
             finish();
         }
@@ -294,35 +366,64 @@ public class InformacionViajesActivity extends ActionBarActivity {
 
     public void onClickContinuarAgregarPersona(View view){
         if (checkBoxLunesAViernes.isChecked())
+        {
             frecuenciaViaje.add("LUNES A VIERNES");
             somethingChecked = true;
+        }
+
         if (checkBoxLunesASabado.isChecked())
+        {
             frecuenciaViaje.add("LUNES A SABADO");
             somethingChecked = true;
+        }
+
         if (checkBoxLunesADomingo.isChecked())
+        {
             frecuenciaViaje.add("LUNES A DOMINGO");
             somethingChecked = true;
+        }
+
         if (checkBoxLunes.isChecked())
+        {
             frecuenciaViaje.add("LUNES");
             somethingChecked = true;
+        }
+
         if (checkBoxMartes.isChecked())
+        {
             frecuenciaViaje.add("MARTES");
             somethingChecked = true;
+        }
+
         if (checkBoxMiercoles.isChecked())
+        {
             frecuenciaViaje.add("MIERCOLES");
             somethingChecked = true;
+        }
+
         if (checkBoxJueves.isChecked())
+        {
             frecuenciaViaje.add("JUEVES");
             somethingChecked = true;
+        }
+
         if (checkBoxViernes.isChecked())
+        {
             frecuenciaViaje.add("VIERNES");
             somethingChecked = true;
+        }
+
         if (checkBoxSabado.isChecked())
+        {
             frecuenciaViaje.add("SABADO");
             somethingChecked = true;
+        }
+
         if (checkBoxDomingo.isChecked())
+        {
             frecuenciaViaje.add("DOMINGO");
             somethingChecked = true;
+        }
 
         if (txtLugarOrigen.getText().toString().equals("") || txtLugarDestino.getText().toString().equals("") || txtHoraSalida.getText().toString().equals("")
                 || txtHoraLlegada.getText().toString().equals("") || (somethingChecked == false))
@@ -335,32 +436,89 @@ public class InformacionViajesActivity extends ActionBarActivity {
             lugarOrigen = txtLugarOrigen.getText().toString();
             lugarDestino = txtLugarDestino.getText().toString();
             zatOrigen = spinnerZatOrigen.getSelectedItem().toString();
-            horaSalida = horaS+":"+minutoS;
-            horaLlegada = horaL+":"+minutoL;
+            horaSalida = txtHoraSalida.getText().toString();//horaS+":"+minutoS;
+            horaLlegada = txtHoraLlegada.getText().toString();//horaL+":"+minutoL;
             motivoViaje = spinnerMotivoDeViaje.getSelectedItem().toString();
             modoViaje = spinnerModoDeViaje.getSelectedItem().toString();
             zatDestino = spinnerZatDestino.getSelectedItem().toString();
 
-
+            boolean is = false;
             DBAdapter db = new DBAdapter(this);
             db.open();
+            Cursor cur  = db.getViaje(1); //Acá se debería de pasar si el númerod e viaje es 1
+            if (cur.moveToFirst())
+            {
+                is = true;
+            }
+            db.close();
+            /*if (is == true)
+            {
+                if (!zatVivienda.equals(zatOrigen))
+                {
+                    db.open();
+                    long id = db.insertRestriccion("VIAJES", "ZAT de origen del primer viaje no es Zat de residencia", cur.getString(0), numeroEncuesta );
+                    db.close();
+                }
+            }*/
+
+
+
+            db.open();
             long id = db.insertViaje(numeroViaje, lugarOrigen, zatOrigen, horaSalida, lugarDestino, zatDestino, horaLlegada, motivoViaje, modoViaje, idPersona);
+            db.close();
+
+            db.open();
             Cursor c = db.getAllViajes();
             if(c.moveToFirst())
             {
                 do{
                     idViaje = c.getString(0);
+                    zatViviendaBd = c.getString(6);
+
                 }while (c.moveToNext());
             }
             db.close();
+
+            /*if (! (zatVivienda.equals(zatDestino))) {
+                db.open();
+                    id = db.insertRestriccion("VIAJES", "LA ZAT del Viaje final no corresponde a la ZAT de residencia", idViaje, numeroEncuesta);
+                db.close();
+            }*/
+
             db.open();
             for (int i=0; i< frecuenciaViaje.size(); i++)
                 id = db.insertFrecuenciaViaje(frecuenciaViaje.get(i), idViaje);
-
             db.close();
-            Intent intent = new Intent(this,InformacionPersonaActivity. class);
-            startActivity(intent);
-            finish();
+
+            AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+            dialog.setCancelable(true);
+            dialog.setMessage("¿Qué desea hacer?")
+                    .setTitle("¿Esta seguro de que esta persona no realiza mas viajes?")
+                    .setCancelable(true)
+                    .setPositiveButton("Agregar viaje", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Intent intent = new Intent(getBaseContext(), InformacionViajesActivity.class);
+                            intent.putExtra("idHogar", idHogar);
+                            intent.putExtra("nroEncuesta", numeroEncuesta);
+                            intent.putExtra("codigoOrden", cdOrden);
+                            startActivity(intent);
+                            finish();
+                        }
+                    })
+                    .setNegativeButton("Agregar persona", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            Intent intent = new Intent(getBaseContext(), InformacionPersonaActivity.class);
+                            intent.putExtra("idHogar", idHogar);
+                            intent.putExtra("nroEncuesta", numeroEncuesta);
+                            intent.putExtra("codigoOrden", cdOrden);
+                            startActivity(intent);
+                            finish();
+                        }
+                    });
+            dialog.show();
+
         }
 
 
@@ -368,35 +526,65 @@ public class InformacionViajesActivity extends ActionBarActivity {
 
     public void onClickFinalizar(View view){
         if (checkBoxLunesAViernes.isChecked())
+        {
             frecuenciaViaje.add("LUNES A VIERNES");
             somethingChecked = true;
+        }
+
         if (checkBoxLunesASabado.isChecked())
+        {
             frecuenciaViaje.add("LUNES A SABADO");
             somethingChecked = true;
+        }
+
         if (checkBoxLunesADomingo.isChecked())
+        {
             frecuenciaViaje.add("LUNES A DOMINGO");
             somethingChecked = true;
+        }
+
         if (checkBoxLunes.isChecked())
+        {
             frecuenciaViaje.add("LUNES");
             somethingChecked = true;
+        }
+
         if (checkBoxMartes.isChecked())
+        {
             frecuenciaViaje.add("MARTES");
             somethingChecked = true;
+        }
+
         if (checkBoxMiercoles.isChecked())
+        {
             frecuenciaViaje.add("MIERCOLES");
             somethingChecked = true;
+        }
+
         if (checkBoxJueves.isChecked())
+        {
             frecuenciaViaje.add("JUEVES");
             somethingChecked = true;
+        }
+
         if (checkBoxViernes.isChecked())
+        {
             frecuenciaViaje.add("VIERNES");
             somethingChecked = true;
+        }
+
         if (checkBoxSabado.isChecked())
+        {
             frecuenciaViaje.add("SABADO");
             somethingChecked = true;
+        }
+
         if (checkBoxDomingo.isChecked())
+        {
             frecuenciaViaje.add("DOMINGO");
             somethingChecked = true;
+        }
+
 
         if (txtLugarOrigen.getText().toString().equals("") || txtLugarDestino.getText().toString().equals("") || txtHoraSalida.getText().toString().equals("")
                 || txtHoraLlegada.getText().toString().equals("") || (somethingChecked == false))
@@ -405,32 +593,62 @@ public class InformacionViajesActivity extends ActionBarActivity {
         }
         else
         {
-            viajeNumero = Integer.toString(nroViaje);
+            viajeNumero = "1";//Integer.toString(nroViaje);
             lugarOrigen = txtLugarOrigen.getText().toString();
             lugarDestino = txtLugarDestino.getText().toString();
             zatOrigen = spinnerZatOrigen.getSelectedItem().toString();
-            horaSalida = horaS+":"+minutoS;
-            horaLlegada = horaL+":"+minutoL;
+            horaSalida = txtHoraSalida.getText().toString(); //horaS+":"+minutoS;
+            horaLlegada = txtHoraLlegada.getText().toString();//horaL+":"+minutoL;
             motivoViaje = spinnerMotivoDeViaje.getSelectedItem().toString();
             modoViaje = spinnerModoDeViaje.getSelectedItem().toString();
             zatDestino = spinnerZatDestino.getSelectedItem().toString();
 
-
+            boolean is = false;
             DBAdapter db = new DBAdapter(this);
             db.open();
+            Cursor cur  = db.getViaje(1); //Acá se debería de pasar si el númerod e viaje es 1
+            if (cur.moveToFirst())
+            {
+                is = true;
+            }
+            db.close();
+            /*if (is == true)
+            {
+                if (!zatVivienda.equals(zatOrigen))
+                {
+                    db.open();
+                    long id = db.insertRestriccion("VIAJES", "ZAT de origen del primer viaje no es Zat de residencia", cur.getString(0), numeroEncuesta );
+                    db.close();
+                }
+            }*/
+
+
+            db.open();
             long id = db.insertViaje(numeroViaje, lugarOrigen, zatOrigen, horaSalida, lugarDestino, zatDestino, horaLlegada, motivoViaje, modoViaje, idPersona);
+            db.close();
+
+            db.open();
             Cursor c = db.getAllViajes();
             if(c.moveToFirst())
             {
                 do{
                     idViaje = c.getString(0);
+                    zatViviendaBd = c.getString(6);
+
                 }while (c.moveToNext());
             }
             db.close();
+
+            if (! (zatVivienda.equals(zatDestino))) {
+                db.open();
+                id = db.insertRestriccion("VIAJES", "LA ZAT del Viaje final no corresponde a la ZAT de residencia", idViaje, numeroEncuesta);
+                db.close();
+            }
+
+
             db.open();
             for (int i=0; i< frecuenciaViaje.size(); i++)
                 id = db.insertFrecuenciaViaje(frecuenciaViaje.get(i), idViaje);
-
             db.close();
 
             AlertDialog.Builder dialog = new AlertDialog.Builder(this);
@@ -527,7 +745,45 @@ public class InformacionViajesActivity extends ActionBarActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            return true;
+            //return true;
+            DBAdapter db = new DBAdapter(getBaseContext());
+            db.open();
+            Cursor mCursor = db.getAllRestriccion();
+            db.getAllRestriccion();
+            if(mCursor.moveToFirst())
+            {
+                do{
+                    Toast.makeText(this,
+                        "id: " +mCursor.getString(0)+ "\n"+
+                                "Tabla: " +mCursor.getString(1)+ "\n"+
+                                "Descripción: "+mCursor.getString(2)+ "\n"+
+                                "Referencia persona: "+mCursor.getString(3)+"\n"+
+                                "Número encuesta: "+mCursor.getString(4), Toast.LENGTH_LONG).show();
+                }while (mCursor.moveToNext());
+            }
+            db.close();
+
+        }
+
+        if (id  == R.id.actin_exit)
+        {
+            AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+            dialog.setMessage("Asegurese de haber completado todos los datos. ¿Qué desea hacer?")
+                    .setCancelable(true)
+                    .setTitle("Gracias por hacer uso de la aplicación Encuesta Riosucio")
+                    .setPositiveButton("Seguir en la encuesta", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
+                        }
+                    })
+                    .setNegativeButton("Finalizar la aplicación", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            InformacionViajesActivity.this.finish();
+                        }
+                    });
+            dialog.show();
         }
 
         return super.onOptionsItemSelected(item);

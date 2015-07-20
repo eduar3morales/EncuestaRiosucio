@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -48,9 +49,10 @@ public class InformacionHogarActivity extends ActionBarActivity {
     String tipoPropiedad;
     String rangoIngresos;
 
-    String numeroEncuesta;
-    String idVivienda;
+    String numeroEncuesta; //Valor proveniente del Intent
+    String idVivienda; //Valor proveniente del Intent
     String idHogar;
+    String zatVivienda;
 
 
     @Override
@@ -64,9 +66,9 @@ public class InformacionHogarActivity extends ActionBarActivity {
                 "Toda esta información se usará para el estudio y es confidencial)")
                 .setTitle("Por favor leer este mensaje a las personas encuestadas")
                 .setCancelable(false)
-                .setPositiveButton("OK", new DialogInterface.OnClickListener(){
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
-                public void onClick(DialogInterface dialog, int which){
+                    public void onClick(DialogInterface dialog, int which) {
                         dialog.cancel();
                     }
                 });
@@ -99,38 +101,62 @@ public class InformacionHogarActivity extends ActionBarActivity {
         adaptadorRangoIngresosMensuales.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerRangoIngresosMensuales.setAdapter(adaptadorRangoIngresosMensuales);
 
-        for(int i=0;i<=40;i++)
-            listaCantidadPersonasViajanDiaTipico.add(""+(i));
-
-        ArrayAdapter<String> adaptadorCantidadPersonasViajanDiaTipico = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, listaCantidadPersonasViajanDiaTipico);
-        adaptadorCantidadPersonasViajanDiaTipico.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerCantidadPersonasViajanDiaTipico.setAdapter(adaptadorCantidadPersonasViajanDiaTipico);
-
-        for(int i=0;i<=40;i++)
+        for(int i=1;i<=40;i++)
             listaCantidadPersonasHogar.add(""+(i));
-
         ArrayAdapter<String> adaptadorCantidadPersonasHogar= new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, listaCantidadPersonasHogar);
         adaptadorCantidadPersonasHogar.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerCantidadPersonasHogar.setAdapter(adaptadorCantidadPersonasHogar);
 
-        for(int i=0;i<=40;i++)
-            listaCantidadPersonasViajanSabado.add(""+(i));
 
-        ArrayAdapter<String> adaptadorCantidadPersonasViajanSabado= new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, listaCantidadPersonasViajanSabado);
-        adaptadorCantidadPersonasViajanSabado.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerCantidadPersonasViajanSabado.setAdapter(adaptadorCantidadPersonasViajanSabado);
+        //_________________________________________________________________________________________
+        spinnerCantidadPersonasHogar.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
-        for(int i=0;i<=40;i++)
-            listaCantidadPersonasPresentes.add(""+(i));
+                listaCantidadPersonasViajanDiaTipico.clear();
+                listaCantidadPersonasViajanSabado.clear();
+                listaCantidadPersonasPresentes.clear();
 
-        ArrayAdapter<String> adaptadorCantidadPersonasPresentes = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, listaCantidadPersonasPresentes);
-        adaptadorCantidadPersonasPresentes .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerCantidadPersonasPresentes.setAdapter(adaptadorCantidadPersonasPresentes);
+                int x = Integer.parseInt(adapterView.getItemAtPosition(i).toString());
+
+
+                for (int j = 0; j <= x; j++)
+                    listaCantidadPersonasViajanDiaTipico.add("" + (j));
+
+                ArrayAdapter<String> adaptadorCantidadPersonasViajanDiaTipico = new ArrayAdapter<String>(getBaseContext(), android.R.layout.simple_spinner_item, listaCantidadPersonasViajanDiaTipico);
+                adaptadorCantidadPersonasViajanDiaTipico.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                spinnerCantidadPersonasViajanDiaTipico.setAdapter(adaptadorCantidadPersonasViajanDiaTipico);
+
+
+                for (int j = 0; j <= x; j++)
+                    listaCantidadPersonasViajanSabado.add("" + (j));
+
+                ArrayAdapter<String> adaptadorCantidadPersonasViajanSabado = new ArrayAdapter<String>(getBaseContext(), android.R.layout.simple_spinner_item, listaCantidadPersonasViajanSabado);
+                adaptadorCantidadPersonasViajanSabado.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                spinnerCantidadPersonasViajanSabado.setAdapter(adaptadorCantidadPersonasViajanSabado);
+
+                ;
+                for (int j = 0; j <= x; j++)
+                    listaCantidadPersonasPresentes.add("" + (j));
+
+                ArrayAdapter<String> adaptadorCantidadPersonasPresentes = new ArrayAdapter<String>(getBaseContext(), android.R.layout.simple_spinner_item, listaCantidadPersonasPresentes);
+                adaptadorCantidadPersonasPresentes.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                spinnerCantidadPersonasPresentes.setAdapter(adaptadorCantidadPersonasPresentes);
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+
+            }
+        });
 
 
         numeroEncuesta = getIntent().getStringExtra("numeroEncuesta");
         idVivienda = getIntent().getStringExtra("idVivienda");
         Toast.makeText(this, "Nro Encuesta: "+numeroEncuesta+"/"+"Id Vivienda: "+idVivienda, Toast.LENGTH_SHORT).show();
+        zatVivienda = getIntent().getStringExtra("zatVivienda");
 
     }
 
@@ -147,7 +173,9 @@ public class InformacionHogarActivity extends ActionBarActivity {
         db.open();
         long id = db.insertHogar(cantidadPersonasConformanHogar, cantidadPersonasViajanDiaTipico, cantidadPersonasViajanDiaSabado, cantidadPersonasPresentes,
                 tipoPropiedad, rangoIngresos, numeroEncuesta, idVivienda);
+        db.close();
 
+        db.open();
         Cursor c = db.getAllHogares();
         if (c.moveToFirst())
         {
@@ -169,8 +197,9 @@ public class InformacionHogarActivity extends ActionBarActivity {
 
         Intent intent = new Intent(this, InformacionMediosTransporteActivity.class);
         intent.putExtra("idHogar", idHogar);
+        intent.putExtra("zatVivienda", zatVivienda);
+        intent.putExtra("nroEncuesta", numeroEncuesta);
         startActivity(intent);
-
         finish();
     }
 

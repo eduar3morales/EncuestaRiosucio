@@ -1,6 +1,7 @@
 package com.example.roxed.encuestariosucio;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -49,6 +50,8 @@ public class MainActivity extends ActionBarActivity {
     TextView txtHFechaEncuesta;
 
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,6 +63,23 @@ public class MainActivity extends ActionBarActivity {
         coordinadorSpinner = (Spinner) findViewById(R.id.spinnerCoordinador);
         txtHoraEncuesta = (TextView) findViewById(R.id.txtHoraEncuesta);
         txtHFechaEncuesta = (TextView) findViewById(R.id.txtFechaEncuesta);
+
+        // --- GENERAR AUTOMATICAMENTE EL NÚMERO DE LA SIGUIENTE ENCUESTA ---
+        DBAdapter  db = new DBAdapter(this);
+        db.open();
+        Cursor c = db.getAllEncuestas();
+        if(c.moveToFirst())
+        {
+            do{
+                int numero = Integer.parseInt(c.getString(0));
+                numero ++;
+                numeroEncuestaTxt.setText(""+numero);
+            }while (c.moveToNext());
+        }
+        db.close();
+
+
+
 
         listaCoordinador.add("JORGE ALBERTO MONTOYA");
         listaCoordinador.add("LUIS GABRIEL QUINA");
@@ -102,7 +122,7 @@ public class MainActivity extends ActionBarActivity {
             encuestador = encuestadorTxt.getText().toString();
             coordinadorEncuesta = coordinadorSpinner.getSelectedItem().toString();
             fechaEncuesta = dia+"/"+(mes+1)+"/"+año;
-            horaInicio = hora+":"+minuto;
+            horaInicio = txtHoraEncuesta.getText().toString();
 
             DBAdapter  db = new DBAdapter(this);
             db.open();
@@ -193,6 +213,72 @@ public class MainActivity extends ActionBarActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
+        }
+
+        if (id == R.id.action_encuesta)
+        {
+            Intent intent = new Intent(this, ListActivityEncuesta.class);
+            startActivity(intent);
+        }
+
+        if (id == R.id.action_vivienda)
+        {
+            Intent intent = new Intent(this, ListActivityVivienda.class);
+            startActivity(intent);
+        }
+
+        if (id == R.id.action_hogar)
+        {
+            Intent intent = new Intent (this, ListActivityHogar.class);
+            startActivity(intent);
+        }
+
+        if (id == R.id.action_medio_transporte)
+        {
+            Intent intent = new Intent(this, ListActivityMedioTransporte.class);
+            startActivity(intent);
+        }
+
+        if (id == R.id.action_persona)
+        {
+            Intent intent = new Intent(this, ListActivityPersona.class);
+            startActivity(intent);
+        }
+
+        if (id == R.id.action_discapacidad)
+        {
+            Intent intent = new Intent(this, ListActivityDiscapacidad.class);
+            startActivity(intent);
+        }
+
+        if (id == R.id.action_ocupacion)
+        {
+            Intent intent = new Intent(this, ListActivityOcupacion.class);
+            startActivity(intent);
+        }
+
+        if (id == R.id.action_viaje)
+        {
+            Intent intent = new Intent(this, ListActivityViaje.class);
+            startActivity(intent);
+        }
+
+        if (id == R.id.action_herramienta_apoyo)
+        {
+            Intent intent = new Intent(this, ListActivityHerramientaApoyo.class);
+            startActivity(intent);
+        }
+
+        if (id == R.id.action_transporte_dificil_acceso)
+        {
+            Intent intent = new Intent(this, ListActivityMediosTransporteDificilAcceso.class);
+            startActivity(intent);
+        }
+
+        if (id == R.id.action_frecuencia_viaje)
+        {
+            Intent intent = new Intent(this, ListActivityFrecuenciaViaje.class);
+            startActivity(intent);
         }
 
         if (id == R.id.actin_exit)

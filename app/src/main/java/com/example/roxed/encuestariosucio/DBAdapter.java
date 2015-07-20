@@ -61,7 +61,7 @@ public class DBAdapter {
                 db.execSQL("CREATE TABLE viaje (_id_viaje integer primary key autoincrement, viajeNumero text not null, lugarOrigen text not null, zatOrigen text not null, horaSalida text not null, " +
                         "lugarDestino text not null, zatDestino text not null, horaLlegada text not null, motivoViaje text not null, modoViaje text not null, personaFk text not null);");
 
-                db.execSQL("CREATE TABLE modoTransporteDificilAcceso (_id_modo_trasnporte integer primary key autoincrement, modoTransporte text not null, personaFk text not null);");
+                db.execSQL("CREATE TABLE modoTransporteDificilAcceso (_id_modo_transporte integer primary key autoincrement, modoTransporte text not null, personaFk text not null);");
 
                 db.execSQL("CREATE TABLE herramientaApoyo (_id_herramienta_apoyo integer primary key autoincrement, herramientaApoyo text not null, personaFk text not null);");
 
@@ -72,8 +72,8 @@ public class DBAdapter {
                 db.execSQL("CREATE TABLE ocupacion (_id_ocupacion integer primary key autoincrement, ocupacion text not null, lugarEstudio text, sectorTrabajo text, laborDesempeño text, " +
                         "direccionActividad text, zatActividad text, tipoOcupacion text not null, personaFk text not null);");
 
-                // ---- Revisar bien esta tabla como crear los campos ----
-                //db.execSQL("CREATE TABLE restriccion");
+                db.execSQL("CREATE TABLE restriccion (_id_restriccion integer primary key autoincrement, nombreTabla text not null, descripcion text not null, referencia text not null, " +
+                        "encuestaFk)");
 
             } catch (SQLException e){
                 e.printStackTrace();
@@ -95,6 +95,7 @@ public class DBAdapter {
             db.execSQL("DROP TABLE IF EXISTS herramientaApoyo");
             db.execSQL("DROP TABLE IF EXISTS modoTransporteDificilAcceso");
             db.execSQL("DROP TABLE IF EXISTS ocupacion");
+            db.execSQL("DROP TABLE IF EXISTS restriccion");
             onCreate(db);
         }
 
@@ -254,6 +255,16 @@ public class DBAdapter {
         return db.insert("ocupacion", null, initialValues);
     }
 
+    public long insertRestriccion(String nombreTabla, String descripcion, String referencia, String encuestaFk)
+    {
+        ContentValues initialValues = new ContentValues();
+        initialValues.put("nombreTabla", nombreTabla);
+        initialValues.put("descripcion", descripcion);
+        initialValues.put("referencia", referencia);
+        initialValues.put("encuestaFk", encuestaFk);
+        return db.insert("restriccion", null, initialValues);
+    }
+
 
     // --- Get ---
     public Cursor getAllEncuestas()
@@ -313,6 +324,23 @@ public class DBAdapter {
     {
         return db.query("ocupacion", new String[]{"_id_ocupacion", "ocupacion", "lugarEstudio", "sectorTrabajo", "laborDesempeño", "direccionActividad",
                 "zatActividad", "tipoOcupacion", "personaFk"}, null, null, null, null, null);
+    }
+
+    public  Cursor getAllRestriccion()
+    {
+        return db.query("restriccion", new String[] {"_id_restriccion", "nombreTabla", "descripcion", "referencia", "encuestaFk"}, null, null, null, null, null);
+    }
+
+
+    public Cursor getViaje(long rowId) throws SQLException
+    {
+        Cursor mCursor = db.query(true, "viaje", new String[] {"_id_viaje", "viajeNumero", "lugarOrigen", "zatOrigen", "horaSalida", "lugarDestino", "zatDestino", "horaLlegada",
+                "motivoViaje", "modoViaje", "personaFk"}, "_id_viaje" + "=" + rowId, null, null, null, null, null);
+        if (mCursor != null)
+        {
+            mCursor.moveToFirst();
+        }
+        return  mCursor;
     }
 
 }

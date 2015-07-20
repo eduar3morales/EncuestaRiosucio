@@ -10,7 +10,7 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
-            android:screenOrientation="landscape">
+            android:screenOrientation="landscape" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -20,42 +20,86 @@
         <activity
             android:name=".InformacionViviendaActivity"
             android:label="@string/title_activity_informacion_vivienda"
-            android:screenOrientation="landscape">
+            android:screenOrientation="landscape" >
         </activity>
         <activity
             android:name=".InformacionHogarActivity"
             android:label="@string/title_activity_informacion_hogar"
-            android:screenOrientation="landscape">
+            android:screenOrientation="landscape" >
         </activity>
         <activity
             android:name=".InformacionMediosTransporteActivity"
             android:label="@string/title_activity_informacion_medios_transporte"
-            android:screenOrientation="landscape">
+            android:screenOrientation="landscape" >
         </activity>
         <activity
             android:name=".InformacionPersonaActivity"
             android:label="@string/title_activity_informacion_persona"
-            android:screenOrientation="landscape">
+            android:screenOrientation="landscape" >
         </activity>
         <activity
             android:name=".InformacionOcupacionPrincipalActivity"
             android:label="@string/title_activity_informacion_ocupacion_principal"
-            android:screenOrientation="landscape">
+            android:screenOrientation="landscape" >
         </activity>
         <activity
             android:name=".InformacionDiscapacidadActivity"
             android:label="@string/title_activity_informacion_discapacidad"
-            android:screenOrientation="landscape">
+            android:screenOrientation="landscape" >
         </activity>
         <activity
             android:name=".InformacionOcupacionSecundariaActivity"
             android:label="@string/title_activity_informacion_ocupacion_secundaria"
-            android:screenOrientation="landscape">
+            android:screenOrientation="landscape" >
         </activity>
         <activity
             android:name=".InformacionViajesActivity"
             android:label="@string/title_activity_informacion_viajes"
-            android:screenOrientation="landscape">
+            android:screenOrientation="landscape" >
+        </activity>
+        <activity
+            android:name=".ListActivityEncuesta"
+            android:label="@string/title_activity_list_activity_encuesta" >
+        </activity>
+        <activity
+            android:name=".ListActivityHogar"
+            android:label="@string/title_activity_list_activity_hogar" >
+        </activity>
+        <activity
+            android:name=".ListActivityVivienda"
+            android:label="@string/title_activity_list_activity_vivienda" >
+        </activity>
+        <activity
+            android:name=".ListActivityMedioTransporte"
+            android:label="@string/title_activity_list_activity_medio_transporte" >
+        </activity>
+        <activity
+            android:name=".ListActivityPersona"
+            android:label="@string/title_activity_list_activity_persona" >
+        </activity>
+        <activity
+            android:name=".ListActivityOcupacion"
+            android:label="@string/title_activity_list_activity_ocupacion_principal" >
+        </activity>
+        <activity
+            android:name=".ListActivityDiscapacidad"
+            android:label="@string/title_activity_list_activity_discapacidad" >
+        </activity>
+        <activity
+            android:name=".ListActivityViaje"
+            android:label="@string/title_activity_list_activity_viaje" >
+        </activity>
+        <activity
+            android:name=".ListActivityHerramientaApoyo"
+            android:label="@string/title_activity_list_activity_herramienta_apoyo" >
+        </activity>
+        <activity
+            android:name=".ListActivityMediosTransporteDificilAcceso"
+            android:label="@string/title_activity_list_activity_medios_transporte_dificil_acceso" >
+        </activity>
+        <activity
+            android:name=".ListActivityFrecuenciaViaje"
+            android:label="@string/title_activity_list_activity_frecuencia_viaje" >
         </activity>
     </application>
 

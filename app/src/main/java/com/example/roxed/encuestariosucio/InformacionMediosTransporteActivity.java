@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -36,7 +37,10 @@ public class InformacionMediosTransporteActivity extends ActionBarActivity {
     String lugarMatricula;
     String sitioEstacionamiento;
 
-    String idHogar;
+    String idHogar; //Valor proveniente del Intent
+    String zatVivienda;
+    String numeroEncuesta;
+    String codigoOrden = "0";
 
 
     @Override
@@ -51,7 +55,7 @@ public class InformacionMediosTransporteActivity extends ActionBarActivity {
         txtKilometro = (EditText) findViewById(R.id.txtKmUltimoAnio);
         txtLugarMatricula = (EditText) findViewById(R.id.txtLugarMatricula);
 
-
+        listaTipoVehiculo.add("NO TIENE VEHÍCULO");
         listaTipoVehiculo.add("AUTOMOVIL");
         listaTipoVehiculo.add("CAMPERO O CAMIONETA");
         listaTipoVehiculo.add("CAMION PEQUEÑO (1,5 - 3,5 Ton)");
@@ -80,28 +84,38 @@ public class InformacionMediosTransporteActivity extends ActionBarActivity {
         adaptadorSitioEstacionamiento.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerSitioEstacionamiento.setAdapter(adaptadorSitioEstacionamiento);
 
-        /*DBAdapter db = new DBAdapter(this);
-        Cursor c = db.getAllHogares();
-        if (c.moveToFirst())
-        {
-            do{
-                idHogar = c.getString(0);
-                Toast.makeText(this,
-                        "Id: " +c.getString(0)+ "\n"+
-                                "Personas: " +c.getString(1)+ "\n"+
-                                "Tipico: "+c.getString(2)+ "\n"+
-                                "Sabado: "+c.getString(3)+"\n"+
-                                "Presentes: "+c.getString(4)+"\n"+
-                                "Tipo: "+c.getString(5)+"\n"+
-                                "Ingresos: "+c.getString(6)+"\n"+
-                                "Encuesta: "+c.getString(7)+"\n"+
-                                "Vivienda: "+c.getString(8), Toast.LENGTH_LONG).show();
-            }while (c.moveToNext());
-        }
-        db.close();*/
 
         idHogar = getIntent().getStringExtra("idHogar");
-        //Toast.makeText(this, "Id Hogar: "+idHogar, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Id Hogar: "+idHogar, Toast.LENGTH_SHORT).show();
+        zatVivienda = getIntent().getStringExtra("zatVivienda");
+        numeroEncuesta = getIntent().getStringExtra("nroEncuesta");
+
+
+        spinnerTipoVehiculo.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if (spinnerTipoVehiculo.getSelectedItem().toString().equals("NO TIENE VEHÍCULO"))
+                {
+                    spinnerModeloVehiculo.setEnabled(false);
+                    txtLugarMatricula.setEnabled(false);
+                    spinnerSitioEstacionamiento.setEnabled(false);
+                    txtKilometro.setEnabled(false);
+                }
+                else
+                {
+                    spinnerModeloVehiculo.setEnabled(true);
+                    txtLugarMatricula.setEnabled(true);
+                    spinnerSitioEstacionamiento.setEnabled(true);
+                    txtKilometro.setEnabled(true);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
 
 
     }
@@ -114,29 +128,41 @@ public class InformacionMediosTransporteActivity extends ActionBarActivity {
         lugarMatricula = txtLugarMatricula.getText().toString();
         sitioEstacionamiento = spinnerSitioEstacionamiento.getSelectedItem().toString();
 
+        if (tipoVehiculo.equals("NO TIENE VEHÍCULO"))
+        {
+            modeloVehiculo = "NA";
+            lugarMatricula = "NA";
+            sitioEstacionamiento = "NA";
+            kmUltimoA = "NA";
+        }
+
         DBAdapter db = new DBAdapter(this);
         db.open();
         long id = db.insertMediosTransporte(tipoVehiculo, modeloVehiculo, kmUltimoA, lugarMatricula, sitioEstacionamiento, idHogar);
+        db.close();
 
+        /*db.open();
         Cursor c = db.getAllMediosTransporte();
         if (c.moveToFirst())
         {
             do{
-                /*Toast.makeText(this,
+                Toast.makeText(this,
                         "id: " + c.getString(0) + "\n" +
                                 "Tipo vehículo: " + c.getString(1) + "\n" +
                                 "Km: " + c.getString(2) + "\n" +
                                 "Lugar MAtricula: " + c.getString(3) + "\n" +
                                 "Sitio estacionamiento: " + c.getString(4)+"\n"+
-                        "Id hogar: "+c.getString(5), Toast.LENGTH_LONG).show();*/
+                        "Id hogar: "+c.getString(5), Toast.LENGTH_LONG).show();
             }while (c.moveToNext());
         }
-
-        db.close();
+        db.close();*/
 
 
         Intent intent = new Intent(this,InformacionPersonaActivity. class);
         intent.putExtra("idHogar", idHogar);
+        intent.putExtra("zatVivienda", zatVivienda);
+        intent.putExtra("nroEncuesta", numeroEncuesta);
+        intent.putExtra("codigoOrden", codigoOrden);
         startActivity(intent);
         finish();
     }
@@ -153,8 +179,11 @@ public class InformacionMediosTransporteActivity extends ActionBarActivity {
         db.open();
         long id = db.insertMediosTransporte(tipoVehiculo, modeloVehiculo, kmUltimoA, lugarMatricula, sitioEstacionamiento, idHogar);
         db.close();
+
         Intent intent = new Intent(this,InformacionMediosTransporteActivity. class);
         intent.putExtra("idHogar", idHogar);
+        intent.putExtra("nroEncuesta", numeroEncuesta);
+        intent.putExtra("codigoOrden", codigoOrden);
         startActivity(intent);
         finish();
     }

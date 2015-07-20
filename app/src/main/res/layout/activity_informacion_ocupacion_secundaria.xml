@@ -83,7 +83,7 @@
     <TableRow>
         <TextView
             style="@style/Subtitulos2"
-            android:text="Dirección de la actividad principal"
+            android:text="Dirección de la actividad secundaria"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingBottom="10dp"

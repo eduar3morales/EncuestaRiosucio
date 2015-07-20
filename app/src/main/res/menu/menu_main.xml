@@ -5,4 +5,27 @@
         android:orderInCategory="100" app:showAsAction="never" />
     <item android:id="@+id/actin_exit" android:title="@string/action_exit"
         android:orderInCategory="100" app:showAsAction="never" />
+
+    <item android:id="@+id/action_encuesta" android:title="Verificar encuestas"
+        android:orderInCategory="100" app:showAsAction="never"/>
+    <item android:id="@+id/action_vivienda" android:title="Verificar viviendas"
+        android:orderInCategory="100" app:showAsAction="never"/>
+    <item android:id="@+id/action_hogar" android:title="Verificar hogares"
+        android:orderInCategory="100" app:showAsAction="never" />
+    <item android:id="@+id/action_medio_transporte" android:title="Verificar medios de transporte"
+        android:orderInCategory="100" app:showAsAction="never" />
+    <item android:id="@+id/action_persona" android:title="Verificar personas"
+        android:orderInCategory="100" app:showAsAction="never"/>
+    <item android:id="@+id/action_ocupacion" android:title="Verificar ocupaciones"
+        android:orderInCategory="100" app:showAsAction="never"/>
+    <item android:id="@+id/action_discapacidad" android:title="Verificar discapacidades"
+        android:orderInCategory="100" app:showAsAction="never"/>
+    <item android:id="@+id/action_viaje" android:title="Verificar viajes"
+        android:orderInCategory="100" app:showAsAction="never"/>
+    <item android:id="@+id/action_herramienta_apoyo" android:title="Verificar herramientas de apoyo"
+        android:orderInCategory="100" app:showAsAction="never" />
+    <item android:id="@+id/action_transporte_dificil_acceso" android:title="Verificar medios de transporte de dificil acceso"
+        android:orderInCategory="100" app:showAsAction="never" />
+    <item android:id="@+id/action_frecuencia_viaje" android:title="Verificar frecuencia de viaje"
+        android:orderInCategory="100" app:showAsAction="never" />
 </menu>

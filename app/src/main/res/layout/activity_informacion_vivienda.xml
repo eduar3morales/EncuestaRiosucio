@@ -70,7 +70,7 @@
     <TableRow>
         <TextView
             style="@style/Subtitulos"
-            android:text="Celular"
+            android:text="Celular jefe de hogar"
             android:textStyle="bold"
             android:layout_width="160dp"/>
         <TextView
@@ -99,7 +99,7 @@
             android:id="@+id/txtCelular"
             android:layout_width="160dp"
             android:layout_height="wrap_content"
-            android:hint="Celular"
+            android:hint="Celular..."
             android:inputType="number"
             android:digits="0123456789"/>
         <TextView

@@ -32,8 +32,12 @@ public class InformacionPersonaActivity extends ActionBarActivity {
     String ultimoNivelEstudio;
     String usoRedCicloRuta;
 
-    String idHogar;
+    String idHogar; //Valor proveniente del Intent
     String idPersona;
+    String zatVivienda;
+    String numeroEncuesta;
+    String cdOrden;
+
 
     private List<String> listaCodigoDeOrden= new ArrayList<String>();
     private List<String> listaEdad= new ArrayList<String>();
@@ -94,7 +98,15 @@ public class InformacionPersonaActivity extends ActionBarActivity {
         spinnerUsoCicloruta.setAdapter(adaptadorUsoCicloruta);
 
         idHogar = getIntent().getStringExtra("idHogar");
-        //Toast.makeText(this, "Id hogar: "+idHogar, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Id hogar: "+idHogar, Toast.LENGTH_SHORT).show();
+        zatVivienda = getIntent().getStringExtra("zatVivienda");
+        numeroEncuesta = getIntent().getStringExtra("nroEncuesta");
+        cdOrden = getIntent().getStringExtra("codigoOrden");
+
+        Toast.makeText(this, "Codigo Orden: "+cdOrden, Toast.LENGTH_SHORT).show();
+        spinnerCodigoDeOrden.setSelection(Integer.parseInt(cdOrden));
+
+
 
     }
 
@@ -116,6 +128,9 @@ public class InformacionPersonaActivity extends ActionBarActivity {
             DBAdapter db = new DBAdapter(this);
             db.open();
             long id = db.insertPersona(codigoOrden, nombre, edad, genero, ultimoNivelEstudio, usoRedCicloRuta, idHogar);
+            db.close();
+
+            db.open();
             Cursor c = db.getAllPersonas();
             if(c.moveToFirst())
             {
@@ -127,6 +142,11 @@ public class InformacionPersonaActivity extends ActionBarActivity {
 
             Intent intent = new Intent(this,InformacionOcupacionPrincipalActivity. class);
             intent.putExtra("idPersona", idPersona);
+            intent.putExtra("edad", edad);
+            intent.putExtra("zatVivienda", zatVivienda);
+            intent.putExtra("nroEncuesta", numeroEncuesta);
+            intent.putExtra("idHogar", idHogar);
+            intent.putExtra("codigoOrden", cdOrden);
             startActivity(intent);
 
             finish();
@@ -155,7 +175,24 @@ public class InformacionPersonaActivity extends ActionBarActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            return true;
+            //return true;
+            //return true;
+            DBAdapter db = new DBAdapter(getBaseContext());
+            db.open();
+            Cursor mCursor = db.getAllRestriccion();
+            db.getAllRestriccion();
+            if(mCursor.moveToFirst())
+            {
+                do{
+                    Toast.makeText(this,
+                            "id: " +mCursor.getString(0)+ "\n"+
+                                    "Tabla: " +mCursor.getString(1)+ "\n"+
+                                    "Descripción: "+mCursor.getString(2)+ "\n"+
+                                    "Referencia persona: "+mCursor.getString(3)+"\n"+
+                                    "Número encuesta: "+mCursor.getString(4), Toast.LENGTH_LONG).show();
+                }while (mCursor.moveToNext());
+            }
+            db.close();
         }
 
         return super.onOptionsItemSelected(item);

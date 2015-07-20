@@ -1,6 +1,7 @@
 package com.example.roxed.encuestariosucio;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -10,6 +11,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.CheckedTextView;
+import android.widget.CompoundButton;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -43,7 +45,15 @@ public class InformacionDiscapacidadActivity extends ActionBarActivity {
     //String[] mediosTransporteDificilAcceso;
     List<String> herramientaApoyo = new ArrayList<String>();
     List <String> medioTransporteDificilAcceso = new ArrayList<String>();
-    String idPersona;
+
+    String idPersona;//Valor proveniente del Intent
+    String zatVivienda;
+    String numeroEncuesta;
+    String idHogar;
+    String cdOrden;
+
+    boolean somethingCheckedModos = false;
+    boolean somethingCheckedHerramientas = false;
 
     private List<String> listaTipoDiscapacidad = new ArrayList<String>();
     private List<String> listaDuracionDiscapacidad = new ArrayList<String>();
@@ -101,11 +111,12 @@ public class InformacionDiscapacidadActivity extends ActionBarActivity {
         spinnerTipoDiscapacidad.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                if (adapterView.getItemAtPosition(i).toString().equals("NINGUNA"))
-                {
+                if (adapterView.getItemAtPosition(i).toString().equals("NINGUNA")) {
                     spinnerDuracionDiscapacidad.setEnabled(false);
                     checkBoxNinguno.setChecked(true);
                     checkBoxNingunos.setChecked(true);
+                    somethingCheckedModos = true;
+                    somethingCheckedHerramientas = true;
 
                     checkBoxNinguno.setEnabled(false);
                     checkBoxNingunos.setEnabled(false);
@@ -121,12 +132,12 @@ public class InformacionDiscapacidadActivity extends ActionBarActivity {
                     checkBoxCaminador.setEnabled(false);
                     checkBoxOtros.setEnabled(false);
                     Toast.makeText(getBaseContext(), "En este caso la duración de la discapacidad no aplica", Toast.LENGTH_SHORT).show();
-                }
-                else
-                {
+                } else {
                     spinnerDuracionDiscapacidad.setEnabled(true);
                     checkBoxNinguno.setChecked(false);
                     checkBoxNingunos.setChecked(false);
+                    somethingCheckedModos = false;
+                    somethingCheckedHerramientas = false;
 
                     checkBoxNinguno.setEnabled(true);
                     checkBoxNingunos.setEnabled(true);
@@ -152,9 +163,198 @@ public class InformacionDiscapacidadActivity extends ActionBarActivity {
             }
         });
 
+        checkBoxBicicleta.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                if (isChecked) {
+                    somethingCheckedModos = true;
+                } else {
+                    somethingCheckedModos = false;
+                }
+            }
+        });
+
+        checkBoxTaxi.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                if (isChecked) {
+                    somethingCheckedModos = true;
+                } else {
+                    somethingCheckedModos = false;
+                }
+            }
+        });
+        checkBoxBus.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                if (isChecked) {
+                    somethingCheckedModos = true;
+                } else {
+                    somethingCheckedModos = false;
+                }
+            }
+        });
+        checkBoxAutomovil.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                if (isChecked) {
+                    somethingCheckedModos = true;
+                } else {
+                    somethingCheckedModos = false;
+                }
+            }
+        });
+        checkBoxMoto.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                if (isChecked) {
+                    somethingCheckedModos = true;
+                } else {
+                    somethingCheckedModos = false;
+                }
+            }
+        });
+        checkBoxOtro.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                if (isChecked) {
+                    somethingCheckedModos = true;
+                } else {
+                    somethingCheckedModos = false;
+                }
+            }
+        });
+
+        checkBoxNingunos.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                if (isChecked)
+                {
+                    somethingCheckedModos = true;
+                    checkBoxBicicleta.setEnabled(false);
+                    checkBoxTaxi.setEnabled(false);
+                    checkBoxBus.setEnabled(false);
+                    checkBoxAutomovil.setEnabled(false);
+                    checkBoxMoto.setEnabled(false);
+                    checkBoxOtro.setEnabled(false);
+
+                    checkBoxBicicleta.setChecked(false);
+                    checkBoxTaxi.setChecked(false);
+                    checkBoxBus.setChecked(false);
+                    checkBoxAutomovil.setChecked(false);
+                    checkBoxMoto.setChecked(false);
+                    checkBoxOtro.setChecked(false);
+                }
+                else
+                {
+                    somethingCheckedModos = false;
+                    checkBoxBicicleta.setEnabled(true);
+                    checkBoxTaxi.setEnabled(true);
+                    checkBoxBus.setEnabled(true);
+                    checkBoxAutomovil.setEnabled(true);
+                    checkBoxMoto.setEnabled(true);
+                    checkBoxOtro.setEnabled(true);
+
+                }
+
+            }
+        });
+
+
+        checkBoxSillaRuedas.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                if (isChecked) {
+                    somethingCheckedHerramientas = true;
+                } else {
+                    somethingCheckedHerramientas = false;
+                }
+            }
+        });
+        checkBoxMuleta.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                if (isChecked) {
+                    somethingCheckedHerramientas = true;
+                } else {
+                    somethingCheckedHerramientas = false;
+                }
+            }
+        });
+        checkBoxBaston.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                if (isChecked) {
+                    somethingCheckedHerramientas = true;
+                } else {
+                    somethingCheckedHerramientas = false;
+                }
+            }
+        });
+        checkBoxCaminador.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                if (isChecked) {
+                    somethingCheckedHerramientas = true;
+                } else {
+                    somethingCheckedHerramientas = false;
+                }
+            }
+        });
+        checkBoxOtros.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                if (isChecked) {
+                    somethingCheckedHerramientas = true;
+                } else {
+                    somethingCheckedHerramientas = false;
+                }
+            }
+        });
+
+        checkBoxNinguno.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                if (isChecked)
+                {
+                    somethingCheckedHerramientas = true;
+                    checkBoxSillaRuedas.setEnabled(false);
+                    checkBoxMuleta.setEnabled(false);
+                    checkBoxBaston.setEnabled(false);
+                    checkBoxCaminador.setEnabled(false);
+                    checkBoxOtros.setEnabled(false);
+
+                    checkBoxSillaRuedas.setChecked(false);
+                    checkBoxMuleta.setChecked(false);
+                    checkBoxBaston.setChecked(false);
+                    checkBoxBaston.setChecked(false);
+                    checkBoxCaminador.setChecked(false);
+                    checkBoxOtros.setChecked(false);
+                }
+                else
+                {
+                    somethingCheckedHerramientas = false;
+                    checkBoxSillaRuedas.setEnabled(true);
+                    checkBoxMuleta.setEnabled(true);
+                    checkBoxBaston.setEnabled(true);
+                    checkBoxCaminador.setEnabled(true);
+                    checkBoxOtros.setEnabled(true);
+                }
+            }
+        });
+
 
         idPersona = getIntent().getStringExtra("idPersona");
-        //Toast.makeText(this, idPersona, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Id persona: "+idPersona, Toast.LENGTH_SHORT).show();
+
+        zatVivienda = getIntent().getStringExtra("zatVivienda");
+
+        numeroEncuesta = getIntent().getStringExtra("nroEncuesta");
+
+        idHogar = getIntent().getStringExtra("idHogar");
+
+        cdOrden = getIntent().getStringExtra("codigoOrden");
+        Toast.makeText(this, "Codigo orden: "+cdOrden, Toast.LENGTH_SHORT).show();
 
 
 
@@ -165,56 +365,149 @@ public class InformacionDiscapacidadActivity extends ActionBarActivity {
         tipoDiscapacidad = spinnerTipoDiscapacidad.getSelectedItem().toString();
         duracionDiscapacidad = spinnerDuracionDiscapacidad.getSelectedItem().toString();
         if (checkBoxBicicleta.isChecked())
+        {
             medioTransporteDificilAcceso.add("BICICLETA");
+        }
 
         if (checkBoxTaxi.isChecked())
+        {
             medioTransporteDificilAcceso.add("TAXI");
+        }
 
         if (checkBoxBus.isChecked())
+        {
             medioTransporteDificilAcceso.add("BUS");
+        }
+
 
         if (checkBoxAutomovil.isChecked())
+        {
             medioTransporteDificilAcceso.add("AUTOMOVIL");
+        }
+
 
         if (checkBoxMoto.isChecked())
+        {
             medioTransporteDificilAcceso.add("MOTO");
+        }
 
         if (checkBoxOtro.isChecked())
+        {
             medioTransporteDificilAcceso.add("OTROS");
+        }
+
+        if (checkBoxNingunos.isChecked())
+        {
+            medioTransporteDificilAcceso.add("NINGUNO");
+        }
 
         if (checkBoxSillaRuedas.isChecked())
+        {
             herramientaApoyo.add("SILLA DE RUEDAS");
+        }
 
         if (checkBoxMuleta.isChecked())
+        {
             herramientaApoyo.add("MULETA");
+        }
 
         if (checkBoxBaston.isChecked())
+        {
             herramientaApoyo.add("BASTON");
+        }
 
         if (checkBoxCaminador.isChecked())
+        {
             herramientaApoyo.add("CAMINADOR");
+        }
 
         if (checkBoxOtros.isChecked())
+        {
             herramientaApoyo.add("OTROS");
+        }
+
+        if(checkBoxNinguno.isChecked())
+        {
+            herramientaApoyo.add("NINGUNA");
+        }
+
+        if (!(tipoDiscapacidad.equals("NINGUNA")))
+        {
+            if ((!somethingCheckedModos) || (!somethingCheckedHerramientas))
+            {
+                Toast.makeText(getBaseContext(), "Por favor complete todos los campos", Toast.LENGTH_SHORT).show();
+            }
+            else
+            {
+                duracionDiscapacidad = "NA";
+                DBAdapter db = new DBAdapter(this);
+                db.open();
+                long id = db.insertDiscapacidad(tipoDiscapacidad, duracionDiscapacidad, idPersona);
+                db.close();
+
+                db.open();
+                for (int i=0; i<herramientaApoyo.size(); i++)
+                {
+                    id = db.insertHerramientaApoyo(herramientaApoyo.get(i), idPersona);
+                }
+                db.close();
+
+                db.open();
+                for (int i=0; i<medioTransporteDificilAcceso.size(); i++)
+                {
+                    id = db.insertModoTransporteDificilAcceso(medioTransporteDificilAcceso.get(i), idPersona);
+                }
+                db.close();
 
 
-        DBAdapter db = new DBAdapter(this);
-        db.open();
-        long id = db.insertDiscapacidad(tipoDiscapacidad, duracionDiscapacidad, idPersona);
+                Intent intent = new Intent(this, InformacionOcupacionSecundariaActivity.class);
+                intent.putExtra("idPersona", idPersona);
+                intent.putExtra("zatVivienda", zatVivienda);
+                intent.putExtra("nroEncuesta", numeroEncuesta);
+                intent.putExtra("idHogar", idHogar);
+                intent.putExtra("codigoOrden", cdOrden);
+                startActivity(intent);
+                finish();
+            }
 
-        for (int i=0; i<herramientaApoyo.size(); i++)
-            id = db.insertHerramientaApoyo(herramientaApoyo.get(i), idPersona);
+        }
+        else
+        {
 
-        for (int i=0; i<medioTransporteDificilAcceso.size(); i++)
-            id = db.insertModoTransporteDificilAcceso(medioTransporteDificilAcceso.get(i), idPersona);
+                DBAdapter db = new DBAdapter(this);
+                db.open();
+                long id = db.insertDiscapacidad(tipoDiscapacidad, duracionDiscapacidad, idPersona);
+                db.close();
 
-        db.close();
+                db.open();
+                for (int i=0; i<herramientaApoyo.size(); i++)
+                {
+                    id = db.insertHerramientaApoyo(herramientaApoyo.get(i), idPersona);
+                }
+                db.close();
 
-        Intent intent = new Intent(this, InformacionOcupacionSecundariaActivity.class);
-        //intent.putExtra("idPersona", idPersona);
-        startActivity(intent);
+                db.open();
+                for (int i=0; i<medioTransporteDificilAcceso.size(); i++)
+                {
+                    id = db.insertModoTransporteDificilAcceso(medioTransporteDificilAcceso.get(i), idPersona);
+                }
+                db.close();
 
-        finish();
+
+                Intent intent = new Intent(this, InformacionOcupacionSecundariaActivity.class);
+                intent.putExtra("idPersona", idPersona);
+                intent.putExtra("zatVivienda", zatVivienda);
+                intent.putExtra("nroEncuesta", numeroEncuesta);
+                intent.putExtra("idHogar", idHogar);
+                intent.putExtra("codigoOrden", cdOrden);
+                startActivity(intent);
+                finish();
+
+        }
+
+
+
+
     }
 
     @Override
@@ -238,7 +531,24 @@ public class InformacionDiscapacidadActivity extends ActionBarActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            return true;
+            //return true;
+            //return true;
+            DBAdapter db = new DBAdapter(getBaseContext());
+            db.open();
+            Cursor mCursor = db.getAllRestriccion();
+            db.getAllRestriccion();
+            if(mCursor.moveToFirst())
+            {
+                do{
+                    Toast.makeText(this,
+                            "id: " +mCursor.getString(0)+ "\n"+
+                                    "Tabla: " +mCursor.getString(1)+ "\n"+
+                                    "Descripción: "+mCursor.getString(2)+ "\n"+
+                                    "Referencia persona: "+mCursor.getString(3)+"\n"+
+                                    "Número encuesta: "+mCursor.getString(4), Toast.LENGTH_LONG).show();
+                }while (mCursor.moveToNext());
+            }
+            db.close();
         }
 
         return super.onOptionsItemSelected(item);
