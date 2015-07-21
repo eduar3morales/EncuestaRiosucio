@@ -156,8 +156,8 @@ public class InformacionHogarActivity extends ActionBarActivity {
 
         numeroEncuesta = getIntent().getStringExtra("numeroEncuesta");
         idVivienda = getIntent().getStringExtra("idVivienda");
-        Toast.makeText(this, "Nro Encuesta: "+numeroEncuesta+"/"+"Id Vivienda: "+idVivienda, Toast.LENGTH_SHORT).show();
         zatVivienda = getIntent().getStringExtra("zatVivienda");
+        Toast.makeText(this, "Nro Encuesta: "+numeroEncuesta+"/"+"Id Vivienda: "+idVivienda, Toast.LENGTH_SHORT).show();
 
     }
 

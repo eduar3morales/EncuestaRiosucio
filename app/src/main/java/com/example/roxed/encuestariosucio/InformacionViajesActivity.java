@@ -151,7 +151,7 @@ public class InformacionViajesActivity extends ActionBarActivity {
         adaptadorModoViaje.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerModoDeViaje.setAdapter(adaptadorModoViaje);
 
-        idPersona = getIntent().getStringExtra("idPersona");
+
 
         checkBoxLunesAViernes.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
             @Override
@@ -201,8 +201,6 @@ public class InformacionViajesActivity extends ActionBarActivity {
 
 
 
-
-
         idPersona = getIntent().getStringExtra("idPersona");
         Toast.makeText(this, "Id persona: "+ idPersona, Toast.LENGTH_SHORT).show();
         //Toast.makeText(this, "Id Persona: "+ idPersona+ " Numero Viaje: " +nroViaje, Toast.LENGTH_SHORT).show();
@@ -217,8 +215,10 @@ public class InformacionViajesActivity extends ActionBarActivity {
         Toast.makeText(this, "Codigo orden: "+cdOrden, Toast.LENGTH_SHORT).show();
 
         nViaje = getIntent().getStringExtra("numeroViaje");
+        Toast.makeText(this, "Numero viaje: "+nViaje, Toast.LENGTH_SHORT).show();
 
-        int numeroViaje = (1+ Integer.parseInt(nViaje));
+        int numeroViaje = (Integer.parseInt(nViaje));
+        numeroViaje ++;
 
         nViaje = ""+numeroViaje;
 

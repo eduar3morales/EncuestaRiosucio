@@ -100,24 +100,15 @@ public class InformacionMediosTransporteActivity extends ActionBarActivity {
         spinnerSitioEstacionamiento.setAdapter(adaptadorSitioEstacionamiento);
 
 
-        idHogar = getIntent().getStringExtra("idHogar");
-        Toast.makeText(this, "Id Hogar: "+idHogar, Toast.LENGTH_SHORT).show();
-        zatVivienda = getIntent().getStringExtra("zatVivienda");
-        numeroEncuesta = getIntent().getStringExtra("nroEncuesta");
-
-
         spinnerTipoVehiculo.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                if (spinnerTipoVehiculo.getSelectedItem().toString().equals("NO TIENE VEHÍCULO"))
-                {
+                if (spinnerTipoVehiculo.getSelectedItem().toString().equals("NO TIENE VEHÍCULO")) {
                     spinnerModeloVehiculo.setEnabled(false);
                     txtLugarMatricula.setEnabled(false);
                     spinnerSitioEstacionamiento.setEnabled(false);
                     txtKilometro.setEnabled(false);
-                }
-                else
-                {
+                } else {
                     spinnerModeloVehiculo.setEnabled(true);
                     txtLugarMatricula.setEnabled(true);
                     spinnerSitioEstacionamiento.setEnabled(true);
@@ -131,7 +122,10 @@ public class InformacionMediosTransporteActivity extends ActionBarActivity {
             }
         });
 
-
+        idHogar = getIntent().getStringExtra("idHogar");
+        Toast.makeText(this, "Id Hogar: "+idHogar, Toast.LENGTH_SHORT).show();
+        zatVivienda = getIntent().getStringExtra("zatVivienda");
+        numeroEncuesta = getIntent().getStringExtra("nroEncuesta");
 
     }
 
@@ -199,7 +193,7 @@ public class InformacionMediosTransporteActivity extends ActionBarActivity {
         Intent intent = new Intent(this,InformacionMediosTransporteActivity. class);
         intent.putExtra("idHogar", idHogar);
         intent.putExtra("nroEncuesta", numeroEncuesta);
-        intent.putExtra("codigoOrden", codigoOrden);
+        intent.putExtra("zatVivienda", zatVivienda);
         startActivity(intent);
         finish();
     }

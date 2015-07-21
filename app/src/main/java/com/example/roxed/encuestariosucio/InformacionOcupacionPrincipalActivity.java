@@ -273,8 +273,10 @@ public class InformacionOcupacionPrincipalActivity extends ActionBarActivity {
 
             Intent intent = new Intent(this,InformacionDiscapacidadActivity. class);
             intent.putExtra("idPersona", idPersona);
+            intent.putExtra("zatVivienda", zatVivienda);
             intent.putExtra("nroEncuesta", numeroEncuesta);
             intent.putExtra("codigoOrden", cdOrden);
+            intent.putExtra("idHogar", idHogar);
             startActivity(intent);
 
             finish();

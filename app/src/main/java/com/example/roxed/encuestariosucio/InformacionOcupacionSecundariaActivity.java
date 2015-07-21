@@ -293,10 +293,12 @@ public class InformacionOcupacionSecundariaActivity extends ActionBarActivity {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 Intent intent = new Intent(getBaseContext(), InformacionViajesActivity.class);
+                                intent.putExtra("idPersona", idPersona);
                                 intent.putExtra("zatVivienda", zatVivienda);
                                 intent.putExtra("nroEncuesta", numeroEncuesta);
                                 intent.putExtra("idHogar", idHogar);
                                 intent.putExtra("codigoOrden", cdOrden);
+                                intent.putExtra("numeroViaje", nViaje);
                                 startActivity(intent);
                                 finish();
                             }
@@ -309,6 +311,7 @@ public class InformacionOcupacionSecundariaActivity extends ActionBarActivity {
                                 intent.putExtra("nroEncuesta", numeroEncuesta);
                                 intent.putExtra("idHogar", idHogar);
                                 intent.putExtra("codigoOrden", cdOrden);
+                                //intent.putExtra("numeroViaje", nViaje);
                                 startActivity(intent);
                                 finish();
                             }
@@ -342,10 +345,12 @@ public class InformacionOcupacionSecundariaActivity extends ActionBarActivity {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             Intent intent = new Intent(getBaseContext(), InformacionViajesActivity.class);
+                            intent.putExtra("idPersona", idPersona);
                             intent.putExtra("zatVivienda", zatVivienda);
                             intent.putExtra("nroEncuesta", numeroEncuesta);
                             intent.putExtra("idHogar", idHogar);
                             intent.putExtra("codigoOrden", cdOrden);
+                            intent.putExtra("numeroViaje", nViaje);
                             startActivity(intent);
                             finish();
                         }
