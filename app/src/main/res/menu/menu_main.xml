@@ -28,4 +28,6 @@
         android:orderInCategory="100" app:showAsAction="never" />
     <item android:id="@+id/action_frecuencia_viaje" android:title="Verificar frecuencia de viaje"
         android:orderInCategory="100" app:showAsAction="never" />
+    <item android:id="@+id/action_restriccion" android:title="Verificar restricción"
+        android:orderInCategory="100" app:showAsAction="never" />
 </menu>

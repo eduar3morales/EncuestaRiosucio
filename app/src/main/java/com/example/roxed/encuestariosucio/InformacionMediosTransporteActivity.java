@@ -185,6 +185,14 @@ public class InformacionMediosTransporteActivity extends ActionBarActivity {
         lugarMatricula = txtLugarMatricula.getText().toString();
         sitioEstacionamiento = spinnerSitioEstacionamiento.getSelectedItem().toString();
 
+        if (tipoVehiculo.equals("NO TIENE VEHÍCULO"))
+        {
+            modeloVehiculo = "";
+            lugarMatricula = "";
+            sitioEstacionamiento = "";
+            kmUltimoA = "";
+        }
+
         DBAdapter db = new DBAdapter(this);
         db.open();
         long id = db.insertMediosTransporte(tipoVehiculo, modeloVehiculo, kmUltimoA, lugarMatricula, sitioEstacionamiento, idHogar);

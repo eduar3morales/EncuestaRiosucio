@@ -73,7 +73,7 @@ public class DBAdapter {
                         "direccionActividad text, zatActividad text, tipoOcupacion text not null, personaFk text not null);");
 
                 db.execSQL("CREATE TABLE restriccion (_id_restriccion integer primary key autoincrement, nombreTabla text not null, descripcion text not null, referencia text not null, " +
-                        "encuestaFk)");
+                        "encuestaFk text not null)");
 
             } catch (SQLException e){
                 e.printStackTrace();

@@ -281,6 +281,12 @@ public class MainActivity extends ActionBarActivity {
             startActivity(intent);
         }
 
+        if (id == R.id.action_restriccion)
+        {
+            Intent intent = new Intent(this, ListActivityRestricciones.class);
+            startActivity(intent);
+        }
+
         if (id == R.id.actin_exit)
         {
             MainActivity.this.finish();

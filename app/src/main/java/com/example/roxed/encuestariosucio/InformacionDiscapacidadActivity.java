@@ -439,7 +439,7 @@ public class InformacionDiscapacidadActivity extends ActionBarActivity {
             }
             else
             {
-                duracionDiscapacidad = "";
+
                 DBAdapter db = new DBAdapter(this);
                 db.open();
                 long id = db.insertDiscapacidad(tipoDiscapacidad, duracionDiscapacidad, idPersona);
@@ -474,7 +474,7 @@ public class InformacionDiscapacidadActivity extends ActionBarActivity {
         }
         else
         {
-
+                duracionDiscapacidad = "";
                 DBAdapter db = new DBAdapter(this);
                 db.open();
                 long id = db.insertDiscapacidad(tipoDiscapacidad, duracionDiscapacidad, idPersona);

@@ -101,6 +101,10 @@
             android:name=".ListActivityFrecuenciaViaje"
             android:label="@string/title_activity_list_activity_frecuencia_viaje" >
         </activity>
+        <activity
+            android:name=".ListActivityRestricciones"
+            android:label="@string/title_activity_list_activity_restricciones" >
+        </activity>
     </application>
 
 </manifest>

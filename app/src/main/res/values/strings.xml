@@ -36,4 +36,5 @@
     </string>
     <string name="title_activity_list_activity_frecuencia_viaje">ListActivityFrecuenciaViaje
     </string>
+    <string name="title_activity_list_activity_restricciones">ListActivityRestricciones</string>
 </resources>

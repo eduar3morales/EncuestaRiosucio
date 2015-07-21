@@ -266,6 +266,12 @@ public class InformacionOcupacionPrincipalActivity extends ActionBarActivity {
             direccionActividadPrincipal = txtDireccionActividadPrincipal.getText().toString();
             zatActividadPrincipal = spinnerZatActividadPrincipal.getSelectedItem().toString();
 
+            lugarEstudio = "";
+            sectorTrabajo = "";
+            laborDesempeño = "";
+            direccionActividadPrincipal = "";
+            zatActividadPrincipal = "";
+
             DBAdapter db = new DBAdapter(this);
             db.open();
             long id = db.insertOcupacion(ocupacion, lugarEstudio, sectorTrabajo, laborDesempeño, direccionActividadPrincipal, zatActividadPrincipal, TIPO_OCUPACION, idPersona);

@@ -127,7 +127,7 @@ public class InformacionOcupacionSecundariaActivity extends ActionBarActivity {
         adaptadorZatActividadSecundaria.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerZatActividadSecundaria.setAdapter(adaptadorZatActividadSecundaria);
 
-        idPersona = getIntent().getStringExtra("idPersona");
+
         //Toast.makeText(this, idPersona, Toast.LENGTH_SHORT).show();
 
 
@@ -244,6 +244,12 @@ public class InformacionOcupacionSecundariaActivity extends ActionBarActivity {
             laborDesempeño = spinnerLaborDesempeñaSecundaria.getSelectedItem().toString();
             direccionActividadSecundaria = txtDireccionActividadSecundaria.getText().toString();
             zatActividadSecundaria = spinnerZatActividadSecundaria.getSelectedItem().toString();
+
+            lugarEstudio = "";
+            sectorTrabajo = "";
+            laborDesempeño = "";
+            direccionActividadSecundaria = "";
+            zatActividadSecundaria = "";
 
             DBAdapter db = new DBAdapter(this);
             db.open();
