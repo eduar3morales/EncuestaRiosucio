@@ -69,6 +69,8 @@ public class InformacionViajesActivity extends ActionBarActivity {
     //String[] frecuenciaViaje;
     boolean somethingChecked = false;
     List<String> frecuenciaViaje = new ArrayList<String>();
+    boolean thereMotivo = false;
+    boolean saturday = false;
 
     String idPersona; //Valor proveniente del Intent
     String idViaje;
@@ -78,6 +80,9 @@ public class InformacionViajesActivity extends ActionBarActivity {
     String numeroEncuesta;
     String idHogar;
     String cdOrden;
+    String ocupacion;
+    String tipoVehiculo;
+    String viajeSabado;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -222,6 +227,15 @@ public class InformacionViajesActivity extends ActionBarActivity {
 
         nViaje = ""+numeroViaje;
 
+        ocupacion = getIntent().getStringExtra("ocupacion");
+        Toast.makeText(this, "Ocupacion: "+ocupacion, Toast.LENGTH_SHORT).show();
+
+        tipoVehiculo = getIntent().getStringExtra("vehiculo");
+        Toast.makeText(this, "Tipo vehiculo: "+tipoVehiculo, Toast.LENGTH_SHORT).show();
+
+        viajeSabado = getIntent().getStringExtra("sabado");
+        Toast.makeText(this, "Viaje sabado: "+viajeSabado, Toast.LENGTH_SHORT).show();
+
     }
 
     public void onClickHoraLlegada(View view)
@@ -246,6 +260,7 @@ public class InformacionViajesActivity extends ActionBarActivity {
         {
             frecuenciaViaje.add("LUNES A SABADO");
             somethingChecked = true;
+            saturday = true;
         }
 
         if (checkBoxLunesADomingo.isChecked())
@@ -288,6 +303,7 @@ public class InformacionViajesActivity extends ActionBarActivity {
         {
             frecuenciaViaje.add("SABADO");
             somethingChecked = true;
+            saturday = true;
         }
 
         if (checkBoxDomingo.isChecked())
@@ -312,6 +328,28 @@ public class InformacionViajesActivity extends ActionBarActivity {
             motivoViaje = spinnerMotivoDeViaje.getSelectedItem().toString();
             modoViaje = spinnerModoDeViaje.getSelectedItem().toString();
             zatDestino = spinnerZatDestino.getSelectedItem().toString();
+
+            // --- Restricción ---
+            if (ocupacion.equals("ESTUDIAR"))
+            {
+                if(motivoViaje.equals("ESTUDIO"))
+                {
+                        thereMotivo = true;
+                }
+            }
+            else if (ocupacion.equals("TRABAJAR"))
+            {
+                if (motivoViaje.equals("ESTUDIO"))
+                {
+                    thereMotivo = true;
+                }
+            }
+            else
+            {
+                thereMotivo = false;
+            }
+
+
 
             //boolean is = false;
             DBAdapter db = new DBAdapter(this);
@@ -354,13 +392,35 @@ public class InformacionViajesActivity extends ActionBarActivity {
                 id = db.insertFrecuenciaViaje(frecuenciaViaje.get(i), idViaje);
             db.close();
 
+
+
+            if (viajeSabado.equals("0") && saturday== true)
+            {
+                db.open();
+                id = db.insertRestriccion("VAIJES", "Viajes en el día sabado pero no hay personas que viaje el día sabado", idViaje, numeroEncuesta);
+                db.close();
+            }
+
             //--- Restricción ---
+
+
             if (viajeNumero.equals("1"))
             {
                 if (!(zatOrigen.equals(zatVivienda)));
                 db.open();
                 id = db.insertRestriccion("VIAJES", "ZAT de origen del primer viaje no es Zat de residencia", idViaje, numeroEncuesta );
                 db.close();
+            }
+
+            if (tipoVehiculo.equals("NO TIENE VEHÍCULO"))
+            {
+                if (modoViaje.equals("BICICLETA") || modoViaje.equals("MOTO") || modoViaje.equals("AUTOMOVIL PRIVADO") ||
+                        modoViaje.equals("CAMION"))
+                {
+                    db.open();
+                    id = db.insertRestriccion("VIAJES", "El viaje al parecer se realiza en un vehículo propio, pero el hogar no cuenta con uno", idViaje, numeroEncuesta);
+                    db.close();
+                }
             }
 
             Intent intent = new Intent(this,InformacionViajesActivity. class);
@@ -370,6 +430,9 @@ public class InformacionViajesActivity extends ActionBarActivity {
             intent.putExtra("codigoOrden", cdOrden);
             intent.putExtra("zatVivienda", zatVivienda);
             intent.putExtra("nroEncuesta", numeroEncuesta);
+            intent.putExtra("ocupacion", ocupacion);
+            intent.putExtra("vehiculo", tipoVehiculo);
+            intent.putExtra("sabado", viajeSabado);
             startActivity(intent);
             finish();
         }
@@ -388,6 +451,7 @@ public class InformacionViajesActivity extends ActionBarActivity {
         {
             frecuenciaViaje.add("LUNES A SABADO");
             somethingChecked = true;
+            saturday = true;
         }
 
         if (checkBoxLunesADomingo.isChecked())
@@ -430,6 +494,7 @@ public class InformacionViajesActivity extends ActionBarActivity {
         {
             frecuenciaViaje.add("SABADO");
             somethingChecked = true;
+            saturday = true;
         }
 
         if (checkBoxDomingo.isChecked())
@@ -454,6 +519,26 @@ public class InformacionViajesActivity extends ActionBarActivity {
             motivoViaje = spinnerMotivoDeViaje.getSelectedItem().toString();
             modoViaje = spinnerModoDeViaje.getSelectedItem().toString();
             zatDestino = spinnerZatDestino.getSelectedItem().toString();
+
+            // --- Restricción ---
+            if (ocupacion.equals("ESTUDIAR"))
+            {
+                if(motivoViaje.equals("ESTUDIO"))
+                {
+                    thereMotivo = true;
+                }
+            }
+            else if (ocupacion.equals("TRABAJAR"))
+            {
+                if (motivoViaje.equals("ESTUDIO"))
+                {
+                    thereMotivo = true;
+                }
+            }
+            else
+            {
+                thereMotivo = false;
+            }
 
             //boolean is = false;
             final DBAdapter db = new DBAdapter(this);
@@ -497,6 +582,13 @@ public class InformacionViajesActivity extends ActionBarActivity {
                 id = db.insertFrecuenciaViaje(frecuenciaViaje.get(i), idViaje);
             db.close();
 
+
+            if (viajeSabado.equals("0") && saturday== true)
+            {
+                db.open();
+                id = db.insertRestriccion("VAIJES", "Viajes en el día sabado pero no hay personas que viaje el día sabado", idViaje, numeroEncuesta);
+                db.close();
+            }
             //--- Restricción ---
             if (viajeNumero.equals("1"))
             {
@@ -504,6 +596,17 @@ public class InformacionViajesActivity extends ActionBarActivity {
                 db.open();
                 id = db.insertRestriccion("VIAJES", "ZAT de origen del primer viaje no es Zat de residencia", idViaje, numeroEncuesta );
                 db.close();
+            }
+
+            if (tipoVehiculo.equals("NO TIENE VEHÍCULO"))
+            {
+                if (modoViaje.equals("BICICLETA") || modoViaje.equals("MOTO") || modoViaje.equals("AUTOMOVIL PRIVADO") ||
+                        modoViaje.equals("CAMION"))
+                {
+                    db.open();
+                    id = db.insertRestriccion("VIAJES", "El viaje al parecer se realiza en un vehículo propio, pero el hogar no cuenta con uno", idViaje, numeroEncuesta);
+                    db.close();
+                }
             }
 
             AlertDialog.Builder dialog = new AlertDialog.Builder(this);
@@ -521,7 +624,9 @@ public class InformacionViajesActivity extends ActionBarActivity {
                             intent.putExtra("numeroViaje", nViaje);
                             intent.putExtra("idPersona", idPersona);
                             intent.putExtra("zatVivienda", zatVivienda);
-
+                            intent.putExtra("ocupacion", ocupacion);
+                            intent.putExtra("vehiculo", tipoVehiculo);
+                            intent.putExtra("sabado", viajeSabado);
 
                             startActivity(intent);
                             finish();
@@ -536,6 +641,12 @@ public class InformacionViajesActivity extends ActionBarActivity {
                                 db.close();
                             }
 
+                            if (!thereMotivo) {
+                                db.open();
+                                long idq = db.insertRestriccion("VIAJES", "No hay ningún motivo de viaje relacionado con la ocupación principal", idViaje, numeroEncuesta);
+                                db.close();
+                            }
+
                             if (viajeNumero.equals("1")) {
                                 Toast.makeText(getBaseContext(), "Para finalizar los viajes, la persona debe tener por lo menos dos viajes registrados", Toast.LENGTH_SHORT).show();
                             } else {
@@ -544,7 +655,8 @@ public class InformacionViajesActivity extends ActionBarActivity {
                                 intent.putExtra("nroEncuesta", numeroEncuesta);
                                 intent.putExtra("codigoOrden", cdOrden);
                                 intent.putExtra("zatVivienda", zatVivienda);
-
+                                intent.putExtra("vehiculo", tipoVehiculo);
+                                intent.putExtra("sabado", viajeSabado);
 
                                 startActivity(intent);
                                 finish();
@@ -571,6 +683,7 @@ public class InformacionViajesActivity extends ActionBarActivity {
         {
             frecuenciaViaje.add("LUNES A SABADO");
             somethingChecked = true;
+            saturday = true;
         }
 
         if (checkBoxLunesADomingo.isChecked())
@@ -613,6 +726,7 @@ public class InformacionViajesActivity extends ActionBarActivity {
         {
             frecuenciaViaje.add("SABADO");
             somethingChecked = true;
+            saturday = true;
         }
 
         if (checkBoxDomingo.isChecked())
@@ -638,6 +752,26 @@ public class InformacionViajesActivity extends ActionBarActivity {
             motivoViaje = spinnerMotivoDeViaje.getSelectedItem().toString();
             modoViaje = spinnerModoDeViaje.getSelectedItem().toString();
             zatDestino = spinnerZatDestino.getSelectedItem().toString();
+
+            // --- Restricción ---
+            if (ocupacion.equals("ESTUDIAR"))
+            {
+                if(motivoViaje.equals("ESTUDIO"))
+                {
+                    thereMotivo = true;
+                }
+            }
+            else if (ocupacion.equals("TRABAJAR"))
+            {
+                if (motivoViaje.equals("ESTUDIO"))
+                {
+                    thereMotivo = true;
+                }
+            }
+            else
+            {
+                thereMotivo = false;
+            }
 
             //boolean is = false;
             final DBAdapter db = new DBAdapter(this);
@@ -680,7 +814,25 @@ public class InformacionViajesActivity extends ActionBarActivity {
                 id = db.insertFrecuenciaViaje(frecuenciaViaje.get(i), idViaje);
             db.close();
 
+
+            if (viajeSabado.equals("0") && saturday== true)
+            {
+                db.open();
+                id = db.insertRestriccion("VAIJES", "Viajes en el día sabado pero no hay personas que viaje el día sabado", idViaje, numeroEncuesta);
+                db.close();
+            }
             //--- Restricción ---
+            if (tipoVehiculo.equals("NO TIENE VEHÍCULO"))
+            {
+                if (modoViaje.equals("BICICLETA") || modoViaje.equals("MOTO") || modoViaje.equals("AUTOMOVIL PRIVADO") ||
+                        modoViaje.equals("CAMION"))
+                {
+                    db.open();
+                    id = db.insertRestriccion("VIAJES", "El viaje al parecer se realiza en un vehículo propio, pero el hogar no cuenta con uno", idViaje, numeroEncuesta);
+                    db.close();
+                }
+            }
+
             if (viajeNumero.equals("1"))
             {
                 if (!(zatOrigen.equals(zatVivienda)))
@@ -708,6 +860,13 @@ public class InformacionViajesActivity extends ActionBarActivity {
                                     db.close();
                                 }
 
+                                if (!thereMotivo)
+                                {
+                                    db.open();
+                                    long idq = db.insertRestriccion("VIAJES", "No hay ningún motivo de viaje relacionado con la ocupación principal", idViaje, numeroEncuesta);
+                                    db.close();
+                                }
+
                                 Intent intent = new Intent(getBaseContext(), MainActivity.class);
                                 startActivity(intent);
                                 finish();
@@ -719,6 +878,13 @@ public class InformacionViajesActivity extends ActionBarActivity {
                                 if (!(zatViviendaBd.equals(zatVivienda))) {
                                     db.open();
                                     long idq = db.insertRestriccion("VIAJES", "ZAT de destino último viaje, no es ZAT de residencia", idViaje, numeroEncuesta);
+                                    db.close();
+                                }
+
+                                if (!thereMotivo)
+                                {
+                                    db.open();
+                                    long idq = db.insertRestriccion("VIAJES", "No hay ningún motivo de viaje relacionado con la ocupación principal", idViaje, numeroEncuesta);
                                     db.close();
                                 }
                                 InformacionViajesActivity.this.finish();

@@ -43,6 +43,7 @@ public class InformacionMediosTransporteActivity extends ActionBarActivity {
     String zatVivienda;
     String numeroEncuesta;
     String codigoOrden = "0";
+    String viajeSabado;
 
 
     @Override
@@ -51,8 +52,8 @@ public class InformacionMediosTransporteActivity extends ActionBarActivity {
         setContentView(R.layout.activity_informacion_medios_transporte);
 
         AlertDialog.Builder dialog = new AlertDialog.Builder(this);
-        dialog.setMessage("Es necesario agregar todos lo vehículos pertenecientes hogar, solo cuando este seguro de ésto, coontinue" +
-                "con las siguientes preguntas")
+        dialog.setMessage("Es necesario agregar todos lo vehículos pertenecientes hogar, solo cuando este seguro de ésto, continue" +
+                " con las siguientes preguntas")
                 .setTitle("Recuerde!")
                 .setCancelable(true)
                 .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
@@ -126,6 +127,8 @@ public class InformacionMediosTransporteActivity extends ActionBarActivity {
         Toast.makeText(this, "Id Hogar: "+idHogar, Toast.LENGTH_SHORT).show();
         zatVivienda = getIntent().getStringExtra("zatVivienda");
         numeroEncuesta = getIntent().getStringExtra("nroEncuesta");
+        viajeSabado = getIntent().getStringExtra("sabado");
+        Toast.makeText(this, "Viaje sabado: "+viajeSabado, Toast.LENGTH_SHORT).show();
 
     }
 
@@ -173,6 +176,8 @@ public class InformacionMediosTransporteActivity extends ActionBarActivity {
         intent.putExtra("zatVivienda", zatVivienda);
         intent.putExtra("nroEncuesta", numeroEncuesta);
         intent.putExtra("codigoOrden", codigoOrden);
+        intent.putExtra("vehiculo", tipoVehiculo);
+        intent.putExtra("sabado", viajeSabado);
         startActivity(intent);
         finish();
     }
@@ -202,6 +207,7 @@ public class InformacionMediosTransporteActivity extends ActionBarActivity {
         intent.putExtra("idHogar", idHogar);
         intent.putExtra("nroEncuesta", numeroEncuesta);
         intent.putExtra("zatVivienda", zatVivienda);
+        intent.putExtra("sabado", viajeSabado);
         startActivity(intent);
         finish();
     }

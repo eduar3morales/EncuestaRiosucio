@@ -215,6 +215,7 @@ public class InformacionHogarActivity extends ActionBarActivity {
                             intent.putExtra("idHogar", idHogar);
                             intent.putExtra("zatVivienda", zatVivienda);
                             intent.putExtra("nroEncuesta", numeroEncuesta);
+                            intent.putExtra("sabado", cantidadPersonasViajanDiaSabado);
                             startActivity(intent);
                             finish();
                         }

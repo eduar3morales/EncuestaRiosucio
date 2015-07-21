@@ -51,6 +51,9 @@ public class InformacionDiscapacidadActivity extends ActionBarActivity {
     String numeroEncuesta;
     String idHogar;
     String cdOrden;
+    String ocupacion;
+    String tipoVehiculo;
+    String viajeSabado;
 
     boolean somethingCheckedModos = false;
     boolean somethingCheckedHerramientas = false;
@@ -356,7 +359,12 @@ public class InformacionDiscapacidadActivity extends ActionBarActivity {
         cdOrden = getIntent().getStringExtra("codigoOrden");
         Toast.makeText(this, "Codigo orden: "+cdOrden, Toast.LENGTH_SHORT).show();
 
+        ocupacion = getIntent().getStringExtra("ocupacion");
 
+        tipoVehiculo = getIntent().getStringExtra("vehiculo");
+
+        viajeSabado = getIntent().getStringExtra("sabado");
+        Toast.makeText(this, "Viaje sabado: "+viajeSabado, Toast.LENGTH_SHORT).show();
 
     }
 
@@ -467,6 +475,9 @@ public class InformacionDiscapacidadActivity extends ActionBarActivity {
                 intent.putExtra("nroEncuesta", numeroEncuesta);
                 intent.putExtra("idHogar", idHogar);
                 intent.putExtra("codigoOrden", cdOrden);
+                intent.putExtra("ocupacion", ocupacion);
+                intent.putExtra("vehiculo", tipoVehiculo);
+                intent.putExtra("sabado", viajeSabado);
                 startActivity(intent);
                 finish();
             }
@@ -503,6 +514,9 @@ public class InformacionDiscapacidadActivity extends ActionBarActivity {
                 intent.putExtra("nroEncuesta", numeroEncuesta);
                 intent.putExtra("idHogar", idHogar);
                 intent.putExtra("codigoOrden", cdOrden);
+                intent.putExtra("ocupacion", ocupacion);
+                intent.putExtra("vehiculo", tipoVehiculo);
+                intent.putExtra("sabado", viajeSabado);
                 startActivity(intent);
                 finish();
 

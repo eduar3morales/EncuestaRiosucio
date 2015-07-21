@@ -41,6 +41,8 @@ public class InformacionOcupacionPrincipalActivity extends ActionBarActivity {
     String numeroEncuesta;
     String idHogar;
     String cdOrden;
+    String tipoVehiculo;
+    String viajeSabado;
     static final String TIPO_OCUPACION = "Principal";
 
     private List<String> listaOcupacionPrincipal= new ArrayList<String>();
@@ -182,7 +184,10 @@ public class InformacionOcupacionPrincipalActivity extends ActionBarActivity {
 
         Toast.makeText(this, "Codigo orden: "+cdOrden, Toast.LENGTH_SHORT).show();
 
+        tipoVehiculo = getIntent().getStringExtra("vehiculo");
 
+        viajeSabado = getIntent().getStringExtra("sabado");
+        Toast.makeText(this, "Viaje sabado: "+viajeSabado, Toast.LENGTH_SHORT).show();
 
 
 
@@ -250,6 +255,9 @@ public class InformacionOcupacionPrincipalActivity extends ActionBarActivity {
                 intent.putExtra("nroEncuesta", numeroEncuesta);
                 intent.putExtra("idHogar", idHogar);
                 intent.putExtra("codigoOrden", cdOrden);
+                intent.putExtra("ocupacion", ocupacion);
+                intent.putExtra("vehiculo", tipoVehiculo);
+                intent.putExtra("sabado", viajeSabado);
 
                 startActivity(intent);
 
@@ -283,6 +291,9 @@ public class InformacionOcupacionPrincipalActivity extends ActionBarActivity {
             intent.putExtra("nroEncuesta", numeroEncuesta);
             intent.putExtra("codigoOrden", cdOrden);
             intent.putExtra("idHogar", idHogar);
+            intent.putExtra("ocupacion", ocupacion);
+            intent.putExtra("vehiculo", tipoVehiculo);
+            intent.putExtra("sabado", viajeSabado);
             startActivity(intent);
 
             finish();

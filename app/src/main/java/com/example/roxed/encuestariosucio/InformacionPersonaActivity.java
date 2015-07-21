@@ -37,6 +37,8 @@ public class InformacionPersonaActivity extends ActionBarActivity {
     String zatVivienda;
     String numeroEncuesta;
     String cdOrden;
+    String tipoVehiculo;
+    String viajeSabado;
 
 
     private List<String> listaCodigoDeOrden= new ArrayList<String>();
@@ -106,6 +108,11 @@ public class InformacionPersonaActivity extends ActionBarActivity {
         Toast.makeText(this, "Codigo Orden: "+cdOrden, Toast.LENGTH_SHORT).show();
         spinnerCodigoDeOrden.setSelection(Integer.parseInt(cdOrden));
 
+        tipoVehiculo = getIntent().getStringExtra("vehiculo");
+
+        viajeSabado = getIntent().getStringExtra("sabado");
+        Toast.makeText(this, "Viaje sabado: "+viajeSabado, Toast.LENGTH_SHORT).show();
+
 
 
     }
@@ -147,6 +154,8 @@ public class InformacionPersonaActivity extends ActionBarActivity {
             intent.putExtra("nroEncuesta", numeroEncuesta);
             intent.putExtra("idHogar", idHogar);
             intent.putExtra("codigoOrden", cdOrden);
+            intent.putExtra("vehiculo", tipoVehiculo);
+            intent.putExtra("sabado", viajeSabado);
             startActivity(intent);
 
             finish();
