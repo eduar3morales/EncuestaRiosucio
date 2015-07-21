@@ -44,6 +44,7 @@ public class InformacionOcupacionSecundariaActivity extends ActionBarActivity {
     String numeroEncuesta;
     String idHogar;
     String cdOrden;
+    String nViaje = "0";
     static final String TIPO_OCUPACION = "Secundaria";
 
 
@@ -202,21 +203,21 @@ public class InformacionOcupacionSecundariaActivity extends ActionBarActivity {
 
                 if (ocupacion.equals("ESTUDIAR"))
                 {
-                    sectorTrabajo = "NA";
-                    laborDesempeño = "NA";
+                    sectorTrabajo = "";
+                    laborDesempeño = "";
                 }
                 else if (ocupacion.equals("TRABAJAR"))
                 {
-                    lugarEstudio = "NA";
+                    lugarEstudio = "";
 
                 }
                 else
                 {
-                    lugarEstudio = "NA";
-                    sectorTrabajo = "NA";
-                    laborDesempeño = "NA";
-                    direccionActividadSecundaria = "NA";
-                    zatActividadSecundaria = "NA";
+                    lugarEstudio = "";
+                    sectorTrabajo = "";
+                    laborDesempeño = "";
+                    direccionActividadSecundaria = "";
+                    zatActividadSecundaria = "";
                 }
 
                 DBAdapter db = new DBAdapter(this);
@@ -230,7 +231,7 @@ public class InformacionOcupacionSecundariaActivity extends ActionBarActivity {
                 intent.putExtra("nroEncuesta", numeroEncuesta);
                 intent.putExtra("idHogar", idHogar);
                 intent.putExtra("codigoOrden", cdOrden);
-                //intent.putExtra("numeroViaje", numeroViaje);
+                intent.putExtra("numeroViaje", nViaje);
                 startActivity(intent);
                 finish();
             }
@@ -255,7 +256,7 @@ public class InformacionOcupacionSecundariaActivity extends ActionBarActivity {
             intent.putExtra("nroEncuesta", numeroEncuesta);
             intent.putExtra("idHogar", idHogar);
             intent.putExtra("codigoOrden", cdOrden);
-            //intent.putExtra("numeroViaje", numeroViaje);
+            intent.putExtra("numeroViaje", nViaje);
             startActivity(intent);
             finish();
         }

@@ -364,6 +364,7 @@ public class InformacionDiscapacidadActivity extends ActionBarActivity {
     {
         tipoDiscapacidad = spinnerTipoDiscapacidad.getSelectedItem().toString();
         duracionDiscapacidad = spinnerDuracionDiscapacidad.getSelectedItem().toString();
+
         if (checkBoxBicicleta.isChecked())
         {
             medioTransporteDificilAcceso.add("BICICLETA");
@@ -379,12 +380,10 @@ public class InformacionDiscapacidadActivity extends ActionBarActivity {
             medioTransporteDificilAcceso.add("BUS");
         }
 
-
         if (checkBoxAutomovil.isChecked())
         {
             medioTransporteDificilAcceso.add("AUTOMOVIL");
         }
-
 
         if (checkBoxMoto.isChecked())
         {
@@ -431,6 +430,7 @@ public class InformacionDiscapacidadActivity extends ActionBarActivity {
             herramientaApoyo.add("NINGUNA");
         }
 
+
         if (!(tipoDiscapacidad.equals("NINGUNA")))
         {
             if ((!somethingCheckedModos) || (!somethingCheckedHerramientas))
@@ -439,12 +439,13 @@ public class InformacionDiscapacidadActivity extends ActionBarActivity {
             }
             else
             {
-                duracionDiscapacidad = "NA";
+                duracionDiscapacidad = "";
                 DBAdapter db = new DBAdapter(this);
                 db.open();
                 long id = db.insertDiscapacidad(tipoDiscapacidad, duracionDiscapacidad, idPersona);
                 db.close();
 
+                Toast.makeText(getBaseContext(), "Estoy en el primer else"+herramientaApoyo.size()+"/"+medioTransporteDificilAcceso.size(), Toast.LENGTH_SHORT).show();
                 db.open();
                 for (int i=0; i<herramientaApoyo.size(); i++)
                 {
@@ -478,6 +479,8 @@ public class InformacionDiscapacidadActivity extends ActionBarActivity {
                 db.open();
                 long id = db.insertDiscapacidad(tipoDiscapacidad, duracionDiscapacidad, idPersona);
                 db.close();
+
+                Toast.makeText(getBaseContext(), "Estoy en el último else"+herramientaApoyo.size()+"/"+medioTransporteDificilAcceso.size(), Toast.LENGTH_SHORT).show();
 
                 db.open();
                 for (int i=0; i<herramientaApoyo.size(); i++)

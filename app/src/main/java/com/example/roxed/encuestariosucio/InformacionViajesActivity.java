@@ -71,10 +71,8 @@ public class InformacionViajesActivity extends ActionBarActivity {
     List<String> frecuenciaViaje = new ArrayList<String>();
 
     String idPersona; //Valor proveniente del Intent
-    String numeroViaje;
-    int nroViaje;
     String idViaje;
-    int nViaje;
+    String nViaje;
     String zatVivienda;
     String zatViviendaBd;
     String numeroEncuesta;
@@ -154,7 +152,6 @@ public class InformacionViajesActivity extends ActionBarActivity {
         spinnerModoDeViaje.setAdapter(adaptadorModoViaje);
 
         idPersona = getIntent().getStringExtra("idPersona");
-        numeroViaje = "1";//getIntent().getStringExtra("numeroViaje");
 
         checkBoxLunesAViernes.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
             @Override
@@ -218,6 +215,12 @@ public class InformacionViajesActivity extends ActionBarActivity {
 
         cdOrden = getIntent().getStringExtra("codigoOrden");
         Toast.makeText(this, "Codigo orden: "+cdOrden, Toast.LENGTH_SHORT).show();
+
+        nViaje = getIntent().getStringExtra("numeroViaje");
+
+        int numeroViaje = (1+ Integer.parseInt(nViaje));
+
+        nViaje = ""+numeroViaje;
 
     }
 
@@ -300,7 +303,7 @@ public class InformacionViajesActivity extends ActionBarActivity {
         }
         else
         {
-            viajeNumero = Integer.toString(nroViaje);
+            viajeNumero = nViaje;
             lugarOrigen = txtLugarOrigen.getText().toString();
             lugarDestino = txtLugarDestino.getText().toString();
             zatOrigen = spinnerZatOrigen.getSelectedItem().toString();
@@ -329,11 +332,8 @@ public class InformacionViajesActivity extends ActionBarActivity {
                 }
             }*/
 
-
-
-
             db.open();
-            long id = db.insertViaje(numeroViaje, lugarOrigen, zatOrigen, horaSalida, lugarDestino, zatDestino, horaLlegada, motivoViaje, modoViaje, idPersona);
+            long id = db.insertViaje(viajeNumero, lugarOrigen, zatOrigen, horaSalida, lugarDestino, zatDestino, horaLlegada, motivoViaje, modoViaje, idPersona);
             db.close();
 
             db.open();
@@ -353,7 +353,7 @@ public class InformacionViajesActivity extends ActionBarActivity {
             db.close();
 
             Intent intent = new Intent(this,InformacionViajesActivity. class);
-            //intent.putExtra("nroViaje", numeroViaje);
+            intent.putExtra("numeroViaje", nViaje);
             intent.putExtra("idPersona", idPersona);
             intent.putExtra("idHogar", idHogar);
             intent.putExtra("codigoOrden", cdOrden);
@@ -432,7 +432,7 @@ public class InformacionViajesActivity extends ActionBarActivity {
         }
         else
         {
-            viajeNumero = Integer.toString(nroViaje);
+            viajeNumero = nViaje;
             lugarOrigen = txtLugarOrigen.getText().toString();
             lugarDestino = txtLugarDestino.getText().toString();
             zatOrigen = spinnerZatOrigen.getSelectedItem().toString();
@@ -464,7 +464,7 @@ public class InformacionViajesActivity extends ActionBarActivity {
 
 
             db.open();
-            long id = db.insertViaje(numeroViaje, lugarOrigen, zatOrigen, horaSalida, lugarDestino, zatDestino, horaLlegada, motivoViaje, modoViaje, idPersona);
+            long id = db.insertViaje(viajeNumero, lugarOrigen, zatOrigen, horaSalida, lugarDestino, zatDestino, horaLlegada, motivoViaje, modoViaje, idPersona);
             db.close();
 
             db.open();
@@ -502,6 +502,10 @@ public class InformacionViajesActivity extends ActionBarActivity {
                             intent.putExtra("idHogar", idHogar);
                             intent.putExtra("nroEncuesta", numeroEncuesta);
                             intent.putExtra("codigoOrden", cdOrden);
+                            intent.putExtra("numeroViaje", nViaje);
+                            intent.putExtra("idPersona", idPersona);
+
+
                             startActivity(intent);
                             finish();
                         }
@@ -593,7 +597,7 @@ public class InformacionViajesActivity extends ActionBarActivity {
         }
         else
         {
-            viajeNumero = "1";//Integer.toString(nroViaje);
+            viajeNumero = nViaje;
             lugarOrigen = txtLugarOrigen.getText().toString();
             lugarDestino = txtLugarDestino.getText().toString();
             zatOrigen = spinnerZatOrigen.getSelectedItem().toString();
@@ -624,7 +628,7 @@ public class InformacionViajesActivity extends ActionBarActivity {
 
 
             db.open();
-            long id = db.insertViaje(numeroViaje, lugarOrigen, zatOrigen, horaSalida, lugarDestino, zatDestino, horaLlegada, motivoViaje, modoViaje, idPersona);
+            long id = db.insertViaje(viajeNumero, lugarOrigen, zatOrigen, horaSalida, lugarDestino, zatDestino, horaLlegada, motivoViaje, modoViaje, idPersona);
             db.close();
 
             db.open();

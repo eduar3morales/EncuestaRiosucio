@@ -207,20 +207,20 @@ public class InformacionOcupacionPrincipalActivity extends ActionBarActivity {
 
                 if (ocupacion.equals("ESTUDIAR"))
                 {
-                    sectorTrabajo = "NA";
-                    laborDesempeño = "NA";
+                    sectorTrabajo = "";
+                    laborDesempeño = "";
                 }
                 else if (ocupacion.equals("TRABAJAR"))
                 {
-                    lugarEstudio = "NA";
+                    lugarEstudio = "";
                 }
                 else
                 {
-                    lugarEstudio = "NA";
-                    sectorTrabajo = "NA";
-                    laborDesempeño = "NA";
-                    direccionActividadPrincipal = "NA";
-                    zatActividadPrincipal = "NA";
+                    lugarEstudio = "";
+                    sectorTrabajo = "";
+                    laborDesempeño = "";
+                    direccionActividadPrincipal = "";
+                    zatActividadPrincipal = "";
                 }
 
                 DBAdapter db = new DBAdapter(this);

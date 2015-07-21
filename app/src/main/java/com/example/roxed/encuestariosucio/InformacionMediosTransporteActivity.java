@@ -1,5 +1,7 @@
 package com.example.roxed.encuestariosucio;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.support.v7.app.ActionBarActivity;
@@ -47,6 +49,19 @@ public class InformacionMediosTransporteActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_informacion_medios_transporte);
+
+        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+        dialog.setMessage("Es necesario agregar todos lo vehículos pertenecientes hogar, solo cuando este seguro de ésto, coontinue" +
+                "con las siguientes preguntas")
+                .setTitle("Recuerde!")
+                .setCancelable(true)
+                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+        dialog.show();
 
 
         spinnerTipoVehiculo = (Spinner) findViewById(R.id.spinnerTipoVehiculo);
@@ -122,6 +137,7 @@ public class InformacionMediosTransporteActivity extends ActionBarActivity {
 
     public void onClickContinuarMediosTransporte(View view) {
 
+
         tipoVehiculo = spinnerTipoVehiculo.getSelectedItem().toString();
         modeloVehiculo = spinnerModeloVehiculo.getSelectedItem().toString();
         kmUltimoA = txtKilometro.getText().toString();
@@ -130,10 +146,10 @@ public class InformacionMediosTransporteActivity extends ActionBarActivity {
 
         if (tipoVehiculo.equals("NO TIENE VEHÍCULO"))
         {
-            modeloVehiculo = "NA";
-            lugarMatricula = "NA";
-            sitioEstacionamiento = "NA";
-            kmUltimoA = "NA";
+            modeloVehiculo = "";
+            lugarMatricula = "";
+            sitioEstacionamiento = "";
+            kmUltimoA = "";
         }
 
         DBAdapter db = new DBAdapter(this);
