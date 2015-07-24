@@ -95,6 +95,17 @@ public class MainActivity extends ActionBarActivity {
         mes = fechaActual.get(Calendar.MONTH);
         dia = fechaActual.get(Calendar.DAY_OF_MONTH);
 
+        DBAdapter dataB = new DBAdapter(this);
+        dataB.open();
+        Cursor cur = dataB.getAllEncuestas();
+        if (cur.moveToFirst())
+        {
+            do{
+                encuestadorTxt.setText(cur.getString(2));
+            }while (cur.moveToNext());
+        }
+        db.close();
+
 
 
     }
@@ -158,7 +169,7 @@ public class MainActivity extends ActionBarActivity {
             mes = monthOfYear;
             dia = dayOfMonth;
             Toast.makeText(getBaseContext(), "Fecha seleccionada: " + dia + "/"+ (mes + 1) + "/" + año, Toast.LENGTH_SHORT ).show();
-            txtHFechaEncuesta.setText("FECHA: " + año + " / " + (mes + 1) + " / " + dia);
+            //txtHFechaEncuesta.setText("FECHA: " + año + " / " + (mes + 1) + " / " + dia);
         }
     };
 
@@ -172,7 +183,7 @@ public class MainActivity extends ActionBarActivity {
             SimpleDateFormat timeFormat = new SimpleDateFormat("kk:mm:ss"); //Como poner este formato de 24 horas?????
             Date date = new Date();
             String strDate = timeFormat.format(date);
-            Toast.makeText(getBaseContext(), "Hora seleccionada "+ strDate, Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getBaseContext(), "Hora seleccionada "+ strDate, Toast.LENGTH_SHORT).show();
 
             //HORA MOSTRATA EN PANTALLA
             txtHoraEncuesta.setText(Horas(hora,minuto));

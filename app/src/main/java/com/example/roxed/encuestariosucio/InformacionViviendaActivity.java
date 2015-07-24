@@ -93,7 +93,7 @@ public class InformacionViviendaActivity extends ActionBarActivity {
 
 
         numeroEncuesta = getIntent().getStringExtra("numeroEncuesta");
-        Toast.makeText(this, "Numero encuesta: "+numeroEncuesta, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "Numero encuesta: "+numeroEncuesta, Toast.LENGTH_SHORT).show();
 
         /*DBAdapter db = new DBAdapter(this);
         db.open();

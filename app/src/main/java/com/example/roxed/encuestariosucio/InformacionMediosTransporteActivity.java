@@ -128,7 +128,7 @@ public class InformacionMediosTransporteActivity extends ActionBarActivity {
         zatVivienda = getIntent().getStringExtra("zatVivienda");
         numeroEncuesta = getIntent().getStringExtra("nroEncuesta");
         viajeSabado = getIntent().getStringExtra("sabado");
-        Toast.makeText(this, "Viaje sabado: "+viajeSabado, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "Viaje sabado: "+viajeSabado, Toast.LENGTH_SHORT).show();
 
     }
 
@@ -154,23 +154,6 @@ public class InformacionMediosTransporteActivity extends ActionBarActivity {
         long id = db.insertMediosTransporte(tipoVehiculo, modeloVehiculo, kmUltimoA, lugarMatricula, sitioEstacionamiento, idHogar);
         db.close();
 
-        /*db.open();
-        Cursor c = db.getAllMediosTransporte();
-        if (c.moveToFirst())
-        {
-            do{
-                Toast.makeText(this,
-                        "id: " + c.getString(0) + "\n" +
-                                "Tipo vehículo: " + c.getString(1) + "\n" +
-                                "Km: " + c.getString(2) + "\n" +
-                                "Lugar MAtricula: " + c.getString(3) + "\n" +
-                                "Sitio estacionamiento: " + c.getString(4)+"\n"+
-                        "Id hogar: "+c.getString(5), Toast.LENGTH_LONG).show();
-            }while (c.moveToNext());
-        }
-        db.close();*/
-
-
         Intent intent = new Intent(this,InformacionPersonaActivity. class);
         intent.putExtra("idHogar", idHogar);
         intent.putExtra("zatVivienda", zatVivienda);
@@ -181,6 +164,7 @@ public class InformacionMediosTransporteActivity extends ActionBarActivity {
         startActivity(intent);
         finish();
     }
+
 
     public void onClickContinuarAgregarMedioTransporte(View view){
 
@@ -196,20 +180,31 @@ public class InformacionMediosTransporteActivity extends ActionBarActivity {
             lugarMatricula = "";
             sitioEstacionamiento = "";
             kmUltimoA = "";
+
+            /*DBAdapter db = new DBAdapter(this);
+            db.open();
+            long id = db.insertMediosTransporte(tipoVehiculo, modeloVehiculo, kmUltimoA, lugarMatricula, sitioEstacionamiento, idHogar);
+            db.close();*/
+
+            Toast.makeText(this, "Esta opción no esta disponible si no se tiene vehículo, por favor presione el botón continuar", Toast.LENGTH_LONG).show();
+        }
+        else
+        {
+            DBAdapter db = new DBAdapter(this);
+            db.open();
+            long id = db.insertMediosTransporte(tipoVehiculo, modeloVehiculo, kmUltimoA, lugarMatricula, sitioEstacionamiento, idHogar);
+            db.close();
+
+            Intent intent = new Intent(this,InformacionMediosTransporteActivity. class);
+            intent.putExtra("idHogar", idHogar);
+            intent.putExtra("nroEncuesta", numeroEncuesta);
+            intent.putExtra("zatVivienda", zatVivienda);
+            intent.putExtra("sabado", viajeSabado);
+            startActivity(intent);
+            finish();
         }
 
-        DBAdapter db = new DBAdapter(this);
-        db.open();
-        long id = db.insertMediosTransporte(tipoVehiculo, modeloVehiculo, kmUltimoA, lugarMatricula, sitioEstacionamiento, idHogar);
-        db.close();
 
-        Intent intent = new Intent(this,InformacionMediosTransporteActivity. class);
-        intent.putExtra("idHogar", idHogar);
-        intent.putExtra("nroEncuesta", numeroEncuesta);
-        intent.putExtra("zatVivienda", zatVivienda);
-        intent.putExtra("sabado", viajeSabado);
-        startActivity(intent);
-        finish();
     }
 
 

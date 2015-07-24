@@ -124,7 +124,7 @@ public class InformacionOcupacionPrincipalActivity extends ActionBarActivity {
         spinnerZatActividadPrincipal.setAdapter(adaptadorZatActividadPrincipal);
 
 
-        idPersona = getIntent().getStringExtra("idPersona");
+        //idPersona = getIntent().getStringExtra("idPersona");
         //Toast.makeText(this, idPersona, Toast.LENGTH_SHORT).show();
 
 
@@ -168,10 +168,8 @@ public class InformacionOcupacionPrincipalActivity extends ActionBarActivity {
         });
 
         idPersona = getIntent().getStringExtra("idPersona");
-        Toast.makeText(this, "Id Persona: "+idPersona, Toast.LENGTH_SHORT).show();
 
         edad = getIntent().getStringExtra("edad");
-        Toast.makeText(this, "Edad: "+edad, Toast.LENGTH_SHORT).show();
 
         zatVivienda = getIntent().getStringExtra("zatVivienda");
 
@@ -182,16 +180,16 @@ public class InformacionOcupacionPrincipalActivity extends ActionBarActivity {
         cdOrden = getIntent().getStringExtra("codigoOrden");
         cdOrden = ""+(Integer.parseInt(cdOrden) + 1);
 
-        Toast.makeText(this, "Codigo orden: "+cdOrden, Toast.LENGTH_SHORT).show();
-
         tipoVehiculo = getIntent().getStringExtra("vehiculo");
 
         viajeSabado = getIntent().getStringExtra("sabado");
+        Toast.makeText(this, "Id Persona: "+idPersona, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Edad: "+edad, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Codigo orden: "+cdOrden, Toast.LENGTH_SHORT).show();
         Toast.makeText(this, "Viaje sabado: "+viajeSabado, Toast.LENGTH_SHORT).show();
 
-
-
     }
+
 
     public void onClickContinuarInformacionDiscapacidad(View view) {
         if (txtDireccionActividadPrincipal.isEnabled())

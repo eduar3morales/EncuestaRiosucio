@@ -348,7 +348,6 @@ public class InformacionDiscapacidadActivity extends ActionBarActivity {
 
 
         idPersona = getIntent().getStringExtra("idPersona");
-        Toast.makeText(this, "Id persona: "+idPersona, Toast.LENGTH_SHORT).show();
 
         zatVivienda = getIntent().getStringExtra("zatVivienda");
 
@@ -357,13 +356,14 @@ public class InformacionDiscapacidadActivity extends ActionBarActivity {
         idHogar = getIntent().getStringExtra("idHogar");
 
         cdOrden = getIntent().getStringExtra("codigoOrden");
-        Toast.makeText(this, "Codigo orden: "+cdOrden, Toast.LENGTH_SHORT).show();
 
         ocupacion = getIntent().getStringExtra("ocupacion");
 
         tipoVehiculo = getIntent().getStringExtra("vehiculo");
 
         viajeSabado = getIntent().getStringExtra("sabado");
+        Toast.makeText(this, "Id persona: "+idPersona, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Codigo orden: "+cdOrden, Toast.LENGTH_SHORT).show();
         Toast.makeText(this, "Viaje sabado: "+viajeSabado, Toast.LENGTH_SHORT).show();
 
     }
@@ -447,13 +447,12 @@ public class InformacionDiscapacidadActivity extends ActionBarActivity {
             }
             else
             {
-
                 DBAdapter db = new DBAdapter(this);
                 db.open();
                 long id = db.insertDiscapacidad(tipoDiscapacidad, duracionDiscapacidad, idPersona);
                 db.close();
 
-                Toast.makeText(getBaseContext(), "Estoy en el primer else"+herramientaApoyo.size()+"/"+medioTransporteDificilAcceso.size(), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getBaseContext(), "Estoy en el primer else"+herramientaApoyo.size()+"/"+medioTransporteDificilAcceso.size(), Toast.LENGTH_SHORT).show();
                 db.open();
                 for (int i=0; i<herramientaApoyo.size(); i++)
                 {
@@ -491,8 +490,7 @@ public class InformacionDiscapacidadActivity extends ActionBarActivity {
                 long id = db.insertDiscapacidad(tipoDiscapacidad, duracionDiscapacidad, idPersona);
                 db.close();
 
-                Toast.makeText(getBaseContext(), "Estoy en el último else"+herramientaApoyo.size()+"/"+medioTransporteDificilAcceso.size(), Toast.LENGTH_SHORT).show();
-
+                //Toast.makeText(getBaseContext(), "Estoy en el último else"+herramientaApoyo.size()+"/"+medioTransporteDificilAcceso.size(), Toast.LENGTH_SHORT).show();
                 db.open();
                 for (int i=0; i<herramientaApoyo.size(); i++)
                 {

@@ -48,6 +48,7 @@ public class InformacionOcupacionSecundariaActivity extends ActionBarActivity {
     String ocupacionP;
     String tipoVehiculo;
     String viajeSabado;
+    String hayMotivoViaje = "No";
     static final String TIPO_OCUPACION = "Secundaria";
 
 
@@ -222,14 +223,7 @@ public class InformacionOcupacionSecundariaActivity extends ActionBarActivity {
                     lugarEstudio = "";
 
                 }
-                else
-                {
-                    lugarEstudio = "";
-                    sectorTrabajo = "";
-                    laborDesempeño = "";
-                    direccionActividadSecundaria = "";
-                    zatActividadSecundaria = "";
-                }
+
 
                 DBAdapter db = new DBAdapter(this);
                 db.open();
@@ -246,6 +240,7 @@ public class InformacionOcupacionSecundariaActivity extends ActionBarActivity {
                 intent.putExtra("ocupacion", ocupacionP);
                 intent.putExtra("vehiculo", tipoVehiculo);
                 intent.putExtra("sabado", viajeSabado);
+                intent.putExtra("hayMotivoViaje", hayMotivoViaje);
                 startActivity(intent);
                 finish();
             }
@@ -259,11 +254,15 @@ public class InformacionOcupacionSecundariaActivity extends ActionBarActivity {
             direccionActividadSecundaria = txtDireccionActividadSecundaria.getText().toString();
             zatActividadSecundaria = spinnerZatActividadSecundaria.getSelectedItem().toString();
 
-            lugarEstudio = "";
-            sectorTrabajo = "";
-            laborDesempeño = "";
-            direccionActividadSecundaria = "";
-            zatActividadSecundaria = "";
+            if (ocupacion.equals("NINGUNA"))
+            {
+                lugarEstudio = "";
+                sectorTrabajo = "";
+                laborDesempeño = "";
+                direccionActividadSecundaria = "";
+                zatActividadSecundaria = "";
+            }
+
 
             DBAdapter db = new DBAdapter(this);
             db.open();
@@ -280,6 +279,7 @@ public class InformacionOcupacionSecundariaActivity extends ActionBarActivity {
             intent.putExtra("ocupacion", ocupacionP);
             intent.putExtra("vehiculo", tipoVehiculo);
             intent.putExtra("sabado", viajeSabado);
+            intent.putExtra("hayMotivoViaje", hayMotivoViaje);
             startActivity(intent);
             finish();
         }
@@ -301,6 +301,17 @@ public class InformacionOcupacionSecundariaActivity extends ActionBarActivity {
                 //lugarTrabajo = spinnerLugarTrabajoSecundaria.getSelectedItem().toString();
                 direccionActividadSecundaria = txtDireccionActividadSecundaria.getText().toString();
                 zatActividadSecundaria = spinnerZatActividadSecundaria.getSelectedItem().toString();
+
+                if (ocupacion.equals("ESTUDIAR"))
+                {
+                    sectorTrabajo = "";
+                    laborDesempeño = "";
+                }
+                else if (ocupacion.equals("TRABAJAR"))
+                {
+                    lugarEstudio = "";
+
+                }
 
                 DBAdapter db = new DBAdapter(this);
                 db.open();
@@ -325,6 +336,7 @@ public class InformacionOcupacionSecundariaActivity extends ActionBarActivity {
                                 intent.putExtra("ocupacion", ocupacionP);
                                 intent.putExtra("vehiculo", tipoVehiculo);
                                 intent.putExtra("sabado", viajeSabado);
+                                intent.putExtra("hayMotivoViaje", hayMotivoViaje);
                                 startActivity(intent);
                                 finish();
                             }
@@ -355,9 +367,14 @@ public class InformacionOcupacionSecundariaActivity extends ActionBarActivity {
             lugarEstudio = spinnerLugarEstudioSecundaria.getSelectedItem().toString();
             sectorTrabajo = spinnerSectorTrabajoSecundaria.getSelectedItem().toString();
             laborDesempeño = spinnerLaborDesempeñaSecundaria.getSelectedItem().toString();
-            //lugarTrabajo = spinnerLugarTrabajoSecundaria.getSelectedItem().toString();
             direccionActividadSecundaria = txtDireccionActividadSecundaria.getText().toString();
             zatActividadSecundaria = spinnerZatActividadSecundaria.getSelectedItem().toString();
+
+            lugarEstudio = "";
+            sectorTrabajo = "";
+            laborDesempeño = "";
+            direccionActividadSecundaria = "";
+            zatActividadSecundaria = "";
 
             DBAdapter db = new DBAdapter(this);
             db.open();
@@ -382,6 +399,7 @@ public class InformacionOcupacionSecundariaActivity extends ActionBarActivity {
                             intent.putExtra("ocupacion", ocupacionP);
                             intent.putExtra("vehiculo", tipoVehiculo);
                             intent.putExtra("sabado", viajeSabado);
+                            intent.putExtra("hayMotivoViaje", hayMotivoViaje);
                             startActivity(intent);
                             finish();
                         }
@@ -419,6 +437,17 @@ public class InformacionOcupacionSecundariaActivity extends ActionBarActivity {
                 laborDesempeño = spinnerLaborDesempeñaSecundaria.getSelectedItem().toString();
                 direccionActividadSecundaria = txtDireccionActividadSecundaria.getText().toString();
                 zatActividadSecundaria = spinnerZatActividadSecundaria.getSelectedItem().toString();
+
+                if (ocupacion.equals("ESTUDIAR"))
+                {
+                    sectorTrabajo = "";
+                    laborDesempeño = "";
+                }
+                else if (ocupacion.equals("TRABAJAR"))
+                {
+                    lugarEstudio = "";
+
+                }
 
                 DBAdapter db = new DBAdapter(this);
                 db.open();
@@ -459,6 +488,12 @@ public class InformacionOcupacionSecundariaActivity extends ActionBarActivity {
             //lugarTrabajo = spinnerLugarTrabajoSecundaria.getSelectedItem().toString();
             direccionActividadSecundaria = txtDireccionActividadSecundaria.getText().toString();
             zatActividadSecundaria = spinnerZatActividadSecundaria.getSelectedItem().toString();
+
+            lugarEstudio = "";
+            sectorTrabajo = "";
+            laborDesempeño = "";
+            direccionActividadSecundaria = "";
+            zatActividadSecundaria = "";
 
             DBAdapter db = new DBAdapter(this);
             db.open();

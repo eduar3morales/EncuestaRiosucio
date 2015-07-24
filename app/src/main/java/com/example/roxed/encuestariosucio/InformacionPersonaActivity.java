@@ -100,18 +100,21 @@ public class InformacionPersonaActivity extends ActionBarActivity {
         spinnerUsoCicloruta.setAdapter(adaptadorUsoCicloruta);
 
         idHogar = getIntent().getStringExtra("idHogar");
-        Toast.makeText(this, "Id hogar: "+idHogar, Toast.LENGTH_SHORT).show();
+
         zatVivienda = getIntent().getStringExtra("zatVivienda");
+
         numeroEncuesta = getIntent().getStringExtra("nroEncuesta");
+
         cdOrden = getIntent().getStringExtra("codigoOrden");
 
-        Toast.makeText(this, "Codigo Orden: "+cdOrden, Toast.LENGTH_SHORT).show();
         spinnerCodigoDeOrden.setSelection(Integer.parseInt(cdOrden));
 
         tipoVehiculo = getIntent().getStringExtra("vehiculo");
 
         viajeSabado = getIntent().getStringExtra("sabado");
-        Toast.makeText(this, "Viaje sabado: "+viajeSabado, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "Id hogar: "+idHogar, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "Codigo Orden: "+cdOrden, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "Viaje sabado: "+viajeSabado, Toast.LENGTH_SHORT).show();
 
 
 
