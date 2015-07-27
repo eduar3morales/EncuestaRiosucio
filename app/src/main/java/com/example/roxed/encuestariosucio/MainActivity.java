@@ -168,8 +168,8 @@ public class MainActivity extends ActionBarActivity {
             año = year;
             mes = monthOfYear;
             dia = dayOfMonth;
-            Toast.makeText(getBaseContext(), "Fecha seleccionada: " + dia + "/"+ (mes + 1) + "/" + año, Toast.LENGTH_SHORT ).show();
-            //txtHFechaEncuesta.setText("FECHA: " + año + " / " + (mes + 1) + " / " + dia);
+            //Toast.makeText(getBaseContext(), "Fecha seleccionada: " + dia + "/"+ (mes + 1) + "/" + año, Toast.LENGTH_SHORT ).show();
+            txtHFechaEncuesta.setText("FECHA: " + año + " / " + (mes + 1) + " / " + dia);
         }
     };
 
@@ -195,10 +195,10 @@ public class MainActivity extends ActionBarActivity {
     private String Horas(int hora, int minuto){
 
         if(minuto<10){
-            return "HORA:  "+hora+" : 0"+minuto;
+            return "HORA: "+hora+":0"+minuto;
         }
 
-        return "HORA  "+hora+" : "+minuto;
+        return "HORA  "+hora+":"+minuto;
 
     }
 

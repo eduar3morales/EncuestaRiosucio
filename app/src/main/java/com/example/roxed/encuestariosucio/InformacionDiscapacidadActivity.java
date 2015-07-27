@@ -54,6 +54,7 @@ public class InformacionDiscapacidadActivity extends ActionBarActivity {
     String ocupacion;
     String tipoVehiculo;
     String viajeSabado;
+    String zatActividad;
 
     boolean somethingCheckedModos = false;
     boolean somethingCheckedHerramientas = false;
@@ -362,6 +363,8 @@ public class InformacionDiscapacidadActivity extends ActionBarActivity {
         tipoVehiculo = getIntent().getStringExtra("vehiculo");
 
         viajeSabado = getIntent().getStringExtra("sabado");
+
+        zatActividad = getIntent().getStringExtra("zatActividad");
         Toast.makeText(this, "Id persona: "+idPersona, Toast.LENGTH_SHORT).show();
         Toast.makeText(this, "Codigo orden: "+cdOrden, Toast.LENGTH_SHORT).show();
         Toast.makeText(this, "Viaje sabado: "+viajeSabado, Toast.LENGTH_SHORT).show();
@@ -477,6 +480,7 @@ public class InformacionDiscapacidadActivity extends ActionBarActivity {
                 intent.putExtra("ocupacion", ocupacion);
                 intent.putExtra("vehiculo", tipoVehiculo);
                 intent.putExtra("sabado", viajeSabado);
+                intent.putExtra("zatActividad", zatActividad);
                 startActivity(intent);
                 finish();
             }
@@ -515,6 +519,7 @@ public class InformacionDiscapacidadActivity extends ActionBarActivity {
                 intent.putExtra("ocupacion", ocupacion);
                 intent.putExtra("vehiculo", tipoVehiculo);
                 intent.putExtra("sabado", viajeSabado);
+                intent.putExtra("zatActividad", zatActividad);
                 startActivity(intent);
                 finish();
 

@@ -52,7 +52,7 @@ public class InformacionMediosTransporteActivity extends ActionBarActivity {
         setContentView(R.layout.activity_informacion_medios_transporte);
 
         AlertDialog.Builder dialog = new AlertDialog.Builder(this);
-        dialog.setMessage("Es necesario agregar todos lo vehículos pertenecientes hogar, solo cuando este seguro de ésto, continue" +
+        dialog.setMessage("Es necesario agregar todos lo vehículos pertenecientes al hogar, solo cuando este seguro de ésto, continue" +
                 " con las siguientes preguntas")
                 .setTitle("Recuerde!")
                 .setCancelable(true)
@@ -200,6 +200,7 @@ public class InformacionMediosTransporteActivity extends ActionBarActivity {
             intent.putExtra("nroEncuesta", numeroEncuesta);
             intent.putExtra("zatVivienda", zatVivienda);
             intent.putExtra("sabado", viajeSabado);
+
             startActivity(intent);
             finish();
         }

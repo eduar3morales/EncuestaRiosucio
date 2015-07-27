@@ -174,7 +174,7 @@ public class InformacionHogarActivity extends ActionBarActivity {
         {
             AlertDialog.Builder dialog = new AlertDialog.Builder(this);
             dialog.setMessage("Recuerde revisar todos los datos y estar seguro antes de continuar con la encuesta. ¿Qué desea hacer?")
-                    .setCancelable(true)
+                    .setCancelable(false)
                     .setTitle("Recordatorio")
                     .setPositiveButton("Revisar datos", new DialogInterface.OnClickListener() {
                         @Override
@@ -254,6 +254,7 @@ public class InformacionHogarActivity extends ActionBarActivity {
             intent.putExtra("idHogar", idHogar);
             intent.putExtra("zatVivienda", zatVivienda);
             intent.putExtra("nroEncuesta", numeroEncuesta);
+            intent.putExtra("sabado", cantidadPersonasViajanDiaSabado);
             startActivity(intent);
             finish();
         }

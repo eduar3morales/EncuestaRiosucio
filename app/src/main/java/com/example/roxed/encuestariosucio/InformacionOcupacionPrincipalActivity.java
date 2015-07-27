@@ -256,6 +256,7 @@ public class InformacionOcupacionPrincipalActivity extends ActionBarActivity {
                 intent.putExtra("ocupacion", ocupacion);
                 intent.putExtra("vehiculo", tipoVehiculo);
                 intent.putExtra("sabado", viajeSabado);
+                intent.putExtra("zatActividad", zatActividadPrincipal);
 
                 startActivity(intent);
 
@@ -292,6 +293,7 @@ public class InformacionOcupacionPrincipalActivity extends ActionBarActivity {
             intent.putExtra("ocupacion", ocupacion);
             intent.putExtra("vehiculo", tipoVehiculo);
             intent.putExtra("sabado", viajeSabado);
+            intent.putExtra("zatActividad", zatActividadPrincipal);
             startActivity(intent);
 
             finish();

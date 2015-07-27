@@ -87,6 +87,7 @@ public class InformacionViajesActivity extends ActionBarActivity {
     String tipoVehiculo;
     String viajeSabado;
     String hayMotivoViaje;
+    String zatActividad;
 
     String zatViajeAnterior;
 
@@ -229,7 +230,7 @@ public class InformacionViajesActivity extends ActionBarActivity {
 
 
         idPersona = getIntent().getStringExtra("idPersona");
-        //Toast.makeText(this, "Id persona: "+ idPersona, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Id persona: "+ idPersona, Toast.LENGTH_SHORT).show();
         //Toast.makeText(this, "Id Persona: "+ idPersona+ " Numero Viaje: " +nroViaje, Toast.LENGTH_SHORT).show();
 
         zatVivienda = getIntent().getStringExtra("zatVivienda");
@@ -240,29 +241,33 @@ public class InformacionViajesActivity extends ActionBarActivity {
         idHogar = getIntent().getStringExtra("idHogar");
 
         cdOrden = getIntent().getStringExtra("codigoOrden");
-        //Toast.makeText(this, "Codigo orden: "+cdOrden, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Codigo orden: "+cdOrden, Toast.LENGTH_SHORT).show();
 
         nViaje = getIntent().getStringExtra("numeroViaje");
-        //Toast.makeText(this, "Numero viaje: "+nViaje, Toast.LENGTH_SHORT).show();
+
 
         int numeroViaje = (Integer.parseInt(nViaje));
         numeroViaje ++;
 
         nViaje = ""+numeroViaje;
+        Toast.makeText(this, "Numero viaje: "+nViaje, Toast.LENGTH_SHORT).show();
 
         ocupacion = getIntent().getStringExtra("ocupacion");
         Toast.makeText(this, "Ocupacion: "+ocupacion, Toast.LENGTH_SHORT).show();
 
         tipoVehiculo = getIntent().getStringExtra("vehiculo");
-        //Toast.makeText(this, "Tipo vehiculo: "+tipoVehiculo, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Tipo vehiculo: "+tipoVehiculo, Toast.LENGTH_SHORT).show();
 
         viajeSabado = getIntent().getStringExtra("sabado");
-        //Toast.makeText(this, "Viaje sabado: "+viajeSabado, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Viaje sabado: "+viajeSabado, Toast.LENGTH_SHORT).show();
 
         zatViajeAnterior = getIntent().getStringExtra("zatAnterior");
-        //Toast.makeText(this, "Zat viaje anterior: "+zatViajeAnterior, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Zat viaje anterior: "+zatViajeAnterior, Toast.LENGTH_SHORT).show();
 
         hayMotivoViaje = getIntent().getStringExtra("hayMotivoViaje");
+
+        zatActividad = getIntent().getStringExtra("zatActividad");
+        Toast.makeText(this, "ZAT actividad: "+zatActividad, Toast.LENGTH_SHORT).show();
 
     }
 
@@ -359,46 +364,12 @@ public class InformacionViajesActivity extends ActionBarActivity {
             zatDestino = spinnerZatDestino.getSelectedItem().toString();
 
 
-            // --- Restricción Checked ---
-                if (ocupacion.equals("ESTUDIAR") && motivoEstudio)
-                {
-                    thereMotivo = true;
-                    hayMotivoViaje = "Si";
-                }
-                else if (ocupacion.equals("TRABAJAR") && motivoTrabajo)
-                {
-                    thereMotivo = true;
-                    hayMotivoViaje = "Si";
-                }
 
-
-
-
-            //boolean is = false;
             DBAdapter db = new DBAdapter(this);
-            /*db.open();
-            Cursor cur  = db.getViaje(1); //Acá se debería de pasar si el númerod e viaje es 1
-            if (cur.moveToFirst())
-            {
-                is = true;
-            }
-            db.close();*/
-            /*if (is == true)
-            {
-                if (!zatVivienda.equals(zatOrigen))
-                {
-                    db.open();
-                    long id = db.insertRestriccion("VIAJES", "ZAT de origen del primer viaje no es Zat de residencia", cur.getString(0), numeroEncuesta );
-                    db.close();
-                }
-            }*/
-
-
 
             db.open();
             long id = db.insertViaje(viajeNumero, lugarOrigen, zatOrigen, horaSalida, lugarDestino, zatDestino, horaLlegada, motivoViaje, modoViaje, idPersona);
             db.close();
-
 
             db.open();
             Cursor c = db.getAllViajes();
@@ -415,32 +386,56 @@ public class InformacionViajesActivity extends ActionBarActivity {
                 id = db.insertFrecuenciaViaje(frecuenciaViaje.get(i), idViaje);
             db.close();
 
+
+
+            // --- Restricción Checked ---      //Mirar con la ZAT
+            if (ocupacion.equals("ESTUDIAR") && motivoEstudio)
+            {
+                thereMotivo = true;
+                hayMotivoViaje = "Si";
+                if (!zatActividad.equals(zatDestino))
+                {
+                    db.open();
+                    id = db.insertRestriccion("VIAJE", "La ZAT de destino no corresponde con la ZAT de la actividad principal", idViaje, numeroEncuesta);
+                    db.close();
+                }
+
+            }
+            else if (ocupacion.equals("TRABAJAR") && motivoTrabajo)
+            {
+                thereMotivo = true;
+                hayMotivoViaje = "Si";
+                if (!zatActividad.equals(zatDestino))
+                {
+                    db.open();
+                    id = db.insertRestriccion("VIAJE", "La ZAT de destino no corresponde con la ZAT de la actividad principal", idViaje, numeroEncuesta);
+                    db.close();
+                }
+            }
+
+
             // RESTRICCIÓN CHECKED
             if (viajeNumero.equals("1"))
             {
-                Toast.makeText(this, "Verificando en el If de si Viaje es igual a 1", Toast.LENGTH_LONG).show();
                 if (!(zatOrigen.equals(zatVivienda)))
                 {
                     db.open();
                     id = db.insertRestriccion("VIAJES", "ZAT de origen del primer viaje no es Zat de residencia", idViaje, numeroEncuesta );
                     db.close();
                 }
-
             }
             else if (!zatViajeAnterior.equals(zatOrigen))
             {
-                Toast.makeText(this, "Verificando en el If de si viaje anterior igual a viaje origen", Toast.LENGTH_LONG).show();
                 db.open();
                 id = db.insertRestriccion("VIAJES", "ZAT de destino no corresponde a la nueva ZAT de origen", idViaje, numeroEncuesta);
                 db.close();
             }
-
             zatViajeAnterior = zatDestino;
+
 
             if (tipoVehiculo.equals("NO TIENE VEHÍCULO"))
             {
-                if (modoViaje.equals("BICICLETA") || modoViaje.equals("MOTO") || modoViaje.equals("AUTOMOVIL PRIVADO") ||
-                        modoViaje.equals("CAMION"))
+                if (modoViaje.equals("BICICLETA") || modoViaje.equals("MOTO") || modoViaje.equals("AUTOMOVIL PRIVADO") || modoViaje.equals("CAMION"))
                 {
                     db.open();
                     id = db.insertRestriccion("VIAJES", "El viaje al parecer se realiza en un vehículo propio, pero el hogar no cuenta con uno", idViaje, numeroEncuesta);
@@ -471,11 +466,12 @@ public class InformacionViajesActivity extends ActionBarActivity {
                 db.close();
             }
 
-
-
-
-
-
+            if (horaL-horaS > 1)
+            {
+                db.open();
+                id = db.insertRestriccion("VIAJE", "El viaje tarda mas d euna hora", idViaje, numeroEncuesta);
+                db.close();
+            }
 
 
             Intent intent = new Intent(this,InformacionViajesActivity. class);
@@ -490,12 +486,13 @@ public class InformacionViajesActivity extends ActionBarActivity {
             intent.putExtra("sabado", viajeSabado);
             intent.putExtra("zatAnterior", zatViajeAnterior);
             intent.putExtra("hayMotivoViaje", hayMotivoViaje);
+            intent.putExtra("zatActividad", zatActividad);
             startActivity(intent);
             finish();
         }
 
-
     }
+
 
     public void onClickContinuarAgregarPersona(View view){
         if (checkBoxLunesAViernes.isChecked())
@@ -578,65 +575,67 @@ public class InformacionViajesActivity extends ActionBarActivity {
             modoViaje = spinnerModoDeViaje.getSelectedItem().toString();
             zatDestino = spinnerZatDestino.getSelectedItem().toString();
 
-            //Restricción checked
-            if (ocupacion.equals("ESTUDIAR") && motivoEstudio)
-            {
-                thereMotivo = true;
-                hayMotivoViaje = "Si";
-            }
-            else if (ocupacion.equals("TRABAJAR") && motivoTrabajo)
-            {
-                thereMotivo = true;
-                hayMotivoViaje = "Si";
-            }
 
-            //boolean is = false;
             final DBAdapter db = new DBAdapter(this);
-            /**db.open();
-            Cursor cur  = db.getViaje(1); //Acá se debería de pasar si el númerod e viaje es 1
-            if (cur.moveToFirst())
-            {
-                is = true;
-            }
-            db.close();*/
-            /*if (is == true)
-            {
-                if (!zatVivienda.equals(zatOrigen))
-                {
-                    db.open();
-                    long id = db.insertRestriccion("VIAJES", "ZAT de origen del primer viaje no es Zat de residencia", cur.getString(0), numeroEncuesta );
-                    db.close();
-                }
-            }*/
 
 
-
-            db.open();
-            long id = db.insertViaje(viajeNumero, lugarOrigen, zatOrigen, horaSalida, lugarDestino, zatDestino, horaLlegada, motivoViaje, modoViaje, idPersona);
-            db.close();
-
-            db.open();
-            Cursor c = db.getAllViajes();
-            if(c.moveToFirst())
-            {
-                do{
-                    idViaje = c.getString(0);
-                    zatViviendaBd = c.getString(6);
-                }while (c.moveToNext());
-            }
-            db.close();
-
-
-            db.open();
-            for (int i=0; i< frecuenciaViaje.size(); i++)
-                id = db.insertFrecuenciaViaje(frecuenciaViaje.get(i), idViaje);
-            db.close();
-
-            // RESTRICCIÓN CHECKED
             if (viajeNumero.equals("1"))
             {
-                Toast.makeText(this, "Verificando en el If de si Viaje es igual a 1", Toast.LENGTH_LONG).show();
-                if (!(zatOrigen.equals(zatVivienda)))
+                Toast.makeText(getBaseContext(), "Para finalizar los viajes, la persona debe tener por lo menos dos viajes registrados", Toast.LENGTH_SHORT).show();
+            }
+            else
+            {
+                db.open();
+                long id = db.insertViaje(viajeNumero, lugarOrigen, zatOrigen, horaSalida, lugarDestino, zatDestino, horaLlegada, motivoViaje, modoViaje, idPersona);
+                db.close();
+
+                db.open();
+                Cursor c = db.getAllViajes();
+                if(c.moveToFirst())
+                {
+                    do{
+                        idViaje = c.getString(0);
+                        zatViviendaBd = c.getString(6);
+                    }while (c.moveToNext());
+                }
+                db.close();
+
+
+                db.open();
+                for (int i=0; i< frecuenciaViaje.size(); i++)
+                    id = db.insertFrecuenciaViaje(frecuenciaViaje.get(i), idViaje);
+                db.close();
+
+
+                // --- Restricción Checked ---      //Mirar con la ZAT
+                if (ocupacion.equals("ESTUDIAR") && motivoEstudio)
+                {
+                    thereMotivo = true;
+                    hayMotivoViaje = "Si";
+                    if (!zatActividad.equals(zatDestino))
+                    {
+                        db.open();
+                        id = db.insertRestriccion("VIAJE", "La ZAT de destino no corresponde con la ZAT de la actividad principal", idViaje, numeroEncuesta);
+                        db.close();
+                    }
+
+                }
+                else if (ocupacion.equals("TRABAJAR") && motivoTrabajo)
+                {
+                    thereMotivo = true;
+                    hayMotivoViaje = "Si";
+                    if (!zatActividad.equals(zatDestino))
+                    {
+                        db.open();
+                        id = db.insertRestriccion("VIAJE", "La ZAT de destino no corresponde con la ZAT de la actividad principal", idViaje, numeroEncuesta);
+                        db.close();
+                    }
+                }
+
+
+
+                // RESTRICCIÓN CHECKED
+                if (viajeNumero.equals("1"))
                 {
                     if (!(zatOrigen.equals(zatVivienda)))
                     {
@@ -645,113 +644,94 @@ public class InformacionViajesActivity extends ActionBarActivity {
                         db.close();
                     }
                 }
-            }
-            else if (!zatViajeAnterior.equals(zatOrigen))
-            {
-                Toast.makeText(this, "Verificando en el If de si viaje anterior igual a viaje origen", Toast.LENGTH_LONG).show();
-                db.open();
-                id = db.insertRestriccion("VIAJES", "ZAT de destino no corresponde a la nueva ZAT de origen", idViaje, numeroEncuesta);
-                db.close();
-            }
-
-            zatViajeAnterior = zatDestino;
-
-            if (tipoVehiculo.equals("NO TIENE VEHÍCULO"))
-            {
-                if (modoViaje.equals("BICICLETA") || modoViaje.equals("MOTO") || modoViaje.equals("AUTOMOVIL PRIVADO") ||
-                        modoViaje.equals("CAMION"))
+                else if (!zatViajeAnterior.equals(zatOrigen))
                 {
                     db.open();
-                    id = db.insertRestriccion("VIAJES", "El viaje al parecer se realiza en un vehículo propio, pero el hogar no cuenta con uno", idViaje, numeroEncuesta);
+                    id = db.insertRestriccion("VIAJES", "ZAT de destino no corresponde a la nueva ZAT de origen", idViaje, numeroEncuesta);
                     db.close();
                 }
-            }
+                zatViajeAnterior = zatDestino;
 
-            if (viajeSabado.equals("0") && saturday== true)
-            {
-                db.open();
-                id = db.insertRestriccion("VIAJES", "Viajes en el día sabado pero no hay personas que viaje el día sabado", idViaje, numeroEncuesta);
-                db.close();
-            }
 
-            if (horaS == horaL)
-            {
-                if (minutoS > minutoL)
+                if (tipoVehiculo.equals("NO TIENE VEHÍCULO"))
+                {
+                    if (modoViaje.equals("BICICLETA") || modoViaje.equals("MOTO") || modoViaje.equals("AUTOMOVIL PRIVADO") ||
+                            modoViaje.equals("CAMION"))
+                    {
+                        db.open();
+                        id = db.insertRestriccion("VIAJES", "El viaje al parecer se realiza en un vehículo propio, pero el hogar no cuenta con uno", idViaje, numeroEncuesta);
+                        db.close();
+                    }
+                }
+
+                if (viajeSabado.equals("0") && saturday== true)
+                {
+                    db.open();
+                    id = db.insertRestriccion("VIAJES", "Viajes en el día sabado pero no hay personas que viaje el día sabado", idViaje, numeroEncuesta);
+                    db.close();
+                }
+
+                if (horaS == horaL)
+                {
+                    if (minutoS > minutoL)
+                    {
+                        db.open();
+                        id = db.insertRestriccion("VIAJE", "La hora de salida es mayor a la hora de llegada", idViaje, numeroEncuesta);
+                        db.close();
+                    }
+                }
+                else if (horaS > horaL)
                 {
                     db.open();
                     id = db.insertRestriccion("VIAJE", "La hora de salida es mayor a la hora de llegada", idViaje, numeroEncuesta);
                     db.close();
                 }
-            }
-            else if (horaS > horaL)
-            {
-                db.open();
-                id = db.insertRestriccion("VIAJE", "La hora de salida es mayor a la hora de llegada", idViaje, numeroEncuesta);
-                db.close();
-            }
 
-            /*if (horaS > horaL)
-            {
-                db.open();
-                id = db.insertRestriccion("VIAJE", "La hora de salida es mayor a la hora de llegada", idViaje, numeroEncuesta);
-                db.close();
-            }
+                if (horaL-horaS > 1)
+                {
+                    db.open();
+                    id = db.insertRestriccion("VIAJE", "El viaje tarda mas d euna hora", idViaje, numeroEncuesta);
+                    db.close();
+                }
 
+                AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+                dialog.setCancelable(true);
+                dialog.setMessage("¿Qué desea hacer?")
+                        .setTitle("¿Esta seguro de que esta persona no realiza mas viajes?")
+                        .setCancelable(false)
+                        .setPositiveButton("Agregar viaje", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
 
-            //--- Restricción ---
-            if (viajeNumero.equals("1"))
-            {
-                if (!(zatOrigen.equals(zatVivienda)));
-                db.open();
-                id = db.insertRestriccion("VIAJES", "ZAT de origen del primer viaje no es Zat de residencia", idViaje, numeroEncuesta );
-                db.close();
-            }*/
+                                Intent intent = new Intent(getBaseContext(), InformacionViajesActivity.class);
+                                intent.putExtra("idHogar", idHogar);
+                                intent.putExtra("nroEncuesta", numeroEncuesta);
+                                intent.putExtra("codigoOrden", cdOrden);
+                                intent.putExtra("numeroViaje", nViaje);
+                                intent.putExtra("idPersona", idPersona);
+                                intent.putExtra("zatVivienda", zatVivienda);
+                                intent.putExtra("ocupacion", ocupacion);
+                                intent.putExtra("vehiculo", tipoVehiculo);
+                                intent.putExtra("sabado", viajeSabado);
+                                intent.putExtra("zatAnterior", zatViajeAnterior);
+                                intent.putExtra("hayMotivoViaje", hayMotivoViaje);
+                                intent.putExtra("zatActividad", zatActividad);
 
-
-            AlertDialog.Builder dialog = new AlertDialog.Builder(this);
-            dialog.setCancelable(true);
-            dialog.setMessage("¿Qué desea hacer?")
-                    .setTitle("¿Esta seguro de que esta persona no realiza mas viajes?")
-                    .setCancelable(true)
-                    .setPositiveButton("Agregar viaje", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            Intent intent = new Intent(getBaseContext(), InformacionViajesActivity.class);
-                            intent.putExtra("idHogar", idHogar);
-                            intent.putExtra("nroEncuesta", numeroEncuesta);
-                            intent.putExtra("codigoOrden", cdOrden);
-                            intent.putExtra("numeroViaje", nViaje);
-                            intent.putExtra("idPersona", idPersona);
-                            intent.putExtra("zatVivienda", zatVivienda);
-                            intent.putExtra("ocupacion", ocupacion);
-                            intent.putExtra("vehiculo", tipoVehiculo);
-                            intent.putExtra("sabado", viajeSabado);
-                            intent.putExtra("zatAnterior", zatViajeAnterior);
-                            intent.putExtra("hayMotivoViaje", hayMotivoViaje);
-
-                            startActivity(intent);
-                            finish();
-                        }
-                    })
-                    .setNegativeButton("Agregar persona", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                            /*if (!(zatViviendaBd.equals(zatVivienda))) {
-                                db.open();
-                                long idq = db.insertRestriccion("VIAJES", "ZAT de destino último viaje, no es ZAT de residencia", idViaje, numeroEncuesta);
-                                db.close();
-                            }*/
-
-                            if (hayMotivoViaje.equals("No")) {
-                                db.open();
-                                long idq = db.insertRestriccion("VIAJES", "No hay ningún motivo de viaje relacionado con la ocupación principal", idViaje, numeroEncuesta);
-                                db.close();
+                                startActivity(intent);
+                                finish();
                             }
+                        })
+                        .setNegativeButton("Agregar persona", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
 
-                            if (viajeNumero.equals("1")) {
-                                Toast.makeText(getBaseContext(), "Para finalizar los viajes, la persona debe tener por lo menos dos viajes registrados", Toast.LENGTH_SHORT).show();
-                            }
-                            else {
+                                if (hayMotivoViaje.equals("No")) {
+                                    db.open();
+                                    long idq = db.insertRestriccion("VIAJES", "No hay ningún motivo de viaje relacionado con la ocupación principal", idViaje, numeroEncuesta);
+                                    db.close();
+                                }
+
+
                                 Intent intent = new Intent(getBaseContext(), InformacionPersonaActivity.class);
                                 intent.putExtra("idHogar", idHogar);
                                 intent.putExtra("nroEncuesta", numeroEncuesta);
@@ -759,20 +739,19 @@ public class InformacionViajesActivity extends ActionBarActivity {
                                 intent.putExtra("zatVivienda", zatVivienda);
                                 intent.putExtra("vehiculo", tipoVehiculo);
                                 intent.putExtra("sabado", viajeSabado);
-
                                 startActivity(intent);
                                 finish();
+
                             }
-
-
-                        }
-                    });
-            dialog.show();
+                        });
+                dialog.show();
+            }
 
         }
 
 
     }
+
 
     public void onClickFinalizar(View view){
         if (checkBoxLunesAViernes.isChecked())
@@ -856,119 +835,9 @@ public class InformacionViajesActivity extends ActionBarActivity {
             modoViaje = spinnerModoDeViaje.getSelectedItem().toString();
             zatDestino = spinnerZatDestino.getSelectedItem().toString();
 
-            //Restricción checked
-            if (ocupacion.equals("ESTUDIAR") && motivoEstudio)
-            {
-                thereMotivo = true;
-                hayMotivoViaje = "Si";
-            }
-            else if (ocupacion.equals("TRABAJAR") && motivoTrabajo)
-            {
-                thereMotivo = true;
-                hayMotivoViaje = "Si";
-            }
 
-            //boolean is = false;
             final DBAdapter db = new DBAdapter(this);
-            /*db.open();
-            Cursor cur  = db.getViaje(1); //Acá se debería de pasar si el númerod e viaje es 1
-            if (cur.moveToFirst())
-            {
-                is = true;
-            }
-            db.close();*/
-            /*if (is == true)
-            {
-                if (!zatVivienda.equals(zatOrigen))
-                {
-                    db.open();
-                    long id = db.insertRestriccion("VIAJES", "ZAT de origen del primer viaje no es Zat de residencia", cur.getString(0), numeroEncuesta );
-                    db.close();
-                }
-            }*/
 
-
-            db.open();
-            long id = db.insertViaje(viajeNumero, lugarOrigen, zatOrigen, horaSalida, lugarDestino, zatDestino, horaLlegada, motivoViaje, modoViaje, idPersona);
-            db.close();
-
-            db.open();
-            Cursor c = db.getAllViajes();
-            if(c.moveToFirst())
-            {
-                do{
-                    idViaje = c.getString(0);
-                    zatViviendaBd = c.getString(6);
-                }while (c.moveToNext());
-            }
-            db.close();
-
-
-            db.open();
-            for (int i=0; i< frecuenciaViaje.size(); i++)
-                id = db.insertFrecuenciaViaje(frecuenciaViaje.get(i), idViaje);
-            db.close();
-
-            // RESTRICCIÓN CHECKED
-            if (viajeNumero.equals("1"))
-            {
-                Toast.makeText(this, "Verificando en el If de si Viaje es igual a 1", Toast.LENGTH_LONG).show();
-                if (!(zatOrigen.equals(zatVivienda)))
-                {
-                    if (!(zatOrigen.equals(zatVivienda)))
-                    {
-                        db.open();
-                        id = db.insertRestriccion("VIAJES", "ZAT de origen del primer viaje no es Zat de residencia", idViaje, numeroEncuesta );
-                        db.close();
-                    }
-                }
-            }
-            else if (!zatViajeAnterior.equals(zatOrigen))
-            {
-                Toast.makeText(this, "Verificando en el If de si viaje anterior igual a viaje origen", Toast.LENGTH_LONG).show();
-                db.open();
-                id = db.insertRestriccion("VIAJES", "ZAT de destino no corresponde a la nueva ZAT de origen", idViaje, numeroEncuesta);
-                db.close();
-            }
-
-            zatViajeAnterior = zatDestino;
-
-            if (tipoVehiculo.equals("NO TIENE VEHÍCULO"))
-            {
-                if (modoViaje.equals("BICICLETA") || modoViaje.equals("MOTO") || modoViaje.equals("AUTOMOVIL PRIVADO") ||
-                        modoViaje.equals("CAMION"))
-                {
-                    db.open();
-                    id = db.insertRestriccion("VIAJES", "El viaje al parecer se realiza en un vehículo propio, pero el hogar no cuenta con uno", idViaje, numeroEncuesta);
-                    db.close();
-                }
-            }
-
-            if (viajeSabado.equals("0") && saturday== true)
-            {
-                db.open();
-                id = db.insertRestriccion("VIAJES", "Viajes en el día sabado pero no hay personas que viaje el día sabado", idViaje, numeroEncuesta);
-                db.close();
-            }
-
-            if (horaS == horaL)
-            {
-                if (minutoS > minutoL)
-                {
-                    db.open();
-                    id = db.insertRestriccion("VIAJE", "La hora de salida es mayor a la hora de llegada", idViaje, numeroEncuesta);
-                    db.close();
-                }
-            }
-            else if (horaS > horaL)
-            {
-                db.open();
-                id = db.insertRestriccion("VIAJE", "La hora de salida es mayor a la hora de llegada", idViaje, numeroEncuesta);
-                db.close();
-            }
-
-
-            //--- Restricción ---
 
             if (viajeNumero.equals("1"))
             {
@@ -976,22 +845,125 @@ public class InformacionViajesActivity extends ActionBarActivity {
             }
             else
             {
+                db.open();
+                long id = db.insertViaje(viajeNumero, lugarOrigen, zatOrigen, horaSalida, lugarDestino, zatDestino, horaLlegada, motivoViaje, modoViaje, idPersona);
+                db.close();
+
+                db.open();
+                Cursor c = db.getAllViajes();
+                if(c.moveToFirst())
+                {
+                    do{
+                        idViaje = c.getString(0);
+                        zatViviendaBd = c.getString(6);
+                    }while (c.moveToNext());
+                }
+                db.close();
+
+
+                db.open();
+                for (int i=0; i< frecuenciaViaje.size(); i++)
+                    id = db.insertFrecuenciaViaje(frecuenciaViaje.get(i), idViaje);
+                db.close();
+
+
+                // --- Restricción Checked ---      //Mirar con la ZAT
+                if (ocupacion.equals("ESTUDIAR") && motivoEstudio)
+                {
+                    thereMotivo = true;
+                    hayMotivoViaje = "Si";
+                    if (!zatActividad.equals(zatDestino))
+                    {
+                        db.open();
+                        id = db.insertRestriccion("VIAJE", "La ZAT de destino no corresponde con la ZAT de la actividad principal", idViaje, numeroEncuesta);
+                        db.close();
+                    }
+
+                }
+                else if (ocupacion.equals("TRABAJAR") && motivoTrabajo)
+                {
+                    thereMotivo = true;
+                    hayMotivoViaje = "Si";
+                    if (!zatActividad.equals(zatDestino))
+                    {
+                        db.open();
+                        id = db.insertRestriccion("VIAJE", "La ZAT de destino no corresponde con la ZAT de la actividad principal", idViaje, numeroEncuesta);
+                        db.close();
+                    }
+                }
+
+
+                // RESTRICCIÓN CHECKED
+                if (viajeNumero.equals("1"))
+                {
+                    if (!(zatOrigen.equals(zatVivienda)))
+                    {
+                        if (!(zatOrigen.equals(zatVivienda)))
+                        {
+                            db.open();
+                            id = db.insertRestriccion("VIAJES", "ZAT de origen del primer viaje no es Zat de residencia", idViaje, numeroEncuesta );
+                            db.close();
+                        }
+                    }
+                }
+                else if (!zatViajeAnterior.equals(zatOrigen))
+                {
+                    db.open();
+                    id = db.insertRestriccion("VIAJES", "ZAT de destino no corresponde a la nueva ZAT de origen", idViaje, numeroEncuesta);
+                    db.close();
+                }
+
+                zatViajeAnterior = zatDestino;
+
+                if (tipoVehiculo.equals("NO TIENE VEHÍCULO"))
+                {
+                    if (modoViaje.equals("BICICLETA") || modoViaje.equals("MOTO") || modoViaje.equals("AUTOMOVIL PRIVADO") ||
+                            modoViaje.equals("CAMION"))
+                    {
+                        db.open();
+                        id = db.insertRestriccion("VIAJES", "El viaje al parecer se realiza en un vehículo propio, pero el hogar no cuenta con uno", idViaje, numeroEncuesta);
+                        db.close();
+                    }
+                }
+
+                if (viajeSabado.equals("0") && saturday== true)
+                {
+                    db.open();
+                    id = db.insertRestriccion("VIAJES", "Viajes en el día sabado pero no hay personas que viaje el día sabado", idViaje, numeroEncuesta);
+                    db.close();
+                }
+
+                if (horaS == horaL)
+                {
+                    if (minutoS > minutoL)
+                    {
+                        db.open();
+                        id = db.insertRestriccion("VIAJE", "La hora de salida es mayor a la hora de llegada", idViaje, numeroEncuesta);
+                        db.close();
+                    }
+                }
+                else if (horaS > horaL)
+                {
+                    db.open();
+                    id = db.insertRestriccion("VIAJE", "La hora de salida es mayor a la hora de llegada", idViaje, numeroEncuesta);
+                    db.close();
+                }
+
+                if (horaL-horaS > 1)
+                {
+                    db.open();
+                    id = db.insertRestriccion("VIAJE", "El viaje tarda mas de una hora", idViaje, numeroEncuesta);
+                    db.close();
+                }
+
                 AlertDialog.Builder dialog = new AlertDialog.Builder(this);
                 dialog.setMessage("¿Qué desea hacer?")
-                        .setCancelable(true)
+                        .setCancelable(false)
                         .setTitle("Gracias por hacer uso de la aplicación Encuesta Riosucio")
                         .setPositiveButton("Comenzar una nueva encuesta", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                /*if (!(zatViviendaBd.equals(zatVivienda))) {
-                                    db.open();
-                                    long idq = db.insertRestriccion("VIAJES", "ZAT de destino último viaje, no es ZAT de residencia", idViaje, numeroEncuesta);
-                                    db.close();
-                                }*/
-
-                                if (hayMotivoViaje.equals("No"))
-                                {
-
+                                if (hayMotivoViaje.equals("No")) {
                                     db.open();
                                     long idq = db.insertRestriccion("VIAJES", "No hay ningún motivo de viaje relacionado con la ocupación principal", idViaje, numeroEncuesta);
                                     db.close();
@@ -1005,14 +977,8 @@ public class InformacionViajesActivity extends ActionBarActivity {
                         .setNegativeButton("Finalizar la aplicación", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                /*if (!(zatViviendaBd.equals(zatVivienda))) {
-                                    db.open();
-                                    long idq = db.insertRestriccion("VIAJES", "ZAT de destino último viaje, no es ZAT de residencia", idViaje, numeroEncuesta);
-                                    db.close();
-                                }*/
 
-                                if (hayMotivoViaje.equals("No"))
-                                {
+                                if (hayMotivoViaje.equals("No")) {
                                     db.open();
                                     long idq = db.insertRestriccion("VIAJES", "No hay ningún motivo de viaje relacionado con la ocupación principal", idViaje, numeroEncuesta);
                                     db.close();
@@ -1022,6 +988,14 @@ public class InformacionViajesActivity extends ActionBarActivity {
                         });
                 dialog.show();
             }
+
+
+
+
+            //--- Restricción ---
+
+
+
 
 
         }

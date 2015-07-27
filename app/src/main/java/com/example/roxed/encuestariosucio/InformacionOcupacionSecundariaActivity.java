@@ -49,6 +49,7 @@ public class InformacionOcupacionSecundariaActivity extends ActionBarActivity {
     String tipoVehiculo;
     String viajeSabado;
     String hayMotivoViaje = "No";
+    String zatActividad;
     static final String TIPO_OCUPACION = "Secundaria";
 
 
@@ -181,7 +182,6 @@ public class InformacionOcupacionSecundariaActivity extends ActionBarActivity {
         });
 
         idPersona = getIntent().getStringExtra("idPersona");
-        Toast.makeText(this, "Id persona: "+ idPersona, Toast.LENGTH_SHORT).show();
 
         zatVivienda = getIntent().getStringExtra("zatVivienda");
 
@@ -190,15 +190,19 @@ public class InformacionOcupacionSecundariaActivity extends ActionBarActivity {
         idHogar = getIntent().getStringExtra("idHogar");
 
         cdOrden = getIntent().getStringExtra("codigoOrden");
-        Toast.makeText(this, "Codigo ordne: "+cdOrden, Toast.LENGTH_SHORT).show();
 
         ocupacionP = getIntent().getStringExtra("ocupacion");
 
         tipoVehiculo = getIntent().getStringExtra("vehiculo");
-        Toast.makeText(this, "Tipo vehiculo: "+tipoVehiculo, Toast.LENGTH_SHORT).show();
 
         viajeSabado = getIntent().getStringExtra("sabado");
-        Toast.makeText(this, "Viaje sabado: "+viajeSabado, Toast.LENGTH_SHORT).show();
+
+        zatActividad = getIntent().getStringExtra("zatActividad");
+
+        //Toast.makeText(this, "Id persona: "+ idPersona, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "Codigo ordne: "+cdOrden, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "Tipo vehiculo: "+tipoVehiculo, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "Viaje sabado: "+viajeSabado, Toast.LENGTH_SHORT).show();
     }
 
     public void onClickContinuarInformacionViajes(View view) {
@@ -221,7 +225,6 @@ public class InformacionOcupacionSecundariaActivity extends ActionBarActivity {
                 else if (ocupacion.equals("TRABAJAR"))
                 {
                     lugarEstudio = "";
-
                 }
 
 
@@ -241,6 +244,7 @@ public class InformacionOcupacionSecundariaActivity extends ActionBarActivity {
                 intent.putExtra("vehiculo", tipoVehiculo);
                 intent.putExtra("sabado", viajeSabado);
                 intent.putExtra("hayMotivoViaje", hayMotivoViaje);
+                intent.putExtra("zatActividad", zatActividad);
                 startActivity(intent);
                 finish();
             }
@@ -280,14 +284,14 @@ public class InformacionOcupacionSecundariaActivity extends ActionBarActivity {
             intent.putExtra("vehiculo", tipoVehiculo);
             intent.putExtra("sabado", viajeSabado);
             intent.putExtra("hayMotivoViaje", hayMotivoViaje);
+            intent.putExtra("zatActividad", zatActividad);
             startActivity(intent);
             finish();
         }
-
     }
 
-    public void onClickContinuarAgregarPersona(View view){
 
+    public void onClickContinuarAgregarPersona(View view){
 
         if (txtDireccionActividadSecundaria.isEnabled()) {
             if (txtDireccionActividadSecundaria.getText().toString().equals("")) {
@@ -298,7 +302,6 @@ public class InformacionOcupacionSecundariaActivity extends ActionBarActivity {
                 lugarEstudio = spinnerLugarEstudioSecundaria.getSelectedItem().toString();
                 sectorTrabajo = spinnerSectorTrabajoSecundaria.getSelectedItem().toString();
                 laborDesempeño = spinnerLaborDesempeñaSecundaria.getSelectedItem().toString();
-                //lugarTrabajo = spinnerLugarTrabajoSecundaria.getSelectedItem().toString();
                 direccionActividadSecundaria = txtDireccionActividadSecundaria.getText().toString();
                 zatActividadSecundaria = spinnerZatActividadSecundaria.getSelectedItem().toString();
 
@@ -337,6 +340,7 @@ public class InformacionOcupacionSecundariaActivity extends ActionBarActivity {
                                 intent.putExtra("vehiculo", tipoVehiculo);
                                 intent.putExtra("sabado", viajeSabado);
                                 intent.putExtra("hayMotivoViaje", hayMotivoViaje);
+                                intent.putExtra("zatActividad", zatActividad);
                                 startActivity(intent);
                                 finish();
                             }
