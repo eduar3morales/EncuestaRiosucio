@@ -245,29 +245,28 @@ public class InformacionViajesActivity extends ActionBarActivity {
 
         nViaje = getIntent().getStringExtra("numeroViaje");
 
-
         int numeroViaje = (Integer.parseInt(nViaje));
         numeroViaje ++;
 
         nViaje = ""+numeroViaje;
-        Toast.makeText(this, "Numero viaje: "+nViaje, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "Numero viaje: "+nViaje, Toast.LENGTH_SHORT).show();
 
         ocupacion = getIntent().getStringExtra("ocupacion");
-        Toast.makeText(this, "Ocupacion: "+ocupacion, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "Ocupacion: "+ocupacion, Toast.LENGTH_SHORT).show();
 
         tipoVehiculo = getIntent().getStringExtra("vehiculo");
-        Toast.makeText(this, "Tipo vehiculo: "+tipoVehiculo, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "Tipo vehiculo: "+tipoVehiculo, Toast.LENGTH_SHORT).show();
 
         viajeSabado = getIntent().getStringExtra("sabado");
-        Toast.makeText(this, "Viaje sabado: "+viajeSabado, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "Viaje sabado: "+viajeSabado, Toast.LENGTH_SHORT).show();
 
         zatViajeAnterior = getIntent().getStringExtra("zatAnterior");
-        Toast.makeText(this, "Zat viaje anterior: "+zatViajeAnterior, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "Zat viaje anterior: "+zatViajeAnterior, Toast.LENGTH_SHORT).show();
 
         hayMotivoViaje = getIntent().getStringExtra("hayMotivoViaje");
 
         zatActividad = getIntent().getStringExtra("zatActividad");
-        Toast.makeText(this, "ZAT actividad: "+zatActividad, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "ZAT actividad: "+zatActividad, Toast.LENGTH_SHORT).show();
 
     }
 

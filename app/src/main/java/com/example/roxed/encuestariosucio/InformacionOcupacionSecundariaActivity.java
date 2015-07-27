@@ -404,6 +404,7 @@ public class InformacionOcupacionSecundariaActivity extends ActionBarActivity {
                             intent.putExtra("vehiculo", tipoVehiculo);
                             intent.putExtra("sabado", viajeSabado);
                             intent.putExtra("hayMotivoViaje", hayMotivoViaje);
+                            intent.putExtra("zatActividad", zatActividad);
                             startActivity(intent);
                             finish();
                         }

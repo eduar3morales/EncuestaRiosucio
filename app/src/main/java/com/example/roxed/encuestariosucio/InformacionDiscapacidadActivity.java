@@ -365,9 +365,9 @@ public class InformacionDiscapacidadActivity extends ActionBarActivity {
         viajeSabado = getIntent().getStringExtra("sabado");
 
         zatActividad = getIntent().getStringExtra("zatActividad");
-        Toast.makeText(this, "Id persona: "+idPersona, Toast.LENGTH_SHORT).show();
-        Toast.makeText(this, "Codigo orden: "+cdOrden, Toast.LENGTH_SHORT).show();
-        Toast.makeText(this, "Viaje sabado: "+viajeSabado, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "Id persona: "+idPersona, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "Codigo orden: "+cdOrden, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "Viaje sabado: "+viajeSabado, Toast.LENGTH_SHORT).show();
 
     }
 

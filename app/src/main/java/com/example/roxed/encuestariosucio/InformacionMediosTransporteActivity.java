@@ -124,7 +124,7 @@ public class InformacionMediosTransporteActivity extends ActionBarActivity {
         });
 
         idHogar = getIntent().getStringExtra("idHogar");
-        Toast.makeText(this, "Id Hogar: "+idHogar, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "Id Hogar: "+idHogar, Toast.LENGTH_SHORT).show();
         zatVivienda = getIntent().getStringExtra("zatVivienda");
         numeroEncuesta = getIntent().getStringExtra("nroEncuesta");
         viajeSabado = getIntent().getStringExtra("sabado");

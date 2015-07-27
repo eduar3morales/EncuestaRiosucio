@@ -183,10 +183,10 @@ public class InformacionOcupacionPrincipalActivity extends ActionBarActivity {
         tipoVehiculo = getIntent().getStringExtra("vehiculo");
 
         viajeSabado = getIntent().getStringExtra("sabado");
-        Toast.makeText(this, "Id Persona: "+idPersona, Toast.LENGTH_SHORT).show();
-        Toast.makeText(this, "Edad: "+edad, Toast.LENGTH_SHORT).show();
-        Toast.makeText(this, "Codigo orden: "+cdOrden, Toast.LENGTH_SHORT).show();
-        Toast.makeText(this, "Viaje sabado: "+viajeSabado, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "Id Persona: "+idPersona, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "Edad: "+edad, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "Codigo orden: "+cdOrden, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "Viaje sabado: "+viajeSabado, Toast.LENGTH_SHORT).show();
 
     }
 
