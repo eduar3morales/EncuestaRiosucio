@@ -1024,6 +1024,7 @@ public class InformacionViajesActivity extends ActionBarActivity {
             horaS = horaDia;
             minutoS = minutoHora;
             txtHoraSalida.setText(Horas(horaS,minutoS));
+            Toast.makeText(getBaseContext(), "Hora seleccionada: "+txtHoraSalida.getText().toString(), Toast.LENGTH_SHORT).show();
 
 
         }
@@ -1037,6 +1038,7 @@ public class InformacionViajesActivity extends ActionBarActivity {
             minutoL = minutoHora;
             //HORA DE LLEGADA MOSTRADA EN PANTALLA
             txtHoraLlegada.setText(Horas(horaL,minutoL));
+            Toast.makeText(getBaseContext(), "Hora seleccionada: "+txtHoraLlegada.getText().toString(), Toast.LENGTH_SHORT).show();
 
         }
     };
@@ -1050,10 +1052,10 @@ public class InformacionViajesActivity extends ActionBarActivity {
     private String Horas(int hora, int minuto){
 
         if(minuto<10){
-            return "HORA:  "+hora+" : 0"+minuto+" ";
+            return "HORA:"+hora+":0"+minuto+" ";
         }
 
-        return "HORA  "+hora+" : "+minuto+" ";
+        return "HORA:"+hora+":"+minuto+" ";
 
     }
 
