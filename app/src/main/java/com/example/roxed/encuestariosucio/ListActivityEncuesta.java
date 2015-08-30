@@ -12,8 +12,17 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import java.io.BufferedWriter;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.List;
+
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 
 
 public class ListActivityEncuesta extends ListActivity {
@@ -31,7 +40,24 @@ public class ListActivityEncuesta extends ListActivity {
         if (c.moveToFirst())
         {
             do{
-                encuestas.add("Número Encuesta: "+c.getString(0)+" Coordinador: "+c.getString(1)+" Encuestador: "+c.getString(2)+" "+c.getString(3)+" Fecha: "+ c.getString(4));
+                //encuestas.add("Número Encuesta: "+c.getString(0)+" Coordinador: "+c.getString(1)+" Encuestador: "+c.getString(2)+" "+c.getString(3)+" Fecha: "+ c.getString(4));
+                encuestas.add("Número encuesta:"+c.getString(0)+" Coordinador:"+c.getString(1)+" Encuestador:"+c.getString(2)+" "+c.getString(3)+" "+ c.getString(4));
+                String str = c.getString(0)+","+c.getString(1)+","+c.getString(2)+","+c.getString(3)+","+ c.getString(4);
+                try
+                {
+
+                    FileOutputStream fOut = openFileOutput("encuesta.txt", MODE_APPEND);
+                    OutputStreamWriter osw = new OutputStreamWriter(fOut);
+
+                    osw.write(str+"\n");
+                    osw.flush();
+                    osw.close();
+
+                }
+                catch (IOException ioe)
+                {
+                    ioe.printStackTrace();
+                }
 
             }while(c.moveToNext());
         }
@@ -41,6 +67,7 @@ public class ListActivityEncuesta extends ListActivity {
         for (int i=0; i<encuestas.size(); i++ )
         {
             encuesta[i] = encuestas.get(i);
+
         }
 
         Toast.makeText(this, "N: "+ encuestas.size(), Toast.LENGTH_SHORT).show();

@@ -29,38 +29,110 @@ public class InformacionOcupacionSecundariaActivity extends ActionBarActivity {
     Spinner spinnerZatActividadSecundaria;
     EditText txtDireccionActividadSecundaria;
 
+    /**
+     * Variable donde se almacena la Ocupación secundaria
+     */
     String ocupacion;
+
+    /**
+     * Variable donde se almacena el lugar de estudio
+     */
     String lugarEstudio;
+
+    /**
+     * Variable donde se almacena el sector de trabajo
+     */
     String sectorTrabajo;
+
+    /**
+     * Variable donde se almacena la labor de desempeño
+     */
     String laborDesempeño;
 
+    /**
+     * Variable donde se almacena la dirección de la dirección de la actividad secundaria
+     */
     String direccionActividadSecundaria;
+
+    /**
+     * Variable donde se almacena la ZAT de la actividad secundaria
+     */
     String zatActividadSecundaria;
 
+    /**
+     * Variable que contiene el id de persona proveniente de la actividad persona
+     */
     String idPersona; //Valor proveniente del Intent
+
+    /**
+     * Variable que contiene la zat de la vivienda proveniente de la actividad vivienda
+     */
     String zatVivienda;
+
     //String numeroViaje = "0";
     //int numeroViaje = 0;
+
+    /**
+     * Variable que contiene  el número de encuesta proveniente de la actividad principal
+     */
     String numeroEncuesta;
+
+    /**
+     * Variable que contiene el id de hogar proveniente de la actividad hogar
+     */
     String idHogar;
+
+    /**
+     * Variable que contiene el código de orden proveniente de la actividad persona
+     */
     String cdOrden;
     String nViaje = "0";
+
+    /**
+     * Variable que contiene la ocupación princpal proveniente de la actividad ocupación principal
+     */
     String ocupacionP;
+
+    /**
+     * Variable que contiene el tipo de vehículo proveniente de la actividad medios de transporte
+     */
     String tipoVehiculo;
     String viajeSabado;
     String hayMotivoViaje = "No";
+
+    /**
+     * Variable que contiene la zat de la actividad principal proveniente de la actividad ocupación principal
+     */
     String zatActividad;
     static final String TIPO_OCUPACION = "Secundaria";
 
 
-
-
+    /**
+     * Lista donde se almacenan los valores de Ocupación secundaría que se muestran en el Spinner ocupación
+     */
     private List<String> listaOcupacionSecundaria= new ArrayList<String>();
+
+    /**
+     * Lista donde se almacenan los valores de Lugar Estudio que se muestran en el Spinner lugar de estudio
+     */
     private List<String> listaLugarEstudioSecundaria= new ArrayList<String>();
+
+    /**
+     * Lista donde se almacenan los valores de Sector Trabajo que se muestran en el Spinner sector de trabajo
+     */
     private List<String> listaSectorTrabajoSecundaria= new ArrayList<String>();
+
+    /**
+     * Lista donde se almacenan los valores de Labor de desempeño que se muestran en el Spinner labor que se desempeña
+     */
     private List<String> listaLaborDesempeñaSecundaria= new ArrayList<String>();
 
+    /**
+     * Lista donde se almacenan  los valores de ZAT disponible que se muestran en el Spinner Zat actividad secundaria
+     */
     private List<String> listaZatActividadSecundaria = new ArrayList<String>();
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -205,6 +277,11 @@ public class InformacionOcupacionSecundariaActivity extends ActionBarActivity {
         //Toast.makeText(this, "Viaje sabado: "+viajeSabado, Toast.LENGTH_SHORT).show();
     }
 
+
+    /**
+     * Función que permite hacer el registro de los valores de Ocupación secundaría y continuar con la siguiente actividad
+     * donde se hace el registro de los datos de viaje
+     */
     public void onClickContinuarInformacionViajes(View view) {
         if (txtDireccionActividadSecundaria.isEnabled()) {
             if (txtDireccionActividadSecundaria.getText().toString().equals("")) {
@@ -291,6 +368,10 @@ public class InformacionOcupacionSecundariaActivity extends ActionBarActivity {
     }
 
 
+    /**
+     * Función que permite hacer el registro de los valores de Ocupación secundaría y continuar con la siguiente actividad
+     * que puede ser viaje o información persona, según lo selecione el usuario
+     */
     public void onClickContinuarAgregarPersona(View view){
 
         if (txtDireccionActividadSecundaria.isEnabled()) {
@@ -430,6 +511,10 @@ public class InformacionOcupacionSecundariaActivity extends ActionBarActivity {
 
     }
 
+    /**
+     * Función que permite hacer el registro de los valores de Ocupación secundaria y terminar con la encuesta para salir
+     * de la encuesta o comenzar una nueva
+     */
     public void onClickFinalizar(View view){
         if (txtDireccionActividadSecundaria.isEnabled()) {
             if (txtDireccionActividadSecundaria.getText().toString().equals("")) {

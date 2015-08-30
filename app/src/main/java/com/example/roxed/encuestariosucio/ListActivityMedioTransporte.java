@@ -8,6 +8,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,6 +30,24 @@ public class ListActivityMedioTransporte extends ListActivity {
             do{
                 mediosTransporte.add("Id vehículo: "+c.getString(0)+" Tipo vehículo: "+c.getString(1)+" Modelo: "+c.getString(2)+" Km último año: "+c.getString(3)+" Lugar de matricula: "+c.getString(4)+" Sitio estacionamiento: "+
                         c.getString(5)+" Id hogar "+c.getString(6));
+                String str = c.getString(0)+","+c.getString(1)+","+c.getString(2)+","+c.getString(3)+","+c.getString(4)+","+
+                        c.getString(5)+","+c.getString(6);
+                try
+                {
+
+                    FileOutputStream fOut = openFileOutput("mediotransporte.txt", MODE_APPEND);
+                    OutputStreamWriter osw = new OutputStreamWriter(fOut);
+
+                    osw.write(str+"\n");
+                    osw.flush();
+                    osw.close();
+
+                }
+                catch (IOException ioe)
+                {
+                    ioe.printStackTrace();
+                }
+
             }while(c.moveToNext());
         }
         db.close();

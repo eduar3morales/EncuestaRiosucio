@@ -53,40 +53,126 @@ public class InformacionViajesActivity extends ActionBarActivity {
     Spinner spinnerZatDestino;
     Spinner spinnerModoDeViaje;
     Spinner spinnerMotivoDeViaje;
+    /**
+     * Lista que almacena los valores de ZAT disponibles que se muestran en el Spinner Zat destino
+     */
     private List<String> listaZatDestino = new ArrayList<String>();
+
+    /**
+     * Lista que almacena los valores de ZAT disponibles que se muestran en el Spinner Zat origen
+     */
     private List<String> listaZatOrigen = new ArrayList<String>();
+
+    /**
+     * Lista que almacena los valores de Modo de viaje que se muestran en el Spinner Modo de viaje
+     */
     private List<String> listaModoDeViaje = new ArrayList<String>();
+
+    /**
+     * Lista que almacena los valores de Motivo de viaje que se muestran en el Spinner Motivo Viaje
+     */
     private List<String> listaMotivoDeViaje = new ArrayList<String>();
 
+    /**
+     * Variable que almacena el número de viaje de una persona
+     */
     String viajeNumero;
+
+    /**
+     * Variable que almacena el lugar de origen de un viaje
+     */
     String lugarOrigen;
+
+    /**
+     * Variable que almacena la Zat de origen del viaje
+     */
     String zatOrigen;
+
+    /**
+     * Variable que almacena la hora de salida del viaje
+     */
     String horaSalida;
+
+    /**
+     * Variable que almacena el lugar de destino del viaje
+     */
     String lugarDestino;
+
+    /**
+     * Variable que almacena la Zat de destino del viaje
+     */
     String zatDestino;
+
+    /**
+     * Variable que almacena la hora de llegada del viaje
+     */
     String horaLlegada;
+
+    /**
+     * Variable que almacena el motivo del viaje
+     */
     String motivoViaje;
+
+    /**
+     * Variable que almacena el modo del viaje
+     */
     String modoViaje;
     //String[] frecuenciaViaje;
     boolean somethingChecked = false;
+
+    /**
+     * Lista que almacena los días en los que se realiza el viaje
+     */
     List<String> frecuenciaViaje = new ArrayList<String>();
     boolean thereMotivo = false;
     boolean saturday = false;
     boolean motivoEstudio = false;
     boolean motivoTrabajo = false;
 
+    /**
+     * Variable que contiene el id de una persona proveniente de la actividad persona
+     */
     String idPersona; //Valor proveniente del Intent
+
     String idViaje;
     String nViaje;
+
+    /**
+     * Variable que contiene la Zat de la vivienda proveniente de la actividad vivienda
+     */
     String zatVivienda;
     String zatViviendaBd;
+
+    /**
+     * Variable que contiene el número de encuesta proveniente de la actividad principal
+     */
     String numeroEncuesta;
+
+    /**
+     * Variable que contiene el id de hogar proveniente de la actividad hogar
+     */
     String idHogar;
+
+    /**
+     * Variable que contiene el código de orden proveniente de la actividad persona
+     */
     String cdOrden;
+
+    /**
+     * Variable que contiene la ocupación principal de una persona proveniente de la actividad ocupación principal
+     */
     String ocupacion;
+
+    /**
+     * Variable que contiene el tipo de vehículo proveniente de la actividad medios de transporte
+     */
     String tipoVehiculo;
     String viajeSabado;
     String hayMotivoViaje;
+
+    /**
+     * Variable que contiene la zat de la actividad princopal proveniente de la actividad ocupación principal
+     */
     String zatActividad;
 
     String zatViajeAnterior;
@@ -230,18 +316,18 @@ public class InformacionViajesActivity extends ActionBarActivity {
 
 
         idPersona = getIntent().getStringExtra("idPersona");
-        Toast.makeText(this, "Id persona: "+ idPersona, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "Id persona: "+ idPersona, Toast.LENGTH_SHORT).show();
         //Toast.makeText(this, "Id Persona: "+ idPersona+ " Numero Viaje: " +nroViaje, Toast.LENGTH_SHORT).show();
 
         zatVivienda = getIntent().getStringExtra("zatVivienda");
-        Toast.makeText(this, "Zat vivienda:"+zatVivienda, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "Zat vivienda:"+zatVivienda, Toast.LENGTH_SHORT).show();
 
         numeroEncuesta = getIntent().getStringExtra("nroEncuesta");
 
         idHogar = getIntent().getStringExtra("idHogar");
 
         cdOrden = getIntent().getStringExtra("codigoOrden");
-        Toast.makeText(this, "Codigo orden: "+cdOrden, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "Codigo orden: "+cdOrden, Toast.LENGTH_SHORT).show();
 
         nViaje = getIntent().getStringExtra("numeroViaje");
 
@@ -270,17 +356,26 @@ public class InformacionViajesActivity extends ActionBarActivity {
 
     }
 
+    /**
+     * Función que permite seleccionar la hora de llegada de viaje a través de un cuadro de dialogo
+     */
     public void onClickHoraLlegada(View view)
     {
         showDialog(TIME_DIALOG_ID_LLEGADA);
     }
+
+    /**
+     * Función que permite seleccionar la hora de salida de viaje a travñes de un cuadro de dialogo
+     */
     public void onClickHoraSalida(View view)
     {
         showDialog(TIME_DIALOG_ID_SALIDA);
     }
 
 
-
+    /**
+     *Función que permite hacer el registro de los datos de un viaje y permite registrar un nuevo viaje
+     */
     public void onClickContinuarInformacionViajes(View view) {
         if (checkBoxLunesAViernes.isChecked())
         {

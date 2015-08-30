@@ -33,25 +33,87 @@ public class InformacionHogarActivity extends ActionBarActivity {
     Spinner spinnerTieneVehiculo;
     Spinner spinnerCantidadVehiculos;
 
+    /**
+     * Lista con los valores de Tipo Propiedad que se muestran en el Spinner tipo propiedad
+     */
     private List<String> listaTipoPropiedad = new ArrayList<String>();
+
+    /**
+     * Lista con los valores de Rango de Ingresos Mensuales que se muestran en el Spinner rango de ingresos mensuales
+     */
     private List<String> listaRangoIngresosMensuales = new ArrayList<String>();
+
+    /**
+     * Lista con los valores de Cantidad de Personas en un Hogar que se muestran en el Spinner cantidad personas del hogar
+     */
     private List<String> listaCantidadPersonasHogar = new ArrayList<String>();
+
+    /**
+     * Lista con los valores de Cantidad de Personas que viajan en día típico que se muestran en el Spinner cantidad personas que viajan en día típico
+     */
     private List<String> listaCantidadPersonasViajanDiaTipico = new ArrayList<String>();
+
+    /**
+     * Lista con los valores de Cantidad de Personas presentes del hogar que se muestran en el Spinner cantidad personas presentes en el hogar
+     * al momento de la encuesta
+     */
     private List<String> listaCantidadPersonasPresentes = new ArrayList<String>();
+
+    /**
+     * Lista con los valores de Cantidad de Personas que viajan en el día sábado que se muestran en el Spinner cantidad personas que viajan los sábados
+     */
     private List<String> listaCantidadPersonasViajanSabado = new ArrayList<String>();
     private List<String> listaTieneVehiculo = new ArrayList<String>();
     private List<String> listaCantidadVehiculos = new ArrayList<String>();
 
+    /**
+     * Variable donde se guardan la cantidad de personas que conforman el hogar, valor obtenido del Spinner cantidad personas que conforman el hogar
+     */
     String cantidadPersonasConformanHogar;
+
+    /**
+     * Variable donde se guardan la cantidad de personas que Viajan en día típico, valor obtenido del Spinner cantidad personas que viajan el día típico
+     */
     String cantidadPersonasViajanDiaTipico;
+
+    /**
+     * Variable donde se guardan la cantidad de personas que viajan en día sábado, valor obtenido del Spinner cantidad personas que viajan en día típico
+     */
     String cantidadPersonasViajanDiaSabado;
+
+    /**
+     * Variable donde se guardan la cantidad de personas presentes del hogar, valor obtenido del Spinner cantidad de personas presentes durante la encuesta
+     */
     String cantidadPersonasPresentes;
+
+    /**
+     * Variable donde se guarda el tipo de propiedad del hogar, valor obtenido del Spinner tipo propiedad
+     */
     String tipoPropiedad;
+
+    /**
+     * Variable donde se guarda el rango de ingresos mensuales del hogar, valor obtenido del Spinner rango de ingresos mensuales
+     */
     String rangoIngresos;
 
+    /**
+     * Valor que contiene el número de encuesta proveniente de la actividad principal
+     */
     String numeroEncuesta; //Valor proveniente del Intent
+
+    /**
+     * Valor que contiene el id de la vivienda proveniente de la actividad vivienda
+     */
     String idVivienda; //Valor proveniente del Intent
+
+    /**
+     * Valor que contiene el id del hogar proveniente de la actividad hogar
+     */
     String idHogar;
+
+    /**
+     * Valor que contiene la Zat de la vivienda proveniente de la actividad vivienda
+     */
     String zatVivienda;
 
     int cantidadClick = 0;
@@ -161,6 +223,10 @@ public class InformacionHogarActivity extends ActionBarActivity {
 
     }
 
+    /**
+     * Función que permite hacer el registro de los datos de la Actividad Hogar y lleva a la siguiente actividad
+     * donde se registran los datos de medios de transporte
+     */
     public void onClickContinuarHogar(View view)
     {
         cantidadPersonasConformanHogar = spinnerCantidadPersonasHogar.getSelectedItem().toString();

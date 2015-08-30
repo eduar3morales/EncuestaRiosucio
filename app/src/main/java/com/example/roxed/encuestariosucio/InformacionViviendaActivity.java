@@ -26,20 +26,71 @@ public class InformacionViviendaActivity extends ActionBarActivity {
     EditText txtTelefono;
     EditText txtCelular;
     Spinner spinnerCantidadHogaresVivienda;
+
+    /**
+     * Lista que contiene los valores de las ZAT disponibles que se muestran en el Spinner Zat vivienda
+     */
     private List<String> listaZatVivienda = new ArrayList<String>();
+
+    /**
+     * Lista que contiene los valores de tipo vivienda que se muestran en el Spinner tipo vivienda
+     */
     private List<String> listaTipoVivienda = new ArrayList<String>();
+
+    /**
+     * Lista que contiene los valores disponibles de estrato que se muestran en el Spinner estrato
+     */
     private List<String> listaEstrato = new ArrayList<String>();
+
+    /**
+     * Lista que contiene los valores disponibles de cantidad de hogares en la vivienda  que se muestran
+     * en el Spinner cantidad de hogares en una vivienda
+     */
     private List<String> listaCantidadHogaresVivienda = new ArrayList<String>();
 
+    /**
+     * Variable que almacena el nombre del barrio
+     */
     String barrio;
+
+    /**
+     * Variable que almacena el estrato de la vivienda
+     */
     String estrato;
+
+    /**
+     * Variable que almacena la dirección de la vivienda
+     */
     String direccion;
+
+    /**
+     * Variable que almacena la Zat a la que pertenece la vivienda
+     */
     String zat;
+
+    /**
+     * Variable que almacena el teléfono de la vivienda
+     */
     String telefono;
+
+    /**
+     * Variable que almacena el celular del jefe de hogar
+     */
     String celular;
+
+    /**
+     * Variable que almacena el tipo de vivienda
+     */
     String tipoVivienda;
+
+    /**
+     * Variable que almacena la cantidad de hogares en la vivienda
+     */
     String cantidadHogaresVivienda;
 
+    /**
+     * Variable que contiene el número de encuesta proveniente de la actividad principal
+     */
     String numeroEncuesta; //Valor pasado a través del Intent
     String idVivienda;
 

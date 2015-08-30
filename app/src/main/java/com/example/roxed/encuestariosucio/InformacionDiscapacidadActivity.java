@@ -39,27 +39,84 @@ public class InformacionDiscapacidadActivity extends ActionBarActivity {
     Spinner spinnerTipoDiscapacidad;
     Spinner spinnerDuracionDiscapacidad;
 
+    /**
+     * Discapacidad seleccionada del Spinner discapacidad
+     */
     String tipoDiscapacidad;
+
+    /**
+     * Duración de la discapacidad seleccionada del Spinner duración discapacidad
+     */
     String duracionDiscapacidad = "NO APLICA";
     //String[] herramientaApoyo;
     //String[] mediosTransporteDificilAcceso;
+    /**
+     * Lista donde se almacenan las Herramientas de Apoyo que se muestran en el spinner herramienta apoyo
+     */
     List<String> herramientaApoyo = new ArrayList<String>();
+
+    /**
+     * Lista donde se almacenan los modos de transporte de difícil acceso que se muestran en el spinner medios de transporte
+     * de difícil acceso
+     */
     List <String> medioTransporteDificilAcceso = new ArrayList<String>();
 
-    String idPersona;//Valor proveniente del Intent
+    /**
+     * Valor de idPersona proveniente de la actividad persona
+     */
+    String idPersona;
+
+    /**
+     * Valor de Zat Vivienda proveniente de la actividad vivienda
+     */
     String zatVivienda;
+
+    /**
+     * Valor del número de encuesta proveniente de la actividad principal
+     */
     String numeroEncuesta;
+
+    /**
+     * Valor del id del hogar proveniente de la actividad de hogar
+     */
     String idHogar;
+
+    /**
+     * Valor del código de orden proveniente de la actividad persona
+     */
     String cdOrden;
+
+    /**
+     * Valor de ocupación proveniente de la actividad ocupación principal
+     */
     String ocupacion;
+
+    /**
+     * Valor de tipo vehículo proveniente de la actividad medios de transporte
+     */
     String tipoVehiculo;
+
+    /**
+     * Valor de cantidad de personas que viajan en día sabado proveniente de la actividad hogar
+     */
     String viajeSabado;
+
+    /**
+     * Valor de la Zat de la actividad principal proveniente de la actividad ocupación principal
+     */
     String zatActividad;
 
     boolean somethingCheckedModos = false;
     boolean somethingCheckedHerramientas = false;
 
+    /**
+     * Lista que contiene los valores de Discapacidad que se muestran en el Spinner
+     */
     private List<String> listaTipoDiscapacidad = new ArrayList<String>();
+
+    /**
+     * Lista que contiene los valores de Duración Discapacidad que se muestran en el Spinner
+     */
     private List<String> listaDuracionDiscapacidad = new ArrayList<String>();
 
     @Override
@@ -371,6 +428,10 @@ public class InformacionDiscapacidadActivity extends ActionBarActivity {
 
     }
 
+    /**
+     *Función que hace el registro de los datos de la Actividad Discapacidad y lleva a la siguiente actividad
+     * para registrar datos de la ocupación secundaria
+     */
     public void onClickContinuarInformacionOcupacionSecundaria(View view)
     {
         tipoDiscapacidad = spinnerTipoDiscapacidad.getSelectedItem().toString();

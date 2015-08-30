@@ -27,29 +27,102 @@ public class InformacionOcupacionPrincipalActivity extends ActionBarActivity {
     Spinner spinnerZatActividadPrincipal;
     EditText txtDireccionActividadPrincipal;
 
+    /**
+     * Variable en la que se guarda la Ocupación principal
+     */
     String ocupacion;
+
+    /**
+     * Variable donde se guarda el lugar de estudio
+     */
     String lugarEstudio;
+
+    /**
+     * Variable donde se guarda el sector de trabajo
+     */
     String sectorTrabajo;
+
+    /**
+     * Variable donde se guarda la labor de desempeño
+     */
     String laborDesempeño;
 
+    /**
+     * Variable donde se guarda la Dirección de la actividad principal
+     */
     String direccionActividadPrincipal;
+
+    /**
+     * Variable donde se guarda la ZAT de la actividad principal
+     */
     String zatActividadPrincipal;
 
+    /**
+     * Variable que contiene el id de persona proveniente de la actividad persona
+     */
     String idPersona; //Valor proveniente del Intent
+
+    /**
+     * Variable que contiene la edad proveniente de la actividad de persona
+     */
     String edad; //Valor proveniente del Intent
+
+    /**
+     * Variable que contiene la Zat de la vivienda proveniente de la actividad vivienda
+     */
     String zatVivienda;
+
+    /**
+     * Variable que contiene el número de encuesta proveniente de la actividad principal
+     */
     String numeroEncuesta;
+
+    /**
+     * Variable que contiene el id del hogar proveniente de la actividad hogar
+     */
     String idHogar;
+
+    /**
+     * Variable que contiene el código de orden de una persona proveniente de la actividad persona
+     */
     String cdOrden;
+
+    /**
+     * Variable que contiene el tipo de vehículo proveniente de la actividad medios de transporte
+     */
     String tipoVehiculo;
+
+
     String viajeSabado;
     static final String TIPO_OCUPACION = "Principal";
 
+    /**
+     * Lista donde se almacenan las opciones de Ocupación principal que se muestran en el Spinner ocupaciín
+     */
     private List<String> listaOcupacionPrincipal= new ArrayList<String>();
+
+    /**
+     * Lista donde se almacenan las opciones de Lugar de Estudio que se muestran en el Spinner lugar de estudio
+     */
     private List<String> listaLugarEstudioPrincipal= new ArrayList<String>();
+
+    /**
+     * Lista donde se almacenan las opciones de Sector de trabajo que se muestran en el Spinner sector de trabajo
+     */
     private List<String> listaSectorTrabajoPrincipal= new ArrayList<String>();
+
+    /**
+     * Lista donde se almacenan las opciones de labor de desempeño que se muestran en el Spinner labor que se desempeña
+     */
     private List<String> listaLaborDesempeñaPrincipal= new ArrayList<String>();
+
+    /**
+     * Lista donde se almacenan opciones de ZAT disponibles que se muestran en el Spinner Zat de la actividad secundaria
+     */
     private List<String> listaZatActividadPrincipal = new ArrayList<String>();
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -191,6 +264,10 @@ public class InformacionOcupacionPrincipalActivity extends ActionBarActivity {
     }
 
 
+    /**
+     * Función que permite hacer el registro de los datos relacionados a la Ocupación Principal y lleva a
+     * la siguiente actividad para hacer el registro de los datos de discapacidad
+     */
     public void onClickContinuarInformacionDiscapacidad(View view) {
         if (txtDireccionActividadPrincipal.isEnabled())
         {

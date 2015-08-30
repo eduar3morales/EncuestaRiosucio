@@ -37,16 +37,41 @@ public class MainActivity extends ActionBarActivity {
     EditText numeroEncuestaTxt;
     EditText encuestadorTxt;
     Spinner coordinadorSpinner;
+
+    /**
+     * Lista donde se almacenan las Opciones de Coordinador que se muestran en el Spinner
+     */
     List<String> listaCoordinador = new ArrayList<String>();
 
-
+    /**
+     * Variable donde se almacena el número de encuesta
+     */
     String numeroEncuesta;
+
+    /**
+     * Variable donde se almacena el coordinador de la encuesta
+     */
     String coordinadorEncuesta;
     String encuestador;
+
+    /**
+     * Variable donde se almacena la hora de inicio de la encuesta
+     */
     String horaInicio;
+
+    /**
+     * Variable donde se almacena la fecha en que se realiza la enceusta
+     */
     String fechaEncuesta;
 
+    /**
+     * Text View que muestra la hora seleccionada
+     */
     TextView txtHoraEncuesta;
+
+    /**
+     * Text View que muestra la fecha seleccionada
+     */
     TextView txtHFechaEncuesta;
 
 
@@ -110,16 +135,26 @@ public class MainActivity extends ActionBarActivity {
 
     }
 
+
+    /**
+     * Función que muestra el cuadro de dialogo que permite seleccionar la hora
+     */
     public void onClickHora(View view)
     {
         showDialog(TIME_DIALOG_ID);
     }
 
+    /**
+     * Función que muestra el cuadro de dialogo que permite seleccionar la fecha
+     */
     public void onClickFecha(View view)
     {
         showDialog(DATE_DIALOG_ID);
     }
 
+    /**
+     * Función que permite
+     */
     public void onClickContinuarEncuesta(View view)
     {
         if (numeroEncuestaTxt.getText().toString().equals("") || encuestadorTxt.getText().toString().equals("") || txtHoraEncuesta.getText().toString().equals("")
@@ -191,7 +226,12 @@ public class MainActivity extends ActionBarActivity {
         }
     };
 
-
+    /**
+     * Función que da formato a la hora seleccionada
+     * @param hora - Hora seleccionada del TimePicker
+     * @param minuto - Minuto seleccionado del TimePicker
+     * @return - Devuelve el formato de la hora xx:xx ó x:xx
+     */
     private String Horas(int hora, int minuto){
 
         if(minuto<10){

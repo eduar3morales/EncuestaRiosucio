@@ -11,6 +11,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,6 +35,24 @@ public class ListActivityOcupacion extends ListActivity {
             do{
                 ocupaciones.add("Id:"+c.getString(0)+" Ocupación:"+c.getString(1)+" Lugar estudio:"+c.getString(2)+" Sector trabajo:"+c.getString(3)+" Labor desempeño:"+c.getString(4)+" Dirección actividad:"+
                         c.getString(5)+" Zat actividad:"+c.getString(6)+" Tipo ocupación:"+c.getString(7)+" Id persona:"+c.getString(8));
+                String str = c.getString(0)+","+c.getString(1)+","+c.getString(2)+","+c.getString(3)+","+c.getString(4)+","+
+                        c.getString(5)+","+c.getString(6)+","+c.getString(7)+","+c.getString(8);
+                try
+                {
+
+                    FileOutputStream fOut = openFileOutput("ocupacion.txt", MODE_APPEND);
+                    OutputStreamWriter osw = new OutputStreamWriter(fOut);
+
+                    osw.write(str+"\n");
+                    osw.flush();
+                    osw.close();
+
+                }
+                catch (IOException ioe)
+                {
+                    ioe.printStackTrace();
+                }
+
             }while (c.moveToNext());
         }
         db.close();

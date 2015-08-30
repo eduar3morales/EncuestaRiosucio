@@ -8,6 +8,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,8 +29,27 @@ public class ListActivityVivienda extends ListActivity {
         if (c.moveToFirst())
         {
             do{
-                viviendas.add("Id Vivienda: "+c.getString(0)+" Barrio: "+c.getString(1)+" Estrato: "+c.getString(2)+" Dirección: "+c.getString(3)+" Zat: "+c.getString(4)+" Teléfono: "+
-                c.getString(5)+" Celular: "+c.getString(6)+" Tipo vivienda: "+c.getString(7)+" Cantidad hogares en vivienda: "+c.getString(8));
+                viviendas.add("Id vivienda:"+c.getString(0)+" Barrio:"+c.getString(1)+" Estrato:"+c.getString(2)+" Dirección:"+c.getString(3)+" ZAT:"+c.getString(4)+" Teléfono:"+
+                c.getString(5)+" Celular:"+c.getString(6)+" Tipo vivienda:"+c.getString(7)+" Cantidad hogares en vivienda:"+c.getString(8));
+                String str = c.getString(0)+","+c.getString(1)+","+c.getString(2)+","+c.getString(3)+","+c.getString(4)+","+
+                        c.getString(5)+","+c.getString(6)+","+c.getString(7)+","+c.getString(8);
+                try
+                {
+
+                    FileOutputStream fOut = openFileOutput("vivienda.txt", MODE_APPEND);
+                    OutputStreamWriter osw = new OutputStreamWriter(fOut);
+
+                    osw.write(str+"\n");
+                    osw.flush();
+                    osw.close();
+
+                }
+                catch (IOException ioe)
+                {
+                    ioe.printStackTrace();
+                }
+
+
             }while (c.moveToNext());
         }
         db.close();

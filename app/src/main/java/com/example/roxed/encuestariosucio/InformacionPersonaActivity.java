@@ -25,27 +25,94 @@ public class InformacionPersonaActivity extends ActionBarActivity {
     Spinner spinnerUsoCicloruta;
     EditText txtNombre;
 
+    /**
+     * Variable que almacena el Código de Orden de las personas de un Hogar
+     */
     String codigoOrden;
+
+    /**
+     * Variable que almacena el nombre de una persona
+     */
     String nombre;
+
+    /**
+     * Variable que almacena la edad de una persona
+     */
     String edad;
+
+    /**
+     * Variable que almacena el genero de una persona
+     */
     String genero;
+
+    /**
+     * Variable que almacena el último nivel de estudio de una persona
+     */
     String ultimoNivelEstudio;
+
+    /**
+     * Variable que almacena la respuesta del uso de una red de ciclo ruta de una persona
+     */
     String usoRedCicloRuta;
 
+    /**
+     * Variable que contiene el id del hogar proveniente de la actividad hogar
+     */
     String idHogar; //Valor proveniente del Intent
+
+    /**
+     * Variable que contiene el id de persona proveniente de la actividad persona
+     */
     String idPersona;
+
+    /**
+     * Variable que contiene la Zat de la vivienda proveniente de la actividad vivienda
+     */
     String zatVivienda;
+
+    /**
+     * Variable que contiene el número de encuesta proveniente de la actividad principal
+     */
     String numeroEncuesta;
+
+    /**
+     * Variable que contiene el código de orden proveniente de la actividad persona
+     */
     String cdOrden;
+
+    /**
+     * Variable que contiene el tipo de vehículo proveniente de la actividad medios de transporte
+     */
     String tipoVehiculo;
+
     String viajeSabado;
 
-
+    /**
+     * Lista donde se almacenan los códigos de orden que se muestran en el Spinner código de orden
+     */
     private List<String> listaCodigoDeOrden= new ArrayList<String>();
+
+    /**
+     * Lista donde se almacenan las opciones de edad que se muestran en el Spinner edad
+     */
     private List<String> listaEdad= new ArrayList<String>();
+
+    /**
+     * Lista donde se almacenan las opciones de genero que se muestran en el Spinner genero
+     */
     private List<String> listaGenero= new ArrayList<String>();
+
+    /**
+     * Lista donde se almacenan las opciones de nivel de estudio que se muestran en el Spinner último nivel de estudios
+     */
     private List<String> listaNivelDeEstudios= new ArrayList<String>();
+
+    /**
+     * Lista donde se almacenan las opciones de uso de red de cicloruta que se muestran en el Spinner uso red de ciclo ruta
+     */
     private List<String> listaUsoCicloruta = new ArrayList<String>();
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -120,6 +187,10 @@ public class InformacionPersonaActivity extends ActionBarActivity {
 
     }
 
+    /**
+     * Función que permite hacer el registro de los datos de Persona y continuar con la siguiente actividad
+     * para registrar los datos relacionados con la ocupación principal
+     */
     public void onClickContinuarOcupacionPrincipal(View view) {
 
         if (txtNombre.getText().toString().equals(""))

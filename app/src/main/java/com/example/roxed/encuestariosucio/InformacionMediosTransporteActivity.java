@@ -28,20 +28,62 @@ public class InformacionMediosTransporteActivity extends ActionBarActivity {
     EditText txtKilometro;
     EditText txtLugarMatricula;
 
+    /**
+     * Lista donde se almacenan los valores de tipo vehículo que se muestran en el Spinner tipo vehículo
+     */
     private List<String> listaTipoVehiculo = new ArrayList<String>();
+
+    /**
+     * Lista donde se almacenan los valores de Modelo Vehículo que se muestran en el Spinner modelo vehículo
+     */
     private List<String> listaModeloVehiculo = new ArrayList<String>();
+
+    /**
+     * Lista donde se almacenan los valores de sitio estacionamiento que se muestran en el Spinner sitio de estacionamiento
+     */
     private List<String> listaSitioEstacionamiento = new ArrayList<String>();
 
 
+    /**
+     * Variable donde se guarda el tipo de vehículo obtenido del Spinner tipo vehículo
+     */
     String tipoVehiculo;
+
+    /**
+     * Variable donde se guarda el modelo del vehículo obtenido del Spinner modelo vehículo
+     */
     String modeloVehiculo;
+
+    /**
+     * Variable donde se guardan los kilometros del último año
+     */
     String kmUltimoA;
+
+    /**
+     * Variable donde se guarda el Lugar de Matrigula del medio de transporte
+     */
     String lugarMatricula;
+
+    /**
+     * Variable donde se guarda el sitio de estacionamiento
+     */
     String sitioEstacionamiento;
 
+    /**
+     * Valor que contiene el id de hogar proveniente de la actividad hogar
+     */
     String idHogar; //Valor proveniente del Intent
+
+    /**
+     * Valor que contiene la Zat de la vivienda proveniente de la actividad vivienda
+     */
     String zatVivienda;
+
+    /**
+     * Valor que contiene el número de encuesta proveniente de la actividad principal
+     */
     String numeroEncuesta;
+
     String codigoOrden = "0";
     String viajeSabado;
 
@@ -132,6 +174,10 @@ public class InformacionMediosTransporteActivity extends ActionBarActivity {
 
     }
 
+    /**
+     *Función que permite hacer el registro de los Medios de Transporte y lleva a la siguiente actividad
+     * donde se registran lo datos de persona
+     */
     public void onClickContinuarMediosTransporte(View view) {
 
 
@@ -166,6 +212,9 @@ public class InformacionMediosTransporteActivity extends ActionBarActivity {
     }
 
 
+    /**
+     * Función que permite hacer el registro de los Medios de Transporte y permite agregar otro medio de transporte
+     */
     public void onClickContinuarAgregarMedioTransporte(View view){
 
         tipoVehiculo = spinnerTipoVehiculo.getSelectedItem().toString();

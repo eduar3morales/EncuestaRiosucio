@@ -8,6 +8,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,6 +32,24 @@ public class ListActivityDiscapacidad extends ListActivity {
             do{
                 discapacidades.add("Id:"+c.getString(0)+" Tipo discapacidad:"+c.getString(1)+" Duración:"+c.getString(2)+
                         " Id persona"+c.getString(3));
+                String str = c.getString(0)+","+c.getString(1)+","+c.getString(2)+
+                        ","+c.getString(3);
+                try
+                {
+
+                    FileOutputStream fOut = openFileOutput("discapacidad.txt", MODE_APPEND);
+                    OutputStreamWriter osw = new OutputStreamWriter(fOut);
+
+                    osw.write(str+"\n");
+                    osw.flush();
+                    osw.close();
+
+                }
+                catch (IOException ioe)
+                {
+                    ioe.printStackTrace();
+                }
+
             }while (c.moveToNext());
         }
         db.close();
